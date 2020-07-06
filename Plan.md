@@ -41,3 +41,5 @@ web管理页面与小程序并行
 
 ### Day5： 
 数据库+后端框架
+
+<img src="./ProjectStruct_Week1.jpg">
