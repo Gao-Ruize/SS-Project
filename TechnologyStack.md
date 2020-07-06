@@ -23,4 +23,5 @@
   持续集成，即频繁的将代码集成到主干，并且每次都通过自动化的构建来验证，从而尽快的发现集成错误，以达到让产品在保持高质量的同时快速迭代的目的。
 - Microservece  
   将整个Web应用组织为一系列小的Web服务。这些小的Web服务可以独立地编译及部署，并通过各自暴露的API接口相互通讯。它们彼此相互协作，作为一个整体为用户提供功能，却可以独立地进行和进行拓展，便于团队协作开发。  
-- Container Ochestration/Kubernets
+- Container Ochestration：Kubernets  
+  Docker Compose可以轻松、高效的管理容器，它是一个用于定义和运行多容器 Docker 的应用程序工具。Kubernets：是一个开源的 Linux 容器自动化运维平台，它消除了容器化应用程序在部署、伸缩时涉及到的许多手动操作。
