@@ -36,6 +36,22 @@ Page({
       }
     ],
     showMiddle: [],
+    replyPhase: [
+      {
+        name: 'JBoss',
+        detail: '你好，请于2020-02-07日参加答辩',
+        ReadStatus: '已读',
+      }
+    ],
+    showReply: [],
+    pigeonholePhase: [
+      {
+        name: 'JBoss',
+        detail: '你好吗我不好',
+        ReadStatus: '未读',
+      }
+    ],
+    showPigeonhole: [],
   },
 
   onLoad: function(options) {
@@ -45,6 +61,8 @@ Page({
       showSelect: this.data.selectPhase,
       showMiddle: this.data.MiddlePhase,
       showProposal: this.data.ProposalPhase,
+      showReply: this.data.replyPhase,
+      showPigeonhole: this.data.pigeonholePhase,
     });
     
   },
@@ -69,12 +87,42 @@ Page({
     {
       if (data2[i].detail.indexOf(e.detail) != -1)
       {
-        showPhase2.push(data1[i]);
+        showPhase2.push(data2[i]);
+      }
+    };
+    let showPhase3 = [];
+    let data3 = this.data.MiddlePhase;
+    for (var i = 0; i < data3.length; ++i)
+    {
+      if (data3[i].detail.indexOf(e.detail) != -1)
+      {
+        showPhase3.push(data3[i]);
+      }
+    };
+    let showPhase4 = [];
+    let data4 = this.data.replyPhase;
+    for (var i = 0; i < data4.length; ++i)
+    {
+      if (data4[i].detail.indexOf(e.detail) != -1)
+      {
+        showPhase4.push(data4[i]);
+      }
+    }
+    let showPhase5 = [];
+    let data5 = this.data.pigeonholePhase;
+    for (var i = 0; i < data5.length; ++i)
+    {
+      if (data5[i].detail.indexOf(e.detail) != -1)
+      {
+        showPhase5.push(data5[i]);
       }
     }
     this.setData({
       showSelect: showPhase1,
       showProposal: showPhase2,
+      showMiddle: showPhase3,
+      showReply: showPhase4,
+      showPigeonhole: showPhase5
     })
 
   },
