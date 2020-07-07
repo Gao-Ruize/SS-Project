@@ -1,0 +1,5 @@
+/* pages/qunfaMessage/qunfaMessage.wxss */
+.van-checkbox {
+  width: 240rpx;
+  height: 90rpx;
+}
