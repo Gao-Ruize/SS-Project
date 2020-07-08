@@ -55,6 +55,7 @@ create table if not exists `read_jwc_msg` (
 `student_id` INT,
 `tutor_id` INT,
 `if_read` INT,
+`if_student` INT,
 primary key (`rjm_id`),
 foreign key (`student_id`) references student (`student_id`),
 foreign key (`tutor_id`) references tutor (`tutor_id`)
