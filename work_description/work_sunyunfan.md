@@ -6,3 +6,4 @@
 - 将微信登录获取openid的组件整合到小程序中
 - 新增register页面，并整合到小程序中
 - 前端功能基本实现，还需要对wx.request的具体参数进行调整
+- 将最终的小程序上传到develop分支，/code/wechat_front
