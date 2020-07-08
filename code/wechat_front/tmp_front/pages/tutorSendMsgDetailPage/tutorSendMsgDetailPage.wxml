@@ -1,0 +1,39 @@
+<!--pages/message/message.wxml-->
+<view>
+  <view class="page">
+    <text class="text1">即将发送给以下几位同学：{{students}}</text>
+    <view>
+    <van-button round type="info" bindtap="bindOpenTime">
+      选择时间
+    </van-button>
+    </view>
+    <text class="text1">选择的时间为:{{timeSpanStr}}</text>
+    <view>
+      <van-cell-group>
+      <van-field
+        value="{{ value }}"
+        placeholder="请输入内容"
+        border="{{ false }}"
+        bind:change="onChange"
+      />
+      </van-cell-group>
+    </view>
+    <text class="text1"></text>
+    <view>
+      <van-button round type="info" bindtap="bindQuit">
+        确认
+      </van-button>
+    </view>
+  </view>
+<!--遮罩层：显示timepicker-->
+  <van-overlay show="{{ show }}">
+    <van-datetime-picker
+    show = "{{show}}"
+    type="datetime"
+    value="{{ currentDate }}"
+    min-date="{{ minDate }}"
+    max-date="{{ maxDate }}"
+    bind:confirm="onTimeConfirm"
+    />
+  </van-overlay>
+</view>

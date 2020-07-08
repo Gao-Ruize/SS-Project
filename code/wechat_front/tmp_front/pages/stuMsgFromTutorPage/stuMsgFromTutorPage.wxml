@@ -1,0 +1,65 @@
+<van-notice-bar
+  mode="closeable"
+  text="{{noticeInfo}}"
+/>
+<van-search
+  value="{{ value }}"
+  placeholder="请输入搜索关键词"
+  show-action
+  bind:search="onSearch"
+  bind:cancel="onCancel"
+/>
+<view class="Phase">
+<van-row>
+  <van-progress pivot-text="导师选择" color="#f2826a" percentage="25" />
+</van-row>
+<van-row>
+  <view wx:for="{{showSelect}}" wx:for-item="item">
+  <van-panel title="{{item.name}}" desc="{{item.detail}}" status="{{item.ReadStatus}}">
+  </van-panel>
+  </view>
+</van-row>
+<van-row>
+  <van-progress pivot-text="开题"  percentage="35" />
+</van-row>
+<van-row>
+  <view wx:for="{{showProposal}}" wx:for-item="item">
+    <van-panel title="{{item.name}}" desc="{{item.detail}}" status="{{item.ReadStatus}}">
+    </van-panel>
+  </view>
+</van-row>
+<van-row>
+  <van-progress pivot-text="中期检查" color="#ee0a24" percentage="50" />
+</van-row>
+<van-row>
+  <view wx:for="{{showMiddle}}" wx:for-item="item">
+    <van-panel title="{{item.name}}" desc="{{item.detail}}" status="{{item.ReadStatus}}">
+    </van-panel>
+  </view>
+</van-row>
+</view>
+<view>
+<van-row>
+  <van-progress pivot-text="答辩" color="#be99ff" percentage="75" />
+</van-row>
+<van-row>
+  <view wx:for="{{showReply}}" wx:for-item="item">
+    <van-panel title="{{item.name}}" desc="{{item.detail}}" status="{{item.ReadStatus}}">
+    </van-panel>
+  </view>
+</van-row>
+</view>
+<view>
+    <van-progress pivot-text="归档" color="#7232dd" percentage="100" />
+    <van-row>
+  <view wx:for="{{showPigeonhole}}" wx:for-item="item">
+    <van-panel title="{{item.name}}" desc="{{item.detail}}" status="{{item.ReadStatus}}">
+    </van-panel>
+</view>
+  </van-row>
+  <van-tabbar active="{{ active }}" bind:change="onChange">
+    <van-tabbar-item icon="comment-o">教务消息</van-tabbar-item>
+    <van-tabbar-item icon="chat-o">导师消息</van-tabbar-item>
+    <van-tabbar-item icon="setting-o">设置</van-tabbar-item>
+  </van-tabbar>
+</view>

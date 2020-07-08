@@ -1,0 +1,6 @@
+/* pages/sentMsgPage/sentMsgPage.wxss */
+.title-class {
+  size: 3cm;
+  font-size: 3cm;
+  color: red;
+}

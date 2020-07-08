@@ -1,0 +1,52 @@
+<!--pages/sentMsgDetailPage/sentMsgDetailPage.wxml-->
+<view>
+  <van-popup
+  show="{{ showPopUp }}"
+  position="bottom"
+  custom-style="height: 80%;"
+  bind:close="onClose"
+  closeable
+  >
+  <van-nav-bar
+  title="选择要提醒的学生"
+  />
+    <van-checkbox-group value="{{ result }}" bind:change="mulChosChange">
+    <van-checkbox name = "{{item.ID}}"  wx:for = "{{unreadStudentInfo}}" wx:key="ID">
+      {{item.ID}} {{item.name}}
+    </van-checkbox>
+    </van-checkbox-group>
+
+    <van-goods-action>
+      <van-goods-action-button color="#7232dd" text="发送提醒" bind:click="sendMsg"/>
+    </van-goods-action>
+  </van-popup>
+
+  <van-search
+    value="{{ searchValue }}"
+    placeholder="通过学生姓名或学号搜索"
+    bind:change="searchChange"
+    bind:search="onSearch"
+    shape = "round"
+  />
+  <view wx:for="{{readStudentInfo}}" wx:for-item="eachInfo">
+    <van-cell icon="user-o"  value = "{{eachInfo.ID}}">
+      <view slot="title">
+        <view class="van-cell-text">{{eachInfo.name}}</view>
+        <van-tag type="danger">未读</van-tag>
+      </view>
+    </van-cell>
+  </view>
+  <view wx:for="{{unreadStudentInfo}}" wx:for-item="eachInfo">
+    <van-cell icon="user-o" value = "{{eachInfo.ID}}">
+      <view slot="title">
+        <view class="van-cell-text">{{eachInfo.name}}</view>
+        <van-tag type="success">已读</van-tag>
+      </view>
+    </van-cell>
+  </view>
+  <van-goods-action>
+    <van-goods-action-button text=" 阅读提醒" 
+    color = "#3CB371"
+    bind:click="showSendPop" />
+  </van-goods-action>
+</view>

@@ -1,0 +1,17 @@
+{
+  "usingComponents": {
+    "van-image": "@vant/weapp/image",
+    "van-search": "@vant/weapp/search",
+    "van-goods-action": "@vant/weapp/goods-action",
+    "van-goods-action-icon": "@vant/weapp/goods-action-icon",
+    "van-goods-action-button": "@vant/weapp/goods-action-button",
+    "van-overlay": "@vant/weapp/overlay",
+    "van-tabbar": "@vant/weapp/tabbar",
+    "van-tabbar-item": "@vant/weapp/tabbar-item",
+    "van-checkbox": "@vant/weapp/checkbox/index",
+    "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-datetime-picker": "@vant/weapp/datetime-picker/index"
+  }
+}

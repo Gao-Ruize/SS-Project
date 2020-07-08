@@ -1,0 +1,94 @@
+<!--index.wxml-->
+<view>
+  <!-- <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view> -->
+  <view style="position: -webkit-sticky;">
+    <van-search value="{{searchValue}}" placeholder="输入要查询的通知" use-action-slot bind:change="onChange" bind:search="onSearch">
+    </van-search>
+    <!-- <van-cell title="筛选时间：" value="all" /> -->
+    <!-- <van-cell value="{{startTime + '~' + endTime}}">
+      <view slot="title">
+        <view><van-button plain type="info" size="small" bind:click="showPickTime" round>筛选时间</van-button></view>
+      </view>
+    </van-cell> -->
+    <!-- <van-button plain type="info" size="small" block>选择时间</van-button> -->
+  </view>
+
+<view>
+  <van-cell title="选择日期区间" value="{{ date }}" bind:click="onDisplay" />
+    <van-calendar
+      show="{{ show }}"
+      type="range"
+      bind:close="onClose"
+      bind:confirm="onConfirm"
+      min-date="{{ minDate }}"
+      max-date="{{ maxDate }}"
+      position="right"
+      color="skyblue"
+    />
+</view>
+
+<text>\n</text>
+<text>\n</text>
+<!-- <van-divider
+  contentPosition="center"
+  customStyle="color: #1989fa; border-color: #1989fa; font-size: 18px;"
+>
+  文本
+</van-divider> -->
+
+<van-cell-group>
+  <!-- <van-cell title="单元格" value="内容" />
+  <van-cell title="单元格" value="内容" label="描述信息" border="{{ false }}" /> -->
+  <view wx:for="{{messages}}" wx:for-item="message">
+      <!-- <van-cell title="{{message.title}}" label="{{message.detail}}" /> -->
+      <van-cell label="{{message.detail}}" is-link>
+        <view slot="title">
+          <view class="van-cell-text">{{message.title}}</view>
+          <van-tag color="{{message.read?'grey':'skyblue'}}">{{message.read?"已读":"未读"}}</van-tag>
+        </view>
+      </van-cell>
+  </view>
+</van-cell-group>
+
+
+  <van-tabbar active="{{ active }}" bind:change="onChange">
+    <van-tabbar-item icon="home-o">教务处消息</van-tabbar-item>
+    <van-tabbar-item icon="search">历史消息列表</van-tabbar-item>
+    <van-tabbar-item icon="friends-o">群发消息</van-tabbar-item>
+    <van-tabbar-item icon="setting-o">设置</van-tabbar-item>
+  </van-tabbar>
+
+  
+<!-- <view>{{startTime}}</view> -->
+<!-- <van-overlay show="{{ show }}" bind:click="hidePickTime">
+    <view>
+    <van-datetime-picker
+      type="year-month"
+      value="{{ currentDate }}"
+      min-date="{{ minDate }}"
+      bind:input="onInput"
+    />
+      <van-datetime-picker
+        type="date"
+        value="{{ startTime }}"
+        bind:input="onInputStartDate"
+        min-date="{{ minDate }}"
+        formatter="{{ formatter }}"
+      />
+      <van-datetime-picker
+        type="date"
+        value="{{ endTime }}"
+        bind:input="onInputEndDate"
+        min-date="{{ minDate }}"
+        formatter="{{ formatter }}"
+      />
+    </view>
+</van-overlay> -->
+
+</view>

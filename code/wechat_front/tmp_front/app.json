@@ -1,0 +1,20 @@
+{
+  "pages": [
+    "pages/tutorMsgFromJwcPage/tutorMsgFromJwcPage",
+    "pages/stuMsgFromJwcPage/stuMsgFromJwcPage",
+    "pages/logs/logs",
+    "pages/stuMsgFromTutorPage/stuMsgFromTutorPage",
+    "pages/tutorHistoryMsgPage/tutorHistoryMsgPage",
+    "pages/tutorHistoryMsgDetailPage/tutorHistoryMsgDetailPage",
+    "pages/tutorSendMsgPage/tutorSendMsgPage",
+    "pages/tutorSendMsgDetailPage/tutorSendMsgDetailPage",
+    "pages/register/register"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json"
+}
