@@ -8,7 +8,7 @@ Page({
     s_id: "",
     t_id: "",
     value: "",
-    redio: 1
+    redio: -1
   },
   onChoose(event){
     this.setData({redio: event.detail})
@@ -24,6 +24,19 @@ Page({
    */
   onLoad: function (options) {
 
+  },
+
+  onChange(event) {
+    this.setData({
+      radio: event.detail,
+    });
+  },
+
+  onClick(event) {
+    const { name } = event.currentTarget.dataset;
+    this.setData({
+      radio: name,
+    });
   },
 
   /**
