@@ -8,13 +8,8 @@
     "pages/tutorHistoryMsgPage/tutorHistoryMsgPage",
     "pages/tutorHistoryMsgDetailPage/tutorHistoryMsgDetailPage",
     "pages/tutorSendMsgPage/tutorSendMsgPage",
-<<<<<<< HEAD
     "pages/tutorSendMsgDetailPage/tutorSendMsgDetailPage",
-    "pages/stuChooseTutor/stuChooseTutor",
-    "pages/register/register"
-=======
-    "pages/tutorSendMsgDetailPage/tutorSendMsgDetailPage"
->>>>>>> df6cd17863de59d745ced3666754d64c1aa7ab11
+    "pages/stuChooseTutor/stuChooseTutor"
   ],
   "window": {
     "backgroundTextStyle": "light",
