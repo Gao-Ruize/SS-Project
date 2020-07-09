@@ -19,11 +19,4 @@ public class TutMsgController {
     @Autowired
     InstructService instructService;
 
-    @CrossOrigin
-    @GetMapping(value = "api/test2")
-    @ResponseBody
-    public List<Instruct> findAll() {
-        List<Instruct> ret = instructService.findAll();
-        return ret;
-    }
 }

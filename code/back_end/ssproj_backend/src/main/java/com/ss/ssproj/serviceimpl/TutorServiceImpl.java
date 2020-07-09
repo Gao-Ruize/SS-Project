@@ -12,7 +12,14 @@ import java.util.List;
 public class TutorServiceImpl implements TutorService{
     @Autowired
     TutorDao tutorDao;
+
+    @Override
     public List<Tutor> findAll(){
         return tutorDao.findAll();
+    }
+
+    @Override
+    public void saveOrUpdate(Tutor tutor) {
+        tutorDao.saveOrUpdate(tutor);
     }
 }

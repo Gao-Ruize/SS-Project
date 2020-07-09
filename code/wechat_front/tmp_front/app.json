@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/register/register",
     "pages/tutorMsgFromJwcPage/tutorMsgFromJwcPage",
     "pages/stuMsgFromJwcPage/stuMsgFromJwcPage",
     "pages/logs/logs",
@@ -7,9 +8,13 @@
     "pages/tutorHistoryMsgPage/tutorHistoryMsgPage",
     "pages/tutorHistoryMsgDetailPage/tutorHistoryMsgDetailPage",
     "pages/tutorSendMsgPage/tutorSendMsgPage",
+<<<<<<< HEAD
     "pages/tutorSendMsgDetailPage/tutorSendMsgDetailPage",
     "pages/stuChooseTutor/stuChooseTutor",
     "pages/register/register"
+=======
+    "pages/tutorSendMsgDetailPage/tutorSendMsgDetailPage"
+>>>>>>> df6cd17863de59d745ced3666754d64c1aa7ab11
   ],
   "window": {
     "backgroundTextStyle": "light",

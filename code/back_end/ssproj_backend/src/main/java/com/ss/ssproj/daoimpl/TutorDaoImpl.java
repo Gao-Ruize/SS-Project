@@ -17,4 +17,10 @@ public class TutorDaoImpl implements TutorDao {
     public List<Tutor> findAll() {
         return tutorRepository.findAll();
     };
+
+    @Override
+    public void saveOrUpdate(Tutor tutor) {
+        tutorRepository.save(tutor);
+    }
+
 }

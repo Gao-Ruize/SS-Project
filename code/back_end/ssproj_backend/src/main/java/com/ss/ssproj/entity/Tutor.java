@@ -10,10 +10,20 @@ import javax.persistence.*;
 public class Tutor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "tutor_id")
+    @Column(name = "id")
+    int id;
     String tutor_id;
     String u_id;
     String tutor_name;
+
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
 
     public void setU_id(String u_id) {
         this.u_id = u_id;
