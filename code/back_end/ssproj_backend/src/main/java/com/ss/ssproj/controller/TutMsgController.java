@@ -1,8 +1,11 @@
-//用户登录时用于判定用户身份
-//用户注册时用于将其学号与微信号绑定
+//教师查看发送给学生的信息
+//教师查看信息阅读情况
+//教师给学生发送信息
+//搜索
 package com.ss.ssproj.controller;
-import com.ss.ssproj.entity.Tutor;
-import com.ss.ssproj.service.TutorService;
+
+import com.ss.ssproj.entity.Instruct;
+import com.ss.ssproj.service.InstructService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,15 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class LoginController {
+public class TutMsgController {
     @Autowired
-    TutorService tutorService;
+    InstructService instructService;
 
     @CrossOrigin
-    @GetMapping(value = "api/text1")
+    @GetMapping(value = "api/test2")
     @ResponseBody
-    public List<Tutor> test() {
-        List<Tutor> ret = tutorService.findAll();
+    public List<Instruct> findAll() {
+        List<Instruct> ret = instructService.findAll();
         return ret;
     }
 }
