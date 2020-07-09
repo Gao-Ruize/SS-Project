@@ -8,4 +8,5 @@ import java.util.List;
 @Service
 public interface TutorService {
     List<Tutor> findAll();
+    void saveOrUpdate(Tutor tutor);
 }

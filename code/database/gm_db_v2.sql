@@ -1,19 +1,21 @@
 -- u_id 微信号对应id
 -- tutor_id 工号
 create table if not exists `tutor` (
+`id` INT AUTO_INCREMENT,
 `tutor_id` VARCHAR(100),
 `u_id` VARCHAR(100), 
 `tutor_name` VARCHAR(100),
-primary key(`tutor_id`)
+primary key(`id`)
 ) ENGINE = INNODB DEFAULT CHARSET=utf8;
 
 -- u_id 微信号对应id
 -- student_id 学号
 create table if not exists `student` (
+`id` INT AUTO_INCREMENT,
 `student_id` VARCHAR(100),
 `u_id` VARCHAR(100),
 `student_name` VARCHAR(100),
-primary key(`student_id`)
+primary key(`id`)
 ) ENGINE = INNODB DEFAULT CHARSET=utf8;
 
 -- 指导关系表
@@ -21,9 +23,7 @@ create table if not exists `instruct` (
 `ins_id` INT AUTO_INCREMENT,
 `student_id` VARCHAR(100),
 `tutor_id` VARCHAR(100),
-primary key(`ins_id`),
-foreign key (student_id) references student(student_id),
-foreign key(tutor_id) references tutor(tutor_id)
+primary key(`ins_id`)
 ) ENGINE = INNODB DEFAULT CHARSET=utf8;
 
 -- 教务处信息
@@ -44,9 +44,7 @@ create table if not exists `ins_message` (
 `content` VARCHAR(500),
 `release_time` TIMESTAMP,
 `if_read` INT,
-primary key (`ins_msg_id`),
-foreign key (`tutor_id`) references tutor (`tutor_id`),
-foreign key (`student_id`) references student (`student_id`)
+primary key (`ins_msg_id`)
 ) ENGINE = INNODB DEFAULT CHARSET=utf8;
 
 -- 教务处信息阅读情况
@@ -55,9 +53,7 @@ create table if not exists `read_jwc_msg` (
 `student_id` VARCHAR(100),
 `tutor_id` VARCHAR(100),
 `if_read` INT,
-primary key (`rjm_id`),
-foreign key (`student_id`) references student (`student_id`),
-foreign key (`tutor_id`) references tutor (`tutor_id`)
+primary key (`rjm_id`)
 ) ENGINE = INNODB DEFAULT CHARSET=utf8;
 
 
