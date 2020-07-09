@@ -8,6 +8,7 @@
     "pages/tutorHistoryMsgDetailPage/tutorHistoryMsgDetailPage",
     "pages/tutorSendMsgPage/tutorSendMsgPage",
     "pages/tutorSendMsgDetailPage/tutorSendMsgDetailPage",
+    "pages/stuChooseTutor/stuChooseTutor",
     "pages/register/register"
   ],
   "window": {
