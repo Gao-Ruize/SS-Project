@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface TutorRepository extends JpaRepository<Tutor, Integer> {
     List<Tutor> findAll();
+    Tutor save(Tutor tutor);
 }

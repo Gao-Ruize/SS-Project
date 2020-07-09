@@ -1,6 +1,5 @@
 // pages/register/register.js
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -9,22 +8,53 @@ Page({
     s_id: "",
     t_id: "",
     value: "",
-    redio: 1
+    radio: -1
   },
   onChoose(event){
-    this.setData({redio: event.detail})
+    this.setData({radio: event.detail})
   },
   onInput(event){
     this.setData({value: event.detail})
   },
   onCommit(event){
     //向后端发消息，若后端返回成功，则继续，若返回errMsg，则报错，让其重新输入或联系管理员
+    let indentity = this.data.radio;
+    console.log(indentity);
+    if(indentity == -1) {
+      wx.showToast({
+        title: '请选择身份！',
+        icon:'none'
+      }) }
+      else
+      if(indentity == 1) {
+        wx.navigateTo({
+          url: '../stuMsgFromJwcPage/stuMsgFromJwcPage',
+        });
+      } else
+      if(indentity == 2) {
+        wx.navigateTo({
+          url: '../tutorMsgFromJwcPage/tutorMsgFromJwcPage',
+        });
+      }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
 
+  },
+
+  onChange(event) {
+    this.setData({
+      radio: event.detail,
+    });
+  },
+
+  onClick(event) {
+    const { name } = event.currentTarget.dataset;
+    this.setData({
+      radio: name,
+    });
   },
 
   /**

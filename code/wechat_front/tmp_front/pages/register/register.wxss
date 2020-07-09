@@ -1,1 +1,21 @@
 /* pages/register/register.wxss */
+.titleText {
+  margin-top: 50px;
+  color:blue;
+  font-size: 50px;
+  font-weight: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputForm {
+  margin-top: 50px;
+}
+
+.bottomButton {
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

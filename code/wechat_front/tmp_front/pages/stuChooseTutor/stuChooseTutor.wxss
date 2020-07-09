@@ -1,0 +1,11 @@
+/* pages/stuChooseTutor/stuChooseTutor.wxss */
+.page {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.text1{
+  padding-top: 40rpx;
+  height: 100rpx;
+}

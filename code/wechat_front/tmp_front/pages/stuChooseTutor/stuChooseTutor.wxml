@@ -1,0 +1,31 @@
+<!--pages/stuChooseTutor/stuChooseTutor.wxml-->
+<view>
+  <view class="page">
+    <van-button round type="info" bindtap="bindOpenDept">
+      选择专业
+    </van-button>
+    <van-button round type="info" bindtap="bindOpenTutor">
+      选择导师
+    </van-button>
+  </view>
+  <!--遮罩层：显示deptpicker-->
+  <van-overlay show="{{ deptshow }}">
+    <van-picker 
+    columns="{{ columns }}" 
+    bind:change="onChange" 
+    bind:confirm="onDeptConfirm" 
+    confirm-button-text="确认" 
+    cancel-button-text="取消" 
+    show-toolbar="true"/>
+  </van-overlay>
+  <!--遮罩层：显示tutorpicker-->
+  <van-overlay show="{{ tutorshow }}">
+    <van-picker 
+    columns="{{ tutors }}" 
+    bind:confirm="onTutorConfirm" 
+    confirm-button-text="确认" 
+    cancel-button-text="取消" 
+    show-toolbar="true"/>
+  </van-overlay>
+</view>
+
