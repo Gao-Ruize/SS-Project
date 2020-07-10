@@ -1,11 +1,17 @@
 <!--pages/stuChooseTutor/stuChooseTutor.wxml-->
 <view>
   <view class="page">
+    <text class="text1">绑定导师：</text>
     <van-button round type="info" bindtap="bindOpenDept">
       选择专业
     </van-button>
+    <text class="text1">您的专业是：{{profession}}</text>
     <van-button round type="info" bindtap="bindOpenTutor">
       选择导师
+    </van-button>
+    <text class="text1">您的导师是：{{tutor}}</text>
+    <van-button round type="info" bindtap="bindConfirm">
+      确认提交
     </van-button>
   </view>
   <!--遮罩层：显示deptpicker-->
