@@ -39,15 +39,15 @@ public class LoginController {
     @PostMapping(value = "api/bind")
     @ResponseBody
     public Result bind(@RequestBody LoginForm loginForm) {
-        String real_id = loginForm.getReal_id();
-        String u_id = loginForm.getU_id();
+        String real_id = loginForm.getRealId();
+        String u_id = loginForm.getuId();
         String type = loginForm.getType();
         if(type.equals("1")) {
             //判断该学号是否被注册过
             //若没有则获取该生姓名
             Student student = new Student();
-            student.setStudent_id(real_id);
-            student.setU_id(u_id);
+            student.setStudentId(real_id);
+            student.setuId(u_id);
             //student.setStudent_name(name);
             studentService.saveOrUpdate(student);
             return new Result(200);
@@ -55,9 +55,9 @@ public class LoginController {
         if(type.equals("2")) {
             //判断是否被注册过
             Tutor tutor = new Tutor();
-            tutor.setTutor_id(real_id);
-            tutor.setU_id(u_id);
-            tutor.setTutor_name("name");
+            tutor.setTutorId(real_id);
+            tutor.setuId(u_id);
+            tutor.setTutorName("name");
             tutorService.saveOrUpdate(tutor);
             return new Result(201);
         }

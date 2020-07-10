@@ -11,31 +11,31 @@ public class Instruct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ins_id")
-    int ins_id;
-    String student_id;
-    String tutor_id;
+    int insId;
+    String studentId;
+    String tutorId;
 
-    public void setStudent_id(String student_id) {
-        this.student_id = student_id;
+    public void setTutorId(String tutorId) {
+        this.tutorId = tutorId;
     }
 
-    public String getStudent_id() {
-        return student_id;
+    public String getTutorId() {
+        return tutorId;
     }
 
-    public void setTutor_id(String tutor_id) {
-        this.tutor_id = tutor_id;
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 
-    public String getTutor_id() {
-        return tutor_id;
+    public String getStudentId() {
+        return studentId;
     }
 
-    public void setIns_id(int ins_id) {
-        this.ins_id = ins_id;
+    public void setInsId(int insId) {
+        this.insId = insId;
     }
 
-    public int getIns_id() {
-        return ins_id;
+    public int getInsId() {
+        return insId;
     }
 }

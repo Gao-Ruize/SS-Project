@@ -12,36 +12,28 @@ public class InsMessage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ins_msg_id")
-    int ins_msg_id;
-    String tutor_id;
-    String student_id;
+    int insMsgId;
+    String tutorId;
+    String studentId;
     String title;
     String content;
-    int release_time;
-    int if_read;
+    String releaseTime;
+    int ifRead;
 
-    public void setStudent_id(String student_id) {
-        this.student_id = student_id;
+    public void setIfRead(int ifRead) {
+        this.ifRead = ifRead;
     }
 
-    public String getStudent_id() {
-        return student_id;
+    public int getIfRead() {
+        return ifRead;
     }
 
-    public void setTutor_id(String tutor_id) {
-        this.tutor_id = tutor_id;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getTutor_id() {
-        return tutor_id;
-    }
-
-    public void setIf_read(int if_read) {
-        this.if_read = if_read;
-    }
-
-    public int getIf_read() {
-        return if_read;
+    public String getTitle() {
+        return title;
     }
 
     public void setContent(String content) {
@@ -52,28 +44,36 @@ public class InsMessage {
         return content;
     }
 
-    public void setIns_msg_id(int ins_msg_id) {
-        this.ins_msg_id = ins_msg_id;
+    public void setInsMsgId(int insMsgId) {
+        this.insMsgId = insMsgId;
     }
 
-    public int getIns_msg_id() {
-        return ins_msg_id;
+    public int getInsMsgId() {
+        return insMsgId;
     }
 
-    public void setRelease_time(int release_time) {
-        this.release_time = release_time;
+    public void setReleaseTime(String releaseTime) {
+        this.releaseTime = releaseTime;
     }
 
-    public int getRelease_time() {
-        return release_time;
+    public String getReleaseTime() {
+        return releaseTime;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 
-    public String getTitle() {
-        return title;
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setTutorId(String tutorId) {
+        this.tutorId = tutorId;
+    }
+
+    public String getTutorId() {
+        return tutorId;
     }
 }
 

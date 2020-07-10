@@ -11,40 +11,53 @@ public class JwcMessage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "jwc_msg_id")
-    int jwc_msg_id;
-    int release_time;
+    int jwcMsgId;
+    String releaseTime;
     String title;
     String content;
 
-    public int getJwc_msg_id() {
-        return jwc_msg_id;
+    public void setReleaseTime(String releaseTime) {
+        this.releaseTime = releaseTime;
     }
 
-    public void setJwc_msg_id(int jwc_msg_id) {
-        this.jwc_msg_id = jwc_msg_id;
+    public String getReleaseTime() {
+        return releaseTime;
     }
 
-    public int getRelease_time() {
-        return release_time;
-    }
-
-    public void setRelease_time(int release_time) {
-        this.release_time = release_time;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getContent() {
         return content;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setJwcMsgId(int jwcMsgId) {
+        this.jwcMsgId = jwcMsgId;
+    }
+
+    public int getJwcMsgId() {
+        return jwcMsgId;
+    }
+
+    //在dao层将数据组装好
+    //将jwc message 的信息与是否阅读组装
+    @Transient
+    int ifRead;
+
+    public void setIfRead(int ifRead) {
+        this.ifRead = ifRead;
+    }
+
+    public int getIfRead() {
+        return ifRead;
     }
 }
