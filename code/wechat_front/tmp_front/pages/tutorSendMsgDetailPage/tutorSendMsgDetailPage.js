@@ -11,12 +11,14 @@ Page({
     minDate: new Date().getTime(),
     maxDate: new Date(2021, 6, 1).getTime(),
     currentDate: new Date().getTime(),
-    timeSpanStr: new Date().getFullYear()+ "-" + (new Date().getMonth()+1) + "-" + new Date().getDate() + " " + new Date().getHours() +":" + new Date().getMinutes()
+    timeSpanStr: new Date().getFullYear()+ "-" + (new Date().getMonth()+1) + "-" + new Date().getDate() + " " + new Date().getHours() +":" + new Date().getMinutes(),
+    msg: ""
   },
-
+  // 记录文本框里的信息，保存在msg里
   bindTextAreaBlur(event){
     var result = event.detail.value;
     console.log(result);
+    this.setData({msg: result});
   },
   // 关闭遮罩层，并且保存时间
   onTimeConfirm(event) {
@@ -36,6 +38,7 @@ Page({
   },
   // 发消息的确认，传给后端
   bindQuit(event){
+    // 此处补充传向后端的代码数据
     wx.navigateBack({
       complete: (res) => {},
     })

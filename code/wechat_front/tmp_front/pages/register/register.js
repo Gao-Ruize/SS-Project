@@ -10,9 +10,11 @@ Page({
     value: "",
     radio: -1
   },
+  // 选择学生、导师身份
   onChoose(event){
     this.setData({radio: event.detail})
   },
+  // 输入框，输入学号工号
   onInput(event){
     this.setData({value: event.detail})
   },

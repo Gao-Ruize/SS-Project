@@ -24,11 +24,13 @@ Page({
     result:[],
     active: 2,
   },
+  // 多选框结果的记录
   onChangeCheck(event) {
     this.setData({
       result: event.detail,
     });
   },
+  // 底部导航栏的路由
   onChange(event) {
     if(event.detail == 1)
     {
@@ -43,6 +45,7 @@ Page({
       })
     }
   },
+  // 转到群发消息detail界面
   changetomessage(event){
     wx.setStorageSync('SendMessageTo', this.data.result);
     wx.navigateTo({

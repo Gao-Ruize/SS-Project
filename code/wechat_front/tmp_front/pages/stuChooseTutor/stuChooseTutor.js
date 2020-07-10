@@ -38,12 +38,15 @@ Page({
 
 
   },
+  // 打开选择专业遮罩层按钮
   bindOpenDept(){
     this.setData({deptshow: true})
   },
+  // 打开选择导师遮罩层按钮
   bindOpenTutor(){
     this.setData({tutorshow: true})
   },
+  // 确认专业，关闭遮罩层
   onDeptConfirm(event){
     const { picker, value, index } = event.detail;
     var dept = value[0];
@@ -54,6 +57,7 @@ Page({
 
 
   },
+  // 确认导师， 关闭遮罩层
   onTutorConfirm(event){
     const { picker, value, index } = event.detail;
     var tutor = value;
