@@ -11,49 +11,49 @@ public class ReadJwcMsg {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "rjm_id")
-    int rjm_id;
-    String student_id;
-    String tutor_id;
-    int if_read;
-    int if_student;
+    int rjmId;
+    String studentId;
+    String tutorId;
+    int ifRead;
+    int ifStudent;
 
-    public int getIf_read() {
-        return if_read;
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 
-    public void setIf_read(int if_read) {
-        this.if_read = if_read;
+    public String getStudentId() {
+        return studentId;
     }
 
-    public String getTutor_id() {
-        return tutor_id;
+    public void setTutorId(String tutorId) {
+        this.tutorId = tutorId;
     }
 
-    public void setTutor_id(String tutor_id) {
-        this.tutor_id = tutor_id;
+    public String getTutorId() {
+        return tutorId;
     }
 
-    public String getStudent_id() {
-        return student_id;
+    public void setIfRead(int ifRead) {
+        this.ifRead = ifRead;
     }
 
-    public void setStudent_id(String student_id) {
-        this.student_id = student_id;
+    public int getIfRead() {
+        return ifRead;
     }
 
-    public int getIf_student() {
-        return if_student;
+    public void setIfStudent(int ifStudent) {
+        this.ifStudent = ifStudent;
     }
 
-    public void setIf_student(int if_student) {
-        this.if_student = if_student;
+    public int getIfStudent() {
+        return ifStudent;
     }
 
-    public int getRjm_id() {
-        return rjm_id;
+    public void setRjmId(int rjmId) {
+        this.rjmId = rjmId;
     }
 
-    public void setRjm_id(int rjm_id) {
-        this.rjm_id = rjm_id;
+    public int getRjmId() {
+        return rjmId;
     }
 }

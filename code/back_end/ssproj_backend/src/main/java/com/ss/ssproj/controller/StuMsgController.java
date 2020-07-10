@@ -3,5 +3,10 @@
 //信息搜索
 package com.ss.ssproj.controller;
 
+import com.ss.ssproj.entity.JwcMessage;
+import com.ss.ssproj.utils.LoginMsg;
+import org.springframework.web.bind.annotation.*;
+
 public class StuMsgController {
+
 }

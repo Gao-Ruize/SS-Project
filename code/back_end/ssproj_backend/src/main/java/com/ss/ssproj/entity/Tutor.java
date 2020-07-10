@@ -12,9 +12,9 @@ public class Tutor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     int id;
-    String tutor_id;
-    String u_id;
-    String tutor_name;
+    String tutorId;
+    String uId;
+    String tutorName;
 
 
     public void setId(int id) {
@@ -25,27 +25,27 @@ public class Tutor {
         return id;
     }
 
-    public void setU_id(String u_id) {
-        this.u_id = u_id;
+    public void setuId(String uId) {
+        this.uId = uId;
     }
 
-    public String getU_id() {
-        return u_id;
+    public String getuId() {
+        return uId;
     }
 
-    public String getTutor_id() {
-        return tutor_id;
+    public void setTutorId(String tutorId) {
+        this.tutorId = tutorId;
     }
 
-    public void setTutor_id(String tutor_id) {
-        this.tutor_id = tutor_id;
+    public String getTutorId() {
+        return tutorId;
     }
 
-    public String getTutor_name() {
-        return tutor_name;
+    public void setTutorName(String tutorName) {
+        this.tutorName = tutorName;
     }
 
-    public void setTutor_name(String tutor_name) {
-        this.tutor_name = tutor_name;
+    public String getTutorName() {
+        return tutorName;
     }
 }
