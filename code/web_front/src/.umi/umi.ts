@@ -1,48 +1,12 @@
 // @ts-nocheck
 import './core/polyfill';
 import '@@/core/devScripts';
-import '../global.tsx';
 import { plugin } from './core/plugin';
 import { createHistory } from './core/history';
-import { ApplyPluginsType } from 'D:/SS-Project/SS-Project/code/web_front/node_modules/@umijs/runtime';
-import { renderClient } from 'D:/SS-Project/SS-Project/code/web_front/node_modules/@umijs/renderer-react/dist/index.js';
+import { ApplyPluginsType } from 'D:/SS-Project/code/web_front/node_modules/@umijs/runtime';
+import { renderClient } from 'D:/SS-Project/code/web_front/node_modules/@umijs/renderer-react/dist/index.js';
 
 
-require('../global.less');
-require('./plugin-locale/locale')._onCreate();
-(() => {
-  // Runtime block add component
-  window.GUmiUIFlag = require('D:/SS-Project/SS-Project/code/web_front/node_modules/@umijs/plugin-ui-blocks/lib/sdk/flagBabelPlugin/GUmiUIFlag.js').default;
-
-  // Enable/Disable block add edit mode
-  window.addEventListener(
-    'message',
-    event => {
-      try {
-        const { action, data } = JSON.parse(event.data);
-        switch (action) {
-          case 'umi.ui.checkValidEditSection':
-            const haveValid = !!document.querySelectorAll('div.g_umiuiBlockAddEditMode').length;
-            const frame = document.getElementById('umi-ui-bubble');
-            if (frame && frame.contentWindow) {
-              frame.contentWindow.postMessage(
-                JSON.stringify({
-                  action: 'umi.ui.checkValidEditSection.success',
-                  payload: {
-                    haveValid,
-                  },
-                }),
-                '*',
-              );
-            }
-          default:
-            break;
-        }
-      } catch (e) {}
-    },
-    false,
-  );
-})();
 
 
 const getClientRender = (args: { hot?: boolean } = {}) => plugin.applyPlugins({
@@ -55,8 +19,8 @@ const getClientRender = (args: { hot?: boolean } = {}) => plugin.applyPlugins({
       plugin,
       history: createHistory(args.hot),
       isServer: process.env.__IS_SERVER,
-      dynamicImport: true,
       rootElement: 'root',
+      defaultTitle: ``,
     });
   },
   args,
@@ -69,25 +33,6 @@ export default clientRender();
     window.g_umi = {
       version: '3.2.9',
     };
-  
-
-    (() => {
-      try {
-        const ua = window.navigator.userAgent;
-        const isIE = ua.indexOf('MSIE ') > -1 || ua.indexOf('Trident/') > -1;
-        if (isIE) return;
-
-        // Umi UI Bubble
-        require('D:/SS-Project/SS-Project/code/web_front/node_modules/@umijs/preset-ui/lib/bubble').default({
-          port: 3000,
-          path: 'D:/SS-Project/SS-Project/code/web_front',
-          currentProject: '',
-          isBigfish: undefined,
-        });
-      } catch (e) {
-        console.warn('Umi UI render error:', e);
-      }
-    })();
   
 
 // hot module replacement

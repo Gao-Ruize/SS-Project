@@ -176,31 +176,5 @@ export interface IConfigFromPlugins {
   mock?: {
     exclude?: string[];
   };
-  ProBlockOption?: string;
-  antd?: {
-    dark?: boolean;
-    compact?: boolean;
-    config?: {};
-  };
-  dva?: {
-    immer?: boolean;
-    hmr?: boolean;
-    skipModelValidate?: boolean;
-    extraModels?: string[];
-  };
-  locale?: {
-    default?: string;
-    useLocalStorage?: boolean;
-    baseNavigator?: boolean;
-    title?: boolean;
-    antd?: boolean;
-    baseSeparator?: string;
-  };
-  layout?: {};
-  request?: {
-    dataField?: "";
-  };
-  block?: number;
-  esbuild?: {};
   [k: string]: any;
 }
