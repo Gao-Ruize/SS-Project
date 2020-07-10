@@ -29,7 +29,7 @@ primary key(`ins_id`)
 -- 教务处信息
 create table if not exists `jwc_message` (
 `jwc_msg_id` INT AUTO_INCREMENT,
-`release_time` TIMESTAMP,
+`release_time` VARCHAR(20),
 `title` VARCHAR(200),
 `content` VARCHAR(200),
 primary key(`jwc_msg_id`)
@@ -42,7 +42,7 @@ create table if not exists `ins_message` (
 `student_id` VARCHAR(100),
 `title` VARCHAR(200),
 `content` VARCHAR(500),
-`release_time` TIMESTAMP,
+`release_time` VARCHAR(20),
 `if_read` INT,
 primary key (`ins_msg_id`)
 ) ENGINE = INNODB DEFAULT CHARSET=utf8;
@@ -53,6 +53,7 @@ create table if not exists `read_jwc_msg` (
 `student_id` VARCHAR(100),
 `tutor_id` VARCHAR(100),
 `if_read` INT,
+`if_student` INT,
 primary key (`rjm_id`)
 ) ENGINE = INNODB DEFAULT CHARSET=utf8;
 
