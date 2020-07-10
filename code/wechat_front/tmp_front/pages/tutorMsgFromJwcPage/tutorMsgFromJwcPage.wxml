@@ -50,7 +50,7 @@
       <van-cell label="{{message.detail}}" is-link>
         <view slot="title">
           <view class="van-cell-text">{{message.title}}</view>
-          <van-tag color="{{message.read?'grey':'skyblue'}}">{{message.read?"已读":"未读"}}</van-tag>
+          <van-tag color="{{message.read?'green':'red'}}">{{message.read?"已读":"未读"}}</van-tag>
         </view>
       </van-cell>
   </view>
