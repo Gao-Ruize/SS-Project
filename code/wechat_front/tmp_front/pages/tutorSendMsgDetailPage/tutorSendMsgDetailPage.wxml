@@ -7,18 +7,14 @@
       选择时间
     </van-button>
     </view>
-    <text class="text1">选择的时间为:{{timeSpanStr}}</text>
+    <text class="text1">选择发送的时间为:{{timeSpanStr}}</text>
     <view>
-      <van-cell-group>
-      <van-field
-        value="{{ value }}"
-        placeholder="请输入内容"
-        border="{{ false }}"
-        bind:change="onChange"
-      />
-      </van-cell-group>
+      <textarea class="detailText" 
+        placeholder="输入您将要发送的消息内容"
+        bindinput="bindTextAreaBlur"
+        value="{{details}}">
+      </textarea>
     </view>
-    <text class="text1"></text>
     <view>
       <van-button round type="info" bindtap="bindQuit">
         确认

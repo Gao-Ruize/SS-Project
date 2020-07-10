@@ -14,6 +14,10 @@ Page({
     timeSpanStr: new Date().getFullYear()+ "-" + (new Date().getMonth()+1) + "-" + new Date().getDate() + " " + new Date().getHours() +":" + new Date().getMinutes()
   },
 
+  bindTextAreaBlur(event){
+    var result = event.detail.value;
+    console.log(result);
+  },
   // 关闭遮罩层，并且保存时间
   onTimeConfirm(event) {
     var tmpDate = new Date(event.detail);
