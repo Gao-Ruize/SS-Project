@@ -23,12 +23,14 @@
 
   <van-search
     value="{{ searchValue }}"
-    placeholder="通过学生姓名或学号搜索"
-    bind:change="searchChange"
-    bind:search="onSearch"
+    show-action
+    placeholder = "通过学生姓名或学号搜索"
+    bind:change = "searchChange"
+    bind:search = "onSearch"
+    bind:cancel = "onCancel"
     shape = "round"
   />
-  <view wx:for="{{readStudentInfo}}" wx:for-item="eachInfo">
+  <view wx:for="{{showStduents}}" wx:for-item="eachInfo">
     <van-cell icon="user-o"  value = "{{eachInfo.ID}}">
       <view slot="title">
         <view class="van-cell-text">{{eachInfo.name}}</view>

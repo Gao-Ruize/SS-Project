@@ -7,8 +7,15 @@ Page({
     //信息id
     msgId:"",
     active:1,
-    readStudentInfo:[{name:"zhangsan",ID:"1",ifRead:1},{name:"lisi",ID:"2",ifRead:1},{name:"wangwu",ID:"3",ifRead:0},{name:"zhaoliu",ID:"4",ifRead:0}],
+    //全部学生信息
+    readStudentInfo:[{name:"zhangsan",ID:"1",ifRead:1},
+                     {name:"lisi",ID:"2",ifRead:1},
+                     {name:"wangwu",ID:"3",ifRead:0},
+                     {name:"zhaoliu",ID:"4",ifRead:0}],
+    //未读学生信息，在发送通知时使用
     unreadStudentInfo:[],
+    //页面展示学生信息，在搜索时使用
+    showStduents:[],
     searchValue:"",
     showPopUp:false,
     result:[],
@@ -23,7 +30,10 @@ Page({
       msgId: tmpMsgId,
     });
     //通过msgId获得对应的学生
-    //将已读学生和未读学生分开处理
+    //将已读学生和未读学生存储到一起
+    //获得信息后将将showStudent为全部学生信息
+    let tmpArr = this.data.readStudentInfo;
+    this.setData({showStduents: tmpArr});
   },
   onChange(event) {
     // event.detail 的值为当前选中项的索引
@@ -44,9 +54,26 @@ Page({
     this.setData({showPopUp: false});
     this.setData({unreadStudentInfo:[]});
   },
+
   onSearch(){
+    //将内容过滤后存入showStudents
     console.log("search!");
+    let value = this.data.searchValue;
+    let tmpArr = [];
+    this.data.readStudentInfo.forEach(function(item,index) {
+      if(item.name.includes(value) 
+         || item.ID.includes(value)) {
+        tmpArr.push(item);
+      }
+    });
+    this.setData({showStduents: tmpArr});
   },
+
+  onCancel() {
+    let tmpArr = this.data.readStudentInfo;
+    this.setData({showStduents: tmpArr});
+  },
+
   mulChosChange(event) {
     this.setData({result:event.detail});
   },

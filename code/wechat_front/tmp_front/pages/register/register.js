@@ -20,6 +20,13 @@ Page({
   },
   onCommit(event){
     //向后端发消息，若后端返回成功，则继续，若返回errMsg，则报错，让其重新输入或联系管理员
+    if(this.data.value == "") {
+      wx.showToast({
+        title: '请输入学号/工号！',
+        icon:'none',
+      });
+      return;
+    }
     let indentity = this.data.radio;
     console.log(indentity);
     if(indentity == -1) {

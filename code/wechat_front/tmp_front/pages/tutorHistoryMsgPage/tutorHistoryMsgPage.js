@@ -6,15 +6,19 @@ Page({
    */
   data: {
     active: 1,
+    //全部信息
     msgItems:[{id:"1",title:"选课时间通知",date:"2020"},{id:"2",title:"退课时间通知",date:"2020"}],
     searchValue:"",
+    //页面展示信息，即搜索过滤后的信息
+    showItems:[],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let tmp = this.data.msgItems;
+    this.setData({showItems: tmp});
   },
   onChange(event) {
     if(event.detail == 0)
@@ -38,6 +42,19 @@ Page({
   },
   onSearch(){
     console.log("search!");
+    let tmpArr = [];
+    let value = this.data.searchValue;
+    this.data.msgItems.forEach(function(item,index) {
+      if(item.title.includes(value) 
+         || item.date.includes(value)) {
+        tmpArr.push(item);
+      }
+    });
+    this.setData({showItems: tmpArr});
+  },
+  onCancel(){
+    let tmpArr = this.data.msgItems;
+    this.setData({showItems: tmpArr});
   },
   checkDetails(event) {
     let msgId = event.currentTarget.dataset.id;
