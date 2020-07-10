@@ -1,0 +1,19 @@
+<!--pages/messageDetail/messageDetailPage.wxml-->
+<view>
+  <view>
+    <van-notice-bar
+     text="阅读后请点击确认按钮"
+    />
+  </view>
+  <view>
+    <van-cell title="{{title}}" value="{{date}}" size="large" label="{{sender_name}}" />
+    <van-collapse value="{{ activeNames }}" bind:change="onCollChange">
+      <van-collapse-item title="详情" name="1">
+        {{content}}
+      </van-collapse-item>
+    </van-collapse>
+    <view slot="footer" class = "buttons">
+        <van-button size="normal" type="danger" bindtap="onCommit">确认收到</van-button>
+    </view>
+  </view>
+</view>
