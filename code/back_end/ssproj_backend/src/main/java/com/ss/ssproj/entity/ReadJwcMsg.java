@@ -16,6 +16,7 @@ public class ReadJwcMsg {
     String tutorId;
     int ifRead;
     int ifStudent;
+    int jwcMsgId;
 
     public void setStudentId(String studentId) {
         this.studentId = studentId;
@@ -55,5 +56,13 @@ public class ReadJwcMsg {
 
     public int getRjmId() {
         return rjmId;
+    }
+
+    public void setJwcMsgId(int jwcMsgId) {
+        this.jwcMsgId = jwcMsgId;
+    }
+
+    public int getJwcMsgId() {
+        return jwcMsgId;
     }
 }

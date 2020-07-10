@@ -5,11 +5,17 @@ public class MsgForm {
     String title;
     String content;
     String time;
+    String senderName;
+    String msgType;
+    int msgId;
 
-    public MsgForm(String t, String c, String ti) {
-        this.title = t;
-        this.content = t;
-        this.time = ti;
+    public MsgForm(String title, String content, String time, String sender, String type, int id) {
+        this.title = title;
+        this.content = content;
+        this.time = time;
+        this.senderName = sender;
+        this.msgType = type;
+        this.msgId = id;
     }
 
     public void setTime(String time) {
@@ -34,5 +40,29 @@ public class MsgForm {
 
     public String getTitle() {
         return title;
+    }
+
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
+    }
+
+    public String getMsgType() {
+        return msgType;
+    }
+
+    public void setMsgType(String msgType) {
+        this.msgType = msgType;
+    }
+
+    public void setMsgId(int msgId) {
+        this.msgId = msgId;
+    }
+
+    public int getMsgId() {
+        return msgId;
     }
 }
