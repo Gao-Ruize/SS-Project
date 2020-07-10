@@ -48,12 +48,14 @@ primary key (`ins_msg_id`)
 ) ENGINE = INNODB DEFAULT CHARSET=utf8;
 
 -- 教务处信息阅读情况
+drop table if exists`read_jwc_msg`;
 create table if not exists `read_jwc_msg` (
 `rjm_id` INT AUTO_INCREMENT,
 `student_id` VARCHAR(100),
 `tutor_id` VARCHAR(100),
 `if_read` INT,
 `if_student` INT,
+`jwc_msg_id` INT,
 primary key (`rjm_id`)
 ) ENGINE = INNODB DEFAULT CHARSET=utf8;
 
