@@ -32,13 +32,13 @@ Page({
   onChange(event) {
     if(event.detail == 1)
     {
-      wx.navigateTo({
+      wx.redirectTo({
         url: '../tutorHistoryMsgPage/tutorHistoryMsgPage',
       })
     }
     if(event.detail == 0)
     {
-      wx.navigateTo({
+      wx.redirectTo({
         url: '../tutorMsgFromJwcPage/tutorMsgFromJwcPage',
       })
     }

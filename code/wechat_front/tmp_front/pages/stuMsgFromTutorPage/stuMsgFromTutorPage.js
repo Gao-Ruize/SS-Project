@@ -70,8 +70,8 @@ Page({
 
   onChange(event) {
     if(event.detail == 0){
-      wx.navigateBack({
-        complete: (res) => {},
+      wx.redirectTo({
+        url: '../stuMsgFromJwcPage/stuMsgFromJwcPage',
       })
     }
   },

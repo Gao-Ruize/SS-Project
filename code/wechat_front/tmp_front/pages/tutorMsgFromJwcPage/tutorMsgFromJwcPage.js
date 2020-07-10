@@ -36,17 +36,17 @@ Page({
       {title:"title5", detail:"detail5", read:true, messageId:5}
     ]
   },
-  // 
+  // 导航栏
   onChange (event) {
     if(event.detail == 1)
     {
-      wx.navigateTo({
+      wx.redirectTo({
         url: '../tutorHistoryMsgPage/tutorHistoryMsgPage',
       })
     }
     if(event.detail == 2)
     {
-      wx.navigateTo({
+      wx.redirectTo({
         url: '../tutorSendMsgPage/tutorSendMsgPage',
       })
     }

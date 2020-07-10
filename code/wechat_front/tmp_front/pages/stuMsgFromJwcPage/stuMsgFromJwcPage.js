@@ -40,7 +40,7 @@ Page({
   onChange (event) {
     if(event.detail == 1)
     {
-      wx.navigateTo({
+      wx.redirectTo({
         url: '../stuMsgFromTutorPage/stuMsgFromTutorPage',
       })
     }
