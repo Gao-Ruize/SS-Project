@@ -32,15 +32,7 @@
     <van-cell icon="user-o"  value = "{{eachInfo.ID}}">
       <view slot="title">
         <view class="van-cell-text">{{eachInfo.name}}</view>
-        <van-tag type="danger">未读</van-tag>
-      </view>
-    </van-cell>
-  </view>
-  <view wx:for="{{unreadStudentInfo}}" wx:for-item="eachInfo">
-    <van-cell icon="user-o" value = "{{eachInfo.ID}}">
-      <view slot="title">
-        <view class="van-cell-text">{{eachInfo.name}}</view>
-        <van-tag type="success">已读</van-tag>
+        <van-tag type="{{eachInfo.ifRead?'success':'danger'}}">{{eachInfo.ifRead?"已读":"未读"}}</van-tag>
       </view>
     </van-cell>
   </view>

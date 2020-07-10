@@ -7,8 +7,8 @@ Page({
     //信息id
     msgId:"",
     active:1,
-    readStudentInfo:[{name:"zhangsan",ID:"1"},{name:"lisi",ID:"2"}],
-    unreadStudentInfo:[{name:"wangwu",ID:"3"},{name:"zhaoliu",ID:"4"}],
+    readStudentInfo:[{name:"zhangsan",ID:"1",ifRead:1},{name:"lisi",ID:"2",ifRead:1},{name:"wangwu",ID:"3",ifRead:0},{name:"zhaoliu",ID:"4",ifRead:0}],
+    unreadStudentInfo:[],
     searchValue:"",
     showPopUp:false,
     result:[],
@@ -38,9 +38,11 @@ Page({
   },
   showSendPop(){
     this.setData({showPopUp:true});
+    this.getUnreadInfo();
   },
   onClose() {
-    this.setData({showPopUp: false})
+    this.setData({showPopUp: false});
+    this.setData({unreadStudentInfo:[]});
   },
   onSearch(){
     console.log("search!");
@@ -61,6 +63,16 @@ Page({
     });
     this.onClose();
     this.setData({result:[]});
+  },
+  getUnreadInfo() {
+    let that = this;
+    let tmpArr = [];
+    this.data.readStudentInfo.forEach(function(item,index) {
+      if(item.ifRead == 0) {
+        tmpArr.push(item);
+      }
+    });
+    this.setData({unreadStudentInfo:tmpArr});
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
