@@ -3,7 +3,9 @@ from setting import LOGIN_USERID, LOGIN_PWD
 import re
 import time
 
-driver = webdriver.Chrome("E:\seproject\chromedriver.exe")
+option = webdriver.ChromeOptions()
+option.add_argument('headless')
+driver = webdriver.Chrome("E:\seproject\chromedriver.exe", chrome_options=option)
 driver.get('http://bysj.jwc.sjtu.edu.cn/')
 time.sleep(2)  # 等待缓冲
 
@@ -35,10 +37,19 @@ pageNum = int(result1[0])
 
 
 for i in range(1, pageNum):
+    filename = 'data/selectPhase/' + str(i) + '.txt'
+    file = open(filename, mode='w')
     TableInfo = driver.find_element_by_xpath('//*[@id="gridview"]')
-    print(TableInfo.text)
+    file.write(TableInfo.text)
+    file.close()
     NextPage = driver.find_element_by_xpath('//*[@id="btnNext"]')
     NextPage.click()
     time.sleep(1)
 
+# 单独爬取最后一页
+TableInfo = driver.find_element_by_xpath('//*[@id="gridview"]')
+filename = 'data/selectPhase/' + str(pageNum) + '.txt'
+file = open(filename, mode='w')
+file.write(TableInfo.text)
+file.close()
 driver.quit()
