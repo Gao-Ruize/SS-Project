@@ -2,16 +2,16 @@ package com.ss.ssproj.utils;
 
 public class RegisterForm {
     private
-    String uId;
+    String code;
     String realId;
     String type;
 
-    public void setuId(String uId) {
-        this.uId = uId;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getuId() {
-        return uId;
+    public String getCode() {
+        return code;
     }
 
     public void setType(String type) {

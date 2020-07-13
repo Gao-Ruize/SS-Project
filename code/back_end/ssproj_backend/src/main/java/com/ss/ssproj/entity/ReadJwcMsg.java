@@ -10,59 +10,59 @@ import javax.persistence.*;
 public class ReadJwcMsg {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "rjm_id")
-    int rjmId;
-    String studentId;
-    String tutorId;
-    int ifRead;
-    int ifStudent;
-    int jwcMsgId;
+    @Column(name = "Id")
+    int id;
+    String studentid;
+    String tutorid;
+    int ifread;
+    int ifstudent;
+    int jwcmsgId;
 
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
+    public void setStudentid(String studentid) {
+        this.studentid = studentid;
     }
 
-    public String getStudentId() {
-        return studentId;
+    public String getStudentid() {
+        return studentid;
     }
 
-    public void setTutorId(String tutorId) {
-        this.tutorId = tutorId;
+    public void setTutorid(String tutorid) {
+        this.tutorid = tutorid;
     }
 
-    public String getTutorId() {
-        return tutorId;
+    public String getTutorid() {
+        return tutorid;
     }
 
-    public void setIfRead(int ifRead) {
-        this.ifRead = ifRead;
+    public void setIfread(int ifread) {
+        this.ifread = ifread;
     }
 
-    public int getIfRead() {
-        return ifRead;
+    public int getIfread() {
+        return ifread;
     }
 
-    public void setIfStudent(int ifStudent) {
-        this.ifStudent = ifStudent;
+    public void setIfstudent(int ifstudent) {
+        this.ifstudent = ifstudent;
     }
 
-    public int getIfStudent() {
-        return ifStudent;
+    public int getIfstudent() {
+        return ifstudent;
     }
 
-    public void setRjmId(int rjmId) {
-        this.rjmId = rjmId;
+    public void setJwcmsgId(int jwcmsgId) {
+        this.jwcmsgId = jwcmsgId;
     }
 
-    public int getRjmId() {
-        return rjmId;
+    public int getJwcmsgId() {
+        return jwcmsgId;
     }
 
-    public void setJwcMsgId(int jwcMsgId) {
-        this.jwcMsgId = jwcMsgId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getJwcMsgId() {
-        return jwcMsgId;
+    public int getId() {
+        return id;
     }
 }

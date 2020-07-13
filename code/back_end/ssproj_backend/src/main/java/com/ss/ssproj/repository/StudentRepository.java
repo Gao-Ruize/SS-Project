@@ -8,5 +8,6 @@ import java.util.Optional;
 
 public interface StudentRepository extends JpaRepository<Student, Integer> {
     Student save(Student student);
-    Student findDistinctByuId(String uid);
+    Student findDistinctByUid(String uid);
+    Student findDistinctByStudentid(String studentId);
 }

@@ -20,4 +20,9 @@ public class StudentServiceImpl implements StudentService {
     public Student findDistinctByUid(String uid) {
         return studentDao.findDistinctByUid(uid);
     }
+
+    @Override
+    public Student findDistinctByStudentId(String studentId) {
+        return studentDao.findDistinctByStudentId(studentId);
+    }
 }

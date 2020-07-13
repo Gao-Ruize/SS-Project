@@ -12,7 +12,7 @@ public class JwcMessageDaoImpl implements JwcMessageDao {
     JwcMessageRepository jwcMessageRepository;
 
     public JwcMessage findByJwcId(int id) {
-        JwcMessage ret = jwcMessageRepository.findDistinctByJwcMsgId(id);
+        JwcMessage ret = jwcMessageRepository.findDistinctById(id);
         ret.setIfRead(3);
         return ret;
     }

@@ -23,7 +23,9 @@ public class LoginController {
     @CrossOrigin
     @PostMapping(value = "api/user/login")
     @ResponseBody
-    public LoginMsg login(@RequestBody String u_id) {
+    public LoginMsg login(@RequestBody String code) {
+        //u_id 的获取
+        String u_id = code;
         LoginMsg ret = new LoginMsg();
         Student student = studentService.findDistinctByUid(u_id);
         if(student == null) {
@@ -33,11 +35,11 @@ public class LoginController {
                 ret.setType("N");
             }
             else {
-                ret.setRealId(tutor.getTutorId());
+                ret.setRealId(tutor.getTutorid());
                 ret.setType("T");
             }
         } else {
-            ret.setRealId(student.getStudentId());
+            ret.setRealId(student.getStudentid());
             ret.setType("S");
         }
         return ret;
@@ -45,30 +47,39 @@ public class LoginController {
 
     //返回200为学生 201为老师 300为错误
     @CrossOrigin
-    @PostMapping(value = "api/bind")
+    @PostMapping(value = "api/user/bind")
     @ResponseBody
     public Result bind(@RequestBody RegisterForm loginForm) {
         String real_id = loginForm.getRealId();
-        String u_id = loginForm.getuId();
+        String code = loginForm.getCode();
         String type = loginForm.getType();
+        //通过code获取u_id
+        String u_id = code;
         if(type.equals("1")) {
+            //为学生
             //判断该学号是否被注册过
-            //若没有则获取该生姓名
-            Student student = new Student();
-            student.setStudentId(real_id);
-            student.setUId(u_id);
-            //student.setStudent_name(name);
-            studentService.saveOrUpdate(student);
-            return new Result(200);
+            Student tmpS = studentService.findDistinctByUid(u_id);
+            if(tmpS == null) {
+                //若没有则获取该生姓名
+                Student student = new Student();
+                student.setStudentid(real_id);
+                student.setUid(u_id);
+                student.setStudentname("name");
+                studentService.saveOrUpdate(student);
+                return new Result(200);
+            }
         }
         if(type.equals("2")) {
             //判断是否被注册过
-            Tutor tutor = new Tutor();
-            tutor.setTutorId(real_id);
-            tutor.setuId(u_id);
-            tutor.setTutorName("name");
-            tutorService.saveOrUpdate(tutor);
-            return new Result(201);
+            Tutor tmpT = tutorService.findDistinctByUid(u_id);
+            if(tmpT == null) {
+                Tutor tutor = new Tutor();
+                tutor.setTutorid(real_id);
+                tutor.setUid(u_id);
+                tutor.setTutorname("name");
+                tutorService.saveOrUpdate(tutor);
+                return new Result(201);
+            }
         }
         return new Result(300);
     }
