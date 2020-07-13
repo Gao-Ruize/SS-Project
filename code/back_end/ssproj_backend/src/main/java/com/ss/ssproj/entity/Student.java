@@ -41,11 +41,11 @@ public class Student {
         return studentName;
     }
 
-    public void setuId(String uId) {
+    public void setUId(String uId) {
         this.uId = uId;
     }
 
-    public String getuId() {
+    public String getUId() {
         return uId;
     }
 }

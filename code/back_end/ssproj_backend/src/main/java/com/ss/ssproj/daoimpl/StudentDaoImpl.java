@@ -20,6 +20,6 @@ public class StudentDaoImpl implements StudentDao {
 
     @Override
     public Student findDistinctByUid(String uid) {
-        return studentRepository.findDistinctByUId(uid);
+        return studentRepository.findDistinctByuId(uid);
     }
 }

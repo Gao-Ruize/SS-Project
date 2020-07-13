@@ -56,7 +56,7 @@ public class LoginController {
             //若没有则获取该生姓名
             Student student = new Student();
             student.setStudentId(real_id);
-            student.setuId(u_id);
+            student.setUId(u_id);
             //student.setStudent_name(name);
             studentService.saveOrUpdate(student);
             return new Result(200);
