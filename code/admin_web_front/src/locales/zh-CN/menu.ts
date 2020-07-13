@@ -49,4 +49,8 @@ export default {
   'menu.editor.flow': '流程编辑器',
   'menu.editor.mind': '脑图编辑器',
   'menu.editor.koni': '拓扑编辑器',
+  'menu.消息列表': '消息列表',
+  'menu.用户管理': '用户管理',
+  'menu.用户管理.学生列表': '用户管理.学生列表',
+  'menu.用户管理.导师列表': '用户管理.导师列表',
 };

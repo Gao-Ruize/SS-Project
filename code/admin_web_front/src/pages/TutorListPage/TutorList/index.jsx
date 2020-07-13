@@ -69,20 +69,52 @@ const data = [
   },
 ];
 
-export default () => (
-  <div className={styles.container}>
-    <div className="search">
-      <Search
-        style={{ width: 512 }}
-        placeholder="输入要查询的姓名或工号"
-        onSearch={(value) => console.log(value)}
-        enterButton
-      />
-      <br />
-      <br />
-    </div>
-    <div id="components-table-demo-basic">
-      <Table columns={columns} dataSource={data} />
-    </div>
-  </div>
-);
+// export default () => (
+//   <div className={styles.container}>
+//     <div className="search">
+//       <Search
+//         style={{ width: 512 }}
+//         placeholder="输入要查询的姓名或工号"
+//         onSearch={(value) => console.log(value)}
+//         enterButton
+//       />
+//       <br />
+//       <br />
+//     </div>
+//     <div id="components-table-demo-basic">
+//       <Table columns={columns} dataSource={data} />
+//     </div>
+//   </div>
+// );
+
+
+export default class TutorList extends React.Component{
+  constructor(props){
+    super(props);
+    
+    this.state = {
+      list: data,
+    }
+
+}
+
+  render(){
+    return(
+      <div className={styles.container}>
+        <div className="search">
+          <Search
+            style={{ width: 512 }}
+            placeholder="输入要查询的姓名或工号"
+            onSearch={(value) => console.log(value)}
+            enterButton
+          />
+          <br />
+          <br />
+        </div>
+        <div id="components-table-demo-basic">
+          <Table columns={columns} dataSource={this.state.list} />
+        </div>
+      </div>
+    )
+  }
+}
