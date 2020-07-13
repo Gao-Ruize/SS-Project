@@ -27,11 +27,13 @@ primary key(`ins_id`)
 ) ENGINE = INNODB DEFAULT CHARSET=utf8;
 
 -- 教务处信息
+-- phase 消息对应的毕业设计阶段
 create table if not exists `jwc_message` (
 `jwc_msg_id` INT AUTO_INCREMENT,
 `release_time` VARCHAR(20),
 `title` VARCHAR(200),
 `content` VARCHAR(200),
+`phase` INT,
 primary key(`jwc_msg_id`)
 ) ENGINE = INNODB DEFAULT CHARSET=utf8;
 
@@ -43,6 +45,7 @@ create table if not exists `ins_message` (
 `title` VARCHAR(200),
 `content` VARCHAR(500),
 `release_time` VARCHAR(20),
+`phase` INT,
 `if_read` INT,
 primary key (`ins_msg_id`)
 ) ENGINE = INNODB DEFAULT CHARSET=utf8;

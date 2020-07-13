@@ -18,6 +18,7 @@ public class InsMessage {
     String title;
     String content;
     String releaseTime;
+    int phase;
     int ifRead;
 
     public void setIfRead(int ifRead) {
@@ -74,6 +75,14 @@ public class InsMessage {
 
     public String getTutorId() {
         return tutorId;
+    }
+
+    public void setPhase(int phase) {
+        this.phase = phase;
+    }
+
+    public int getPhase() {
+        return phase;
     }
 }
 

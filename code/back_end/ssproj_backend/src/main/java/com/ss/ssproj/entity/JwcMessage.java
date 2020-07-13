@@ -15,6 +15,7 @@ public class JwcMessage {
     String releaseTime;
     String title;
     String content;
+    int phase;
 
     public void setReleaseTime(String releaseTime) {
         this.releaseTime = releaseTime;
@@ -46,6 +47,14 @@ public class JwcMessage {
 
     public int getJwcMsgId() {
         return jwcMsgId;
+    }
+
+    public int getPhase() {
+        return phase;
+    }
+
+    public void setPhase(int phase) {
+        this.phase = phase;
     }
 
     //在dao层将数据组装好
