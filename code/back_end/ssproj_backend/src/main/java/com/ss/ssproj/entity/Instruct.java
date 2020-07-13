@@ -10,32 +10,32 @@ import javax.persistence.*;
 public class Instruct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ins_id")
-    int insId;
-    String studentId;
-    String tutorId;
+    @Column(name = "Id")
+    int id;
+    String studentid;
+    String tutorid;
 
-    public void setTutorId(String tutorId) {
-        this.tutorId = tutorId;
+    public void setTutorid(String tutorid) {
+        this.tutorid = tutorid;
     }
 
-    public String getTutorId() {
-        return tutorId;
+    public String getTutorid() {
+        return tutorid;
     }
 
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
+    public void setStudentid(String studentid) {
+        this.studentid = studentid;
     }
 
-    public String getStudentId() {
-        return studentId;
+    public String getStudentid() {
+        return studentid;
     }
 
-    public void setInsId(int insId) {
-        this.insId = insId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getInsId() {
-        return insId;
+    public int getId() {
+        return id;
     }
 }

@@ -7,4 +7,5 @@ import org.springframework.stereotype.Service;
 public interface StudentService {
     void saveOrUpdate(Student student);
     Student findDistinctByUid(String uid);
+    Student findDistinctByStudentId(String studentId);
 }

@@ -10,12 +10,20 @@ import javax.persistence.*;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "Id")
     int id;
-    String studentId;
-    String uId;
-    String studentName;
+    String studentid;
+    String uid;
+    String studentname;
 
+
+    public String getStudentid() {
+        return studentid;
+    }
+
+    public void setStudentid(String studentid) {
+        this.studentid = studentid;
+    }
 
     public int getId() {
         return id;
@@ -25,27 +33,20 @@ public class Student {
         this.id = id;
     }
 
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
+    public String getStudentname() {
+        return studentname;
     }
 
-    public String getStudentId() {
-        return studentId;
+    public void setStudentname(String studentname) {
+        this.studentname = studentname;
     }
 
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
+    public String getUid() {
+        return uid;
     }
 
-    public String getStudentName() {
-        return studentName;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
-    public void setUId(String uId) {
-        this.uId = uId;
-    }
-
-    public String getUId() {
-        return uId;
-    }
 }

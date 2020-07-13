@@ -27,4 +27,9 @@ public class TutorServiceImpl implements TutorService{
     public Tutor findDistinctByUid(String uid) {
         return tutorDao.findDistinctByUid(uid);
     }
+
+    @Override
+    public Tutor findDistinctByTutorId(String tutorId) {
+        return tutorDao.findDistinctByTutorId(tutorId);
+    }
 }

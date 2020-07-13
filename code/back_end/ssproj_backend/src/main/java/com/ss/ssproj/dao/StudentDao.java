@@ -7,4 +7,5 @@ import java.util.List;
 public interface StudentDao {
     void saveOrUpdate(Student student);
     Student findDistinctByUid(String uid);
+    Student findDistinctByStudentId(String studentId);
 }

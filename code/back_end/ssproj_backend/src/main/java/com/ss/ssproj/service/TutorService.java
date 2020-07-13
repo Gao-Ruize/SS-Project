@@ -10,4 +10,5 @@ public interface TutorService {
     List<Tutor> findAll();
     void saveOrUpdate(Tutor tutor);
     Tutor findDistinctByUid(String uid);
+    Tutor findDistinctByTutorId(String tutorId);
 }

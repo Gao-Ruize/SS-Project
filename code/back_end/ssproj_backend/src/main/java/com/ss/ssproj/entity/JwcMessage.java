@@ -10,19 +10,19 @@ import javax.persistence.*;
 public class JwcMessage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "jwc_msg_id")
-    int jwcMsgId;
-    String releaseTime;
+    @Column(name = "Id")
+    int id;
+    String releasetime;
     String title;
     String content;
     int phase;
 
-    public void setReleaseTime(String releaseTime) {
-        this.releaseTime = releaseTime;
+    public void setReleasetime(String releasetime) {
+        this.releasetime = releasetime;
     }
 
-    public String getReleaseTime() {
-        return releaseTime;
+    public String getReleasetime() {
+        return releasetime;
     }
 
     public void setContent(String content) {
@@ -41,21 +41,22 @@ public class JwcMessage {
         return title;
     }
 
-    public void setJwcMsgId(int jwcMsgId) {
-        this.jwcMsgId = jwcMsgId;
-    }
-
-    public int getJwcMsgId() {
-        return jwcMsgId;
+    public void setPhase(int phase) {
+        this.phase = phase;
     }
 
     public int getPhase() {
         return phase;
     }
 
-    public void setPhase(int phase) {
-        this.phase = phase;
+    public void setId(int id) {
+        this.id = id;
     }
+
+    public int getId() {
+        return id;
+    }
+
 
     //在dao层将数据组装好
     //将jwc message 的信息与是否阅读组装

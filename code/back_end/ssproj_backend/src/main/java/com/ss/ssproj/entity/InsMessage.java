@@ -11,22 +11,22 @@ import javax.persistence.*;
 public class InsMessage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ins_msg_id")
-    int insMsgId;
-    String tutorId;
-    String studentId;
+    @Column(name = "Id")
+    int id;
+    String tutorid;
+    String studentid;
     String title;
     String content;
-    String releaseTime;
+    String releasetime;
     int phase;
-    int ifRead;
+    int ifread;
 
-    public void setIfRead(int ifRead) {
-        this.ifRead = ifRead;
+    public void setPhase(int phase) {
+        this.phase = phase;
     }
 
-    public int getIfRead() {
-        return ifRead;
+    public int getPhase() {
+        return phase;
     }
 
     public void setTitle(String title) {
@@ -45,45 +45,46 @@ public class InsMessage {
         return content;
     }
 
-    public void setInsMsgId(int insMsgId) {
-        this.insMsgId = insMsgId;
+    public void setIfread(int ifread) {
+        this.ifread = ifread;
     }
 
-    public int getInsMsgId() {
-        return insMsgId;
+    public int getIfread() {
+        return ifread;
     }
 
-    public void setReleaseTime(String releaseTime) {
-        this.releaseTime = releaseTime;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getReleaseTime() {
-        return releaseTime;
+    public int getId() {
+        return id;
     }
 
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
+    public void setReleasetime(String releasetime) {
+        this.releasetime = releasetime;
     }
 
-    public String getStudentId() {
-        return studentId;
+    public String getReleasetime() {
+        return releasetime;
     }
 
-    public void setTutorId(String tutorId) {
-        this.tutorId = tutorId;
+    public void setStudentid(String studentid) {
+        this.studentid = studentid;
     }
 
-    public String getTutorId() {
-        return tutorId;
+    public String getStudentid() {
+        return studentid;
     }
 
-    public void setPhase(int phase) {
-        this.phase = phase;
+    public void setTutorid(String tutorid) {
+        this.tutorid = tutorid;
     }
 
-    public int getPhase() {
-        return phase;
+    public String getTutorid() {
+        return tutorid;
     }
+
 }
 
 

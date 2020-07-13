@@ -8,5 +8,6 @@ import java.util.List;
 public interface TutorRepository extends JpaRepository<Tutor, Integer> {
     List<Tutor> findAll();
     Tutor save(Tutor tutor);
-    Tutor findDistinctByuId(String uid);
+    Tutor findDistinctByUid(String uid);
+    Tutor findDistinctByTutorid(String tutorId);
 }
