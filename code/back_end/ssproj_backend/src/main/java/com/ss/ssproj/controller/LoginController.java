@@ -5,11 +5,12 @@ import com.ss.ssproj.entity.Student;
 import com.ss.ssproj.entity.Tutor;
 import com.ss.ssproj.service.StudentService;
 import com.ss.ssproj.service.TutorService;
-import com.ss.ssproj.utils.LoginForm;
 import com.ss.ssproj.utils.LoginMsg;
+import com.ss.ssproj.utils.RegisterForm;
 import com.ss.ssproj.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -20,17 +21,25 @@ public class LoginController {
     StudentService studentService;
 
     @CrossOrigin
-    @PostMapping(value = "api/login")
+    @PostMapping(value = "api/user/login")
     @ResponseBody
-    public LoginMsg login(@RequestBody String code) {
-        LoginMsg ret = new LoginMsg("","");
-        //check in db
-        //if student
-        ret.setMsg("s");
-        //if tutor
-        ret.setMsg("t");
-        String codeId = "codeid";
-        ret.setCodeId(codeId);
+    public LoginMsg login(@RequestBody String u_id) {
+        LoginMsg ret = new LoginMsg();
+        Student student = studentService.findDistinctByUid(u_id);
+        if(student == null) {
+            Tutor tutor = tutorService.findDistinctByUid(u_id);
+            if(tutor == null)
+            {
+                ret.setType("N");
+            }
+            else {
+                ret.setRealId(tutor.getTutorId());
+                ret.setType("T");
+            }
+        } else {
+            ret.setRealId(student.getStudentId());
+            ret.setType("S");
+        }
         return ret;
     }
 
@@ -38,7 +47,7 @@ public class LoginController {
     @CrossOrigin
     @PostMapping(value = "api/bind")
     @ResponseBody
-    public Result bind(@RequestBody LoginForm loginForm) {
+    public Result bind(@RequestBody RegisterForm loginForm) {
         String real_id = loginForm.getRealId();
         String u_id = loginForm.getuId();
         String type = loginForm.getType();

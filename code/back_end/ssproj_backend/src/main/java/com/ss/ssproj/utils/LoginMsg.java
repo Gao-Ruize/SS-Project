@@ -1,27 +1,22 @@
 package com.ss.ssproj.utils;
 
 public class LoginMsg {
-    String codeId;
-    String msg;
+    String realId;
+    String type;
 
-    public LoginMsg(String c, String m) {
-        this.codeId = c;
-        this.msg = m;
+    public void setRealId(String realId) {
+        this.realId = realId;
     }
 
-    public String getCodeId() {
-        return codeId;
+    public String getRealId() {
+        return realId;
     }
 
-    public void setCodeId(String codeId) {
-        this.codeId = codeId;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public String getType() {
+        return type;
     }
 }

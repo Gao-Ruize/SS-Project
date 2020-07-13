@@ -15,4 +15,9 @@ public class StudentServiceImpl implements StudentService {
     public void saveOrUpdate(Student student) {
         studentDao.saveOrUpdate(student);
     }
+
+    @Override
+    public Student findDistinctByUid(String uid) {
+        return studentDao.findDistinctByUid(uid);
+    }
 }

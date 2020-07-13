@@ -1,16 +1,10 @@
 package com.ss.ssproj.utils;
 
-public class LoginForm {
+public class RegisterForm {
     private
     String uId;
     String realId;
     String type;
-
-    public LoginForm(String U_id, String Real_id, String t) {
-        this.uId = U_id;
-        this.realId = Real_id;
-        this.type = t;
-    }
 
     public void setuId(String uId) {
         this.uId = uId;

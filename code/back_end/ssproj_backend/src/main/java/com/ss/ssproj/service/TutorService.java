@@ -9,4 +9,5 @@ import java.util.List;
 public interface TutorService {
     List<Tutor> findAll();
     void saveOrUpdate(Tutor tutor);
+    Tutor findDistinctByUid(String uid);
 }

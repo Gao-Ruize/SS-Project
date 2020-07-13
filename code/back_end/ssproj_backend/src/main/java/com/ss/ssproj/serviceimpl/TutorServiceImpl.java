@@ -22,4 +22,9 @@ public class TutorServiceImpl implements TutorService{
     public void saveOrUpdate(Tutor tutor) {
         tutorDao.saveOrUpdate(tutor);
     }
+
+    @Override
+    public Tutor findDistinctByUid(String uid) {
+        return tutorDao.findDistinctByUid(uid);
+    }
 }

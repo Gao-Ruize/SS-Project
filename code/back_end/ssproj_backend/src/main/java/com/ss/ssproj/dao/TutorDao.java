@@ -7,4 +7,5 @@ import java.util.List;
 public interface TutorDao {
     public List<Tutor> findAll();
     public void saveOrUpdate(Tutor tutor);
+    public Tutor findDistinctByUid(String uid);
 }

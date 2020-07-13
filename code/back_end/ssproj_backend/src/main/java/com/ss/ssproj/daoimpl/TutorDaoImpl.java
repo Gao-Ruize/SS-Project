@@ -23,4 +23,9 @@ public class TutorDaoImpl implements TutorDao {
         tutorRepository.save(tutor);
     }
 
+    @Override
+    public Tutor findDistinctByUid(String uid) {
+        return tutorRepository.findDistinctByUId(uid);
+    }
+
 }
