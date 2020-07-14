@@ -85,7 +85,7 @@
 - 解除绑定
 
 ##### 请求URL
-- ` http://localhost:8443/api/admin/unbind
+- ` http://localhost:8443/api/admin/unbind `
   
 ##### 请求方式
 - POST 
@@ -112,6 +112,9 @@
 |参数名|类型|说明|
 |:-----  |:-----|-----                           |
 |code |int   |成功：200 失败：400  |
+
+##### 备注
+type 1 学生 2 老师
 
 # 4
 ##### 简要描述
@@ -277,7 +280,7 @@ tutor数组
 
 ``` 
   {
-    "data":[{id:1, tutorId:"xx", studentId:"xx", title, content, releasetime, phase, ifread },{...}]
+    "data":[{id:1, tutorid:"xx", studentid:"xx", title:"xx", content:"xx", releasetime:"xx", phase:1, ifread:1},{...}]
   }
 ```
 
@@ -344,7 +347,7 @@ InsMessage数组
 
 ``` 
   {
-    "data": [{student数组}]
+    "data": [{id:1,studentid:"1",uid:"1",studentname:"name"},{.....}]
   }
 ```
 
