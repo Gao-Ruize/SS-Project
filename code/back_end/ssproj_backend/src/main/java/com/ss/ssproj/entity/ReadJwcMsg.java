@@ -16,7 +16,7 @@ public class ReadJwcMsg {
     String tutorid;
     int ifread;
     int ifstudent;
-    int jwcmsgId;
+    int msgid;
 
     public void setStudentid(String studentid) {
         this.studentid = studentid;
@@ -50,12 +50,12 @@ public class ReadJwcMsg {
         return ifstudent;
     }
 
-    public void setJwcmsgId(int jwcmsgId) {
-        this.jwcmsgId = jwcmsgId;
+    public void setMsgid(int msgid) {
+        this.msgid = msgid;
     }
 
-    public int getJwcmsgId() {
-        return jwcmsgId;
+    public int getMsgid() {
+        return msgid;
     }
 
     public void setId(int id) {
