@@ -20,6 +20,7 @@ public class AccountController {
     @Autowired
     StudentService studentService;
 
+    //解除绑定
     @CrossOrigin
     @PostMapping(value = "api/admin/unbind")
     @ResponseBody

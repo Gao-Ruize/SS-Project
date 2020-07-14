@@ -1,4 +1,5 @@
-
+- 线上API文档存放地址为https://www.showdoc.cc/400dollar
+- 密码：123456
 
 # 1
 ##### 简要描述
@@ -235,7 +236,7 @@ tutor数组
 |参数名|必选|类型|说明|
 |:----    |:---|:----- |-----   |
 |userId |是  |string |学生/教师ID   |
-|msgId |是  |string | 信息ID    |
+|msgId |是  |int | 信息ID    |
 |type     |是  |string | jwc/tutor    |
 
 ##### 返回示例 

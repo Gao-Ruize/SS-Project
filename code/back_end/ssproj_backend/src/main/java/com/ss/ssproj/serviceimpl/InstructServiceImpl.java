@@ -14,7 +14,13 @@ public class InstructServiceImpl implements InstructService {
     @Autowired
     InstructDao instructDao;
 
+    @Override
     public List<Instruct> findAll() {
         return instructDao.findAll();
+    }
+
+    @Override
+    public Instruct saveOrUpdate(Instruct instruct) {
+        return instructDao.save(instruct);
     }
 }
