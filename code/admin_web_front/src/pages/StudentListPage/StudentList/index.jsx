@@ -108,8 +108,36 @@ export default class StudentList extends React.Component{
     this.state = {
       list: data,
     }
+  }
 
-}
+  acquireStudents(){
+    $.ajax({
+      type: "get",
+      url: global.config.backendUrl+"/api/user/???",
+      contentType: "application/json;charset=utf-8;",
+      dataType: "text",
+      success:function(data) {
+          var result = JSON.parse(data);
+          var s_list = [];
+          for (var i = 0; i < result.length; ++i) {
+              var newStudent={
+                  key: i,
+                  s_name: result[i].s_name,
+                  s_ID: result[i].s_ID,
+                  dept_name: result[i].dept_name,
+                  openID: result[i].uid,
+              }
+              s_list = [...s_list, newStudent];
+          }
+          _this.setState({
+              list: s_list,
+          })
+      },
+      error:function(error) {
+          console.log("acquire students error");
+      }
+    });
+  }
 
   render(){
     return(

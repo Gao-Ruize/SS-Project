@@ -2,6 +2,8 @@ import React from 'react';
 import { Table, Tag } from 'antd';
 import styles from './index.less';
 
+import $ from  'jquery';
+
 import { Input } from 'antd';
 import { AudioOutlined } from '@ant-design/icons';
 
@@ -95,8 +97,35 @@ export default class TutorList extends React.Component{
     this.state = {
       list: data,
     }
+  }
 
-}
+  acquireTutors(){
+    $.ajax({
+      type: "get",
+      url: global.config.backendUrl+"/api/user/tutors",
+      contentType: "application/json;charset=utf-8;",
+      dataType: "text",
+      success:function(data) {
+          var result = JSON.parse(data);
+          var tut_list = [];
+          for (var i = 0; i < result.length; ++i) {
+              var newTutor={
+                  key: i,
+                  tut_name: result[i].tutorname,
+                  tut_ID: result[i].tutorid,
+                  openID: result[i].uid,
+              }
+              tut_list = [...tut_list, newTutor];
+          }
+          _this.setState({
+              list: tut_list,
+          })
+      },
+      error:function(error) {
+          console.log("acquire tutors error");
+      }
+    });
+  }
 
   render(){
     return(
