@@ -2,8 +2,9 @@ package com.ss.ssproj.utils;
 
 public class ReadMsgForm {
     String userId;
-    String msgId;
+    int msgId;
     String type;
+    String userType;
 
     public String getType() {
         return type;
@@ -13,11 +14,11 @@ public class ReadMsgForm {
         this.type = type;
     }
 
-    public String getMsgId() {
+    public int getMsgId() {
         return msgId;
     }
 
-    public void setMsgId(String msgId) {
+    public void setMsgId(int msgId) {
         this.msgId = msgId;
     }
 
@@ -27,5 +28,13 @@ public class ReadMsgForm {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
+    public String getUserType() {
+        return userType;
     }
 }

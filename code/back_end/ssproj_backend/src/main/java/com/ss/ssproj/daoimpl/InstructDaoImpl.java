@@ -13,7 +13,13 @@ public class InstructDaoImpl implements InstructDao {
     @Autowired
     InstructRepository instructRepository;
 
+    @Override
     public List<Instruct> findAll() {
         return instructRepository.findAll();
+    }
+
+    @Override
+    public Instruct save(Instruct instruct) {
+        return instructRepository.save(instruct);
     }
 }

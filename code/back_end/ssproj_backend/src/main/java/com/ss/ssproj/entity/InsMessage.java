@@ -14,12 +14,10 @@ public class InsMessage {
     @Column(name = "Id")
     int id;
     String tutorid;
-    String studentid;
     String title;
     String content;
     String releasetime;
     int phase;
-    int ifread;
 
     public void setPhase(int phase) {
         this.phase = phase;
@@ -45,13 +43,6 @@ public class InsMessage {
         return content;
     }
 
-    public void setIfread(int ifread) {
-        this.ifread = ifread;
-    }
-
-    public int getIfread() {
-        return ifread;
-    }
 
     public void setId(int id) {
         this.id = id;
@@ -69,13 +60,6 @@ public class InsMessage {
         return releasetime;
     }
 
-    public void setStudentid(String studentid) {
-        this.studentid = studentid;
-    }
-
-    public String getStudentid() {
-        return studentid;
-    }
 
     public void setTutorid(String tutorid) {
         this.tutorid = tutorid;

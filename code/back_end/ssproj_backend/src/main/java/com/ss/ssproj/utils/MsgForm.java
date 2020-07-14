@@ -1,5 +1,7 @@
 package com.ss.ssproj.utils;
 
+import java.util.List;
+
 public class MsgForm {
     private
     String title;
@@ -7,8 +9,9 @@ public class MsgForm {
     String time;
     String senderName;
     String msgType;
-    String toId;
+    String tutorId;
     int msgId;
+    List<String> toIds;
 
     public void setTime(String time) {
         this.time = time;
@@ -58,11 +61,19 @@ public class MsgForm {
         return msgId;
     }
 
-    public String getToId() {
-        return toId;
+    public void setTutorId(String tutorId) {
+        this.tutorId = tutorId;
     }
 
-    public void setToId(String toId) {
-        this.toId = toId;
+    public String getTutorId() {
+        return tutorId;
+    }
+
+    public void setToIds(List<String> toIds) {
+        this.toIds = toIds;
+    }
+
+    public List<String> getToIds() {
+        return toIds;
     }
 }
