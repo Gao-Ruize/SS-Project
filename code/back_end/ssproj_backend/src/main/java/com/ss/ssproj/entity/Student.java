@@ -49,4 +49,14 @@ public class Student {
         this.uid = uid;
     }
 
+    @Transient
+    int ifRead;
+
+    public void setIfRead(int ifRead) {
+        this.ifRead = ifRead;
+    }
+
+    public int getIfRead() {
+        return ifRead;
+    }
 }

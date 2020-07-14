@@ -57,27 +57,22 @@ public class LoginController {
         String u_id = code;
         if(type.equals("1")) {
             //为学生
+            //学生信息预先在db中存好
             //判断该学号是否被注册过
-            Student tmpS = studentService.findDistinctByUid(u_id);
-            if(tmpS == null) {
+            Student tmpS = studentService.findDistinctByStudentId(real_id);
+            if(tmpS.getUid() == null) {
                 //若没有则获取该生姓名
-                Student student = new Student();
-                student.setStudentid(real_id);
-                student.setUid(u_id);
-                student.setStudentname("name");
-                studentService.saveOrUpdate(student);
+                tmpS.setUid(u_id);
+                studentService.saveOrUpdate(tmpS);
                 return new Result(200);
             }
         }
         if(type.equals("2")) {
             //判断是否被注册过
-            Tutor tmpT = tutorService.findDistinctByUid(u_id);
-            if(tmpT == null) {
-                Tutor tutor = new Tutor();
-                tutor.setTutorid(real_id);
-                tutor.setUid(u_id);
-                tutor.setTutorname("name");
-                tutorService.saveOrUpdate(tutor);
+            Tutor tmpT = tutorService.findDistinctByTutorId(real_id);
+            if(tmpT.getUid() == null) {
+                tmpT.setUid(u_id);
+                tutorService.saveOrUpdate(tmpT);
                 return new Result(201);
             }
         }
