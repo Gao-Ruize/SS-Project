@@ -1,4 +1,5 @@
-
+- 线上API文档存放地址为https://www.showdoc.cc/400dollar
+- 密码：123456
 
 # 1
 ##### 简要描述
