@@ -7,16 +7,8 @@ public class MsgForm {
     String time;
     String senderName;
     String msgType;
+    String toId;
     int msgId;
-
-    public MsgForm(String title, String content, String time, String sender, String type, int id) {
-        this.title = title;
-        this.content = content;
-        this.time = time;
-        this.senderName = sender;
-        this.msgType = type;
-        this.msgId = id;
-    }
 
     public void setTime(String time) {
         this.time = time;
@@ -64,5 +56,13 @@ public class MsgForm {
 
     public int getMsgId() {
         return msgId;
+    }
+
+    public String getToId() {
+        return toId;
+    }
+
+    public void setToId(String toId) {
+        this.toId = toId;
     }
 }
