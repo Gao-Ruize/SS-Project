@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface StudentService {
-    void saveOrUpdate(Student student);
+    Student saveOrUpdate(Student student);
     Student findDistinctByUid(String uid);
     Student findDistinctByStudentId(String studentId);
 }

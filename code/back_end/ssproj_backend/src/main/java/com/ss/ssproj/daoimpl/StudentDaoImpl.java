@@ -14,8 +14,8 @@ public class StudentDaoImpl implements StudentDao {
     StudentRepository studentRepository;
 
     @Override
-    public void saveOrUpdate(Student student) {
-        studentRepository.save(student);
+    public Student saveOrUpdate(Student student) {
+        return studentRepository.save(student);
     }
 
     @Override
