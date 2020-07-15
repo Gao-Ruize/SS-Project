@@ -28,8 +28,9 @@ def firstInsert():
     conn.close()
 
 
-def reportCheck(path, flag):
+def reportCheck(path):
     file = open(path, mode='r')
+    flag = InsertOrUpdate('开题报告')
     next(file)
     lines = file.readlines()
     pattern1 = re.compile(r'[\u4e00-\u9fa5]+')  # find status
@@ -56,7 +57,6 @@ def reportCheck(path, flag):
     file.close()
 
 
-# 不需要讲遍历文件夹放入其中 因为他的检测函数是另一个
 def selectCheck(path):
     flag1 = firstInsert()    # 检测到底是不是第一个爬取数据的处理
     # 如果是 则肯定需要insert 否则肯定insert过了 (因为这是第一个阶段 因此可以这么处理)
@@ -116,7 +116,8 @@ def InsertOrUpdate(phase):
     conn.close()
 
 
-def MiddleCheck(file, flag):
+def MiddleCheck(file):
+    flag = InsertOrUpdate('中期检查')    # 检测到底是不是第一个爬取数据的处理
     pattern1 = re.compile(r'[\u4e00-\u9fa5]+')  # find student's name, teacher's name and status
     p1 = re.compile(r'[(](.*?)[)]', re.S)  # 利用非贪婪模式找到对应括号的内容 考虑到论文题目本身可能会带有括号 因此先取第一个作为学生学号 再逆序取最后一个作为老师工号
     openfile = open(file, mode='r')
@@ -154,19 +155,17 @@ for item in fileList:
     selectCheck(filePath)
 
 Path = 'data/reportPhase'
-flag1 = InsertOrUpdate('开题报告')
 fileList = os.listdir(Path)
 for item in fileList:
     filePath = Path + '/' + item
-    reportCheck(filePath, flag1)
+    reportCheck(filePath)
 
 
 path = 'data/middlePhase'
 fileList = os.listdir(path)
-flag2 = InsertOrUpdate('中期检查')
 for item in fileList:
     filePath = path + '/' + item
-    MiddleCheck(filePath, flag2)
+    MiddleCheck(filePath)
 
 flag = firstInsert()
 if flag:
@@ -180,6 +179,4 @@ if flag:
         data = (key, tutorinfo[key])
         sql = 'insert into tutor (TutorId, TutorName) values (%s, %s)'
         db.save_data(data, sql)
-
-
 
