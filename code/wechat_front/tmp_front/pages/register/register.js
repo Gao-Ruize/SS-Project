@@ -39,6 +39,17 @@ Page({
         let baseurl = 'http://localhost:8443/api/user/bind';
         let openid = wx.getStorageSync('openid');
         console.log(openid);
+        let type = wx.getStorageSync('type');
+        if(type == "err") {
+          wx.showToast({
+            title: '出错了',
+            duration: 1500,
+            icon: 'none'
+          });
+          return;
+        }
+        console.log(openid);
+        wx.setStorageSync('realid', this.data.value);
         wx.request({
           url: baseurl,
           method: 'POST',
@@ -51,11 +62,13 @@ Page({
             console.log(res.data);
             let result = res.data.code;
             if(result == 200) {
+              wx.setStorageSync('type', "S");
               wx.navigateTo({
                 url: '../stuMsgFromJwcPage/stuMsgFromJwcPage',
               });
             } else
             if(result == 201) {
+              wx.setStorageSync('realid', "T");
               wx.navigateTo({
                 url: '../tutorMsgFromJwcPage/tutorMsgFromJwcPage',
               });

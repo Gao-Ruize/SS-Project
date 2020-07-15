@@ -17,16 +17,28 @@ App({
                   method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT 
                   data: res.code,
                   success: function (res) {
+                    console.log(res.data);
                     let realId = res.data.realId;
                     console.log(realId);
-                    let openId = "res.data.openId";
+                    let openId = res.data.openId;
                     wx.setStorageSync('openid', openId);
+                    console.log("openid!");
+                    console.log(openId);
                     wx.setStorageSync('realid', realId);
                     let type = res.data.type;
                     wx.setStorageSync('type', type);
                     console.log(type);
                     if(type == "S") { wx.navigateTo({url: '/pages/stuMsgFromJwcPage/stuMsgFromJwcPage',})}
+                    else
                     if(type == "T") { wx.navigateTo({url: '/pages/tutorMsgFromJwcPage/tutorMsgFromJwcPage',})}
+                    else
+                    if(type == "err") {
+                      wx.showToast({
+                        title: '出错了',
+                        icon:'none',
+                        duration: 1000
+                      });
+                    }
                     else { 
                       wx.showToast({
                         title: "尚未绑定，请注册",

@@ -10,8 +10,8 @@
 />
 <view wx:for="{{showItems}}" wx:for-item="showItem">
   <van-cell 
-    bindtap = "checkDetails" data-id = "{{showItem.id}}"
-    title="{{showItem.title}}" size="large" label="{{showItem.date}}"
+    bindtap = "checkDetails" data-id = "{{showItem.id}}" data-title = "{{showItem.title}}"
+    title="{{showItem.title}}" size="large" label="{{showItem.releasetime}}"
     value = "查看详情"
     is-link 
   />

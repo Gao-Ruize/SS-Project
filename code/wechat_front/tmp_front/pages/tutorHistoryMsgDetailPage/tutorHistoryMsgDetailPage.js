@@ -8,10 +8,7 @@ Page({
     msgId:"",
     active:1,
     //全部学生信息
-    readStudentInfo:[{name:"zhangsan",ID:"1",ifRead:1},
-                     {name:"lisi",ID:"2",ifRead:1},
-                     {name:"wangwu",ID:"3",ifRead:0},
-                     {name:"zhaoliu",ID:"4",ifRead:0}],
+    readStudentInfo:[],
     //未读学生信息，在发送通知时使用
     unreadStudentInfo:[],
     //页面展示学生信息，在搜索时使用
@@ -32,8 +29,18 @@ Page({
     //通过msgId获得对应的学生
     //将已读学生和未读学生存储到一起
     //获得信息后将将showStudent为全部学生信息
-    let tmpArr = this.data.readStudentInfo;
-    this.setData({showStduents: tmpArr});
+    let baseurl = 'http://localhost:8443/api/tut/getmsginfo/' + tmpMsgId;
+    let that = this;
+    wx.request({
+      url: baseurl,
+      method: 'GET',
+      success(res) {
+        that.setData({
+          readStudentInfo: res.data,
+          showStduents: res.data
+        })
+      }
+    });
   },
   onChange(event) {
     // event.detail 的值为当前选中项的索引
@@ -61,8 +68,8 @@ Page({
     let value = this.data.searchValue;
     let tmpArr = [];
     this.data.readStudentInfo.forEach(function(item,index) {
-      if(item.name.includes(value) 
-         || item.ID.includes(value)) {
+      if(item.studentname.includes(value) 
+         || item.studentid.includes(value)) {
         tmpArr.push(item);
       }
     });
@@ -76,13 +83,32 @@ Page({
 
   mulChosChange(event) {
     this.setData({result:event.detail});
+    console.log("choose");
+    console.log(this.data.result);
   },
   changeChosBar(event) {
     this.setData({result:event.detail})
   },
   sendMsg(){
-    let check = this.data.result;
-    console.log(check);
+    let students = this.data.result;
+    let contain = wx.getStorageSync('msgTitle');
+    let realId = wx.getStorageSync('realid');
+    let time = new Date();
+    console.log(time);
+    contain = "请及时阅读通知：" + contain; 
+    console.log(students);
+    let baseurl = "http://localhost:8443/api/tut/sendmsg";
+    wx.request({
+      url: baseurl,
+      method: 'POST',
+      data: {
+        toIds: students,
+        title: "阅读消息提醒",
+        content: contain,
+        time: time,
+        tutorId: realId,
+      }
+    })
     wx.showToast({
       title: '发送成功！',
       icon:"success",
