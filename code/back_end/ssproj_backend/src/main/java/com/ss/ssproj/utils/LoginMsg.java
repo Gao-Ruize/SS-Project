@@ -3,6 +3,7 @@ package com.ss.ssproj.utils;
 public class LoginMsg {
     String realId;
     String type;
+    String openId;
 
     public void setRealId(String realId) {
         this.realId = realId;
@@ -18,5 +19,13 @@ public class LoginMsg {
 
     public String getType() {
         return type;
+    }
+
+    public void setOpenId(String openid) {
+        this.openId = openId;
+    }
+
+    public String getOpenId() {
+        return openId;
     }
 }
