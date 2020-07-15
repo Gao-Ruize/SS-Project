@@ -34,3 +34,8 @@ Mock-Server：搭建独立的mock服务端，但因为我们后端本身结构�
 - 学习了mock函数模块。  
 Mock 函数允许你测试代码之间的连接——实现方式包括：擦除函数的实际实现、捕获对函数的调用 ( 以及在这些调用中传递的参数) 、在使用 new 实例化时捕获构造函数的实例、允许测试时配置返回值。
 - 完成对pr的代码的code review，并merge到dev分支里。
+# Day8 2020-7-15
+- 更新API文档。
+- 实现后端code转换openid。
+- 前端导师发送消息接口的实现（还未改完，卡在checkbox group的返回值）。
+- 完成对pr的代码的code review，并merge到dev分支里。
