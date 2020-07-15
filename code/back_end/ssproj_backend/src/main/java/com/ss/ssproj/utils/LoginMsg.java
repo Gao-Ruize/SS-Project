@@ -21,7 +21,7 @@ public class LoginMsg {
         return type;
     }
 
-    public void setOpenId(String openid) {
+    public void setOpenId(String openId) {
         this.openId = openId;
     }
 

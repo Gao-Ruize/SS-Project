@@ -23,4 +23,9 @@ public class InsMessageServiceImpl implements InsMessageService {
         return insMessageDao.save(insMessage);
     }
 
+    @Override
+    public List<InsMessage> findAllByTutorid(String tutorid) {
+        return insMessageDao.findAllByTutorid(tutorid);
+    }
+
 }
