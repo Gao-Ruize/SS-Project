@@ -23,4 +23,9 @@ public class InstructServiceImpl implements InstructService {
     public Instruct saveOrUpdate(Instruct instruct) {
         return instructDao.save(instruct);
     }
+
+    @Override
+    public List<Instruct> findAllByTutorid(String tutorid) {
+        return instructDao.findAllByTutorid(tutorid);
+    }
 }

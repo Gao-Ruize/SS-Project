@@ -22,4 +22,9 @@ public class InstructDaoImpl implements InstructDao {
     public Instruct save(Instruct instruct) {
         return instructRepository.save(instruct);
     }
+
+    @Override
+    public List<Instruct> findAllByTutorid(String tutorid) {
+        return instructRepository.findAllByTutorid(tutorid);
+    }
 }

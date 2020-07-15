@@ -28,6 +28,9 @@ public class TutMsgController {
     @Autowired
     StudentService studentService;
 
+    @Autowired
+    InstructService instructService;
+
     //选导师时展示所有导师的信息
     @CrossOrigin
     @GetMapping(value = "api/user/tutors")
@@ -80,6 +83,22 @@ public class TutMsgController {
             ret.add(student);
         }
         return ret;
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "api/tut/students/{tutid}")
+    @ResponseBody
+    public List<Student> getInsStudents(@PathVariable String tutid) {
+        List<Instruct> instructs = instructService.findAllByTutorid(tutid);
+        List<Student> students = new ArrayList<>();
+        for(Instruct item : instructs) {
+            String studentId = item.getStudentid();
+            Student student = studentService.findDistinctByStudentId(studentId);
+            if(student != null) {
+                students.add(student);
+            }
+        }
+        return students;
     }
 
 }

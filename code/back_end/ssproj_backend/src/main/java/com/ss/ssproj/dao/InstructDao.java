@@ -9,5 +9,6 @@ import java.util.List;
 public interface InstructDao {
     List<Instruct> findAll();
     Instruct save(Instruct instruct);
+    List<Instruct> findAllByTutorid(String tutorid);
 
 }

@@ -9,4 +9,5 @@ import java.util.List;
 public interface InstructService {
     List<Instruct> findAll();
     Instruct saveOrUpdate(Instruct instruct);
+    List<Instruct> findAllByTutorid(String tutorid);
 }
