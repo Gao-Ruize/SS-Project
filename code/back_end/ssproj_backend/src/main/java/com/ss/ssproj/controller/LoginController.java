@@ -102,6 +102,9 @@ public class LoginController {
             //学生信息预先在db中存好
             //判断该学号是否被注册过
             Student tmpS = studentService.findDistinctByStudentId(real_id);
+            if(tmpS == null) {
+                return new Result(300);
+            }
             if(tmpS.getUid() == null) {
                 //若没有则获取该生姓名
                 tmpS.setUid(u_id);
