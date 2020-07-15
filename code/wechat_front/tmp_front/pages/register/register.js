@@ -35,15 +35,40 @@ Page({
         icon:'none'
       }) }
       else
-      if(indentity == 1) {
-        wx.navigateTo({
-          url: '../stuMsgFromJwcPage/stuMsgFromJwcPage',
+      {
+        let baseurl = 'http://localhost:8443/api/user/bind';
+        let openid = wx.getStorageSync('openid');
+        console.log(openid);
+        wx.request({
+          url: baseurl,
+          method: 'POST',
+          data: {
+            type: indentity,
+            code: openid,
+            realId: this.data.value
+          },
+          success(res) {
+            console.log(res.data);
+            let result = res.data.code;
+            if(result == 200) {
+              wx.navigateTo({
+                url: '../stuMsgFromJwcPage/stuMsgFromJwcPage',
+              });
+            } else
+            if(result == 201) {
+              wx.navigateTo({
+                url: '../tutorMsgFromJwcPage/tutorMsgFromJwcPage',
+              });
+            } else {
+              wx.showToast({
+                title: '该ID已被占用',
+                icon:'none',
+                duration: 1500
+              })
+            }
+          }
         });
-      } else
-      if(indentity == 2) {
-        wx.navigateTo({
-          url: '../tutorMsgFromJwcPage/tutorMsgFromJwcPage',
-        });
+        return;
       }
   },
   /**

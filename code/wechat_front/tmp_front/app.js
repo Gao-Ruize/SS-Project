@@ -5,23 +5,35 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
     // 登录
     wx.login({
            success: res => {
              console.log(res.code); // 先login得到code
              if (res.code) {
                // url为后端地址
-               var url = "";
+               var url = "http://localhost:8443/api/user/login";
                wx.request({
                   url: url,
                   method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT 
                   data: res.code,
                   success: function (res) {
-                    wx.setStorageSync('openid', res.codeid);
-                    if(res.msg == "S"){wx.navigateTo({url: './pages/stuMsgFromJwcPage/stuMsgFromJwcPage',})}
-                    if(res.msg == "T"){wx.navigateTo({url: './pages/tutorMsgFromJwcPage/tutorMsgFromJwcPage',})}
-                    else{wx.navigateTo({url: './pages/tutorMsgFromJwcPage/tutorMsgFromJwcPage',})}
+                    let realId = res.data.realId;
+                    console.log(realId);
+                    let openId = "res.data.openId";
+                    wx.setStorageSync('openid', openId);
+                    wx.setStorageSync('realid', realId);
+                    let type = res.data.type;
+                    wx.setStorageSync('type', type);
+                    console.log(type);
+                    if(type == "S") { wx.navigateTo({url: '/pages/stuMsgFromJwcPage/stuMsgFromJwcPage',})}
+                    if(type == "T") { wx.navigateTo({url: '/pages/tutorMsgFromJwcPage/tutorMsgFromJwcPage',})}
+                    else { 
+                      wx.showToast({
+                        title: "尚未绑定，请注册",
+                        icon: 'none',
+                        duration: 1500
+                      })
+                    }
                  }
                });
              } 
