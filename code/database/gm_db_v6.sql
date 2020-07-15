@@ -90,16 +90,6 @@ CREATE TABLE `student` (
 ) ENGINE=InnoDB AUTO_INCREMENT=168 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for test
--- ----------------------------
-DROP TABLE IF EXISTS `test`;
-CREATE TABLE `test` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- ----------------------------
 -- Table structure for tutor
 -- ----------------------------
 DROP TABLE IF EXISTS `tutor`;
