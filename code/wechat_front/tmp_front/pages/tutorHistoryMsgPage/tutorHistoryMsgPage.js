@@ -7,7 +7,7 @@ Page({
   data: {
     active: 1,
     //全部信息
-    msgItems:[{id:"1",title:"选课时间通知",date:"2020"},{id:"2",title:"退课时间通知",date:"2020"}],
+    msgItems:[],
     searchValue:"",
     //页面展示信息，即搜索过滤后的信息
     showItems:[],
@@ -17,8 +17,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let tmp = this.data.msgItems;
-    this.setData({showItems: tmp});
+    let realId = wx.getStorageSync('realid');
+    let baseurl = "http://localhost:8443/api/tut/insmsgs/" + realId;
+    let that = this;
+    wx.request({
+      url: baseurl,
+      method: 'GET',
+      success(res) {
+        console.log(res.data);
+        that.setData({
+          msgItems: res.data
+        });
+        that.setData({
+          showItems: res.data
+        });
+      }
+    });
   },
   onChange(event) {
     if(event.detail == 0)
@@ -46,7 +60,7 @@ Page({
     let value = this.data.searchValue;
     this.data.msgItems.forEach(function(item,index) {
       if(item.title.includes(value) 
-         || item.date.includes(value)) {
+         || item.releasetime.includes(value)) {
         tmpArr.push(item);
       }
     });
@@ -58,9 +72,12 @@ Page({
   },
   checkDetails(event) {
     let msgId = event.currentTarget.dataset.id;
+    let title = event.currentTarget.dataset.title;
+    wx.setStorageSync('msgTitle', title);
+    console.log(title);
     console.log(msgId);
     wx.navigateTo({
-      url: '../tutorHistoryMsgDetailPage/tutorHistoryMsgDetailPage?msgId=' + msgId,
+      url: '../tutorHistoryMsgDetailPage/tutorHistoryMsgDetailPage?msgId=' + msgId
     })
   },
   /**

@@ -7,4 +7,5 @@ import java.util.List;
 public interface InsMessageDao {
    InsMessage findDistinctById(int id);
    InsMessage save(InsMessage insMessage);
+   List<InsMessage> findAllByTutorid(String tutorid);
 }

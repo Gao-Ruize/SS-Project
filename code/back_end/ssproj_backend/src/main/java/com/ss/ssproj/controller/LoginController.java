@@ -40,9 +40,9 @@ public class LoginController {
         }
 
         // 小程序唯一标识 (在微信小程序管理后台获取) 此处修改成自己的id
-        String wxspAppid = "wx8f7ed90641c81523";
+        String wxspAppid = "wxfc660793593ad691";
         // 小程序的 app secret (在微信小程序管理后台获取) 此处修改成自己的secret
-        String wxspSecret = "38ec0965265e71933cc74ef2c4dbebab";
+        String wxspSecret = "2a9fce2e91b62d6b069c5de6ee140b53";
         // 授权
         String grant_type = "authorization_code";
 
@@ -55,8 +55,8 @@ public class LoginController {
         // 解析相应内容（转换成json对象）
         JSONObject json = new JSONObject(sr);
         // 出错处理：
-        int errcode = (int) json.get("errorcode");
-        if(errcode != 0){
+        // int errcode = (int) json.get("errcode");
+        if(json.has("errcode")){
             map.setRealId("code出错");
             map.setType("err");
             map.setOpenId("0");

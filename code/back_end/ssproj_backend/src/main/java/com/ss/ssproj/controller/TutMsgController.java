@@ -79,8 +79,10 @@ public class TutMsgController {
         for(ReadInsMsg item : readInsMsgs) {
             String studentId = item.getStudentid();
             Student student = studentService.findDistinctByStudentId(studentId);
-            student.setIfRead(item.getIfread());
-            ret.add(student);
+            if(student != null) {
+                student.setIfRead(item.getIfread());
+                ret.add(student);
+            }
         }
         return ret;
     }
@@ -88,7 +90,7 @@ public class TutMsgController {
     @CrossOrigin
     @GetMapping(value = "api/tut/students/{tutid}")
     @ResponseBody
-    public List<Student> getInsStudents(@PathVariable String tutid) {
+    public List<Student> getInsStudents(@PathVariable("tutid") String tutid) {
         List<Instruct> instructs = instructService.findAllByTutorid(tutid);
         List<Student> students = new ArrayList<>();
         for(Instruct item : instructs) {
@@ -99,6 +101,13 @@ public class TutMsgController {
             }
         }
         return students;
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "api/tut/insmsgs/{tutid}")
+    @ResponseBody
+    public List<InsMessage> getInsMags(@PathVariable("tutid") String tutid) {
+        return insMessageService.findAllByTutorid(tutid);
     }
 
 }

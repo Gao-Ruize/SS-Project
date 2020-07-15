@@ -11,8 +11,8 @@
   title="选择要提醒的学生"
   />
     <van-checkbox-group value="{{ result }}" bind:change="mulChosChange">
-    <van-checkbox name = "{{item.ID}}"  wx:for = "{{unreadStudentInfo}}" wx:key="ID">
-      {{item.ID}} {{item.name}}
+    <van-checkbox name = "{{item.studentid}}"  wx:for = "{{unreadStudentInfo}}" wx:key="{{item.studentid}}">
+      {{item.studentid}} {{item.studentname}}
     </van-checkbox>
     </van-checkbox-group>
 
@@ -31,9 +31,9 @@
     shape = "round"
   />
   <view wx:for="{{showStduents}}" wx:for-item="eachInfo">
-    <van-cell icon="user-o"  value = "{{eachInfo.ID}}">
+    <van-cell icon="user-o"  value = "{{eachInfo.studentid}}">
       <view slot="title">
-        <view class="van-cell-text">{{eachInfo.name}}</view>
+        <view class="van-cell-text">{{eachInfo.studentname}}</view>
         <van-tag type="{{eachInfo.ifRead?'success':'danger'}}">{{eachInfo.ifRead?"已读":"未读"}}</van-tag>
       </view>
     </van-cell>
