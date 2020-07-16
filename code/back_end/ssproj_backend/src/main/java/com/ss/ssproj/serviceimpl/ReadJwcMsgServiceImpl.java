@@ -8,6 +8,8 @@ import com.ss.ssproj.service.ReadJwcMsgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ReadJwcMsgServiceImpl implements ReadJwcMsgService {
     @Autowired
@@ -26,5 +28,10 @@ public class ReadJwcMsgServiceImpl implements ReadJwcMsgService {
     @Override
     public ReadJwcMsg saveOrUpdate(ReadJwcMsg readJwcMsg) {
         return readJwcMsgDao.save(readJwcMsg);
+    }
+
+    @Override
+    public List<ReadJwcMsg> findAllByStudentidAndIfread(String studentid, int ifread) {
+        return readJwcMsgDao.findAllByStudentidAndIfread(studentid, ifread);
     }
 }

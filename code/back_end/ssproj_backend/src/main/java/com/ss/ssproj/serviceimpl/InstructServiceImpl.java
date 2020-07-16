@@ -28,4 +28,9 @@ public class InstructServiceImpl implements InstructService {
     public List<Instruct> findAllByTutorid(String tutorid) {
         return instructDao.findAllByTutorid(tutorid);
     }
+
+    @Override
+    public Instruct findDistinctByStudentidAndTutorid(String studentid, String tutorid) {
+        return instructDao.findDistinctByStudentidAndTutorid(studentid, tutorid);
+    }
 }

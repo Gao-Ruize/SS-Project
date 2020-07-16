@@ -103,7 +103,7 @@ public class LoginController {
             //判断该学号是否被注册过
             Student tmpS = studentService.findDistinctByStudentId(real_id);
             if(tmpS == null) {
-                return new Result(300);
+                return new Result(400);
             }
             if(tmpS.getUid() == null) {
                 //若没有则获取该生姓名
@@ -115,6 +115,9 @@ public class LoginController {
         if(type.equals("2")) {
             //判断是否被注册过
             Tutor tmpT = tutorService.findDistinctByTutorId(real_id);
+            if(tmpT == null) {
+                return new Result(400);
+            }
             if(tmpT.getUid() == null) {
                 tmpT.setUid(u_id);
                 tutorService.saveOrUpdate(tmpT);

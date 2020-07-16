@@ -33,6 +33,10 @@ public class StuMsgController {
     public Result choose(@RequestBody ChooseForm chooseForm) {
         String studentId = chooseForm.getStudentId();
         String tutorId = chooseForm.getTutorId();
+        Instruct check = instructService.findDistinctByStudentidAndTutorid(studentId, tutorId);
+        if(check != null) {
+            return new Result(400);
+        }
         Instruct instruct = new Instruct();
         instruct.setStudentid(studentId);
         instruct.setTutorid(tutorId);
@@ -52,16 +56,25 @@ public class StuMsgController {
         if(type.equals("tutor")) {
             //userType必定为S
             ReadInsMsg readInsMsg = readInsMsgService.findDistinctByStudentidAndMsgid(userId, msgId);
+            if(readInsMsg == null) {
+                return new Result(400);
+            }
             readInsMsg.setIfread(1);
             readInsMsgService.save(readInsMsg);
             return new Result(200);
         } else if(type.equals("jwc")) {
             if(userType.equals("S")) {
                 ReadJwcMsg readJwcMsg = readJwcMsgService.findDistinctByStudentidAndMsgid(userId, msgId);
+                if(readJwcMsg == null) {
+                    return new Result(400);
+                }
                 readJwcMsg.setIfread(1);
                 readJwcMsgService.saveOrUpdate(readJwcMsg);
             } else if(userType.equals("T")) {
                 ReadJwcMsg readJwcMsg = readJwcMsgService.findDistinctByTutoridAndMsgid(userId, msgId);
+                if(readJwcMsg == null) {
+                    return new Result(400);
+                }
                 readJwcMsg.setIfread(1);
                 readJwcMsgService.saveOrUpdate(readJwcMsg);
             }
@@ -83,5 +96,23 @@ public class StuMsgController {
             ret.add(tmp);
         }
         return ret;
+    }
+
+    //获取未读导师信息数量
+    @CrossOrigin
+    @ResponseBody
+    @GetMapping(value = "api/stu/unreadinsmsg/{studentId}")
+    public int unreadInsMsg(@PathVariable("studentId") String studentId) {
+        List<ReadInsMsg> readInsMsgs = readInsMsgService.findAllByStudentidAndIfread(studentId, 0);
+        return readInsMsgs.size();
+    }
+
+    //获取未读教务处信息数量
+    @CrossOrigin
+    @ResponseBody
+    @GetMapping(value = "api/stu/unreadjwcmsg/{studentid}")
+    public int unraedJwcMsg(@PathVariable("studentid") String studentid) {
+        List<ReadJwcMsg> readJwcMsgs = readJwcMsgService.findAllByStudentidAndIfread(studentid, 0);
+        return readJwcMsgs.size();
     }
 }

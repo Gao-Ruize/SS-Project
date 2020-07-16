@@ -6,6 +6,8 @@ import com.ss.ssproj.repository.ReadJwcMsgRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class ReadJwcMsgDaoImpl implements ReadJwcMsgDao {
     @Autowired
@@ -24,5 +26,10 @@ public class ReadJwcMsgDaoImpl implements ReadJwcMsgDao {
     @Override
     public ReadJwcMsg save(ReadJwcMsg readJwcMsg) {
         return readJwcMsgRepository.save(readJwcMsg);
+    }
+
+    @Override
+    public List<ReadJwcMsg> findAllByStudentidAndIfread(String studentid, int ifread) {
+        return readJwcMsgRepository.findAllByStudentidAndIfread(studentid, ifread);
     }
 }

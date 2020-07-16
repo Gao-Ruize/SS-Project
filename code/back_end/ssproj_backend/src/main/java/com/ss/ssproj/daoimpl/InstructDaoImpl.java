@@ -27,4 +27,9 @@ public class InstructDaoImpl implements InstructDao {
     public List<Instruct> findAllByTutorid(String tutorid) {
         return instructRepository.findAllByTutorid(tutorid);
     }
+
+    @Override
+    public Instruct findDistinctByStudentidAndTutorid(String studentid, String tutorid) {
+        return instructRepository.findDistinctByStudentidAndTutorid(studentid, tutorid);
+    }
 }
