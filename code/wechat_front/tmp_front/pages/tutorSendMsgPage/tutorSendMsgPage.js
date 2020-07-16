@@ -7,18 +7,21 @@ Page({
     list:[
       {
         id:0,
-        name:"学生A",
-        value:"学生A"
+        studentname:"学生A",
+        studentId:"111111",
+        uid:"u1"
       },
       {
         id:1,
-        name:"学生B",
-        value:"学生B"
+        studentname:"学生B",
+        studentId:"222222",
+        uid:"u2"
       },
       {
         id:2,
-        name:"学生C",
-        value:"学生C"
+        studentname:"学生C",
+        studentId:"333333",
+        uid:"u3"
       }
     ],
     result:[],
@@ -26,6 +29,7 @@ Page({
   },
   // 多选框结果的记录
   onChangeCheck(event) {
+    console.log(event.detail);
     this.setData({
       result: event.detail,
     });
@@ -47,7 +51,18 @@ Page({
   },
   // 转到群发消息detail界面
   changetomessage(event){
-    wx.setStorageSync('SendMessageTo', this.data.result);
+    var nameset = [];
+    for(var i=0; i<this.data.list.length; i++)
+    {
+      
+      if(this.data.result.indexOf(this.data.list[i].studentId) != -1)
+      {
+        nameset.push(this.data.list[i].studentname);
+      }
+        console.log(nameset);
+    }
+    wx.setStorageSync('SendMessageToStudentname', nameset);
+    wx.setStorageSync('SendMessageToStudentId', this.data.result);
     wx.navigateTo({
       url: '../tutorSendMsgDetailPage/tutorSendMsgDetailPage',
     })
@@ -56,7 +71,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var t_id = wx.getStorageSync('realid');
+    var url = "http://localhost:8443/tut/students/"+t_id;
+    wx.request({
+      url: url,
+      method: 'GET',
+      data: t_id,
+      success: function (res) {
+        this.setData({list: res.data})
+      }
+    })
   },
 
   /**

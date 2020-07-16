@@ -1,13 +1,19 @@
 <!--pages/message/message.wxml-->
 <view>
   <view class="page">
-    <text class="text1">即将发送给以下几位同学：{{students}}</text>
+    <text class="text1">即将发送给以下几位同学：{{studentsname}}</text>
     <view>
     <van-button round type="info" bindtap="bindOpenTime">
       选择时间
     </van-button>
     </view>
     <text class="text1">选择发送的时间为:{{timeSpanStr}}</text>
+    <van-field
+      value="{{ value }}"
+      placeholder="请输入标题"
+      border="{{ false }}"
+      bind:change="onTitleChange"
+    />
     <view>
       <textarea class="detailText" 
         placeholder="输入您将要发送的消息内容"

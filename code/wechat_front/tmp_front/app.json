@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/tutorSendMsgPage/tutorSendMsgPage",
     "pages/register/register",
     "pages/tutorMsgFromJwcPage/tutorMsgFromJwcPage",
     "pages/stuMsgFromJwcPage/stuMsgFromJwcPage",
@@ -7,7 +8,6 @@
     "pages/stuMsgFromTutorPage/stuMsgFromTutorPage",
     "pages/tutorHistoryMsgPage/tutorHistoryMsgPage",
     "pages/tutorHistoryMsgDetailPage/tutorHistoryMsgDetailPage",
-    "pages/tutorSendMsgPage/tutorSendMsgPage",
     "pages/tutorSendMsgDetailPage/tutorSendMsgDetailPage",
     "pages/stuChooseTutor/stuChooseTutor",
     "pages/messageDetail/messageDetailPage"
