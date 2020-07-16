@@ -1,4 +1,4 @@
-package com.ss.ssproj.service;
+package com.ss.ssproj.serviceimpl;
 
 import com.ss.ssproj.dao.JwcMessageDao;
 import com.ss.ssproj.entity.JwcMessage;
@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class JwcMessageServiceTest {
+class JwcMessageServiceImplTest {
     @Autowired
     private JwcMessageServiceImpl jwcmessageserviceimpl;
 

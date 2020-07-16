@@ -1,4 +1,4 @@
-package com.ss.ssproj.service;
+package com.ss.ssproj.serviceimpl;
 
 import com.ss.ssproj.dao.StudentDao;
 import com.ss.ssproj.entity.Student;
@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class StudentServiceTest {
+class StudentServiceImplTest {
     @Autowired
     private StudentServiceImpl studentserviceimpl;
 

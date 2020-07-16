@@ -1,4 +1,4 @@
-package com.ss.ssproj.service;
+package com.ss.ssproj.serviceimpl;
 
 import com.ss.ssproj.dao.InsMessageDao;
 import com.ss.ssproj.entity.InsMessage;
@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class InsMessageServiceTest {
+class InsMessageServiceImplTest {
     @Autowired
     private InsMessageServiceImpl insmessageserviceimpl;
 
@@ -43,10 +43,10 @@ class InsMessageServiceTest {
         Mockito.when(insmessagedao.findDistinctById(Mockito.anyInt())).thenReturn(msg1);
         Mockito.when(insmessagedao.save(Mockito.any())).thenAnswer(
                 new Answer<InsMessage>(){
-                   @Override
-                   public InsMessage answer(InvocationOnMock invocation){
-                       return invocation.getArgument(0);
-                   }
+                    @Override
+                    public InsMessage answer(InvocationOnMock invocation){
+                        return invocation.getArgument(0);
+                    }
                 }
         );
         Mockito.when(insmessagedao.findAllByTutorid(Mockito.anyString())).thenAnswer(

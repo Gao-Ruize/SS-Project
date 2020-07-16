@@ -3,6 +3,7 @@ package com.ss.ssproj.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tutor")
@@ -47,5 +48,27 @@ public class Tutor {
 
     public String getTutorname() {
         return tutorname;
+    }
+
+    public Tutor() {}
+
+    public Tutor(int id, String tutorid, String uid, String tutorname){
+        this.id = id;
+        this.tutorid = tutorid;
+        this.uid = uid;
+        this.tutorname = tutorname;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false ;
+
+        if (!(o instanceof Tutor)) return false;
+        Tutor other = (Tutor) o;
+        return this.id == other.id &&
+                Objects.equals(this.tutorid, other.tutorid) &&
+                Objects.equals(this.uid, other.uid) &&
+                Objects.equals(this.tutorname, other.tutorname);
     }
 }

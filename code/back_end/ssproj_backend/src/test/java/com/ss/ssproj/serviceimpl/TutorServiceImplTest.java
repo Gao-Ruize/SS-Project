@@ -1,4 +1,4 @@
-package com.ss.ssproj.service;
+package com.ss.ssproj.serviceimpl;
 
 import com.ss.ssproj.dao.TutorDao;
 import com.ss.ssproj.entity.Tutor;
@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class TutorServiceTest {
+class TutorServiceImplTest {
     @Autowired
     private TutorServiceImpl tutorserviceimpl;
 
