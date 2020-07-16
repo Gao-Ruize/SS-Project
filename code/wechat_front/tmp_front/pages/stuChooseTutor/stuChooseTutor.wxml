@@ -2,36 +2,35 @@
 <view>
   <view class="page">
     <text class="text1">绑定导师：</text>
-    <van-button round type="info" bindtap="bindOpenDept">
-      选择专业
-    </van-button>
-    <text class="text1">您的专业是：{{profession}}</text>
     <van-button round type="info" bindtap="bindOpenTutor">
       选择导师
     </van-button>
     <text class="text1">您的导师是：{{tutor}}</text>
-    <van-button round type="info" bindtap="bindConfirm">
+    <van-button round type="info" bindtap="bindConfirm" class = "buttonClass">
       确认提交
     </van-button>
+    <van-tabbar active="{{ active }}" bind:change="guide">
+      <van-tabbar-item icon="comment-o">教务消息</van-tabbar-item>
+      <van-tabbar-item icon="chat-o">导师消息</van-tabbar-item>
+      <van-tabbar-item icon="setting-o">设置</van-tabbar-item>
+    </van-tabbar>
   </view>
-  <!--遮罩层：显示deptpicker-->
-  <van-overlay show="{{ deptshow }}">
-    <van-picker 
-    columns="{{ columns }}" 
-    bind:change="onChange" 
-    bind:confirm="onDeptConfirm" 
-    confirm-button-text="确认" 
-    cancel-button-text="取消" 
-    show-toolbar="true"/>
-  </van-overlay>
   <!--遮罩层：显示tutorpicker-->
-  <van-overlay show="{{ tutorshow }}">
-    <van-picker 
-    columns="{{ tutors }}" 
-    bind:confirm="onTutorConfirm" 
-    confirm-button-text="确认" 
-    cancel-button-text="取消" 
-    show-toolbar="true"/>
-  </van-overlay>
+  <van-popup
+  show="{{ showPop }}"
+  position="top"
+  custom-style="height: 70%;"
+  bind:close="onClose"
+ >
+   <view wx:for="{{tutors}}" wx:for-item="tutor">
+   <van-cell 
+    bindtap = "chooseTutor" data-tutorid = "{{tutor.tutorid}}"
+    data-tutorname = "{{tutor.tutorname}}"
+    title="{{tutor.tutorname}}" size="large" label="{{tutor.tutorid}}"
+    value = "选择"
+    is-link 
+  />
+</view>
+ </van-popup>
 </view>
 

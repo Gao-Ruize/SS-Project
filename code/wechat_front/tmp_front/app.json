@@ -10,7 +10,8 @@
     "pages/tutorHistoryMsgDetailPage/tutorHistoryMsgDetailPage",
     "pages/tutorSendMsgDetailPage/tutorSendMsgDetailPage",
     "pages/stuChooseTutor/stuChooseTutor",
-    "pages/messageDetail/messageDetailPage"
+    "pages/messageDetail/messageDetailPage",
+    "pages/stuIndex/stuIndex"
   ],
   "window": {
     "backgroundTextStyle": "light",

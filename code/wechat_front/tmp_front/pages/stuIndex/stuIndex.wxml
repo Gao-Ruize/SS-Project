@@ -1,0 +1,15 @@
+<!--pages/stuIndex/stuIndex.wxml-->
+<view>
+  <view class = "title">
+    {{phaseName}}
+  </view>
+  <view class = "msgContainer">
+    <van-cell-group>
+      <van-cell title="未读教务处信息" value="{{jwcMsgNum}}条" />
+      <van-cell title="未读导师信息" value="{{insMsgNum}}条" />
+    </van-cell-group>
+  </view>
+  <view class = "buttonContainer">
+    <van-button type = "info" plain bindtap="toStudentPage">查看详情</van-button>
+  </view>
+</view>

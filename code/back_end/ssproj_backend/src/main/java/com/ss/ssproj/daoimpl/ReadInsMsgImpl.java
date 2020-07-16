@@ -32,4 +32,9 @@ public class ReadInsMsgImpl implements ReadInsMsgDao {
     public List<ReadInsMsg> findAllByMsgid(int msgid) {
         return readInsMsgRepository.findAllByMsgid(msgid);
     }
+
+    @Override
+    public List<ReadInsMsg> findAllByStudentidAndIfread(String studentid, int ifread) {
+        return readInsMsgRepository.findAllByStudentidAndIfread(studentid, ifread);
+    }
 }

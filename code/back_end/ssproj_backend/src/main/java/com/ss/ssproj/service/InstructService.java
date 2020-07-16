@@ -10,4 +10,5 @@ public interface InstructService {
     List<Instruct> findAll();
     Instruct saveOrUpdate(Instruct instruct);
     List<Instruct> findAllByTutorid(String tutorid);
+    Instruct findDistinctByStudentidAndTutorid(String studentid, String tutorid);
 }

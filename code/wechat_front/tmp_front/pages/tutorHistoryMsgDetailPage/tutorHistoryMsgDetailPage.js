@@ -93,7 +93,11 @@ Page({
     let students = this.data.result;
     let contain = wx.getStorageSync('msgTitle');
     let realId = wx.getStorageSync('realid');
-    let time = new Date();
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    let time = year + '-' + month + '-' + day;
     console.log(time);
     contain = "请及时阅读通知：" + contain; 
     console.log(students);

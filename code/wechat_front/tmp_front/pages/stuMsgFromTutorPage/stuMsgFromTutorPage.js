@@ -74,6 +74,12 @@ Page({
         url: '../stuMsgFromJwcPage/stuMsgFromJwcPage',
       })
     }
+    if(event.detail == 2) 
+    {
+      wx.redirectTo({
+        url: '../stuChooseTutor/stuChooseTutor',
+      })
+    }
   },
 
   onSearch(e) {

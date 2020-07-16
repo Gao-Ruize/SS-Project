@@ -72,7 +72,15 @@ Page({
               wx.navigateTo({
                 url: '../tutorMsgFromJwcPage/tutorMsgFromJwcPage',
               });
-            } else {
+            } else 
+            if(result == 400) {
+              wx.showToast({
+                title: '无效ID',
+                icon: 'none',
+                duration: 1500
+              });
+            } else
+            {
               wx.showToast({
                 title: '该ID已被占用',
                 icon:'none',

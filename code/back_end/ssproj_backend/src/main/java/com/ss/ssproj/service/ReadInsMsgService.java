@@ -11,4 +11,5 @@ public interface ReadInsMsgService {
     ReadInsMsg save(ReadInsMsg readInsMsg);
     List<ReadInsMsg> findAllByStudentid(String studentid);
     List<ReadInsMsg> findAllByMsgid(int msgid);
+    List<ReadInsMsg> findAllByStudentidAndIfread(String studentid, int ifread);
 }

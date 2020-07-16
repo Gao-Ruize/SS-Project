@@ -10,5 +10,6 @@ public interface InstructDao {
     List<Instruct> findAll();
     Instruct save(Instruct instruct);
     List<Instruct> findAllByTutorid(String tutorid);
+    Instruct findDistinctByStudentidAndTutorid(String studentid, String tutorid);
 
 }

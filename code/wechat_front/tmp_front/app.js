@@ -28,7 +28,7 @@ App({
                     let type = res.data.type;
                     wx.setStorageSync('type', type);
                     console.log(type);
-                    if(type == "S") { wx.navigateTo({url: '/pages/stuMsgFromJwcPage/stuMsgFromJwcPage',})}
+                    if(type == "S") { wx.navigateTo({url: '/pages/stuIndex/stuIndex',})}
                     else
                     if(type == "T") { wx.navigateTo({url: '/pages/tutorMsgFromJwcPage/tutorMsgFromJwcPage',})}
                     else

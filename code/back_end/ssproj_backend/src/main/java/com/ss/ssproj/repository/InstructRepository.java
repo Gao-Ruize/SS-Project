@@ -9,4 +9,5 @@ public interface InstructRepository extends JpaRepository<Instruct, Integer> {
     List<Instruct> findAll();
     Instruct save(Instruct instruct);
     List<Instruct> findAllByTutorid(String tutorid);
+    Instruct findDistinctByStudentidAndTutorid(String studentid, String tutorid);
 }
