@@ -6,10 +6,10 @@
     />
   </view>
   <view>
-    <van-cell title="{{title}}" value="{{date}}" size="large" label="{{sender_name}}" />
+    <van-cell title="{{infoForm.title}}" value="{{infoForm.time}}" size="large" label="{{infoForm.senderName}}" />
     <van-collapse value="{{ activeNames }}" bind:change="onCollChange">
       <van-collapse-item title="详情" name="1">
-        {{content}}
+        {{infoForm.content}}
       </van-collapse-item>
     </van-collapse>
     <view slot="footer" class = "buttons">

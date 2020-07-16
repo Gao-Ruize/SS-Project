@@ -12,29 +12,8 @@ Page({
     date: '',
     active: 0, // 底边导航栏指向
     minDate: new Date(2018, 0, 1).getTime(),
-    maxDate: new Date(2022, 0, 31).getTime(),
-
-    // show: false,
-    // minDate: 946656000000,
-    // startTime: new Date().getTime(),
-    // endTime: 962951868000,
-    // formatter(type, value) {
-    //   if (type === 'year') {
-    //     return `${value}年`;
-    //   } else if (type === 'month') {
-    //     return `${value}月`;
-    //   }
-    //   //console.log("formatter:"+value);
-    //   return value;
-    // },
-    
-    messages:[
-      {title:"title1", detail:"detail1", read:false, messageId:1},
-      {title:"title2", detail:"detail2", read:false, messageId:2},
-      {title:"title3", detail:"detail3", read:true, messageId:3},
-      {title:"title4", detail:"detail4", read:true, messageId:4},
-      {title:"title5", detail:"detail5", read:true, messageId:5}
-    ]
+    maxDate: new Date(2022, 0, 31).getTime(),    
+    allMsgs:[],
   },
   // 
   onChange (event) {
@@ -42,6 +21,12 @@ Page({
     {
       wx.redirectTo({
         url: '../stuMsgFromTutorPage/stuMsgFromTutorPage',
+      })
+    }
+    if(event.detail == 2) 
+    {
+      wx.redirectTo({
+        url: '../stuChooseTutor/stuChooseTutor',
       })
     }
   },
@@ -63,34 +48,19 @@ Page({
     });
     console.log(this.data.date);
   },
-
-
+  showDetails(event) {
+    let type = 'jwc';
+    let msgid = event.currentTarget.dataset.id;
+    console.log(msgid);
+    wx.navigateTo({
+      url: '/pages/messageDetail/messageDetailPage?msgId=' + msgid + 
+      '&type=' + type,
+    });
+  },
   // 相应搜索栏
   onSearch(value){
     console.log(value.detail);
   },
-
-  // onInputStartDate(event) {
-  //   console.log(event.detail);
-  //   this.setData({
-  //     startDate: event.detail,
-  //   });
-  // },
-
-  // onInputEndDate(event) {
-  //   console.log(event.detail);
-  //   this.setData({
-  //     endDate: event.detail,
-  //   });
-  // },
-
-  // showPickTime(){
-  //   this.setData({ show: true });
-  // },
-
-  // hidePickTime() {
-  //   this.setData({ show: false });
-  // },
 
   //事件处理函数
   bindViewTap: function() {
@@ -99,6 +69,24 @@ Page({
     })
   },
   onLoad: function () {
+    let that = this;
+    let type = wx.getStorageSync('type');
+    let realid = wx.getStorageSync('realid');
+    console.log("get msgs");
+    console.log(type);
+    console.log(realid);
+    let baseurl = "http://localhost:8443/api/user/typejwcmsg/" 
+      + type + "/" + realid;
+    wx.request({
+      url: baseurl,
+      method: 'GET',
+      success (res) {
+        that.setData({
+          allMsgs: res.data,
+        });
+        console.log(res.data);
+      }
+    })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

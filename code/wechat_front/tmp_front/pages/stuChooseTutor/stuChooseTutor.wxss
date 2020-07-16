@@ -9,3 +9,7 @@
   padding-top: 40rpx;
   height: 100rpx;
 }
+
+.buttonClass{
+  margin-top: 100px;
+}

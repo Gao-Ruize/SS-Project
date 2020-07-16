@@ -1,42 +1,47 @@
-// pages/stuChooseTutor/stuChooseTutor.js
-// 学院及其专业，如果从后端找数据会太慢，影响效率。并且这些数据不用考虑安全性问题
-const dept = {
-  电院: ['自动化', '计算机科学', '软件工程', '信息安全', '信息工程','人工智能','精密仪器'],
-  机动: ['汽修', '厨师', '美容美发', '挖掘机','机械工程','能源与动力工程'],
-};
-
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
+    active: 2, // 底边导航栏指向
     deptshow: false,
     tutorshow: false,
-    columns: [
-      {
-        values: Object.keys(dept),
-        className: 'column1',
-      },
-      {
-        values: dept['电院'],
-        className: 'column2',
-        defaultIndex: 2,
-      },
-    ],
-    tutors: ['臧斌宇','陈昊鹏','JBoss'],
+    tutorid:'',
+    tutors:[],
     profession: "",
-    tutor: ""
+    tutor: "",
+    showPop: false,
   },
   // 绑定确认提交按钮
   onConfirm(){
     //向后端发消息：
-
-
     //回到上一个页面
-
-
-
+  },
+  chooseTutor(event) {
+    let tutorid = event.currentTarget.dataset.tutorid;
+    let tutorname = event.currentTarget.dataset.tutorname;
+    this.setData({
+      tutorid: tutorid,
+      tutor: tutorname,
+    });
+    console.log(tutorid);
+    this.setData({
+      showPop: false,
+    })
+  },
+  guide(event) {
+    if(event.detail == 1)
+    {
+      wx.redirectTo({
+        url: '../stuMsgFromTutorPage/stuMsgFromTutorPage',
+      })
+    }
+    if(event.detail == 0)
+    {
+      wx.redirectTo({
+        url: '../stuMsgFromJwcPage/stuMsgFromJwcPage',
+      })
+    }
   },
   // 打开选择专业遮罩层按钮
   bindOpenDept(){
@@ -44,19 +49,15 @@ Page({
   },
   // 打开选择导师遮罩层按钮
   bindOpenTutor(){
-    this.setData({tutorshow: true})
+    this.setData({tutorshow: true});
+    this.setData({showPop: true});
+  },
+  onClose() {
+    this.setData({
+      showPop: false
+    })
   },
   // 确认专业，关闭遮罩层
-  onDeptConfirm(event){
-    const { picker, value, index } = event.detail;
-    var dept = value[0];
-    var profession = value[1];
-    console.log(profession);
-    this.setData({deptshow: false, profession: profession});
-    // 从后端读该专业的教师数据
-
-
-  },
   // 确认导师， 关闭遮罩层
   onTutorConfirm(event){
     const { picker, value, index } = event.detail;
@@ -76,9 +77,60 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let that = this;
+    let baseurl = "http://localhost:8443/api/user/tutors";
+    wx.request({
+      url: baseurl,
+      method:'GET',
+      success (res) {
+        console.log("tutus");
+        console.log(res.data);
+        that.setData({
+          tutors :res.data,
+        })
+      }
+    })
   },
-
+  bindConfirm() {
+    let studentid = wx.getStorageSync('realid');
+    console.log(studentid);
+    let tutorid = this.data.tutorid;
+    if(tutorid == '')
+    {
+      wx.showToast({
+        title: '请选择导师',
+        icon:'none',
+        duration:1000
+      });
+      return;
+    }
+    console.log(tutorid);
+    let baseurl = "http://localhost:8443/api/stu/choosetutor";
+    wx.request({
+      url: baseurl,
+      method: 'POST',
+      data:{
+        studentId: studentid,
+        tutorId: tutorid,
+      },
+      success(res) {
+        if(res.data.code == 200)
+        {
+          wx.showToast({
+            title: '绑定成功',
+            icon:'success',
+            duration:1500
+          })
+        } else {
+          wx.showToast({
+            title: '请勿重复绑定',
+            icon:'none',
+            duration:1500
+          })
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

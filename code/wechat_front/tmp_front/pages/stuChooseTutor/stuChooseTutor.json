@@ -2,6 +2,11 @@
   "usingComponents": {
     "van-picker": "/miniprogram_npm/@vant/weapp/picker/index",
     "van-overlay": "/miniprogram_npm/@vant/weapp/overlay/index",
-    "van-button": "/miniprogram_npm/@vant/weapp/button/index"
+    "van-button": "/miniprogram_npm/@vant/weapp/button/index",
+    "van-tabbar": "/miniprogram_npm/@vant/weapp/tabbar/index",
+    "van-tabbar-item": "/miniprogram_npm/@vant/weapp/tabbar-item/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index"
   }
 }
