@@ -3,6 +3,7 @@ package com.ss.ssproj.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "jwc_message")
@@ -69,5 +70,29 @@ public class JwcMessage {
 
     public int getIfRead() {
         return ifRead;
+    }
+
+    public JwcMessage() {}
+
+    public JwcMessage(int id, String releasetime, String title, String content, int phase){
+        this.id = id;
+        this.releasetime = releasetime;
+        this.title = title;
+        this.content = content;
+        this.phase = phase;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false ;
+
+        if (!(o instanceof JwcMessage)) return false;
+        JwcMessage other = (JwcMessage) o;
+        return this.id == other.id &&
+                Objects.equals(this.releasetime, other.releasetime) &&
+                Objects.equals(this.title, other.title) &&
+                Objects.equals(this.content, other.content) &&
+                this.phase == other.phase;
     }
 }

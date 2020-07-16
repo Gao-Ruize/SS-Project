@@ -1,6 +1,7 @@
 package com.ss.ssproj.entity;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "read_ins_msg")
@@ -43,5 +44,27 @@ public class ReadInsMsg {
 
     public int getIfread() {
         return ifread;
+    }
+
+    public ReadInsMsg() {}
+
+    public ReadInsMsg(int id, String studentid, int ifread, int msgid){
+        this.id = id;
+        this.studentid = studentid;
+        this.ifread = ifread;
+        this.msgid = msgid;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false ;
+
+        if (!(o instanceof ReadInsMsg)) return false;
+        ReadInsMsg other = (ReadInsMsg) o;
+        return this.id == other.id &&
+                Objects.equals(this.studentid, other.studentid) &&
+                this.ifread == other.ifread &&
+                this.msgid == other.msgid;
     }
 }

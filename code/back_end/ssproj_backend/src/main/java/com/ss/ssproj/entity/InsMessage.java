@@ -4,6 +4,7 @@ package com.ss.ssproj.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "ins_message")
@@ -69,6 +70,29 @@ public class InsMessage {
         return tutorid;
     }
 
+    public InsMessage() {}
+
+    public InsMessage(int id, String tutorid, String title, String content, String releasetime){
+        this.id = id;
+        this.tutorid = tutorid;
+        this.title = title;
+        this.content = content;
+        this.releasetime = releasetime;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false ;
+
+        if (!(o instanceof InsMessage)) return false;
+        InsMessage other = (InsMessage) o;
+        return this.id == other.id &&
+                Objects.equals(this.tutorid, other.tutorid) &&
+                Objects.equals(this.title, other.title) &&
+                Objects.equals(this.content, other.content) &&
+                Objects.equals(this.releasetime, other.releasetime);
+    }
 }
 
 

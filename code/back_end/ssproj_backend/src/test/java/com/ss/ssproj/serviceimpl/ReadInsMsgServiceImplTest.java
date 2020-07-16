@@ -1,4 +1,4 @@
-package com.ss.ssproj.service;
+package com.ss.ssproj.serviceimpl;
 
 import com.ss.ssproj.dao.ReadInsMsgDao;
 import com.ss.ssproj.entity.ReadInsMsg;
@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class ReadInsMsgServiceTest {
+class ReadInsMsgServiceImplTest {
     @Autowired
     private ReadInsMsgServiceImpl readinsmsgserviceimpl;
 
@@ -71,7 +71,7 @@ class ReadInsMsgServiceTest {
                         result.add(msg3);
                         return result;
                     }
-        }
+                }
         );
     }
 

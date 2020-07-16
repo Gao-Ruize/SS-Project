@@ -1,4 +1,4 @@
-package com.ss.ssproj.service;
+package com.ss.ssproj.serviceimpl;
 
 import com.ss.ssproj.dao.ReadJwcMsgDao;
 import com.ss.ssproj.entity.ReadJwcMsg;
@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class ReadJwcMsgServiceTest {
+class ReadJwcMsgServiceImplTest {
     @Autowired
     private ReadJwcMsgServiceImpl readjwcmsgserviceimpl;
 
