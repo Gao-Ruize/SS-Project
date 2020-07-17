@@ -30,15 +30,19 @@ public class AccountController {
         if(type.equals("1")) {
             //学生
             Student tmpS = studentService.findDistinctByStudentId(realId);
+            System.out.println("tmpS.getUid(): "+tmpS.getUid());
             if(tmpS.getUid() == null) {
+                System.out.println("return temS.getUid() == null");
                 return new Result(400);
             } else {
                 tmpS.setUid(null);
                 studentService.saveOrUpdate(tmpS);
+                System.out.println("return: tmpS.setUid(null)");
                 return new Result(200);
             }
         } else
         if(type.equals("2")) {
+            //导师
             Tutor tmpT = tutorService.findDistinctByTutorId(realId);
             if(tmpT.getUid() == null) {
                 return new Result(400);
