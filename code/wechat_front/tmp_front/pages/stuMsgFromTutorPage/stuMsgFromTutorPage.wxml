@@ -1,7 +1,4 @@
-<van-notice-bar
-  mode="closeable"
-  text="{{noticeInfo}}"
-/>
+
 <van-search
   value="{{ value }}"
   placeholder="请输入搜索关键词"
@@ -15,7 +12,7 @@
 </van-row>
 <van-row>
   <view wx:for="{{showSelect}}" wx:for-item="item">
-  <van-panel title="{{item.name}}" desc="{{item.detail}}" status="{{item.ReadStatus}}">
+  <van-panel title="{{item.title}}" desc="{{item.content}}" status="{{item.phase}}">
   </van-panel>
   </view>
 </van-row>
@@ -24,7 +21,7 @@
 </van-row>
 <van-row>
   <view wx:for="{{showProposal}}" wx:for-item="item">
-    <van-panel title="{{item.name}}" desc="{{item.detail}}" status="{{item.ReadStatus}}">
+    <van-panel title="{{item.title}}" desc="{{item.content}}" status="{{item.phase}}">
     </van-panel>
   </view>
 </van-row>
@@ -33,7 +30,7 @@
 </van-row>
 <van-row>
   <view wx:for="{{showMiddle}}" wx:for-item="item">
-    <van-panel title="{{item.name}}" desc="{{item.detail}}" status="{{item.ReadStatus}}">
+    <van-panel title="{{item.title}}" desc="{{item.content}}" status="{{item.phase}}">
     </van-panel>
   </view>
 </van-row>
@@ -44,7 +41,7 @@
 </van-row>
 <van-row>
   <view wx:for="{{showReply}}" wx:for-item="item">
-    <van-panel title="{{item.name}}" desc="{{item.detail}}" status="{{item.ReadStatus}}">
+    <van-panel title="{{item.title}}" desc="{{item.content}}" status="{{item.phase}}">  
     </van-panel>
   </view>
 </van-row>
@@ -53,7 +50,7 @@
     <van-progress pivot-text="归档" color="#7232dd" percentage="100" />
     <van-row>
   <view wx:for="{{showPigeonhole}}" wx:for-item="item">
-    <van-panel title="{{item.name}}" desc="{{item.detail}}" status="{{item.ReadStatus}}">
+    <van-panel title="{{item.title}}" desc="{{item.content}}" status="{{item.phase}}">
     </van-panel>
 </view>
   </van-row>
