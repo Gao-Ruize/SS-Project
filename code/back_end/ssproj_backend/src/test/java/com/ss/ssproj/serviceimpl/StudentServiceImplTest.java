@@ -57,6 +57,8 @@ class StudentServiceImplTest {
     @Test
     public void findDistinctByStudentIdTest(){
         Student exp = new Student(2, "s2", "cde", "name2");
+//        Student exp = new Student(168,"516030910005","abcde","陈星伊");
+
         assertEquals(exp, studentserviceimpl.findDistinctByStudentId("s2"));
     }
 }

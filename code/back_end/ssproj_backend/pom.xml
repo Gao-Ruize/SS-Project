@@ -73,6 +73,8 @@
             <version>0.0.20131108.vaadin1</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+    </dependency>
     </dependencies>
 
     <build>
