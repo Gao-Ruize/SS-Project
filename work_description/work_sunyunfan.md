@@ -39,3 +39,7 @@ Mock 函数允许你测试代码之间的连接——实现方式包括：擦除
 - 实现后端code转换openid。
 - 前端导师发送消息接口的实现（还未改完，卡在checkbox group的返回值）。
 - 完成对pr的代码的code review，并merge到dev分支里。
+# Day9 2020-7-16
+- 前端导师发送消息的接口实现。
+- 将jest框架引入微信小程序，并开始对tutorSendMsg页面写test程序。
+- 完成对pr的代码的code review，并merge到dev分支里。
