@@ -1,5 +1,6 @@
 package com.ss.ssproj.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ss.ssproj.entity.InsMessage;
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.internal.matchers.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -74,33 +76,35 @@ class AllMsgControllerTest {
 
     @Test
     public void getMsgDetail() throws Exception {
-        String jwcForm = "{\"title\":\"tj\",\"content\":\"cj\",\"time\":\"2020j\",\"senderName\":\"jwc\",\"msgType\":null,\"tutorId\":null,\"msgId\":0,\"toIds\":null}";
+        MsgForm jwcCheck = new MsgForm("tj","cj","2020j","jwc",null,null,0,null);
         String jwcResult;
         jwcResult = mockmvc
                 .perform(MockMvcRequestBuilders.get("/api/user/msgdetail/1/jwc"))
                 .andReturn()
                 .getResponse()
                 .getContentAsString();
-        JwcMessage x = JSONObject.parseObject(jwcResult,JwcMessage.class);
-        assertEquals(jwcForm,jwcResult);
+        MsgForm jwcObject = JSONObject.parseObject(jwcResult, MsgForm.class);
+        assertEquals(jwcCheck, jwcObject);
 
-        String insForm = "{\"title\":\"ti\",\"content\":\"ci\",\"time\":\"2020i\",\"senderName\":\"n\",\"msgType\":null,\"tutorId\":null,\"msgId\":0,\"toIds\":null}";
+        MsgForm insCheck = new MsgForm("ti","ci","2020i","n",null,null,0,null);
         String insResult;
         insResult = mockmvc
                 .perform(MockMvcRequestBuilders.get("/api/user/msgdetail/2/tutor"))
                 .andReturn()
                 .getResponse()
                 .getContentAsString();
-        assertEquals(insForm,insResult);
+        MsgForm insObject = JSONObject.parseObject(insResult, MsgForm.class);
+        assertEquals(insCheck, insObject);
 
-        String nullCheck = "{\"title\":null,\"content\":null,\"time\":null,\"senderName\":null,\"msgType\":null,\"tutorId\":null,\"msgId\":0,\"toIds\":null}";
+        MsgForm NullCheck = new MsgForm(null,null,null,null,null,null,0,null);
         String nullJwc;
         nullJwc = mockmvc
                 .perform(MockMvcRequestBuilders.get("/api/user/msgdetail/3/tutor"))
                 .andReturn()
                 .getResponse()
                 .getContentAsString();
-        assertEquals(nullCheck, nullJwc);
+        MsgForm nullJwcObj = JSONObject.parseObject(nullJwc, MsgForm.class);
+        assertEquals(NullCheck, nullJwcObj);
 
         String nullIns;
         nullIns = mockmvc
@@ -108,6 +112,7 @@ class AllMsgControllerTest {
                 .andReturn()
                 .getResponse()
                 .getContentAsString();
-        assertEquals(nullCheck, nullIns);
+        MsgForm nullInsObj = JSONObject.parseObject(nullIns, MsgForm.class);
+        assertEquals(NullCheck, nullInsObj);
     }
 }

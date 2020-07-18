@@ -1,6 +1,10 @@
 package com.ss.ssproj.utils;
 
+import com.ss.ssproj.entity.JwcMessage;
+import com.ss.ssproj.entity.Tutor;
+
 import java.util.List;
+import java.util.Objects;
 
 public class MsgForm {
     private
@@ -75,5 +79,37 @@ public class MsgForm {
 
     public List<String> getToIds() {
         return toIds;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false ;
+
+        if (!(o instanceof MsgForm)) return false;
+        MsgForm other = (MsgForm) o;
+        return  Objects.equals(this.content,other.content) &&
+                Objects.equals(this.title, other.title) &&
+                Objects.equals(this.time, other.time) &&
+                Objects.equals(this.senderName, other.senderName) &&
+                Objects.equals(this.msgType,other.msgType) &&
+                Objects.equals(this.tutorId,other.tutorId) &&
+                Objects.equals(this.toIds,other.toIds) &&
+                this.msgId == other.msgId;
+    }
+
+    public MsgForm() {}
+
+    public MsgForm(String title, String content, String time,
+                      String senderName, String msgType, String tutorId,
+                      int msgId, List<String> toIds) {
+        this.title = title;
+        this.time = time;
+        this.content = content;
+        this.senderName = senderName;
+        this.msgType = msgType;
+        this.tutorId = tutorId;
+        this.msgId = msgId;
+        this.toIds = toIds;
     }
 }
