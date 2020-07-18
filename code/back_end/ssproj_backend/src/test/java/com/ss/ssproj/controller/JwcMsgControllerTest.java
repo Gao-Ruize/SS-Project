@@ -1,11 +1,13 @@
 package com.ss.ssproj.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ss.ssproj.entity.JwcMessage;
 import com.ss.ssproj.entity.ReadJwcMsg;
 import com.ss.ssproj.service.JwcMessageService;
 import com.ss.ssproj.service.ReadJwcMsgService;
+import org.hibernate.annotations.Check;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -71,65 +73,48 @@ class JwcMsgControllerTest {
 
     @Test
     void jwcmsgs() throws Exception {
-        String check = "[" +
-                "{" +
-                "\"id\":1," +
-                "\"releasetime\":\"2020\"" +
-                ",\"title\":\"t1\"" +
-                ",\"content\":\"c1\"" +
-                ",\"phase\":0" +
-                ",\"ifRead\":0" +
-                "}" +
-                "," +
-                "{\"id\":2," +
-                "\"releasetime\":\"2020\"," +
-                "\"title\":\"t2\"," +
-                "\"content\":\"c2\"," +
-                "\"phase\":0," +
-                "\"ifRead\":0" +
-                "}" +
-                "]";
+        JwcMessage jm1 = new JwcMessage(1,"2020","t1","c1",0);
+        jm1.setIfRead(0);
+        JwcMessage jm2 = new JwcMessage(2,"2020","t2","c2",0);
+        jm2.setIfRead(0);
+        JSONArray arr1 = new JSONArray();
+        arr1.add(jm1);
+        arr1.add(jm2);
+        JSONArray Arr1 = JSONArray.parseArray(arr1.toJSONString());
         String ret = mockmvc
                 .perform(MockMvcRequestBuilders.get("/api/user/jwcmsgs"))
                 .andReturn()
                 .getResponse()
                 .getContentAsString();
-        assertEquals(check,ret);
+        JSONArray ret1 = JSONArray.parseArray(ret);
+        assertEquals(Arr1,ret1);
     }
 
 
     @Test
     void typejwcmsgs() throws Exception {
-        String checkS = "[" +
-                "{" +
-                "\"id\":1," +
-                "\"releasetime\":\"2020\"," +
-                "\"title\":\"t1\"," +
-                "\"content\":\"c1\"," +
-                "\"phase\":0," +
-                "\"ifRead\":0" +
-                "}," +
-                "{" +
-                "\"id\":2," +
-                "\"releasetime\":\"2020\"," +
-                "\"title\":\"t2\"," +
-                "\"content\":\"c2\"," +
-                "\"phase\":0," +
-                "\"ifRead\":0" +
-                "}" +
-                "]";
-        String checkT = "[{\"id\":1,\"releasetime\":\"2020\",\"title\":\"t1\",\"content\":\"c1\",\"phase\":0,\"ifRead\":0},{\"id\":2,\"releasetime\":\"2020\",\"title\":\"t2\",\"content\":\"c2\",\"phase\":0,\"ifRead\":0}]";
+        JwcMessage checks1 = new JwcMessage(1,"2020","t1","c1",0);
+        checks1.setIfRead(0);
+        JwcMessage checks2 = new JwcMessage(2,"2020","t2","c2",0);
+        checks2.setIfRead(0);
+        JSONArray checks = new JSONArray();
+        checks.add(checks1);
+        checks.add(checks2);
+        JSONArray CheckS = JSONArray.parseArray(checks.toJSONString());
+        JSONArray CheckT = CheckS;
         String retS = mockmvc
                 .perform(MockMvcRequestBuilders.get("/api/user/typejwcmsg/S/s123"))
                 .andReturn()
                 .getResponse()
                 .getContentAsString();
-        assertEquals(checkS, retS);
+        JSONArray RetS = JSONArray.parseArray(retS);
+        assertEquals(CheckS,RetS);
         String retT = mockmvc
                 .perform(MockMvcRequestBuilders.get("/api/user/typejwcmsg/T/t123"))
                 .andReturn()
                 .getResponse()
                 .getContentAsString();
-        assertEquals(checkT, retT);
+        JSONArray RetT = JSONArray.parseArray(retT);
+        assertEquals(CheckT, RetT);
     }
 }
