@@ -46,7 +46,7 @@ CREATE TABLE `ins_message` (
   `Title` varchar(200) DEFAULT NULL,
   `Content` varchar(500) DEFAULT NULL,
   `ReleaseTime` varchar(20) DEFAULT NULL,
-	`Phase` INT DEFAULT NULL,
+  `Phase` INT DEFAULT 0,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -59,7 +59,7 @@ CREATE TABLE `jwc_message` (
   `ReleaseTime` varchar(20) DEFAULT NULL,
   `Title` varchar(200) DEFAULT NULL,
   `Content` varchar(200) DEFAULT NULL,
-	`Phase` INT DEFAULT NULL,
+  `Phase` INT DEFAULT 0,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -71,9 +71,9 @@ CREATE TABLE `read_jwc_msg` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `StudentId` varchar(100) DEFAULT NULL,
   `TutorId` varchar(100) DEFAULT NULL,
-  `ifRead` int(11) DEFAULT NULL,
-  `ifStudent` int(11) DEFAULT NULL,
-  `MsgId` int(11) DEFAULT NULL,
+  `ifRead` int(11) DEFAULT 0,
+  `ifStudent` int(11) DEFAULT 0,
+  `MsgId` int(11) DEFAULT 0,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -104,8 +104,8 @@ CREATE TABLE `tutor` (
 DROP TABLE IF EXISTS `read_ins_msg`;
 CREATE TABLE `read_ins_msg` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
-	`StudentId` varchar(100) DEFAULT NULL,
-  `ifRead` int(11) DEFAULT NULL,
-  `MsgId` int(11) DEFAULT NULL,
-	PRIMARY KEY (`Id`)
+  `StudentId` varchar(100) DEFAULT NULL,
+  `ifRead` int(11) DEFAULT 0,
+  `MsgId` int(11) DEFAULT 0,
+  PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=300 DEFAULT CHARSET=utf8;

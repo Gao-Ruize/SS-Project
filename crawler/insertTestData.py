@@ -153,7 +153,7 @@ def insertIntoIns_Message():
     conn.close()
 
 
-insertInstructor()
-insertIntoJWC_Message()
+# insertInstructor()
+# insertIntoJWC_Message()
 insertIntoIns_Message()
-
+# test()

@@ -71,14 +71,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let that = this;
     var t_id = wx.getStorageSync('realid');
-    var url = "http://localhost:8443/tut/students/"+t_id;
+    var url = "http://localhost:8443/api/tut/students/"+t_id;
     wx.request({
       url: url,
       method: 'GET',
       data: t_id,
       success: function (res) {
-        this.setData({list: res.data})
+        that.setData({list: res.data})
       }
     })
   },

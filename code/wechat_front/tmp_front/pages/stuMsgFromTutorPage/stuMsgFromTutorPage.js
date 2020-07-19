@@ -3,68 +3,81 @@ const app = getApp()
 Page({
   data:{
     activate: 'home',
-    hasNewInfo: true,
-    noticeInfo: '',
     selectPhase: [
-      {
-        name: 'JBoss',
-        detail:"你好，已经收到你的申请，我正在审核!",
-        hasRead: true,
-        ReadStatus: '已读',
-      },
-      {
-        name: 'JBoss',
-        detail: '你好，我已通过你的申请!',
-        hasRead: false,
-        ReadStatus: '未读',
-      }
+
     ],
     showSelect: [],
     ProposalPhase: [
-      {
-        name: 'JBoss',
-        detail: '你好，你的开题报告我已收到！',
-        ReadStatus: '已读',
-      }
+
     ],
     showProposal: [],
     MiddlePhase: [
-      {
-        name: 'JBoss',
-        detail: '你好，请填写并发送中期检查表格',
-        ReadStatus: '未读',
-      }
+
     ],
     showMiddle: [],
     replyPhase: [
-      {
-        name: 'JBoss',
-        detail: '你好，请于2020-02-07日参加答辩',
-        ReadStatus: '已读',
-      }
+
     ],
     showReply: [],
     pigeonholePhase: [
-      {
-        name: 'JBoss',
-        detail: '你好吗我不好',
-        ReadStatus: '未读',
-      }
+
     ],
     showPigeonhole: [],
     active: 1, // 底边导航栏
   },
 
   onLoad: function(options) {
-    var hasNewInfo = this.data.hasNewInfo;
-    this.setData({
-      noticeInfo: (hasNewInfo === true) ? '您有新消息待查看' : '暂无新消息',
-      showSelect: this.data.selectPhase,
-      showMiddle: this.data.MiddlePhase,
-      showProposal: this.data.ProposalPhase,
-      showReply: this.data.replyPhase,
-      showPigeonhole: this.data.pigeonholePhase,
+    let that = this;
+    let realid = wx.getStorageSync('realid');
+    let baseurl ='http://localhost:8443/api/stu/insmsg/' + realid;
+    wx.request({
+      url: baseurl,
+      method: 'GET',
+      success(res) {
+        let info = res.data;
+        phase1 = [];
+        phase2 = [];
+        phase3 = [];
+        phase4 = [];
+        phase5 = [];
+        for (var i = 0; i < info.length; ++i)
+        {
+          switch(info[i].phase) {
+            case 1:
+              phase1.push(info[i])
+              break;
+            case 2:
+              phase2.push(info[i])
+              break;
+            case 3:
+              phase3.push(info[i])
+              break;
+            case 4:
+              phase4.push(info[i])
+              break;
+            case 5:
+              phase5.push(info[i])
+              break;
+          }
+        }
+        that.setData({
+          selectPhase: phase1,
+          ProposalPhase: phase2,
+          MiddlePhase: phase3,
+          replyPhase: phase4,
+          pigeonholePhase: phase5
+        }, () => {
+            that.setData({
+              showSelect: this.data.selectPhase,
+              showMiddle: this.data.MiddlePhase,
+              showProposal: this.data.ProposalPhase,
+              showReply: this.data.replyPhase,
+              showPigeonhole: this.data.pigeonholePhase,
+          });
+        })
+      }
     });
+
     
   },
 
@@ -143,6 +156,8 @@ Page({
       showSelect: this.data.selectPhase,
       showMiddle: this.data.MiddlePhase,
       showProposal: this.data.ProposalPhase,
+      showReply: this.data.replyPhase,
+      showPigeonhole: this.data.pigeonholePhase
     });
   }
 })
