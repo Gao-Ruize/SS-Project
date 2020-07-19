@@ -50,8 +50,8 @@ Page({
     this.setData({
       searchValue:event.detail,
     });
-    let checkdata = this.data.searchValue;
-    console.log(checkdata);
+    // let checkdata = this.data.searchValue;
+    // console.log(checkdata);
   },
   showSendPop(){
     this.setData({showPopUp:true});
@@ -63,16 +63,17 @@ Page({
   },
 
   onSearch(){
-    //将内容过滤后存入showStudents
-    console.log("search!");
+    // 将内容过滤后存入showStudents
+    // console.log("search!");
     let value = this.data.searchValue;
     let tmpArr = [];
-    this.data.readStudentInfo.forEach(function(item,index) {
+    for(var i=0; i<this.data.readStudentInfo.length; i++){
+      let item = this.data.readStudentInfo[i];
       if(item.studentname.includes(value) 
          || item.studentid.includes(value)) {
         tmpArr.push(item);
       }
-    });
+    };
     this.setData({showStduents: tmpArr});
   },
 
@@ -83,8 +84,8 @@ Page({
 
   mulChosChange(event) {
     this.setData({result:event.detail});
-    console.log("choose");
-    console.log(this.data.result);
+    // console.log("choose");
+    // console.log(this.data.result);
   },
   changeChosBar(event) {
     this.setData({result:event.detail})
@@ -98,9 +99,9 @@ Page({
     let month = date.getMonth() + 1;
     let day = date.getDate();
     let time = year + '-' + month + '-' + day;
-    console.log(time);
+    // console.log(time);
     contain = "请及时阅读通知：" + contain; 
-    console.log(students);
+    // console.log(students);
     let baseurl = "http://localhost:8443/api/tut/sendmsg";
     wx.request({
       url: baseurl,
@@ -124,59 +125,12 @@ Page({
   getUnreadInfo() {
     let that = this;
     let tmpArr = [];
-    this.data.readStudentInfo.forEach(function(item,index) {
+    for(let i=0; i<this.data.readStudentInfo.length; i++) {
+      let item = this.data.readStudentInfo[i];
       if(item.ifRead == 0) {
         tmpArr.push(item);
       }
-    });
+    };
     this.setData({unreadStudentInfo:tmpArr});
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })
