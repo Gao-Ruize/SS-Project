@@ -87,5 +87,16 @@ Page({
    */
   onLoad: function (options) {
     this.getStudents();
+    let that = this;
+    var t_id = wx.getStorageSync('realid');
+    var url = "http://localhost:8443/api/tut/students/"+t_id;
+    wx.request({
+      url: url,
+      method: 'GET',
+      data: t_id,
+      success: function (res) {
+        that.setData({list: res.data})
+      }
+    })
   },
 })

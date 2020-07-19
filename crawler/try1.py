@@ -1,6 +1,8 @@
 # coding=gbk
 import os
 import re
+import pymysql
+from setting import MYSQL_HOST, MYSQL_USER, MYSQL_PWD, MYSQL_DB
 
 
 def reportCheck(path):
@@ -56,8 +58,25 @@ def selectCheck(path):
     file.close()
 
 
-Path = 'data/reportPhase'
-fileList = os.listdir(Path)
-for item in fileList:
-    filePath = Path + '/' + item
-    reportCheck(filePath)
+def middleCheck():
+    path = 'data/middlePhase'
+    list = os.listdir(path)
+    for item in list:
+        filepath = path + '/' + item
+        file = open(filepath, mode='r')
+        next(file)
+        lines = file.readlines()
+        for line in lines:
+            print(line)
+        file.close()
+
+
+conn = pymysql.connect(MYSQL_HOST, MYSQL_USER, MYSQL_PWD, MYSQL_DB, charset='utf8')
+sql = 'select Status from info where Sid=%s'
+data = '516030910005'
+cursor = conn.cursor()
+cursor.execute(sql, data)
+result = cursor.fetchone()[0]
+print(result)
+cursor.close()
+conn.close()
