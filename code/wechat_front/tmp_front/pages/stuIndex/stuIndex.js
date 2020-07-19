@@ -18,12 +18,16 @@ Page({
     this.setInsNum();
     this.setJwcNum();
   },
-  setPhaseId() {
+  setPhaseId(num = 0) {
     let date = new Date();
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
     let day = date.getDate();
-    let checkDate = year * 10000 + month * 100 + day;
+    let checkDate = 0;
+    if(num == 0)
+      checkDate = year * 10000 + month * 100 + day;
+    else
+      checkDate = num;
     let point1 = 20200100;
     let point2 = 20200300;
     let point3 = 20200500;
@@ -81,52 +85,4 @@ Page({
       }
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })
