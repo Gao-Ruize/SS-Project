@@ -24,6 +24,9 @@ public class LoginController {
     @Autowired
     StudentService studentService;
 
+//    @Autowired
+//    private HttpRequest httprequest;
+
     @CrossOrigin
     @PostMapping(value = "api/user/login")
     @ResponseBody

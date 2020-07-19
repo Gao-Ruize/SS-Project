@@ -15,6 +15,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
@@ -41,6 +44,17 @@ class ReadJwcMsgServiceImplTest {
                     }
                 }
         );
+        Mockito.when(readjwcmsgdao.findAllByStudentidAndIfread(Mockito.anyString(), Mockito.anyInt())).thenAnswer(
+                new Answer<List<ReadJwcMsg>>(){
+                    @Override
+                    public List<ReadJwcMsg> answer(InvocationOnMock invocation){
+                        List<ReadJwcMsg> ret = new ArrayList<>();
+                        ret.add(new ReadJwcMsg(1, "sId", "tutId", 0, 1, 1));
+                        ret.add(new ReadJwcMsg(2, "sId", "tutId", 0, 1, 2));
+                        return ret;
+                    }
+                }
+        );
     }
 
     @Test
@@ -59,6 +73,14 @@ class ReadJwcMsgServiceImplTest {
     public void saveOrUpdateTest(){
         ReadJwcMsg newMsg = new ReadJwcMsg(3, "s3", "tut3", 0, 0, 5);
         assertEquals(newMsg, readjwcmsgserviceimpl.saveOrUpdate(newMsg));
+    }
+
+    @Test
+    public void findAllByStudentidAndIfreadTest(){
+        List<ReadJwcMsg> exp = new ArrayList<>();
+        exp.add(new ReadJwcMsg(1, "sId", "tutId", 0, 1, 1));
+        exp.add(new ReadJwcMsg(2, "sId", "tutId", 0, 1, 2));
+        assertEquals(exp, readjwcmsgserviceimpl.findAllByStudentidAndIfread("sId", 0));
     }
 
 }
