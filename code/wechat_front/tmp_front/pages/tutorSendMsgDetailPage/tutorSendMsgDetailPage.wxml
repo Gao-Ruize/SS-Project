@@ -1,7 +1,7 @@
 <!--pages/message/message.wxml-->
 <view>
   <view class="page">
-    <text class="text1">即将发送给以下几位同学：{{studentsname}}</text>
+    <text class="text1">即将发送给以下几位同学：{{studentsId}}</text>
     <view>
     <van-button round type="info" bindtap="bindOpenTime">
       选择时间

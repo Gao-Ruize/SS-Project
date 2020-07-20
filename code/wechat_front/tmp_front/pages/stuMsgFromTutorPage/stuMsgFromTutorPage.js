@@ -35,11 +35,11 @@ Page({
       method: 'GET',
       success(res) {
         let info = res.data;
-        phase1 = [];
-        phase2 = [];
-        phase3 = [];
-        phase4 = [];
-        phase5 = [];
+        let phase1 = [];
+        let phase2 = [];
+        let phase3 = [];
+        let phase4 = [];
+        let phase5 = [];
         for (var i = 0; i < info.length; ++i)
         {
           switch(info[i].phase) {
@@ -68,11 +68,11 @@ Page({
           pigeonholePhase: phase5
         }, () => {
             that.setData({
-              showSelect: this.data.selectPhase,
-              showMiddle: this.data.MiddlePhase,
-              showProposal: this.data.ProposalPhase,
-              showReply: this.data.replyPhase,
-              showPigeonhole: this.data.pigeonholePhase,
+              showSelect: that.data.selectPhase,
+              showMiddle: that.data.MiddlePhase,
+              showProposal: that.data.ProposalPhase,
+              showReply: that.data.replyPhase,
+              showPigeonhole: that.data.pigeonholePhase,
           });
         })
       }

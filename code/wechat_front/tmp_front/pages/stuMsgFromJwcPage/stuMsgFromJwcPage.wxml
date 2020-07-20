@@ -6,7 +6,7 @@
   </view>
 
 <view>
-  <van-cell title="选择日期区间" value="{{ date }}" bind:click="onDisplay" />
+  <!-- <van-cell title="选择日期区间" value="{{ date }}" bind:click="onDisplay" />
     <van-calendar
       show="{{ show }}"
       type="range"
@@ -16,11 +16,8 @@
       max-date="{{ maxDate }}"
       position="right"
       color="skyblue"
-    />
+    /> -->
 </view>
-
-<text>\n</text>
-<text>\n</text>
 
 <van-cell-group>
   <view wx:for="{{allMsgs}}" wx:for-item="message">
@@ -39,6 +36,9 @@
   </view>
 </van-cell-group>
 
+<text>\n</text>
+<text>\n</text>
+<text>\n</text>
 
   <van-tabbar active="{{ active }}" bind:change="onChange">
     <van-tabbar-item icon="comment-o">教务消息</van-tabbar-item>
