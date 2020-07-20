@@ -48,6 +48,16 @@ public class JwcMsgController {
                 item.setIfRead(readJwcMsg.getIfread());
             }
         }
-        return jwcMessages;
+        List<JwcMessage> sortRet = new ArrayList<>();
+        for(int i = 0; i < jwcMessages.size(); ++ i) {
+            JwcMessage item = jwcMessages.get(i);
+            if(item.getIfRead() == 0) {
+                sortRet.add(item);
+                jwcMessages.remove(i);
+                i --;
+            }
+        }
+        sortRet.addAll(jwcMessages);
+        return sortRet;
     }
 }
