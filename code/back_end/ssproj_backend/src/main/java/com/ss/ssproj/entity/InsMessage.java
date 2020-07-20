@@ -80,6 +80,17 @@ public class InsMessage {
         this.releasetime = releasetime;
     }
 
+    @Transient
+    int ifRead;
+
+    public void setIfRead(int ifRead) {
+        this.ifRead = ifRead;
+    }
+
+    public int getIfRead() {
+        return this.ifRead;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

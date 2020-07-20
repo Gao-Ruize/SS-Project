@@ -93,6 +93,8 @@ public class StuMsgController {
         for(ReadInsMsg item : readInsMsgs) {
             int msgid = item.getMsgid();
             InsMessage tmp = insMessageService.findDistinctById(msgid);
+            int ifRead = item.getIfread();
+            tmp.setIfRead(ifRead);
             ret.add(tmp);
         }
         return ret;

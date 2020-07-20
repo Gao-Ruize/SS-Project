@@ -46,6 +46,8 @@ public class TutMsgController {
     @ResponseBody
     public Result sendMsg(@RequestBody MsgForm msgForm) {
         List<String> receivers = msgForm.getToIds();
+        if(receivers == null)
+            return new Result(400);
         String title = msgForm.getTitle();
         String content = msgForm.getContent();
         String time = msgForm.getTime();
