@@ -1,10 +1,11 @@
 {
   "pages": [
-    "pages/tutorSendMsgPage/tutorSendMsgPage",
     "pages/register/register",
+    "pages/logs/logs",
+    "pages/stuMsgFromIns/stuMsgFromInsPage",
+    "pages/tutorSendMsgPage/tutorSendMsgPage",
     "pages/tutorMsgFromJwcPage/tutorMsgFromJwcPage",
     "pages/stuMsgFromJwcPage/stuMsgFromJwcPage",
-    "pages/logs/logs",
     "pages/stuMsgFromTutorPage/stuMsgFromTutorPage",
     "pages/tutorHistoryMsgPage/tutorHistoryMsgPage",
     "pages/tutorHistoryMsgDetailPage/tutorHistoryMsgDetailPage",

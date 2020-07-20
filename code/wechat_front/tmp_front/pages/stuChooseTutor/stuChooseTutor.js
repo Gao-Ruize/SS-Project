@@ -33,7 +33,7 @@ Page({
     if(event.detail == 1)
     {
       wx.redirectTo({
-        url: '../stuMsgFromTutorPage/stuMsgFromTutorPage',
+        url: '../stuMsgFromIns/stuMsgFromInsPage',
       })
     }
     if(event.detail == 0)
