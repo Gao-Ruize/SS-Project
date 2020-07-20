@@ -113,7 +113,7 @@ public class StuMsgController {
     @CrossOrigin
     @ResponseBody
     @GetMapping(value = "api/stu/unreadjwcmsg/{studentid}")
-    public int unraedJwcMsg(@PathVariable("studentid") String studentid) {
+    public int unreadJwcMsg(@PathVariable("studentid") String studentid) {
         List<ReadJwcMsg> readJwcMsgs = readJwcMsgService.findAllByStudentidAndIfread(studentid, 0);
         return readJwcMsgs.size();
     }

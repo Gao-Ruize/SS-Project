@@ -52,6 +52,7 @@ public class TutMsgController {
         String content = msgForm.getContent();
         String time = msgForm.getTime();
         String tutorId = msgForm.getTutorId();
+
         //将信息存入InsMessage
         InsMessage insMessage = new InsMessage();
         insMessage.setTitle(title);
@@ -61,6 +62,7 @@ public class TutMsgController {
         InsMessage rec = insMessageService.saveOrUpdate(insMessage);
         int newId = rec.getId();
         //给每个学生发信息
+
         for(String item : receivers) {
             ReadInsMsg readInsMsg = new ReadInsMsg();
             readInsMsg.setIfread(0);

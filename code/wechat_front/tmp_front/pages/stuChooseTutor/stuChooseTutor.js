@@ -12,11 +12,6 @@ Page({
     tutor: "",
     showPop: false,
   },
-  // 绑定确认提交按钮
-  onConfirm(){
-    //向后端发消息：
-    //回到上一个页面
-  },
   chooseTutor(event) {
     let tutorid = event.currentTarget.dataset.tutorid;
     let tutorname = event.currentTarget.dataset.tutorname;
@@ -24,7 +19,7 @@ Page({
       tutorid: tutorid,
       tutor: tutorname,
     });
-    console.log(tutorid);
+    // console.log(tutorid);
     this.setData({
       showPop: false,
     })
@@ -43,10 +38,6 @@ Page({
       })
     }
   },
-  // 打开选择专业遮罩层按钮
-  bindOpenDept(){
-    this.setData({deptshow: true})
-  },
   // 打开选择导师遮罩层按钮
   bindOpenTutor(){
     this.setData({tutorshow: true});
@@ -56,22 +47,6 @@ Page({
     this.setData({
       showPop: false
     })
-  },
-  // 确认专业，关闭遮罩层
-  // 确认导师， 关闭遮罩层
-  onTutorConfirm(event){
-    const { picker, value, index } = event.detail;
-    var tutor = value;
-    console.log(tutor);
-    this.setData({tutorshow: false, tutor: tutor});
-    // 向后端写入教师学生绑定
-
-
-  },
-  // 选学院时根据学院换专业分支
-  onChange(event) {
-    const { picker, value, index } = event.detail;
-    picker.setColumnValues(1, dept[value[0]]);
   },
   /**
    * 生命周期函数--监听页面加载
@@ -83,8 +58,8 @@ Page({
       url: baseurl,
       method:'GET',
       success (res) {
-        console.log("tutus");
-        console.log(res.data);
+        // console.log("tutus");
+        // console.log(res.data);
         that.setData({
           tutors :res.data,
         })
@@ -93,7 +68,7 @@ Page({
   },
   bindConfirm() {
     let studentid = wx.getStorageSync('realid');
-    console.log(studentid);
+    // console.log(studentid);
     let tutorid = this.data.tutorid;
     if(tutorid == '')
     {
@@ -104,7 +79,7 @@ Page({
       });
       return;
     }
-    console.log(tutorid);
+    // console.log(tutorid);
     let baseurl = "http://localhost:8443/api/stu/choosetutor";
     wx.request({
       url: baseurl,
@@ -114,69 +89,25 @@ Page({
         tutorId: tutorid,
       },
       success(res) {
-        if(res.data.code == 200)
-        {
-          wx.showToast({
-            title: '绑定成功',
-            icon:'success',
-            duration:1500
-          })
-        } else {
-          wx.showToast({
-            title: '请勿重复绑定',
-            icon:'none',
-            duration:1500
-          })
-        }
+        bindConfirm_suc(res);
       }
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  bindConfirm_suc(res){
+    if(res.data.code == 200)
+    {
+      wx.showToast({
+        title: '绑定成功',
+        icon:'success',
+        duration:1500
+      })
+    } 
+    else {
+      wx.showToast({
+        title: '请勿重复绑定',
+        icon:'none',
+        duration:1500
+      })
+    }
   }
 })

@@ -61,6 +61,15 @@ class InstructServiceImplTest {
                     }
                 }
         );
+        Mockito.when(instructdao.findDistinctByStudentidAndTutorid(Mockito.anyString(), Mockito.anyString())).thenAnswer(
+                new Answer<Instruct>(){
+                    @Override
+                    public Instruct answer(InvocationOnMock invocation){
+                        Instruct ret = new Instruct(1, "sId", "tutId");
+                        return ret;
+                    }
+                }
+        );
     }
 
     @Test
@@ -83,5 +92,11 @@ class InstructServiceImplTest {
         exp.add(ins1);
         exp.add(ins2);
         assertEquals(exp, instructserviceimpl.findAllByTutorid("tut1"));
+    }
+
+    @Test
+    public void findDistinctByStudentidAndTutoridTest(){
+        Instruct exp = new Instruct(1, "sId", "tutId");
+        assertEquals(exp, instructserviceimpl.findDistinctByStudentidAndTutorid("sId", "tutId"));
     }
 }

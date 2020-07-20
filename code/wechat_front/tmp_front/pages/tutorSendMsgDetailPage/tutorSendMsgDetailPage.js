@@ -18,13 +18,13 @@ Page({
   },
   // 记录文本框里的信息，保存在titlemsg里
   onTitleChange(event){
-    console.log(event.detail);
+    // console.log(event.detail);
     this.setData({titlemsg: event.detail});
   },
   // 记录文本框里的信息，保存在contentmsg里
   bindTextAreaBlur(event){
     var result = event.detail.value;
-    console.log(result);
+    // console.log(result);
     this.setData({contentmsg: result});
   },
   // 关闭遮罩层，并且保存时间
@@ -38,13 +38,13 @@ Page({
     });
   },
   // 打开timepicker遮罩层
-  bindOpenTime(event){
+  bindOpenTime(){
     this.setData({
       show: true,
     });
   },
   // 发消息的确认，传给后端
-  bindQuit(event){
+  bindQuit(){
     // 此处补充传向后端的代码数据
     var send = {
       title: this.data.titlemsg,
@@ -59,81 +59,35 @@ Page({
       method: 'POST',
       data: send,
       success: function (res) {
-        if(res.data.code == 200)
-        {
-          wx.showToast({
-            title: '发送成功',
-            icon: 'success',
-            duration: 2000
-          })
-        }
-        if(res.data.code == 400)
-        {
-          wx.showToast({
-            title: '发送失败，请联系管理员',
-            icon: 'none',
-            duration: 2000
-          })
-        }
+        bindQuit_suc(res);
       },
     })
-    wx.navigateBack({
-      complete: (res) => {},
+    wx.redirectTo({
+      url: '../tutorSendMsgDetailPage/tutorSendMsgDetailPage.js',
     })
   },
+  bindQuit_suc(res){
+    if(res.data.code == 200)
+    {
+      wx.showToast({
+        title: '发送成功',
+        icon: 'success',
+        duration: 2000
+      })
+    }
+    if(res.data.code == 400)
+    {
+      wx.showToast({
+        title: '发送失败，请联系管理员',
+        icon: 'none',
+        duration: 2000
+      })
+    }
+  },
+
   onLoad: function (options) {
     var studentsname = wx.getStorageSync('SendMessageToStudentname');
     var studentsId = wx.getStorageSync('SendMessageToStudentId');
     this.setData({studentsname: studentsname, studentsId: studentsId});
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    var studentsname = wx.getStorageSync('SendMessageToStudentname');
-    var studentsId = wx.getStorageSync('SendMessageToStudentId');
-    this.setData({studentsname: studentsname, studentsId: studentsId});
-  },
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })
