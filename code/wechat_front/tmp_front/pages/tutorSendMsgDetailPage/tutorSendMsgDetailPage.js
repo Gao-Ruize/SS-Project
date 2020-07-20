@@ -51,7 +51,7 @@ Page({
       content: this.data.contentmsg,
       time: this.data.currentDate,
       tutorId: wx.getStorageSync('realid'),
-      tolds: this.data.studentsId
+      toIds: wx.getStorageSync('SendMessageToStudentId'),
     }
     var url = "http://localhost:8443/api/tut/sendmsg";
     wx.request({
