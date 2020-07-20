@@ -58,3 +58,15 @@
 首先考虑将String转为对象进行比较，但是对与List类的对象没有找到合适的方法，其次将对象转为String又会遇到属性顺序不一致的状况，  
 最终选择将参与对比的变量直接按照class中属性的正确顺序表示为String，便于比较，后期如果发现更好的解决方案会进行修改 
 - 通过parseJSON的方式解决了上述问题  
+
+# day11 7.20
+- 在听取了助教的意见后，实现了在导航栏上标出未读信息的条目数量  
+学生需要统计教务处消息与导师消息，故其中在stuChoseTutor, stuMsgFromIns, stuMsgFromJwc中添加了jwcMsgCount和InsMsgCount的data与对应设置函数    
+导师只需要教务处消息，故在tutMsgFromJwc, tutSendMsg, tutHistoryMsg中添加了jwcMsgCount与对应的设置函数  
+导师的数量统计实现还有可以用路由传参实现（导师只在一个页面更新唯一的data），若后期有需求可进行修改  
+- 根据前端的需求，在后端添加了统计导师未阅读教务处信息的接口与实现，更新了api文档  
+- 实现了前端所有的搜索功能  
+- 为实现阅读信息情况的实时刷新，修改了msgDetail页面的commit函数，  
+现在函数在更新完阅读状态后会根据userType与senderType显式的navigateTo上一级页面，通过强制调用onLoad函数实现刷新功能  
+- 在后端所有涉及到获取读取信息的函数中添加了排序功能，将未读item排到前面先显示  
+- 制定本周计划  
