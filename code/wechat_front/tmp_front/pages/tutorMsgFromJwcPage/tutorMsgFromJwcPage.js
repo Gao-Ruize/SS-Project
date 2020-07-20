@@ -11,8 +11,23 @@ Page({
     minDate: new Date(2018, 0, 1).getTime(),
     maxDate: new Date(2022, 0, 31).getTime(),
     allMsgs:[],
+    jwcMsgCount: '',
   },
   // 导航栏
+  setJwcCount() {
+    let ID = wx.getStorageSync('realid');
+    let baseurl = "http://localhost:8443/api/tut/jwcmsgcount/" + ID;
+    let that = this;
+    wx.request({
+      url: baseurl,
+      method: 'GET',
+      success (res) {
+        that.setData({
+          jwcMsgCount: res.data
+        })
+      }
+    })
+  },
   onChange (event) {
     if(event.detail == 1)
     {
@@ -62,6 +77,7 @@ Page({
   // },
 
   onLoad: function () {
+    this.setJwcCount();
     let that = this;
     let type = wx.getStorageSync('type');
     let realid = wx.getStorageSync('realid');

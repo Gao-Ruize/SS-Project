@@ -11,6 +11,35 @@ Page({
     profession: "",
     tutor: "",
     showPop: false,
+    jwcMsgCount: '',
+    tutMsgCount: 0,
+  },
+  setJwcCount () {
+    let that = this;
+    let ID = wx.getStorageSync('realid');
+    let baseUrl = "http://localhost:8443/api/stu/unreadjwcmsg/" + ID;
+    wx.request({
+      url: baseUrl,
+      method: 'GET',
+      success(res) {
+        that.setData({
+          jwcMsgCount: res.data,
+        })
+      }
+    })
+  },
+  setTutCount () {
+    let that = this;
+    let ID = wx.getStorageSync('realid');
+    let baseUrl = "http://localhost:8443/api/stu/unreadinsmsg/" + ID;
+    wx.request({
+      url: baseUrl,
+      success (res) {
+        that.setData({
+          tutMsgCount: res.data,
+        })
+      }
+    })
   },
   chooseTutor(event) {
     let tutorid = event.currentTarget.dataset.tutorid;
@@ -52,6 +81,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setJwcCount();
+    this.setTutCount();
     let that = this;
     let baseurl = "http://localhost:8443/api/user/tutors";
     wx.request({

@@ -1,9 +1,13 @@
 <!--index.wxml-->
 <view>
-  <view style="position: -webkit-sticky;">
-    <van-search value="{{searchValue}}" placeholder="输入要查询的通知" use-action-slot bind:change="onChange" bind:search="onSearch">
-    </van-search>
-  </view>
+  <van-search
+  value="{{searchValue}}"
+  placeholder="请输入搜索关键词"
+  show-action
+  bind:change="searchChange"
+  bind:search="onSearch"
+  bind:cancel="onCancel"
+/>
 
 <view>
   <!-- <van-cell title="选择日期区间" value="{{ date }}" bind:click="onDisplay" />
@@ -21,7 +25,7 @@
 
 
 <van-cell-group>
-  <view wx:for="{{allMsgs}}" wx:for-item="message">
+  <view wx:for="{{showMsgs}}" wx:for-item="message">
       <van-cell 
         label="{{message.releasetime}}" 
         bindtap = "showDetails" data-id = "{{message.id}}"
@@ -39,12 +43,12 @@
 
 <text>\n</text>
 <text>\n</text>
-<text>\n</text>月入u
+<text>\n</text>
 
 
   <van-tabbar active="{{ active }}" bind:change="onChange">
-    <van-tabbar-item icon="comment-o">教务消息</van-tabbar-item>
-    <van-tabbar-item icon="chat-o">导师消息</van-tabbar-item>
+    <van-tabbar-item icon="comment-o" info = "{{jwcMsgCount}}">教务消息</van-tabbar-item>
+    <van-tabbar-item icon="chat-o" info = "{{tutMsgCount}}">导师消息</van-tabbar-item>
     <van-tabbar-item icon="setting-o">设置</van-tabbar-item>
   </van-tabbar>
 

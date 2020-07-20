@@ -11,7 +11,54 @@ Page({
     minDate: new Date(2018, 0, 1).getTime(),
     maxDate: new Date(2022, 0, 31).getTime(),    
     allMsgs:[],
+    showMsgs: [],
+    searchValue:'',
+    jwcMsgCount: '',
+    tutMsgCountL: '',
   }, 
+  setJwcCount () {
+    let that = this;
+    let ID = wx.getStorageSync('realid');
+    let baseUrl = "http://localhost:8443/api/stu/unreadjwcmsg/" + ID;
+    wx.request({
+      url: baseUrl,
+      method: 'GET',
+      success(res) {
+        that.setData({
+          jwcMsgCount: res.data,
+        })
+      }
+    })
+  },
+  setTutCount () {
+    let that = this;
+    let ID = wx.getStorageSync('realid');
+    let baseUrl = "http://localhost:8443/api/stu/unreadinsmsg/" + ID;
+    wx.request({
+      url: baseUrl,
+      method: 'GET',
+      success (res) {
+        that.setData({
+          tutMsgCount: res.data,
+        });
+        console.log(res);
+      }
+    })
+  },
+  onSearch () {
+    //过滤allMsgs得到showMsgs进行展示
+    let searchKey = this.data.searchValue;
+    let arrRec = [];
+    for(var i = 0; i < this.data.allMsgs.length; ++i) {
+      let item = this.data.allMsgs[i];
+      if(item.title.includes(searchKey) || 
+         item.releasetime.includes(searchKey))
+           arrRec.push(item);
+    }
+    this.setData({
+      showMsgs: arrRec
+    });
+  },
   onChange (event) {
     if(event.detail == 1)
     {
@@ -53,7 +100,21 @@ Page({
       '&type=' + type,
     });
   },
+  searchChange(event) {
+    this.setData({
+      searchValue: event.detail,
+    })
+  },
+  onCancel () {
+    let old = this.data.allMsgs;
+    this.setData({
+      showMsgs: old,
+      searchValue: ''
+    })
+  },
   onLoad: function () {
+    this.setJwcCount();
+    this.setTutCount();
     let that = this;
     let type = wx.getStorageSync('type');
     let realid = wx.getStorageSync('realid');
@@ -68,6 +129,7 @@ Page({
       success (res) {
         that.setData({
           allMsgs: res.data,
+          showMsgs: res.data,
         });
         // console.log(res.data);
       }

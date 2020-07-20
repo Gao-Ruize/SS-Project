@@ -32,6 +32,7 @@ Page({
     let userType = wx.getStorageSync('type');
     let senderType = this.data.senderType;
     let msgId = this.data.msgId;
+    let that = this;
     // console.log(realid);
     // console.log(userType);
     // console.log(senderType); 
@@ -47,12 +48,30 @@ Page({
         userType: userType
       },
       success(res) {
-        onCommit_suc(res);
+        that.onCommit_suc(res);
       }
     });
   },
   onCommit_suc(res){
     if(res.data.code == 200) {
+      let userType = wx.getStorageSync('type');
+    let senderType = this.data.senderType;
+    console.log(userType);
+    console.log(senderType);
+    if(userType == 'S') {
+      if(senderType == 'jwc') 
+        wx.navigateTo({
+          url: '/pages/stuMsgFromJwcPage/stuMsgFromJwcPage',
+        });
+      else 
+        wx.navigateTo({
+          url: '/pages/stuMsgFromIns/stuMsgFromInsPage',
+        })
+    } else {
+      wx.navigateTo({
+        url: '/pages/tutorMsgFromJwcPage/tutorMsgFromJwcPage',
+      })
+    };
       wx.showToast({
         title: '确认成功',
         icon:'none',

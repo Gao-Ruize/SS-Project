@@ -59,8 +59,8 @@ Page({
   },
   setJwcNum () {
     let that = this;
-    //let studentId = wx.getStorageSync('realid');
-    let studentId = "123";
+    let studentId = wx.getStorageSync('realid');
+    //let studentId = "123";
     let baseurl = "http://localhost:8443/api/stu/unreadjwcmsg/" + studentId;
     wx.request({
       url: baseurl,
@@ -73,8 +73,8 @@ Page({
   },
   setInsNum () {
     let that = this;
-    //let studentId = wx.getStorageSync('realid');
-    let studentId = "123";
+    let studentId = wx.getStorageSync('realid');
+    //let studentId = "123";
     let baseurl = "http://localhost:8443/api/stu/unreadinsmsg/" + studentId;
     wx.request({
       url: baseurl,

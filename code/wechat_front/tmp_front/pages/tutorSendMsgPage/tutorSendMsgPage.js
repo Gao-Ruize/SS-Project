@@ -26,17 +26,32 @@ Page({
     ],
     result:[],
     active: 2,
+    jwcMsgCount: '',
+  },
+  setJwcCount() {
+    let ID = wx.getStorageSync('realid');
+    let baseurl = "http://localhost:8443/api/tut/jwcmsgcount/" + ID;
+    let that = this;
+    wx.request({
+      url: baseurl,
+      method: 'GET',
+      success (res) {
+        that.setData({
+          jwcMsgCount: res.data
+        })
+      }
+    })
   },
   getStudents(){
     var t_id = wx.getStorageSync('realid');
-    var url = "http://localhost:8443/tut/students/"+t_id;
+    var url = "http://localhost:8443/api/tut/students/"+t_id;
     const _this = this;
     wx.request({
       url: url,
       method: 'GET',
       data: t_id,
       success: function(res){
-        getStudents_suc(res);
+        _this.getStudents_suc(res);
       },
     })
   },
@@ -86,6 +101,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setJwcCount();
     this.getStudents();
     let that = this;
     var t_id = wx.getStorageSync('realid');

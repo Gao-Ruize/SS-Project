@@ -11,12 +11,14 @@ Page({
     searchValue:"",
     //页面展示信息，即搜索过滤后的信息
     showItems:[],
+    jwcMsgCount: '',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setJwcCount();
     let realId = wx.getStorageSync('realid');
     let baseurl = "http://localhost:8443/api/tut/insmsgs/" + realId;
     let that = this;
@@ -24,9 +26,23 @@ Page({
       url: baseurl,
       method: 'GET',
       success(res) {
-        load_suc(res);
+        that.onLoad_suc(res);
       }
     });
+  },
+  setJwcCount() {
+    let ID = wx.getStorageSync('realid');
+    let baseurl = "http://localhost:8443/api/tut/jwcmsgcount/" + ID;
+    let that = this;
+    wx.request({
+      url: baseurl,
+      method: 'GET',
+      success (res) {
+        that.setData({
+          jwcMsgCount: res.data
+        })
+      }
+    })
   },
   onLoad_suc(res){
     // console.log(res.data);
