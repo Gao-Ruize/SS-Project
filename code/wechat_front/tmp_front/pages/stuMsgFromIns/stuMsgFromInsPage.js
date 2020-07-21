@@ -17,7 +17,7 @@ Page({
     serachValue:'',
     showMsgs:[],
     jwcMsgCount: '',
-    tutMsgCountL: '',
+    tutMsgCount: '',
   },
   // 
   setJwcCount () {
