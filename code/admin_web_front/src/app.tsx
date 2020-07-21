@@ -37,7 +37,7 @@ export const layout = ({
   return {
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
-    footerRender: () => <Footer />,
+    // footerRender: () => <Footer />,
     menuHeaderRender: undefined,
     ...initialState?.settings,
   };

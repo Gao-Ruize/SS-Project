@@ -12,7 +12,7 @@
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
-		"nodeModules": false,
+		"nodeModules": true,
 		"autoAudits": false,
 		"showShadowRootInWxmlPanel": true,
 		"scopeDataCheck": false,
@@ -32,7 +32,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.11.3",
-	"appid": "wxfc660793593ad691",
+	"appid": "wx4fe2e23da56642ed",
 	"projectname": "tmp_front",
 	"cloudfunctionTemplateRoot": "",
 	"watchOptions": {
