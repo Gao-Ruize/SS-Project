@@ -31,6 +31,9 @@ public class TutMsgController {
     @Autowired
     InstructService instructService;
 
+    @Autowired
+    ReadJwcMsgService readJwcMsgService;
+
     //选导师时展示所有导师的信息
     @CrossOrigin
     @GetMapping(value = "api/user/tutors")
@@ -46,10 +49,13 @@ public class TutMsgController {
     @ResponseBody
     public Result sendMsg(@RequestBody MsgForm msgForm) {
         List<String> receivers = msgForm.getToIds();
+        if(receivers == null)
+            return new Result(400);
         String title = msgForm.getTitle();
         String content = msgForm.getContent();
         String time = msgForm.getTime();
         String tutorId = msgForm.getTutorId();
+
         //将信息存入InsMessage
         InsMessage insMessage = new InsMessage();
         insMessage.setTitle(title);
@@ -59,6 +65,7 @@ public class TutMsgController {
         InsMessage rec = insMessageService.saveOrUpdate(insMessage);
         int newId = rec.getId();
         //给每个学生发信息
+
         for(String item : receivers) {
             ReadInsMsg readInsMsg = new ReadInsMsg();
             readInsMsg.setIfread(0);
@@ -84,7 +91,18 @@ public class TutMsgController {
                 ret.add(student);
             }
         }
-        return ret;
+        //将未读排到前面
+        List<Student> sortRet = new ArrayList<>();
+        for(int i = 0;i < ret.size(); ++ i) {
+            Student item = ret.get(i);
+            if(item.getIfRead() == 0) {
+                sortRet.add(item);
+                ret.remove(i);
+                i --;
+            }
+            sortRet.addAll(ret);
+        }
+        return sortRet;
     }
 
     @CrossOrigin
@@ -108,6 +126,14 @@ public class TutMsgController {
     @ResponseBody
     public List<InsMessage> getInsMags(@PathVariable("tutid") String tutid) {
         return insMessageService.findAllByTutorid(tutid);
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "api/tut/jwcmsgcount/{tutid}")
+    @ResponseBody
+    public int getJwcMsgCount(@PathVariable("tutid") String tutid) {
+        List<ReadJwcMsg> count = readJwcMsgService.findAllByTutoridAndIfread(tutid, 0);
+        return count.size();
     }
 
 }

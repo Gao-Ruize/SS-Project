@@ -10,8 +10,8 @@
       确认提交
     </van-button>
     <van-tabbar active="{{ active }}" bind:change="guide">
-      <van-tabbar-item icon="comment-o">教务消息</van-tabbar-item>
-      <van-tabbar-item icon="chat-o">导师消息</van-tabbar-item>
+      <van-tabbar-item icon="comment-o" info = "{{jwcMsgCount}}">教务消息</van-tabbar-item>
+      <van-tabbar-item icon="chat-o" info = "{{tutMsgCount}}">导师消息</van-tabbar-item>
       <van-tabbar-item icon="setting-o">设置</van-tabbar-item>
     </van-tabbar>
   </view>

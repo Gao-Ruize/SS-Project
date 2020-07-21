@@ -73,6 +73,17 @@ class ReadInsMsgServiceImplTest {
                     }
                 }
         );
+        Mockito.when(readinsmsgdao.findAllByStudentidAndIfread(Mockito.anyString(), Mockito.anyInt())).thenAnswer(
+                new Answer<List<ReadInsMsg>>(){
+                    @Override
+                    public List<ReadInsMsg> answer(InvocationOnMock invocation){
+                        List<ReadInsMsg> ret = new ArrayList<>();
+                        ret.add(new ReadInsMsg(1, "sId", 1, 1));
+                        ret.add(new ReadInsMsg(2, "sId", 1, 2));
+                        return ret;
+                    }
+                }
+        );
     }
 
     @Test
@@ -106,5 +117,13 @@ class ReadInsMsgServiceImplTest {
         exp.add(msg1);
         exp.add(msg2);
         assertEquals(exp, readinsmsgserviceimpl.findAllByMsgid(1));
+    }
+
+    @Test
+    public void findAllByStudentidAndIfreadTest(){
+        List<ReadInsMsg> exp = new ArrayList<>();
+        exp.add(new ReadInsMsg(1, "sId", 1, 1));
+        exp.add(new ReadInsMsg(2, "sId", 1, 2));
+        assertEquals(exp, readinsmsgserviceimpl.findAllByStudentidAndIfread("sId", 1));
     }
 }

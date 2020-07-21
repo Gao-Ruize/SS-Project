@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view>
-<van-search
+  <van-search
   value="{{searchValue}}"
   placeholder="请输入搜索关键词"
   show-action
@@ -23,6 +23,7 @@
     /> -->
 </view>
 
+
 <van-cell-group>
   <view wx:for="{{showMsgs}}" wx:for-item="message">
       <van-cell 
@@ -43,6 +44,7 @@
 <text>\n</text>
 <text>\n</text>
 <text>\n</text>
+
 
   <van-tabbar active="{{ active }}" bind:change="onChange">
     <van-tabbar-item icon="comment-o" info = "{{jwcMsgCount}}">教务消息</van-tabbar-item>

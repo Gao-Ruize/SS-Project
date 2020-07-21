@@ -93,9 +93,22 @@ public class StuMsgController {
         for(ReadInsMsg item : readInsMsgs) {
             int msgid = item.getMsgid();
             InsMessage tmp = insMessageService.findDistinctById(msgid);
+            int ifRead = item.getIfread();
+            tmp.setIfRead(ifRead);
             ret.add(tmp);
         }
-        return ret;
+        //对消息进行排序，将未读消息放到前面
+        List<InsMessage> sortRet = new ArrayList<>();
+        for(int i = 0; i < ret.size(); ++ i) {
+            InsMessage item = ret.get(i);
+            if(item.getIfRead() == 0) {
+                sortRet.add(item);
+                ret.remove(i);
+                i --;
+            }
+        }
+        sortRet.addAll(ret);
+        return sortRet;
     }
 
     //获取未读导师信息数量
@@ -111,7 +124,7 @@ public class StuMsgController {
     @CrossOrigin
     @ResponseBody
     @GetMapping(value = "api/stu/unreadjwcmsg/{studentid}")
-    public int unraedJwcMsg(@PathVariable("studentid") String studentid) {
+    public int unreadJwcMsg(@PathVariable("studentid") String studentid) {
         List<ReadJwcMsg> readJwcMsgs = readJwcMsgService.findAllByStudentidAndIfread(studentid, 0);
         return readJwcMsgs.size();
     }

@@ -1,6 +1,7 @@
 package com.ss.ssproj.service;
 
 import com.ss.ssproj.entity.ReadInsMsg;
+import com.ss.ssproj.entity.ReadJwcMsg;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

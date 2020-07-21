@@ -27,19 +27,23 @@ Page({
   },
 
   onLoad: function(options) {
+    var hasNewInfo = this.data.hasNewInfo;
+    var str = (hasNewInfo === true) ? '您有新消息待查看' : '暂无新消息';
+
     let that = this;
     let realid = wx.getStorageSync('realid');
     let baseurl ='http://localhost:8443/api/stu/insmsg/' + realid;
+
     wx.request({
       url: baseurl,
       method: 'GET',
       success(res) {
         let info = res.data;
-        phase1 = [];
-        phase2 = [];
-        phase3 = [];
-        phase4 = [];
-        phase5 = [];
+        let phase1 = [];
+        let phase2 = [];
+        let phase3 = [];
+        let phase4 = [];
+        let phase5 = [];
         for (var i = 0; i < info.length; ++i)
         {
           switch(info[i].phase) {
@@ -78,8 +82,16 @@ Page({
       }
     });
 
-    
-  },
+
+    this.setData({
+      noticeInfo: str,
+      showSelect: this.data.selectPhase,
+      showMiddle: this.data.MiddlePhase,
+      showProposal: this.data.ProposalPhase,
+      showReply: this.data.replyPhase,
+      showPigeonhole: this.data.pigeonholePhase,  
+  });
+},
 
   onChange(event) {
     if(event.detail == 0){
@@ -100,7 +112,7 @@ Page({
     let data1 = this.data.selectPhase;
     for (var i = 0; i < data1.length; ++i)
     {
-      if (data1[i].detail.indexOf(e.detail) != -1)
+      if (data1[i].detail.includes(e.detail))
       {
         showPhase1.push(data1[i]);
       }
@@ -109,7 +121,7 @@ Page({
     let data2 = this.data.ProposalPhase;
     for (var i = 0; i < data2.length; ++i)
     {
-      if (data2[i].detail.indexOf(e.detail) != -1)
+      if (data2[i].detail.includes(e.detail))
       {
         showPhase2.push(data2[i]);
       }
@@ -118,7 +130,7 @@ Page({
     let data3 = this.data.MiddlePhase;
     for (var i = 0; i < data3.length; ++i)
     {
-      if (data3[i].detail.indexOf(e.detail) != -1)
+      if (data3[i].detail.includes(e.detail))
       {
         showPhase3.push(data3[i]);
       }
@@ -127,7 +139,7 @@ Page({
     let data4 = this.data.replyPhase;
     for (var i = 0; i < data4.length; ++i)
     {
-      if (data4[i].detail.indexOf(e.detail) != -1)
+      if (data4[i].detail.includes(e.detail))
       {
         showPhase4.push(data4[i]);
       }
@@ -136,7 +148,7 @@ Page({
     let data5 = this.data.pigeonholePhase;
     for (var i = 0; i < data5.length; ++i)
     {
-      if (data5[i].detail.indexOf(e.detail) != -1)
+      if (data5[i].detail.includes(e.detail))
       {
         showPhase5.push(data5[i]);
       }

@@ -5,22 +5,65 @@ const app = getApp()
 Page({
   data: {
     motto: 'Hello World!',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
     show: false,
     date: '',
     active: 0, // 底边导航栏指向
     minDate: new Date(2018, 0, 1).getTime(),
     maxDate: new Date(2022, 0, 31).getTime(),    
     allMsgs:[],
+    showMsgs: [],
+    searchValue:'',
+    jwcMsgCount: '',
+    tutMsgCountL: '',
+  }, 
+  setJwcCount () {
+    let that = this;
+    let ID = wx.getStorageSync('realid');
+    let baseUrl = "http://localhost:8443/api/stu/unreadjwcmsg/" + ID;
+    wx.request({
+      url: baseUrl,
+      method: 'GET',
+      success(res) {
+        that.setData({
+          jwcMsgCount: res.data,
+        })
+      }
+    })
   },
-  // 
+  setTutCount () {
+    let that = this;
+    let ID = wx.getStorageSync('realid');
+    let baseUrl = "http://localhost:8443/api/stu/unreadinsmsg/" + ID;
+    wx.request({
+      url: baseUrl,
+      method: 'GET',
+      success (res) {
+        that.setData({
+          tutMsgCount: res.data,
+        });
+        console.log(res);
+      }
+    })
+  },
+  onSearch () {
+    //过滤allMsgs得到showMsgs进行展示
+    let searchKey = this.data.searchValue;
+    let arrRec = [];
+    for(var i = 0; i < this.data.allMsgs.length; ++i) {
+      let item = this.data.allMsgs[i];
+      if(item.title.includes(searchKey) || 
+         item.releasetime.includes(searchKey))
+           arrRec.push(item);
+    }
+    this.setData({
+      showMsgs: arrRec
+    });
+  },
   onChange (event) {
     if(event.detail == 1)
     {
       wx.redirectTo({
-        url: '../stuMsgFromTutorPage/stuMsgFromTutorPage',
+        url: '../stuMsgFromIns/stuMsgFromInsPage',
       })
     }
     if(event.detail == 2) 
@@ -46,35 +89,38 @@ Page({
       show: false,
       date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
     });
-    console.log(this.data.date);
+    // console.log(this.data.date);
   },
   showDetails(event) {
     let type = 'jwc';
     let msgid = event.currentTarget.dataset.id;
-    console.log(msgid);
+    // console.log(msgid);
     wx.navigateTo({
       url: '/pages/messageDetail/messageDetailPage?msgId=' + msgid + 
       '&type=' + type,
     });
   },
-  // 相应搜索栏
-  onSearch(value){
-    console.log(value.detail);
+  searchChange(event) {
+    this.setData({
+      searchValue: event.detail,
+    })
   },
-
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
+  onCancel () {
+    let old = this.data.allMsgs;
+    this.setData({
+      showMsgs: old,
+      searchValue: ''
     })
   },
   onLoad: function () {
+    this.setJwcCount();
+    this.setTutCount();
     let that = this;
     let type = wx.getStorageSync('type');
     let realid = wx.getStorageSync('realid');
-    console.log("get msgs");
-    console.log(type);
-    console.log(realid);
+    // console.log("get msgs");
+    // console.log(type);
+    // console.log(realid);
     let baseurl = "http://localhost:8443/api/user/typejwcmsg/" 
       + type + "/" + realid;
     wx.request({
@@ -83,43 +129,10 @@ Page({
       success (res) {
         that.setData({
           allMsgs: res.data,
+          showMsgs: res.data,
         });
-        console.log(res.data);
+        // console.log(res.data);
       }
-    })
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
-  },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
     })
   }
 })
