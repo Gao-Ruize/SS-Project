@@ -53,17 +53,18 @@ Page({
       tutorId: wx.getStorageSync('realid'),
       toIds: wx.getStorageSync('SendMessageToStudentId'),
     }
+    let that = this;
     var url = "http://localhost:8443/api/tut/sendmsg";
     wx.request({
       url: url,
       method: 'POST',
       data: send,
       success: function (res) {
-        bindQuit_suc(res);
+        that.bindQuit_suc(res);
       },
     })
     wx.redirectTo({
-      url: '../tutorSendMsgDetailPage/tutorSendMsgDetailPage.js',
+      url: '../tutorSendMsgDetailPage/tutorSendMsgDetailPage',
     })
   },
   bindQuit_suc(res){

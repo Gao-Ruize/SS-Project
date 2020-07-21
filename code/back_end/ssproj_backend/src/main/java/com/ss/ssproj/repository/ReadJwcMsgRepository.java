@@ -11,4 +11,5 @@ public interface ReadJwcMsgRepository extends JpaRepository<ReadJwcMsg, Integer>
     ReadJwcMsg findDistinctByTutoridAndMsgid(String tutorid, int msgid);
     ReadJwcMsg save(ReadJwcMsg readJwcMsg);
     List<ReadJwcMsg> findAllByStudentidAndIfread(String studentid, int ifread);
+    List<ReadJwcMsg> findAllByTutoridAndIfread(String tutorid, int ifread);
 }

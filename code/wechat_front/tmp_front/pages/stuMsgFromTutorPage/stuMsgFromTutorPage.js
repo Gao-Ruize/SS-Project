@@ -29,26 +29,21 @@ Page({
   onLoad: function(options) {
     var hasNewInfo = this.data.hasNewInfo;
     var str = (hasNewInfo === true) ? '您有新消息待查看' : '暂无新消息';
-    this.setData({
-      noticeInfo: str,
-      showSelect: this.data.selectPhase,
-      showMiddle: this.data.MiddlePhase,
-      showProposal: this.data.ProposalPhase,
-      showReply: this.data.replyPhase,
-      showPigeonhole: this.data.pigeonholePhase,
+
     let that = this;
     let realid = wx.getStorageSync('realid');
     let baseurl ='http://localhost:8443/api/stu/insmsg/' + realid;
+
     wx.request({
       url: baseurl,
       method: 'GET',
       success(res) {
         let info = res.data;
-        phase1 = [];
-        phase2 = [];
-        phase3 = [];
-        phase4 = [];
-        phase5 = [];
+        let phase1 = [];
+        let phase2 = [];
+        let phase3 = [];
+        let phase4 = [];
+        let phase5 = [];
         for (var i = 0; i < info.length; ++i)
         {
           switch(info[i].phase) {
@@ -87,8 +82,16 @@ Page({
       }
     });
 
-    
-  },
+
+    this.setData({
+      noticeInfo: str,
+      showSelect: this.data.selectPhase,
+      showMiddle: this.data.MiddlePhase,
+      showProposal: this.data.ProposalPhase,
+      showReply: this.data.replyPhase,
+      showPigeonhole: this.data.pigeonholePhase,  
+  });
+},
 
   onChange(event) {
     if(event.detail == 0){

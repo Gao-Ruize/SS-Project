@@ -10,7 +10,7 @@
     </van-button>
   </view>
   <van-tabbar active="{{ active }}" bind:change="onChange">
-    <van-tabbar-item icon="home-o">教务处消息</van-tabbar-item>
+    <van-tabbar-item icon="home-o" info = "{{jwcMsgCount}}">教务处消息</van-tabbar-item>
     <van-tabbar-item icon="search">历史消息列表</van-tabbar-item>
     <van-tabbar-item icon="friends-o">群发消息</van-tabbar-item>
     <van-tabbar-item icon="setting-o">设置</van-tabbar-item>
