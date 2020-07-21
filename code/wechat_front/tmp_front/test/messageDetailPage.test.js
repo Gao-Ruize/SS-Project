@@ -21,9 +21,26 @@ describe('messageDetail', ()=>{
 
   describe('onCommit_suc', ()=>{
     let res = {data: {code: 200}};
+    page.data.userType = 'S';
+    page.data.senderType = 'jwc';
     page.onCommit_suc(res);
     it('onCommit_suc()', () => {
       expect(wx.showToast).toBeCalled();
+      expect(wx.navigateTo).toBeCalled();
+    });
+    page.data.userType = 'S';
+    page.data.senderType = '"jc"';
+    page.onCommit_suc(res);
+    it('onCommit_suc()', () => {
+      expect(wx.showToast).toBeCalled();
+      expect(wx.navigateTo).toBeCalled();
+    });
+    page.data.userType = 'F';
+    page.data.senderType = '"jc"';
+    page.onCommit_suc(res);
+    it('onCommit_suc()', () => {
+      expect(wx.showToast).toBeCalled();
+      expect(wx.navigateTo).toBeCalled();
     });
 
     res = {data: {code: 400}};

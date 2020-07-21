@@ -41,7 +41,7 @@ Page({
         that.setData({
           tutMsgCount: res.data,
         });
-        console.log(res);
+        // console.log(res);
       }
     })
   },

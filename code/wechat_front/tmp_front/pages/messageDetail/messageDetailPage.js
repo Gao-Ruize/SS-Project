@@ -20,7 +20,8 @@ Page({
     receiver_id:"",
     receiver_type:"",
     infoForm:[],
-    msgId: 0
+    msgId: 0,
+    userType: wx.getStorageSync('type')
   },
   onCollChange(event) {
     this.setData({
@@ -54,7 +55,7 @@ Page({
   },
   onCommit_suc(res){
     if(res.data.code == 200) {
-      let userType = wx.getStorageSync('type');
+      let userType = this.data.userType;
     let senderType = this.data.senderType;
     console.log(userType);
     console.log(senderType);
