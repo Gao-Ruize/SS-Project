@@ -37,4 +37,10 @@ public class ReadJwcMsgDaoImpl implements ReadJwcMsgDao {
     public List<ReadJwcMsg> findAllByTutoridAndIfread(String tutorid, int ifread) {
         return readJwcMsgRepository.findAllByTutoridAndIfread(tutorid, ifread);
     }
+
+    @Override
+    public List<ReadJwcMsg> findAllByIfstudentAndIfreadAndMsgid(int ifstudent, int ifread, int msgid) {
+        return readJwcMsgRepository.findAllByIfstudentAndIfreadAndMsgid(ifstudent, ifread, msgid);
+    }
+
 }

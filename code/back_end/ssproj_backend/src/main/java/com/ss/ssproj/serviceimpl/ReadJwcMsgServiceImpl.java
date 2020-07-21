@@ -39,4 +39,11 @@ public class ReadJwcMsgServiceImpl implements ReadJwcMsgService {
     public List<ReadJwcMsg> findAllByTutoridAndIfread(String tutorid, int ifread) {
         return readJwcMsgDao.findAllByTutoridAndIfread(tutorid, ifread);
     }
+
+    @Override
+    public List<ReadJwcMsg> findAllByIfstudentAndIfreadAndMsgid(int ifstudent, int ifread, int msgid) {
+        return readJwcMsgDao.findAllByIfstudentAndIfreadAndMsgid(ifstudent, ifread, msgid);
+    }
+
+
 }

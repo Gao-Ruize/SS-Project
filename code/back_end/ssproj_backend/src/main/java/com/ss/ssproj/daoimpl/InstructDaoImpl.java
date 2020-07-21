@@ -32,4 +32,14 @@ public class InstructDaoImpl implements InstructDao {
     public Instruct findDistinctByStudentidAndTutorid(String studentid, String tutorid) {
         return instructRepository.findDistinctByStudentidAndTutorid(studentid, tutorid);
     }
+
+    @Override
+    public Instruct findDistinctByStudentid(String studentid) {
+        return instructRepository.findDistinctByStudentid(studentid);
+    }
+
+    @Override
+    public void deleteById(int id) {
+        this.instructRepository.deleteById(id);
+    }
 }

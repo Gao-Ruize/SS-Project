@@ -6,6 +6,8 @@ import com.ss.ssproj.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StudentServiceImpl implements StudentService {
     @Autowired
@@ -25,4 +27,7 @@ public class StudentServiceImpl implements StudentService {
     public Student findDistinctByStudentId(String studentId) {
         return studentDao.findDistinctByStudentId(studentId);
     }
+
+    @Override
+    public List<Student> findAll() {return studentDao.findAll();}
 }

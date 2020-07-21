@@ -33,4 +33,14 @@ public class InstructServiceImpl implements InstructService {
     public Instruct findDistinctByStudentidAndTutorid(String studentid, String tutorid) {
         return instructDao.findDistinctByStudentidAndTutorid(studentid, tutorid);
     }
+
+    @Override
+    public Instruct findDistinctByStudentid(String studentid) {
+        return instructDao.findDistinctByStudentid(studentid);
+    }
+
+    @Override
+    public void deleteById(int id) {
+        instructDao.deleteById(id);
+    }
 }
