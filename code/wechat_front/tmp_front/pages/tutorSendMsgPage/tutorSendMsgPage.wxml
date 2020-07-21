@@ -4,8 +4,8 @@
       <van-checkbox name="{{item.studentid}}" wx:for="{{list}}">{{item.studentname}}</van-checkbox>
     </van-checkbox-group>
   </view>
-  <view>
-    <van-button round id="1" type="info" style="width:15rem; height:6rem; margin: 5rem; padding:90px;" bindtap="changetomessage">
+  <view class = "buttonCon">
+    <van-button round id="1" type="info"  bindtap="changetomessage">
       群发消息
     </van-button>
   </view>

@@ -49,7 +49,7 @@ Page({
     var send = {
       title: this.data.titlemsg,
       content: this.data.contentmsg,
-      time: this.data.currentDate,
+      time: this.data.timeSpanStr,
       tutorId: wx.getStorageSync('realid'),
       toIds: wx.getStorageSync('SendMessageToStudentId'),
     }

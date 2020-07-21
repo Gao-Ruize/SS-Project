@@ -3,17 +3,18 @@
   <view class="page">
     <text class="text1">即将发送给以下几位同学：{{studentsId}}</text>
     <view>
-    <van-button round type="info" bindtap="bindOpenTime">
+    <van-button round type="info" bindtap="bindOpenTime" plain>
       选择时间
     </van-button>
     </view>
     <text class="text1">选择发送的时间为:{{timeSpanStr}}</text>
     <van-field
+      label = "标题"
       value="{{ value }}"
       placeholder="请输入标题"
-      border="{{ false }}"
       bind:change="onTitleChange"
     />
+    <text>\n</text>
     <view>
       <textarea class="detailText" 
         placeholder="输入您将要发送的消息内容"
@@ -22,7 +23,7 @@
       </textarea>
     </view>
     <view>
-      <van-button round type="info" bindtap="bindQuit">
+      <van-button type="info" bindtap="bindQuit">
         确认
       </van-button>
     </view>
