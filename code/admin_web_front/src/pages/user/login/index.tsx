@@ -58,6 +58,7 @@ const Login: React.FC<{}> = () => {
     setSubmitting(true);
     try {
       // 登录
+      console.log(values);
       const msg = await fakeAccountLogin({ ...values, type });
       if (msg.status === 'ok') {
         message.success('登录成功！');
@@ -87,10 +88,10 @@ const Login: React.FC<{}> = () => {
           <div className={styles.header}>
             <Link to="/">
               <img alt="logo" className={styles.logo} src={logo} />
-              <span className={styles.title}>Ant Design</span>
+              <span className={styles.title}>网页管理端</span>
             </Link>
           </div>
-          <div className={styles.desc}>Ant Design 是西湖区最具影响力的 Web 设计规范</div>
+          <div className={styles.desc}></div>
         </div>
 
         <div className={styles.main}>
@@ -102,7 +103,7 @@ const Login: React.FC<{}> = () => {
 
               <Username
                 name="username"
-                placeholder="用户名: admin or user"
+                placeholder="用户名"
                 rules={[
                   {
                     required: true,
@@ -112,7 +113,7 @@ const Login: React.FC<{}> = () => {
               />
               <Password
                 name="password"
-                placeholder="密码: ant.design"
+                placeholder="密码"
                 rules={[
                   {
                     required: true,
@@ -121,7 +122,7 @@ const Login: React.FC<{}> = () => {
                 ]}
               />
             </Tab>
-            <Tab key="mobile" tab="手机号登录">
+            {/* <Tab key="mobile" tab="手机号登录">
               {status === 'error' && loginType === 'mobile' && !submitting && (
                 <LoginMessage content="验证码错误" />
               )}
@@ -152,11 +153,11 @@ const Login: React.FC<{}> = () => {
                   },
                 ]}
               />
-            </Tab>
+            </Tab> */}
             <div>
-              <Checkbox checked={autoLogin} onChange={(e) => setAutoLogin(e.target.checked)}>
+              {/* <Checkbox checked={autoLogin} onChange={(e) => setAutoLogin(e.target.checked)}>
                 自动登录
-              </Checkbox>
+              </Checkbox> */}
               <a
                 style={{
                   float: 'right',
@@ -166,7 +167,7 @@ const Login: React.FC<{}> = () => {
               </a>
             </div>
             <Submit loading={submitting}>登录</Submit>
-            <div className={styles.other}>
+            {/* <div className={styles.other}>
               其他登录方式
               <AlipayCircleOutlined className={styles.icon} />
               <TaobaoCircleOutlined className={styles.icon} />
@@ -174,11 +175,11 @@ const Login: React.FC<{}> = () => {
               <Link className={styles.register} to="/user/register">
                 注册账户
               </Link>
-            </div>
+            </div> */}
           </LoginFrom>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

@@ -10,7 +10,7 @@ export default defineConfig({
     hmr: true,
   },
   layout: {
-    name: 'Ant Design Pro',
+    name: '毕业设计管理系统',
     locale: true,
     siderWidth: 208,
   },
@@ -40,12 +40,12 @@ export default defineConfig({
         },
       ],
     },
-    {
-      path: '/welcome',
-      name: 'welcome',
-      icon: 'smile',
-      component: './Welcome',
-    },
+    // {
+    //   path: '/welcome',
+    //   name: 'welcome',
+    //   icon: 'smile',
+    //   component: './Welcome',
+    // },
     // {
     //   path: '/admin',
     //   name: 'admin',
@@ -70,13 +70,13 @@ export default defineConfig({
     {
       path: '/user_manage',
       name: '用户管理',
-      icone: 'smile',
+      icon: 'user',
       access: 'canAdmin',
       routes: [
         {
           path: 'user_manage/students',
           name: '学生列表',
-          icone: 'smile',
+          icon: 'smile',
           component: './StudentListPage',
         },
         {
@@ -89,23 +89,11 @@ export default defineConfig({
     },
     {
       path: '/',
-      redirect: '/welcome',
+      redirect: '/msg',
     },
-    // {
-    //   name: '学生列表',
-    //   icon: 'smile',
-    //   path: '/students',
-    //   component: './StudentListPage',
-    // },
-    // {
-    //   name: '导师列表',
-    //   icon: 'smile',
-    //   path: '/tutors',
-    //   component: './TutorListPage',
-    // },
     {
       name: '消息列表',
-      icon: 'smile',
+      icon: 'message',
       path: '/msg',
       component: './MsgListPage',
     },

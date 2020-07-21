@@ -89,7 +89,6 @@ const data = [
 //   </div>
 // );
 
-
 export default class TutorList extends React.Component{
   constructor(props){
     super(props);
