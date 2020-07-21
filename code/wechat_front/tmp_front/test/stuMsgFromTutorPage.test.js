@@ -14,6 +14,14 @@ describe('学生收到导师消息页面', ()=>{
     });
   });
 
+  describe('onload_suc', ()=>{
+    let res = {data: [{phase: 1},{phase: 2},{phase: 3},{phase: 4},{phase: 5}]};
+    page.onload_suc(res);
+    it('应该执行setData()', () => {
+      expect(page.setData).toBeCalled();
+    });
+  });
+
   describe('onChange', () => {
     var event = {detail: 0};
     page.onChange(event);

@@ -29,60 +29,16 @@ Page({
   onLoad: function(options) {
     var hasNewInfo = this.data.hasNewInfo;
     var str = (hasNewInfo === true) ? '您有新消息待查看' : '暂无新消息';
-
     let that = this;
     let realid = wx.getStorageSync('realid');
     let baseurl ='http://localhost:8443/api/stu/insmsg/' + realid;
-
     wx.request({
       url: baseurl,
       method: 'GET',
       success(res) {
-        let info = res.data;
-        let phase1 = [];
-        let phase2 = [];
-        let phase3 = [];
-        let phase4 = [];
-        let phase5 = [];
-        for (var i = 0; i < info.length; ++i)
-        {
-          switch(info[i].phase) {
-            case 1:
-              phase1.push(info[i])
-              break;
-            case 2:
-              phase2.push(info[i])
-              break;
-            case 3:
-              phase3.push(info[i])
-              break;
-            case 4:
-              phase4.push(info[i])
-              break;
-            case 5:
-              phase5.push(info[i])
-              break;
-          }
-        }
-        that.setData({
-          selectPhase: phase1,
-          ProposalPhase: phase2,
-          MiddlePhase: phase3,
-          replyPhase: phase4,
-          pigeonholePhase: phase5
-        }, () => {
-            that.setData({
-              showSelect: this.data.selectPhase,
-              showMiddle: this.data.MiddlePhase,
-              showProposal: this.data.ProposalPhase,
-              showReply: this.data.replyPhase,
-              showPigeonhole: this.data.pigeonholePhase,
-          });
-        })
+        onload_suc(res);
       }
     });
-
-
     this.setData({
       noticeInfo: str,
       showSelect: this.data.selectPhase,
@@ -90,8 +46,52 @@ Page({
       showProposal: this.data.ProposalPhase,
       showReply: this.data.replyPhase,
       showPigeonhole: this.data.pigeonholePhase,  
-  });
-},
+    });
+  },
+
+  onload_suc(res){
+    let info = res.data;
+    let phase1 = [];
+    let phase2 = [];
+    let phase3 = [];
+    let phase4 = [];
+    let phase5 = [];
+    for (var i = 0; i < info.length; ++i)
+    {
+      switch(info[i].phase) {
+        case 1:
+          phase1.push(info[i])
+          break;
+        case 2:
+          phase2.push(info[i])
+          break;
+        case 3:
+          phase3.push(info[i])
+          break;
+        case 4:
+          phase4.push(info[i])
+          break;
+        case 5:
+          phase5.push(info[i])
+          break;
+      }
+    }
+    this.setData({
+      selectPhase: phase1,
+      ProposalPhase: phase2,
+      MiddlePhase: phase3,
+      replyPhase: phase4,
+      pigeonholePhase: phase5
+    }, () => {
+        this.setData({
+          showSelect: this.data.selectPhase,
+          showMiddle: this.data.MiddlePhase,
+          showProposal: this.data.ProposalPhase,
+          showReply: this.data.replyPhase,
+          showPigeonhole: this.data.pigeonholePhase,
+      });
+    })
+  },
 
   onChange(event) {
     if(event.detail == 0){
