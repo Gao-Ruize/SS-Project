@@ -8,4 +8,5 @@ public interface StudentDao {
     Student saveOrUpdate(Student student);
     Student findDistinctByUid(String uid);
     Student findDistinctByStudentId(String studentId);
+    List<Student> findAll();
 }

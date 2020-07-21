@@ -27,4 +27,9 @@ public class StudentDaoImpl implements StudentDao {
     public Student findDistinctByStudentId(String studentId) {
         return studentRepository.findDistinctByStudentid(studentId);
     }
+
+    @Override
+    public List<Student> findAll() {
+        return studentRepository.findAll();
+    }
 }

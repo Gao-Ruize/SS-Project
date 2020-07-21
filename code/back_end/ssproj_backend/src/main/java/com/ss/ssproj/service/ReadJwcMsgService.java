@@ -13,4 +13,5 @@ public interface ReadJwcMsgService {
     ReadJwcMsg saveOrUpdate(ReadJwcMsg readJwcMsg);
     List<ReadJwcMsg> findAllByStudentidAndIfread(String studentid, int ifread);
     List<ReadJwcMsg> findAllByTutoridAndIfread(String tutorid, int ifread);
+    List<ReadJwcMsg> findAllByIfstudentAndIfreadAndMsgid(int ifstudent, int ifread, int msgid);
 }

@@ -14,7 +14,7 @@ Page({
     showMsgs: [],
     searchValue:'',
     jwcMsgCount: '',
-    tutMsgCountL: '',
+    tutMsgCount: '',
   }, 
   setJwcCount () {
     let that = this;

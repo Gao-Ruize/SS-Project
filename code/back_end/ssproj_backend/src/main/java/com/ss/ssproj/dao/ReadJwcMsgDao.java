@@ -10,4 +10,6 @@ public interface ReadJwcMsgDao {
     ReadJwcMsg save(ReadJwcMsg readJwcMsg);
     List<ReadJwcMsg> findAllByStudentidAndIfread(String studentid, int ifread);
     List<ReadJwcMsg> findAllByTutoridAndIfread(String tutorid, int ifread);
+    List<ReadJwcMsg> findAllByIfstudentAndIfreadAndMsgid(int ifstudent, int ifread, int msgid);
+
 }
