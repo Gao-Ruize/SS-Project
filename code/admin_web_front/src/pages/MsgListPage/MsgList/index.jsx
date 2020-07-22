@@ -5,9 +5,10 @@ import { DatePicker } from 'antd';
 import { Input } from 'antd';
 import { AudioOutlined } from '@ant-design/icons';
 
+import $ from  'jquery';
+import config from '../../../config.js';
+
 const { Search } = Input;
-
-
 
 const columns = [
   {
@@ -86,57 +87,94 @@ const data = [
   }
 ];
 
-
+var _this;
 
 export default class MsgList extends React.Component{
   constructor(props){
     super(props);
+    _this = this;
     
     this.state = {
-      list: data,
-      showList: data,
+      datalist: [],
+      showlist: [],
       start_time: null,
       end_time: null,
       datePickerRangeWarning: '',
 
     };
 
-    
-this.columns = [
-  {
-    title: '通知',
-    dataIndex: 'title',
-    key: 'title',
-    render: (text, record) => <a href={'#/msgdetail/'+record.msgid}>{text}</a>,
-  },
-  {
-    title: '发布时间',
-    dataIndex: 'release_time',
-    key: 'release_time',
-    render: (text) => <p>{new Date(text*1000).toLocaleDateString()}</p>,
-  },
-  {
-    title: '阅读情况',
-    key: 'action',
-    render: (text, record) => (
-      <span>
-        <a
-          href={'#/msgdetail/'+record.msgid}
-          style={{
-            marginRight: 16,
-          }}
-        >
-          <div>
-            {'学生阅读情况：'+record.s_read_num+'/'+record.s_tot_num}
-          </div>
-          <div>
-            {'导师阅读情况：'+record.t_read_num+'/'+record.t_tot_num}
-          </div>
-        </a>
-      </span>
-    ),
-  },
-];
+    this.columns = [
+      {
+        title: '通知',
+        dataIndex: 'title',
+        key: 'title',
+        render: (text, record) => <a href={'#/msgdetail/'+record.id}>{text}</a>,
+      },
+      {
+        title: '发布时间',
+        dataIndex: 'releasetime',
+        key: 'releasetime',
+        render: (text) => <p>{new Date(text*1000).toLocaleDateString()}</p>,
+      },
+      {
+        title: '阅读情况',
+        key: 'action',
+        render: (text, record) => (
+          <span>
+            <a
+              href={'#/msgdetail/'+record.msgid}
+              style={{
+                marginRight: 16,
+              }}
+            >
+              <div>
+                {'学生阅读情况：'+record.sreadnum+'/'+record.stotnum}
+              </div>
+              <div>
+                {'导师阅读情况：'+record.treadnum+'/'+record.ttotnum}
+              </div>
+            </a>
+          </span>
+        ),
+      },
+    ];
+
+    this.acquireMsgs();
+  }
+
+  acquireMsgs(){
+    $.ajax({
+      type: "get",
+      url: global.config.backendUrl+"/api/admin/jwcmsgs",
+      contentType: "application/json;charset=utf-8;",
+      dataType: "text",
+      success:function(data) {
+          var result = JSON.parse(data);
+          var msg_list = [];
+          for (var i = 0; i < result.length; ++i) {
+              var newMsg={
+                  key: i,
+                  id: result[i].id,
+                  title: result[i].title,
+                  releasetime: result[i].releasetime,
+                  phase: result[i].phase,
+                  treadnum: result[i].treadnum,
+                  ttotnum: result[i].ttotnum,
+                  sreadnum: result[i].sreadnum,
+                  stotnum: result[i].stotnum,
+              }
+              msg_list = [...msg_list, newMsg];
+          }
+          console.log(result);
+          _this.setState({
+              datalist: result,
+              showlist: msg_list,
+          })
+      },
+      error:function(error) {
+          console.log("acquire students error");
+      }
+    });
   }
 
   onChangeStartTime=(date, dateString)=>{
@@ -176,9 +214,9 @@ this.columns = [
     }
     //document.getElementById("datePickerRangeWarning").innerHTML = "";
 
-    for(var i = 0; i < this.state.list.length; ++i){
-      if(this.state.start_time == null || this.state.list[i].release_time > this.state.start_time){
-        if(this.state.end_time == null || this.state.list[i].release_time < this.state.end_time)
+    for(var i = 0; i < this.state.datalist.length; ++i){
+      if(this.state.start_time == null || this.state.datalist[i].releasetime > this.state.start_time){
+        if(this.state.end_time == null || this.state.datalist[i].releasetime < this.state.end_time)
           // var newRow={
           //   key: this.state.list[i].key,
           //   title: this.state.list[i].title,
@@ -187,12 +225,12 @@ this.columns = [
             
           // }
           // newList = [...newList, newRow];
-          newList = [...newList, this.state.list[i]];
+          newList = [...newList, this.state.datalist[i]];
       }
     }
     this.setState({
       datePickerRangeWarning: "",
-      showList: newList,
+      showlist: newList,
     })
   }
 
@@ -224,7 +262,7 @@ this.columns = [
           <br />
         </div>
         <div id="components-table-demo-basic">
-          <Table columns={this.columns} dataSource={this.state.showList} />
+          <Table columns={this.columns} dataSource={this.state.showlist} />
         </div>
       </div>
     )

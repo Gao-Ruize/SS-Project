@@ -2,118 +2,145 @@ import React from 'react';
 import { Table, Tag } from 'antd';
 import styles from './index.less';
 
-import { Input } from 'antd';
+import { Input, Popconfirm, notification } from 'antd';
 import { AudioOutlined } from '@ant-design/icons';
 
+import $ from  'jquery';
+import config from '../../../config.js';
+
 const { Search } = Input;
+
+
+const unbind_fail = type => {
+  notification[type]({
+      message: '解除绑定失败！',
+      description:
+      '',
+  });
+};
+const unbind_success = type => {
+  notification[type]({
+    message: '解除绑定成功！',
+    description:
+    '',
+  })
+}
 
 const columns = [
   {
     title: '姓名',
-    dataIndex: 's_name',
+    dataIndex: 'studentname',
     key: 's_name',
     render: (text) => <a>{text}</a>,
   },
   {
     title: '学号',
-    dataIndex: 's_ID',
+    dataIndex: 'studentid',
     key: 's_ID',
   },
   {
-    title: '专业',
-    dataIndex: 'dept_name',
-    key: 'dept_name',
-  },
-  {
     title: '绑定微信号',
-    dataIndex: 'openID',
-    key: 'openID',
-  },
-  {
-    title: '操作',
-    key: 'action',
+    dataIndex: 'uid',
+    key: 'uid',
     render: (text, record) => (
+      record.uid==null ? 
       <span>
-        <a
-          style={{
-            marginRight: 16,
-          }}
-        >
-          解除绑定： {record.s_name}
-        </a>
+        <Tag color="default">未绑定</Tag>
+      </span> :
+      <span>
+        {record.uid} &nbsp;&nbsp;
+        <Popconfirm title="确认解绑？" onConfirm={() => this.handleUidUnbind(record.studentid)}>
+          <a>解绑</a>
+        </Popconfirm>
       </span>
-    ),
-  },
-];
-const data = [
-  {
-    key: '1',
-    s_name: '张三',
-    s_ID: '123456789',
-    dept_name: '软件工程',
-    openID: 'abcde',
+    )
   },
   {
-    key: '2',
-    s_name: '李四',
-    s_ID: '987654321',
-    dept_name: '机械工程',
-    openID: 'edksj',
-  },
-  {
-    key: '3',
-    s_name: '王八',
-    s_ID: '132457689',
-    dept_name: '软件工程',
-    openID: 'dkwii',
-  },
-  {
-    key: '4',
-    s_name: '茄子',
-    s_ID: '796813245',
-    dept_name: '电子竞技',
-    openID: 'wdnmd',
-  },
-  {
-    key: '5',
-    s_name: '李华',
-    s_ID: '314253647',
-    dept_name: '软件工程',
-    openID: 'krgbs',
-  },
+    title: '所选导师',
+    dataIndex: 'tutorname',
+    key:'tut_name',
+    render: (text, record) => (
+      record.tutorname==null ? 
+      <span>
+        <Tag color="default">未选择</Tag>
+      </span> :
+      <span>
+        {record.tutorname} &nbsp;&nbsp;
+        <Popconfirm title="确认解绑？" onConfirm={() => this.handleTutorUnbind(record.studentid)}>
+          <a>解绑</a>
+        </Popconfirm>
+      </span>
+    )
+  }
 ];
 
-// export default () => (
-//   <div className={styles.container}>
-//     <div className="search">
-//       <Search
-//         style={{ width: 512 }}
-//         placeholder="输入要查询的姓名或学号"
-//         onSearch={(value) => console.log(value)}
-//         enterButton
-//       />
-//       <br />
-//       <br />
-//     </div>
-//     <div id="components-table-demo-basic">
-//       <Table columns={columns} dataSource={data} />
-//     </div>
-//   </div>
-// );
+var _this;
 
 export default class StudentList extends React.Component{
   constructor(props){
     super(props);
-    
+    _this = this;
+
     this.state = {
-      list: data,
+      datalist: [],
+      showlist: [],
     }
+
+    this.columns = [
+      {
+        title: '姓名',
+        dataIndex: 'studentname',
+        key: 's_name',
+        render: (text) => <a>{text}</a>,
+      },
+      {
+        title: '学号',
+        dataIndex: 'studentid',
+        key: 's_ID',
+      },
+      {
+        title: '绑定微信号',
+        dataIndex: 'uid',
+        key: 'uid',
+        render: (text, record) => (
+          record.uid==null ? 
+          <span>
+            <Tag color="default">未绑定</Tag>
+          </span> :
+          <span>
+            {record.uid} &nbsp;&nbsp;
+            <Popconfirm title="确认解绑？" onConfirm={() => this.handleUidUnbind(record.studentid)}>
+              <a>解绑</a>
+            </Popconfirm>
+          </span>
+        )
+      },
+      {
+        title: '所选导师',
+        dataIndex: 'tutorname',
+        key:'tut_name',
+        render: (text, record) => (
+          record.tutorname==null ? 
+          <span>
+            <Tag color="default">未选择</Tag>
+          </span> :
+          <span>
+            {record.tutorname} &nbsp;&nbsp;
+            <Popconfirm title="确认解绑？" onConfirm={() => this.handleTutorUnbind(record.studentid)}>
+              <a>解绑</a>
+            </Popconfirm>
+          </span>
+        )
+      }
+    ];
+
+    this.acquireStudents();
   }
 
   acquireStudents(){
     $.ajax({
       type: "get",
-      url: global.config.backendUrl+"/api/user/???",
+      url: global.config.backendUrl+"/api/admin/students",
       contentType: "application/json;charset=utf-8;",
       dataType: "text",
       success:function(data) {
@@ -122,15 +149,19 @@ export default class StudentList extends React.Component{
           for (var i = 0; i < result.length; ++i) {
               var newStudent={
                   key: i,
-                  s_name: result[i].s_name,
-                  s_ID: result[i].s_ID,
-                  dept_name: result[i].dept_name,
-                  openID: result[i].uid,
+                  id: result[i].id,
+                  studentname: result[i].studentname,
+                  studentid: result[i].studentid,
+                  uid: result[i].uid,
+                  tutorid: result[i].tutorid,
+                  tutorname: result[i].tutorname,
               }
               s_list = [...s_list, newStudent];
           }
+          console.log(result);
           _this.setState({
-              list: s_list,
+              datalist: result,
+              showlist: s_list,
           })
       },
       error:function(error) {
@@ -138,6 +169,66 @@ export default class StudentList extends React.Component{
       }
     });
   }
+
+  handleUidUnbind=(realId)=>{
+    var info = {
+      realId: realId,
+      type: "1",
+    };
+    var info_json = JSON.stringify(info);
+    console.log(info_json);
+
+    $.ajax({
+      type: "post",
+      url: global.config.backendUrl+"/api/admin/unbind",
+      contentType: "application/json;charset=utf-8;",
+      data: info_json,
+      dataType: "text",
+      success:function(data) {
+          console.log("success with returning: "+data);
+          var feedback=JSON.parse(data);
+          if(feedback.code != 200){
+            unbind_fail('error');
+          }else{
+            unbind_success('success');
+            _this.acquireStudents();
+          }
+      },
+      error:function(error) {
+          console.log("error: "+error)
+      }
+    });
+  }
+
+  handleTutorUnbind=(studentid)=>{
+    // var info = {
+    //   studentId: studentid,
+    // };
+    // var info_json = JSON.stringify(info);
+    // console.log(info_json);
+
+    $.ajax({
+      type: "post",
+      url: global.config.backendUrl+"/api/admin/unbindtutor",
+      contentType: "application/json;charset=utf-8;",
+      data: studentid,
+      dataType: "text",
+      success:function(data) {
+          console.log("success with returning: "+data);
+          var feedback=JSON.parse(data);
+          if(feedback.code != 200){
+            unbind_fail('error');
+          }else{
+            unbind_success('success');
+            _this.acquireStudents();
+          }
+      },
+      error:function(error) {
+          console.log("error: "+ error)
+      }
+    });
+  }
+
 
   render(){
     return(
@@ -153,7 +244,7 @@ export default class StudentList extends React.Component{
           <br />
         </div>
         <div id="components-table-demo-basic">
-          <Table columns={columns} dataSource={data} />
+          <Table columns={this.columns} dataSource={this.state.showlist} />
         </div>
       </div>
     )

@@ -67,7 +67,7 @@ public class AdminController {
     }
 
     @CrossOrigin
-    @GetMapping(value = "api/admin/jwcmsgscacu")
+    @GetMapping(value = "api/admin/jwcmsgs")
     @ResponseBody
     public List<JwcMsgCacu> calculatedJwcMsg() {
         List<JwcMessage> jwcMessageList = this.jwcMessageService.findAll();
@@ -97,6 +97,7 @@ public class AdminController {
     @ResponseBody
     public Result unbindTutor(@RequestBody String studentId) {
         Instruct instruct = instructService.findDistinctByStudentid(studentId);
+        System.out.println(studentId);
         if(instruct == null)
             return new Result(400);
         else {
