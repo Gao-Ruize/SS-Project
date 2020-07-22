@@ -2,51 +2,29 @@ import React from 'react';
 import { Table, Tag } from 'antd';
 import styles from './index.less';
 
-import $ from  'jquery';
-
-import { Input } from 'antd';
+import { Input, Popconfirm, notification } from 'antd';
 import { AudioOutlined } from '@ant-design/icons';
+
+import $ from  'jquery';
+import config from '../../../config.js';
 
 const { Search } = Input;
 
-const columns = [
-  {
-    title: '姓名',
-    dataIndex: 'tut_name',
-    key: 'tut_name',
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: '工号',
-    dataIndex: 'tut_ID',
-    key: 'tut_ID',
-  },
-  {
-    title: '院系',
-    dataIndex: 'dept_name',
-    key: 'dept_name',
-  },
-  {
-    title: '绑定微信号',
-    dataIndex: 'openID',
-    key: 'openID',
-  },
-  {
-    title: '操作',
-    key: 'action',
-    render: (text, record) => (
-      <span>
-        <a
-          style={{
-            marginRight: 16,
-          }}
-        >
-          解除绑定： {record.tut_name}
-        </a>
-      </span>
-    ),
-  },
-];
+const unbind_fail = type => {
+  notification[type]({
+      message: '解除绑定失败！',
+      description:
+      '',
+  });
+};
+const unbind_success = type => {
+  notification[type]({
+    message: '解除绑定成功！',
+    description:
+    '',
+  })
+}
+
 const data = [
   {
     key: '1',
@@ -89,19 +67,56 @@ const data = [
 //   </div>
 // );
 
+var _this;
+
 export default class TutorList extends React.Component{
   constructor(props){
     super(props);
-    
+    _this = this;
+
     this.state = {
-      list: data,
+      datalist: data,
+      showlist: [],
     }
+
+    this.columns = [
+      {
+        title: '姓名',
+        dataIndex: 'tutorname',
+        key: 'tutorname',
+        render: (text) => <a>{text}</a>,
+      },
+      {
+        title: '工号',
+        dataIndex: 'tutorid',
+        key: 'tutorid',
+      },
+      {
+        title: '绑定微信号',
+        dataIndex: 'uid',
+        key: 'uid',
+        render: (text, record) => (
+          record.uid==null ? 
+          <span>
+            <Tag color="default">未绑定</Tag>
+          </span> :
+          <span>
+            {record.uid} &nbsp;&nbsp;
+            <Popconfirm title="确认解绑？" onConfirm={() => this.handleUidUnbind(record.tutorid)}>
+              <a>解绑</a>
+            </Popconfirm>
+          </span>
+        )
+      },
+    ];
+
+    this.acquireTutors();
   }
 
   acquireTutors(){
     $.ajax({
       type: "get",
-      url: global.config.backendUrl+"/api/user/tutors",
+      url: global.config.backendUrl+"/api/admin/tutors",
       contentType: "application/json;charset=utf-8;",
       dataType: "text",
       success:function(data) {
@@ -110,18 +125,51 @@ export default class TutorList extends React.Component{
           for (var i = 0; i < result.length; ++i) {
               var newTutor={
                   key: i,
-                  tut_name: result[i].tutorname,
-                  tut_ID: result[i].tutorid,
-                  openID: result[i].uid,
+                  id: result[i].id,
+                  tutorname: result[i].tutorname,
+                  tutorid: result[i].tutorid,
+                  uid: result[i].uid,
               }
               tut_list = [...tut_list, newTutor];
           }
           _this.setState({
-              list: tut_list,
+            datalist: result,
+            showlist: tut_list,
           })
       },
       error:function(error) {
           console.log("acquire tutors error");
+      }
+    });
+  }
+
+  
+  handleUidUnbind=(realId)=>{
+    var info = {
+      realId: realId,
+      type: "2",
+    };
+    var info_json = JSON.stringify(info);
+    console.log(info_json);
+
+    $.ajax({
+      type: "post",
+      url: global.config.backendUrl+"/api/admin/unbind",
+      contentType: "application/json;charset=utf-8;",
+      data: info_json,
+      dataType: "text",
+      success:function(data) {
+          console.log("success with returning: "+data);
+          var feedback=JSON.parse(data);
+          if(feedback.code != 200){
+            unbind_fail('error');
+          }else{
+            unbind_success('success');
+            _this.acquireTutors();
+          }
+      },
+      error:function(error) {
+          console.log("error: "+error)
       }
     });
   }
@@ -140,7 +188,7 @@ export default class TutorList extends React.Component{
           <br />
         </div>
         <div id="components-table-demo-basic">
-          <Table columns={columns} dataSource={this.state.list} />
+          <Table columns={this.columns} dataSource={this.state.showlist} />
         </div>
       </div>
     )
