@@ -70,11 +70,13 @@ public class HelloController {
                 jsonObject.put("token","xx");
                 jsonObject.put("user", null);
                 return "xx";
+
             }
             String token = tokenService.getTutorToken(tmp2);
             jsonObject.put("token", token);
             jsonObject.put("user", tmp2);
             return token;
+
         }
         String toKen = tokenService.getToken(user);
         jsonObject.put("token", toKen);
