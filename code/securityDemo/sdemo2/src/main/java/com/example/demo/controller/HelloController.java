@@ -2,19 +2,23 @@ package com.example.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.annotation.PassToken;
+import com.example.demo.annotation.TutorLoginToken;
 import com.example.demo.annotation.UserLoginToken;
+import com.example.demo.entity.Tutor;
 import com.example.demo.entity.User;
 import com.example.demo.service.TokenService;
+import com.example.demo.service.TutorSercive;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class HelloController {
     @Autowired
     UserService userService;
+
+    @Autowired
+    TutorSercive tutorSercive;
 
     @Autowired
     TokenService tokenService;
@@ -24,6 +28,13 @@ public class HelloController {
     @GetMapping(value = "user/hello")
     public String hello() {
         return "Hello !";
+    }
+
+    @TutorLoginToken
+    @ResponseBody
+    @GetMapping(value = "tutor/hello")
+    public String THello() {
+        return "tutor hello!";
     }
 
     @ResponseBody
@@ -47,17 +58,26 @@ public class HelloController {
     }
 
     @ResponseBody
-    @GetMapping(value = "user/login")
-    public Object login() {
+    @PostMapping(value = "user/login")
+    public Object login(@RequestBody User user) {
         //假设用ada 123456登陆
-        User userForm = new User();
-        userForm.setUsername("ada");
-        userForm.setPassword("123456");
-        userForm.setId(1);
         JSONObject jsonObject = new JSONObject();
-        String toKen = tokenService.getToken(userForm);
+        String username = user.getUsername();
+        User tmp1 = userService.findByUserName(user);
+        if(tmp1 == null) {
+            Tutor tmp2 = tutorSercive.findDistinctByTutorname(username);
+            if(tmp2 == null) {
+                jsonObject.put("token","xx");
+                jsonObject.put("user", null);
+                return jsonObject;
+            }
+            String token = tokenService.getTutorToken(tmp2);
+            jsonObject.put("token", token);
+            jsonObject.put("user", tmp2);
+        }
+        String toKen = tokenService.getToken(user);
         jsonObject.put("token", toKen);
-        jsonObject.put("user", userForm);
+        jsonObject.put("user", user);
         return jsonObject;
     }
 
