@@ -1,21 +1,26 @@
-const automator = require('miniprogram-automator');
+import automator from 'miniprogram-automator';
+import { expect } from 'chai';
 
-describe('课堂小程序自动化测试', () => {
-  let miniProgram;
-  // 运行测试前调用
+describe('index', () => {
+  let miniProgram
   beforeAll(async () => {
     miniProgram = await automator.connect({
       wsEndpoint: 'ws://localhost:9420',
-    });
+    })
   });
-  // 运行测试后调用
   afterAll(() => {
     miniProgram.disconnect();
   });
-  // 测试内容
-  it('nohost检测', async () => {
-    const page = await miniProgram.reLaunch('/pages/index/index');
-    const nohostButton = await page.$('nohost');
-    expect(nohostButton).toBeNull();
-  });
-});
+  it('register', async () => {
+    const page = await miniProgram.reLaunch('/pages/register/register');
+    // 先观察基本组件是否存在
+    const desc1 = await page.$('.titleText');
+    const desc2 = await page.$('.inputForm');
+    const desc3 = await page.$('.bottomButton');
+    // console.log(await desc3.wxml())
+    expect(await desc1.wxml()).contain('注册');
+    expect(await desc2.wxml()).contain('请输入学号/工号');
+    expect(await desc3.wxml()).contain('确认');
+  })
+  
+})
