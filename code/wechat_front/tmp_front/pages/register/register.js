@@ -40,7 +40,7 @@ Page({
     {
       let baseurl = 'http://localhost:8443/api/user/bind';
       let openid = wx.getStorageSync('openid');
-      // console.log(openid);
+      console.log(openid);
       let type = this.data.type;
       if(type == "err") {
         wx.showToast({
