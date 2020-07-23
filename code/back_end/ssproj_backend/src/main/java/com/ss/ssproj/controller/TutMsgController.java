@@ -4,6 +4,8 @@
 //搜索
 package com.ss.ssproj.controller;
 
+import com.ss.ssproj.annotation.TutorLoginToken;
+import com.ss.ssproj.annotation.UserToken;
 import com.ss.ssproj.entity.*;
 import com.ss.ssproj.service.*;
 import com.ss.ssproj.utils.MsgForm;
@@ -35,15 +37,17 @@ public class TutMsgController {
     ReadJwcMsgService readJwcMsgService;
 
     //选导师时展示所有导师的信息
+    @UserToken
     @CrossOrigin
     @GetMapping(value = "api/user/tutors")
     @ResponseBody
     public List<Tutor> tutors() {
-        return tutorService.findAll();
+        return this.tutorService.findAll();
     }
 
     //导师给学生发送通知
     //每次处理
+    @TutorLoginToken
     @CrossOrigin
     @PostMapping(value = "api/tut/sendmsg")
     @ResponseBody
@@ -62,7 +66,7 @@ public class TutMsgController {
         insMessage.setContent(content);
         insMessage.setTutorid(tutorId);
         insMessage.setReleasetime(time);
-        InsMessage rec = insMessageService.saveOrUpdate(insMessage);
+        InsMessage rec = this.insMessageService.saveOrUpdate(insMessage);
         int newId = rec.getId();
         //给每个学生发信息
 
@@ -71,21 +75,22 @@ public class TutMsgController {
             readInsMsg.setIfread(0);
             readInsMsg.setMsgid(newId);
             readInsMsg.setStudentid(item);
-            readInsMsgService.save(readInsMsg);
+            this.readInsMsgService.save(readInsMsg);
         }
         return new Result(200);
     }
 
     //老师查看某一通知学生的阅读情况
+    @TutorLoginToken
     @CrossOrigin
     @GetMapping(value = "api/tut/getmsginfo/{msgid}")
     @ResponseBody
     public List<Student> getMsgInfo(@PathVariable("msgid") int msgId) {
         List<Student> ret = new ArrayList<>();
-        List<ReadInsMsg> readInsMsgs = readInsMsgService.findAllByMsgid(msgId);
+        List<ReadInsMsg> readInsMsgs = this.readInsMsgService.findAllByMsgid(msgId);
         for(ReadInsMsg item : readInsMsgs) {
             String studentId = item.getStudentid();
-            Student student = studentService.findDistinctByStudentId(studentId);
+            Student student = this.studentService.findDistinctByStudentId(studentId);
             if(student != null) {
                 student.setIfRead(item.getIfread());
                 ret.add(student);
@@ -105,15 +110,16 @@ public class TutMsgController {
         return sortRet;
     }
 
+    @TutorLoginToken
     @CrossOrigin
     @GetMapping(value = "api/tut/students/{tutid}")
     @ResponseBody
     public List<Student> getInsStudents(@PathVariable("tutid") String tutid) {
-        List<Instruct> instructs = instructService.findAllByTutorid(tutid);
+        List<Instruct> instructs = this.instructService.findAllByTutorid(tutid);
         List<Student> students = new ArrayList<>();
         for(Instruct item : instructs) {
             String studentId = item.getStudentid();
-            Student student = studentService.findDistinctByStudentId(studentId);
+            Student student = this.studentService.findDistinctByStudentId(studentId);
             if(student != null) {
                 students.add(student);
             }
@@ -121,18 +127,20 @@ public class TutMsgController {
         return students;
     }
 
+    @TutorLoginToken
     @CrossOrigin
     @GetMapping(value = "api/tut/insmsgs/{tutid}")
     @ResponseBody
     public List<InsMessage> getInsMags(@PathVariable("tutid") String tutid) {
-        return insMessageService.findAllByTutorid(tutid);
+        return this.insMessageService.findAllByTutorid(tutid);
     }
 
+    @TutorLoginToken
     @CrossOrigin
     @GetMapping(value = "api/tut/jwcmsgcount/{tutid}")
     @ResponseBody
     public int getJwcMsgCount(@PathVariable("tutid") String tutid) {
-        List<ReadJwcMsg> count = readJwcMsgService.findAllByTutoridAndIfread(tutid, 0);
+        List<ReadJwcMsg> count = this.readJwcMsgService.findAllByTutoridAndIfread(tutid, 0);
         return count.size();
     }
 
