@@ -229,6 +229,24 @@ export default class StudentList extends React.Component{
     });
   }
 
+  onSearch=(string)=>{
+    if(string == ''){
+      this.setState({
+        showlist: this.state.datalist,
+      });
+      return;
+    }
+    var searchList = [];
+    for(var i = 0; i < this.state.datalist.length; ++i){
+      if(this.state.datalist[i].studentid == string || this.state.datalist[i].studentname.search(string) >= 0){
+        searchList = [...searchList, this.state.datalist[i]];
+      }
+    }
+    this.setState({
+      showlist: searchList,
+    })
+  }
+
 
   render(){
     return(
@@ -237,7 +255,7 @@ export default class StudentList extends React.Component{
           <Search
             style={{ width: 512 }}
             placeholder="输入要查询的姓名或学号"
-            onSearch={(value) => console.log(value)}
+            onSearch={this.onSearch}
             enterButton
           />
           <br />

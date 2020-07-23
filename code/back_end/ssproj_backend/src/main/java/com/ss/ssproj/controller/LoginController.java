@@ -1,9 +1,14 @@
 //用户登录时用于判定用户身份
 //用户注册时用于将其学号与微信号绑定
 package com.ss.ssproj.controller;
+import com.ss.ssproj.annotation.AdminLoginToken;
+import com.ss.ssproj.annotation.StudentLoginToken;
+import com.ss.ssproj.annotation.TutorLoginToken;
+import com.ss.ssproj.annotation.UserToken;
 import com.ss.ssproj.entity.Student;
 import com.ss.ssproj.entity.Tutor;
 import com.ss.ssproj.service.StudentService;
+import com.ss.ssproj.service.TokenService;
 import com.ss.ssproj.service.TutorService;
 import com.ss.ssproj.utils.LoginMsg;
 import com.ss.ssproj.utils.RegisterForm;
@@ -21,11 +26,60 @@ import java.util.Map;
 public class LoginController {
     @Autowired
     TutorService tutorService;
+
     @Autowired
     StudentService studentService;
 
+    @Autowired
+    TokenService tokenService;
+
+
 //    @Autowired
 //    private HttpRequest httprequest;
+
+    //测试用
+    @UserToken
+    @CrossOrigin
+    @GetMapping(value = "api/user/hello")
+    @ResponseBody
+    public String helloU() {
+        return "hello user";
+    }
+
+    //测试用
+    @TutorLoginToken
+    @CrossOrigin
+    @GetMapping(value = "api/tut/hello")
+    @ResponseBody
+    public String helloT() {
+        return "hello tutor";
+    }
+
+    //测试用
+    @StudentLoginToken
+    @CrossOrigin
+    @GetMapping(value = "api/stu/hello")
+    @ResponseBody
+    public String helloS() {
+        return "hello student";
+    }
+
+    @AdminLoginToken
+    @CrossOrigin
+    @GetMapping(value = "api/admin/hello")
+    @ResponseBody
+    public String helloA() {
+        return "hello admin";
+    }
+
+    //测试用
+    @CrossOrigin
+    @GetMapping(value = "api/getToken")
+    @ResponseBody
+    public String getToken() {
+        return this.tokenService.getToken("1234","xxx");
+    }
+
 
     @CrossOrigin
     @PostMapping(value = "api/user/login")
@@ -69,24 +123,30 @@ public class LoginController {
         String session_key = json.get("session_key").toString();
         // 用户的唯一标识（openid）
         String openid = (String) json.get("openid");
+        String rid = "";
 
         LoginMsg ret = new LoginMsg();
         ret.setOpenId(openid);
-        Student student = studentService.findDistinctByUid(openid);
+        Student student = this.studentService.findDistinctByUid(openid);
         if(student == null) {
-            Tutor tutor = tutorService.findDistinctByUid(openid);
+            Tutor tutor = this.tutorService.findDistinctByUid(openid);
             if(tutor == null)
             {
                 ret.setType("N");
             }
             else {
+                rid = tutor.getTutorid();
                 ret.setRealId(tutor.getTutorid());
                 ret.setType("T");
             }
         } else {
+            rid = student.getStudentid();
             ret.setRealId(student.getStudentid());
             ret.setType("S");
         }
+        String token = "";
+        token = this.tokenService.getToken(rid, openid);
+        ret.setToken(token);
         return ret;
     }
 
@@ -104,26 +164,26 @@ public class LoginController {
             //为学生
             //学生信息预先在db中存好
             //判断该学号是否被注册过
-            Student tmpS = studentService.findDistinctByStudentId(real_id);
+            Student tmpS = this.studentService.findDistinctByStudentId(real_id);
             if(tmpS == null) {
                 return new Result(400);
             }
             if(tmpS.getUid() == null) {
                 //若没有则获取该生姓名
                 tmpS.setUid(u_id);
-                studentService.saveOrUpdate(tmpS);
+                this.studentService.saveOrUpdate(tmpS);
                 return new Result(200);
             }
         }
         if(type.equals("2")) {
             //判断是否被注册过
-            Tutor tmpT = tutorService.findDistinctByTutorId(real_id);
+            Tutor tmpT = this.tutorService.findDistinctByTutorId(real_id);
             if(tmpT == null) {
                 return new Result(400);
             }
             if(tmpT.getUid() == null) {
                 tmpT.setUid(u_id);
-                tutorService.saveOrUpdate(tmpT);
+                this.tutorService.saveOrUpdate(tmpT);
                 return new Result(201);
             }
         }
