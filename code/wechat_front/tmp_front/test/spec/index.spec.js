@@ -1,28 +1,21 @@
-const automator = require('miniprogram-automator')
+const automator = require('miniprogram-automator');
 
-describe('index', () => {
-  let miniProgram
-  let page
-
-  // beforeAll(async () => {
-  //   miniProgram = await automator.launch({
-  //     projectPath: 'D:/SS-Project/SS-Peoject/code/wechat_front/tmp_front'
-  //   })
-  //   page = await miniProgram.reLaunch('/pages/register/register')
-  //   await page.waitFor(500)
-  // }, 30000)
-
-  // // it('test1', async () => {
-  // //   // const desc = await page.$('.titleText')
-  // //   // expect(desc.tagName).toBe('view')
-  // //   // expect(await desc.text()).toContain('注册')
-  // // })
-
-  // afterAll(async () => {
-  //   await miniProgram.close()
-  // })
-
-
-  
-  
-})
+describe('课堂小程序自动化测试', () => {
+  let miniProgram;
+  // 运行测试前调用
+  beforeAll(async () => {
+    miniProgram = await automator.connect({
+      wsEndpoint: 'ws://localhost:9420',
+    });
+  });
+  // 运行测试后调用
+  afterAll(() => {
+    miniProgram.disconnect();
+  });
+  // 测试内容
+  it('nohost检测', async () => {
+    const page = await miniProgram.reLaunch('/pages/index/index');
+    const nohostButton = await page.$('nohost');
+    expect(nohostButton).toBeNull();
+  });
+});

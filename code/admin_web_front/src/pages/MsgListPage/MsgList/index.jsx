@@ -234,6 +234,24 @@ export default class MsgList extends React.Component{
     })
   }
 
+  onSearch=(string)=>{
+    if(string == ''){
+      this.setState({
+        showlist: this.state.datalist,
+      });
+      return;
+    }
+    var searchList = [];
+    for(var i = 0; i < this.state.datalist.length; ++i){
+      if(this.state.datalist[i].title.search(string) >= 0){
+        searchList = [...searchList, this.state.datalist[i]];
+      }
+    }
+    this.setState({
+      showlist: searchList,
+    })
+  }
+
   render(){
     return(
       <div className={styles.container}>
@@ -241,7 +259,7 @@ export default class MsgList extends React.Component{
           <Search
             style={{ width: 512 }}
             placeholder="输入关键字"
-            onSearch={(value) => console.log(value)}
+            onSearch={this.onSearch}
             enterButton
           />
           <br />
