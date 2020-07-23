@@ -4,6 +4,7 @@
 //搜索
 package com.ss.ssproj.controller;
 
+import com.ss.ssproj.annotation.AdminLoginToken;
 import com.ss.ssproj.entity.Student;
 import com.ss.ssproj.entity.Tutor;
 import com.ss.ssproj.service.StudentService;
@@ -21,6 +22,7 @@ public class AccountController {
     StudentService studentService;
 
     //解除绑定
+    @AdminLoginToken
     @CrossOrigin
     @PostMapping(value = "api/admin/unbind")
     @ResponseBody
@@ -29,26 +31,26 @@ public class AccountController {
         String type = unbindMsg.getType();
         if(type.equals("1")) {
             //学生
-            Student tmpS = studentService.findDistinctByStudentId(realId);
+            Student tmpS = this.studentService.findDistinctByStudentId(realId);
             System.out.println("tmpS.getUid(): "+tmpS.getUid());
             if(tmpS.getUid() == null) {
                 System.out.println("return temS.getUid() == null");
                 return new Result(400);
             } else {
                 tmpS.setUid(null);
-                studentService.saveOrUpdate(tmpS);
+                this.studentService.saveOrUpdate(tmpS);
                 System.out.println("return: tmpS.setUid(null)");
                 return new Result(200);
             }
         } else
         if(type.equals("2")) {
             //导师
-            Tutor tmpT = tutorService.findDistinctByTutorId(realId);
+            Tutor tmpT = this.tutorService.findDistinctByTutorId(realId);
             if(tmpT.getUid() == null) {
                 return new Result(400);
             } else {
                 tmpT.setUid(null);
-                tutorService.saveOrUpdate(tmpT);
+                this.tutorService.saveOrUpdate(tmpT);
                 return new Result(200);
             }
         }

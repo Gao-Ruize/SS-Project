@@ -59,7 +59,7 @@ public class HelloController {
 
     @ResponseBody
     @PostMapping(value = "user/login")
-    public Object login(@RequestBody User user) {
+    public String login(@RequestBody User user) {
         //假设用ada 123456登陆
         JSONObject jsonObject = new JSONObject();
         String username = user.getUsername();
@@ -69,16 +69,19 @@ public class HelloController {
             if(tmp2 == null) {
                 jsonObject.put("token","xx");
                 jsonObject.put("user", null);
-                return jsonObject;
+                return "xx";
+
             }
             String token = tokenService.getTutorToken(tmp2);
             jsonObject.put("token", token);
             jsonObject.put("user", tmp2);
+            return token;
+
         }
         String toKen = tokenService.getToken(user);
         jsonObject.put("token", toKen);
         jsonObject.put("user", user);
-        return jsonObject;
+        return toKen;
     }
 
 }

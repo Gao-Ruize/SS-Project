@@ -1,5 +1,6 @@
 package com.ss.ssproj.controller;
 
+import com.ss.ssproj.annotation.UserToken;
 import com.ss.ssproj.entity.InsMessage;
 import com.ss.ssproj.entity.JwcMessage;
 import com.ss.ssproj.entity.Tutor;
@@ -21,6 +22,7 @@ public class AllMsgController {
     @Autowired
     TutorService tutorService;
 
+    @UserToken
     @CrossOrigin
     @ResponseBody
     @GetMapping(value = "api/user/msgdetail/{msgid}/{type}")
