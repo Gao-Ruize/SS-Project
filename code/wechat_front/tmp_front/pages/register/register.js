@@ -21,6 +21,7 @@ Page({
   },
   onCommit(){
     //向后端发消息，若后端返回成功，则继续，若返回errMsg，则报错，让其重新输入或联系管理员
+    let that = this;
     if(this.data.value == "") {
       wx.showToast({
         title: '请输入学号/工号！',
@@ -39,7 +40,6 @@ Page({
     {
       let baseurl = 'http://localhost:8443/api/user/bind';
       let openid = wx.getStorageSync('openid');
-      // console.log(1);
       let type = this.data.type;
       if(type == "err") {
         wx.showToast({
@@ -60,7 +60,7 @@ Page({
           realId: this.data.value
         },
         success(res) {
-          onCommit_suc(res);
+          that.onCommit_suc(res);
         }
       });
       return;

@@ -2,6 +2,7 @@
 //并更新阅读情况
 package com.ss.ssproj.controller;
 
+import com.ss.ssproj.annotation.UserToken;
 import com.ss.ssproj.entity.JwcMessage;
 import com.ss.ssproj.entity.ReadJwcMsg;
 import com.ss.ssproj.service.JwcMessageService;
@@ -21,30 +22,32 @@ public class JwcMsgController {
     ReadJwcMsgService readJwcMsgService;
 
     //获取所有的教务处通知
+    @UserToken
     @CrossOrigin
     @GetMapping(value = "api/user/jwcmsgs")
     @ResponseBody
     public List<JwcMessage> jwcmsgs() {
-        return jwcMessageService.findAll();
+        return this.jwcMessageService.findAll();
     }
 
     //根据id与type获得当前用户每条jwc信息的状态
+    @UserToken
     @CrossOrigin
     @GetMapping(value = "api/user/typejwcmsg/{type}/{userId}")
     @ResponseBody
     public List<JwcMessage> typejwcmsgs(@PathVariable("type") String type,
                                         @PathVariable("userId") String usetId) {
-        List<JwcMessage> jwcMessages = jwcMessageService.findAll();
+        List<JwcMessage> jwcMessages = this.jwcMessageService.findAll();
         if(type.equals("T")) {
             for(JwcMessage item : jwcMessages) {
                 int msgId = item.getId();
-                ReadJwcMsg readJwcMsg = readJwcMsgService.findDistinctByTutoridAndMsgid(usetId, msgId);
+                ReadJwcMsg readJwcMsg = this.readJwcMsgService.findDistinctByTutoridAndMsgid(usetId, msgId);
                 item.setIfRead(readJwcMsg.getIfread());
             }
         } else if(type.equals("S")) {
             for(JwcMessage item : jwcMessages) {
                 int msgId = item.getId();
-                ReadJwcMsg readJwcMsg = readJwcMsgService.findDistinctByStudentidAndMsgid(usetId, msgId);
+                ReadJwcMsg readJwcMsg = this.readJwcMsgService.findDistinctByStudentidAndMsgid(usetId, msgId);
                 item.setIfRead(readJwcMsg.getIfread());
             }
         }
