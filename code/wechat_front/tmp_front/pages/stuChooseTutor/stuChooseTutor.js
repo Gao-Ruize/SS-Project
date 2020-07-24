@@ -1,3 +1,4 @@
+const app = getApp();
 Page({
   /**
    * 页面的初始数据
@@ -14,14 +15,34 @@ Page({
     jwcMsgCount: '',
     tutMsgCount: 0,
   },
+  errCheck(res) {
+    let errCheck = res.statusCode;
+        if(errCheck == 500) {
+          wx.showToast({
+            title: '登陆超时，请重新登陆',
+            icon: 'none'
+          });  
+          return 1;  
+        }
+        return 0;
+  },
   setJwcCount () {
     let that = this;
     let ID = wx.getStorageSync('realid');
     let baseUrl = "http://localhost:8443/api/stu/unreadjwcmsg/" + ID;
+    let token = wx.getStorageSync('token');
     wx.request({
       url: baseUrl,
       method: 'GET',
+      header: {
+        'content-type': 'application/json', // 默认值
+        'token': token,
+      },
       success(res) {
+        if(that.errCheck(res)) {
+          app.onLaunch();
+          return;
+        }
         that.setData({
           jwcMsgCount: res.data,
         })
@@ -31,10 +52,20 @@ Page({
   setTutCount () {
     let that = this;
     let ID = wx.getStorageSync('realid');
+    let token = wx.getStorageSync('token');
     let baseUrl = "http://localhost:8443/api/stu/unreadinsmsg/" + ID;
     wx.request({
       url: baseUrl,
+      method: 'GET',
+      header: {
+        'content-type': 'application/json', // 默认值
+        'token': token,
+      },
       success (res) {
+        if(that.errCheck(res)) {
+          app.onLaunch();
+          return;
+        }
         that.setData({
           tutMsgCount: res.data,
         })
@@ -85,12 +116,21 @@ Page({
     this.setTutCount();
     let that = this;
     let baseurl = "http://localhost:8443/api/user/tutors";
+    let token = wx.getStorageSync('token');
     wx.request({
       url: baseurl,
       method:'GET',
+      header: {
+        'content-type': 'application/json', // 默认值
+        'token': token,
+      },
       success (res) {
         // console.log("tutus");
         // console.log(res.data);
+        if(that.errCheck(res)) {
+          app.onLaunch();
+          return;
+        }
         that.setData({
           tutors :res.data,
         })
@@ -112,15 +152,25 @@ Page({
     }
     // console.log(tutorid);
     let baseurl = "http://localhost:8443/api/stu/choosetutor";
+    let token = wx.getStorageSync('token');
+    let that = this;
     wx.request({
       url: baseurl,
       method: 'POST',
+      header: {
+        'content-type': 'application/json', // 默认值
+        'token': token,
+      },
       data:{
         studentId: studentid,
         tutorId: tutorid,
       },
       success(res) {
-        bindConfirm_suc(res);
+        if(that.errCheck(res)) {
+          app.onLaunch();
+          return;
+        }
+        that.bindConfirm_suc(res);
       }
     })
   },

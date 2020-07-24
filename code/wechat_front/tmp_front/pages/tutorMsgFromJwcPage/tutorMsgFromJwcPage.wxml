@@ -24,10 +24,6 @@
       color="skyblue"
     /> -->
 </view>
-
-<text>\n</text>
-<text>\n</text>
-
 <van-cell-group>
   <view wx:for="{{showMsgs}}" wx:for-item="message">
       <van-cell 
@@ -44,6 +40,9 @@
       </van-cell>
   </view>
 </van-cell-group>
+
+<text>\n</text>
+<text>\n</text>
 
 
   <van-tabbar active="{{ active }}" bind:change="onChange">

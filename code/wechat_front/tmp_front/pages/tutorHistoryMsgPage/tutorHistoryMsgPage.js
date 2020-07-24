@@ -1,4 +1,5 @@
 // pages/sentMsgPage/sentMsgPage.js
+const app = getApp();
 Page({
 
   /**
@@ -13,31 +14,59 @@ Page({
     showItems:[],
     jwcMsgCount: '',
   },
-
+  errCheck(res) {
+    let errCheck = res.statusCode;
+        if(errCheck == 500) {
+          wx.showToast({
+            title: '登陆超时，请重新登陆',
+            icon: 'none'
+          });  
+          return 1;  
+        }
+        return 0;
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.setJwcCount();
     let realId = wx.getStorageSync('realid');
+    let token = wx.getStorageSync('token');
     let baseurl = "http://localhost:8443/api/tut/insmsgs/" + realId;
     let that = this;
     wx.request({
       url: baseurl,
       method: 'GET',
+      header: {
+        'content-type': 'application/json', // 默认值
+        'token': token,
+      },
       success(res) {
+        if(that.errCheck(res)) {
+          app.onLaunch();
+          return;
+        }
         that.onLoad_suc(res);
       }
     });
   },
   setJwcCount() {
     let ID = wx.getStorageSync('realid');
+    let token = wx.getStorageSync('token');
     let baseurl = "http://localhost:8443/api/tut/jwcmsgcount/" + ID;
     let that = this;
     wx.request({
       url: baseurl,
       method: 'GET',
+      header: {
+        'content-type': 'application/json', // 默认值
+        'token': token,
+      },
       success (res) {
+        if(that.errCheck(res)) {
+          app.onLaunch();
+          return;
+        }
         that.setData({
           jwcMsgCount: res.data
         })

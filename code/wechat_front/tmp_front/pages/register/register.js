@@ -1,4 +1,5 @@
 // pages/register/register.js
+const app = getApp();
 Page({
   /**
    * 页面的初始数据
@@ -51,6 +52,7 @@ Page({
       }
       // console.log(openid);
       wx.setStorageSync('realid', this.data.value);
+      //bind为开放接口
       wx.request({
         url: baseurl,
         method: 'POST',
@@ -69,6 +71,9 @@ Page({
   onCommit_suc(res){
     // console.log(res.data);
     let result = res.data.code;
+    let token = res.data.token;
+    //将token存储到本地
+    wx.setStorageSync('token', token);
     if(result == 200) {
       wx.setStorageSync('type', "S");
       wx.navigateTo({

@@ -1,6 +1,6 @@
 //index.js
 //获取应用实例
-const app = getApp()
+const app = getApp();
 
 Page({
   data: {
@@ -20,14 +20,34 @@ Page({
     tutMsgCount: '',
   },
   // 
+  errCheck(res) {
+    let errCheck = res.statusCode;
+        if(errCheck == 500) {
+          wx.showToast({
+            title: '登陆超时，请重新登陆',
+            icon: 'none'
+          });  
+          return 1;  
+        }
+        return 0;
+  },
   setJwcCount () {
     let that = this;
     let ID = wx.getStorageSync('realid');
+    let token = wx.getStorageSync('token');
     let baseUrl = "http://localhost:8443/api/stu/unreadjwcmsg/" + ID;
     wx.request({
       url: baseUrl,
       method: 'GET',
+      header: {
+        'content-type': 'application/json', // 默认值
+        'token': token,
+      },
       success(res) {
+        if(that.errCheck(res)) {
+          app.onLaunch();
+          return;
+        }
         that.setData({
           jwcMsgCount: res.data,
         })
@@ -37,11 +57,20 @@ Page({
   setTutCount () {
     let that = this;
     let ID = wx.getStorageSync('realid');
+    let token = wx.getStorageSync('token');
     let baseUrl = "http://localhost:8443/api/stu/unreadinsmsg/" + ID;
     wx.request({
       url: baseUrl,
       method: 'GET',
+      header: {
+        'content-type': 'application/json', // 默认值
+        'token': token,
+      },
       success (res) {
+        if(that.errCheck(res)) {
+          app.onLaunch();
+          return;
+        }
         that.setData({
           tutMsgCount: res.data,
         })
@@ -135,12 +164,21 @@ Page({
     console.log("get msgs");
     console.log(type);
     console.log(realid);
+    let token = wx.getStorageSync('token');
     let baseurl = "http://localhost:8443/api/stu/insmsg/" 
       + "/" + realid;
     wx.request({
       url: baseurl,
       method: 'GET',
+      header: {
+        'content-type': 'application/json', // 默认值
+        'token': token,
+      },
       success (res) {
+        if(that.errCheck(res)) {
+          app.onLaunch();
+          return;
+        }
         that.setData({
           allMsgs: res.data,
           showMsgs: res.data
