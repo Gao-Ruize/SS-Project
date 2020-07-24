@@ -1,6 +1,6 @@
 {
   "pages": [
-
+    "pages/register/register",
     "pages/stuMsgFromIns/stuMsgFromInsPage",
     "pages/tutorSendMsgPage/tutorSendMsgPage",
     "pages/tutorMsgFromJwcPage/tutorMsgFromJwcPage",

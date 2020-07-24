@@ -17,6 +17,10 @@ App({
                   method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT 
                   data: res.code,
                   success: function (res) {
+                    let token = res.data.token;
+                    wx.setStorageSync('token', token);
+                    let test = wx.getStorageSync('token');
+                    console.log(test);
                     console.log(res.data);
                     let realId = res.data.realId;
                     console.log(realId);
