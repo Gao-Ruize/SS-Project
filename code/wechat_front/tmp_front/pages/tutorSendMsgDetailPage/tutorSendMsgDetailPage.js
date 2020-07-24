@@ -1,4 +1,5 @@
 // pages/message/message.js
+const app = getApp();
 Page({
   /**
    * 页面的初始数据
@@ -15,6 +16,17 @@ Page({
     timeSpanStr: new Date().getFullYear()+ "-" + (new Date().getMonth()+1) + "-" + new Date().getDate() + " " + new Date().getHours() +":" + new Date().getMinutes(),
     titlemsg: "",
     contentmsg: ""
+  },
+  errCheck(res) {
+    let errCheck = res.statusCode;
+        if(errCheck == 500) {
+          wx.showToast({
+            title: '登陆超时，请重新登陆',
+            icon: 'none'
+          });  
+          return 1;  
+        }
+        return 0;
   },
   // 记录文本框里的信息，保存在titlemsg里
   onTitleChange(event){
@@ -54,17 +66,26 @@ Page({
       toIds: wx.getStorageSync('SendMessageToStudentId'),
     }
     let that = this;
+    let token = wx.getStorageSync('token');
     var url = "http://localhost:8443/api/tut/sendmsg";
     wx.request({
       url: url,
       method: 'POST',
+      header: {
+        'content-type': 'application/json', // 默认值
+        'token': token,
+      },
       data: send,
       success: function (res) {
+        if(that.errCheck(res)) {
+          app.onLaunch();
+          return;
+        }
         that.bindQuit_suc(res);
       },
     })
     wx.redirectTo({
-      url: '../tutorSendMsgDetailPage/tutorSendMsgDetailPage',
+      url: '../tutorSendMsgPage/tutorSendMsgPage',
     })
   },
   bindQuit_suc(res){

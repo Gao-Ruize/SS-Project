@@ -1,4 +1,4 @@
-const app = getApp()
+const app = getApp();
 
 Page({
   data:{
@@ -25,18 +25,37 @@ Page({
     showPigeonhole: [],
     active: 1, // 底边导航栏
   },
-
+  errCheck(res) {
+    let errCheck = res.statusCode;
+        if(errCheck == 500) {
+          wx.showToast({
+            title: '登陆超时，请重新登陆',
+            icon: 'none'
+          });  
+          return 1;  
+        }
+        return 0;
+  },
   onLoad: function(options) {
     var hasNewInfo = this.data.hasNewInfo;
     var str = (hasNewInfo === true) ? '您有新消息待查看' : '暂无新消息';
     let that = this;
     let realid = wx.getStorageSync('realid');
+    let token = wx.getStorageSync('token');
     let baseurl ='http://localhost:8443/api/stu/insmsg/' + realid;
     wx.request({
       url: baseurl,
       method: 'GET',
+      header: {
+        'content-type': 'application/json', // 默认值
+        'token': token,
+      },
       success(res) {
-        onload_suc(res);
+        if(that.errCheck(res)) {
+          app.onLaunch();
+          return;
+        }
+        that.onload_suc(res);
       }
     });
     this.setData({

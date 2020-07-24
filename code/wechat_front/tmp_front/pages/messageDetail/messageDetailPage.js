@@ -1,4 +1,5 @@
 // pages/messageDetail/messageDetailPage.js
+const app = getApp();
 Page({
   /**
    * 页面的初始数据
@@ -28,6 +29,17 @@ Page({
       activeNames: event.detail,
     });
   },
+  errCheck(res) {
+    let errCheck = res.statusCode;
+        if(errCheck == 500) {
+          wx.showToast({
+            title: '登陆超时，请重新登陆',
+            icon: 'none'
+          });  
+          return 1;  
+        }
+        return 0;
+  },
   onCommit() {
     let realid = wx.getStorageSync('realid');
     let userType = wx.getStorageSync('type');
@@ -39,9 +51,14 @@ Page({
     // console.log(senderType); 
     // console.log(msgId);
     let baseurl = "http://localhost:8443/api/user/readmsg";
+    let token = wx.getStorageSync('token');
     wx.request({
       url: baseurl,
       method:'POST',
+      header: {
+        'content-type': 'application/json', // 默认值
+        'token': token,
+      },
       data: {
         userId: realid,
         msgId: msgId,
@@ -49,6 +66,10 @@ Page({
         userType: userType
       },
       success(res) {
+        if(that.errCheck(res)) {
+          app.onLaunch();
+          return;
+        }
         that.onCommit_suc(res);
       }
     });
@@ -96,11 +117,20 @@ Page({
     // console.log(type);
     let baseurl = 'http://localhost:8443/api/user/msgdetail/'
       + msgId + '/' + type;
+    let token = wx.getStorageSync('token');
     wx.request({
       url: baseurl,
       method: 'GET',
+      header: {
+        'content-type': 'application/json', // 默认值
+        'token': token,
+      },
       success (res) {
         // console.log(res.data);
+        if(that.errCheck(res)) {
+          app.onLaunch();
+          return;
+        }
         that.setData({
           infoForm: res.data
         });

@@ -1,4 +1,5 @@
 // pages/sentMsgDetailPage/sentMsgDetailPage.js
+const app = getApp();
 Page({
   /**
    * 页面的初始数据
@@ -17,6 +18,17 @@ Page({
     showPopUp:false,
     result:[],
   },
+  errCheck(res) {
+    let errCheck = res.statusCode;
+        if(errCheck == 500) {
+          wx.showToast({
+            title: '登陆超时，请重新登陆',
+            icon: 'none'
+          });  
+          return 1;  
+        }
+        return 0;
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -30,11 +42,20 @@ Page({
     //将已读学生和未读学生存储到一起
     //获得信息后将将showStudent为全部学生信息
     let baseurl = 'http://localhost:8443/api/tut/getmsginfo/' + tmpMsgId;
+    let token = wx.getStorageSync('token');
     let that = this;
     wx.request({
       url: baseurl,
       method: 'GET',
+      header: {
+        'content-type': 'application/json', // 默认值
+        'token': token,
+      },
       success(res) {
+        if(that.errCheck(res)) {
+          app.onLaunch();
+          return;
+        }
         that.setData({
           readStudentInfo: res.data,
           showStduents: res.data
@@ -90,7 +111,17 @@ Page({
   changeChosBar(event) {
     this.setData({result:event.detail})
   },
+  successCheck(res) {
+    if(res.data.code == 200) {
+      wx.showToast({
+        title: '发送成功！',
+        icon:"success",
+        duration:1500
+      });
+    }
+  },
   sendMsg(){
+    let that = this;
     let students = this.data.result;
     let contain = wx.getStorageSync('msgTitle');
     let realId = wx.getStorageSync('realid');
@@ -102,23 +133,35 @@ Page({
     // console.log(time);
     contain = "请及时阅读通知：" + contain; 
     // console.log(students);
+    let token = wx.getStorageSync('token');
     let baseurl = "http://localhost:8443/api/tut/sendmsg";
     wx.request({
       url: baseurl,
       method: 'POST',
+      header: {
+        'content-type': 'application/json', // 默认值
+        'token': token,
+      },
       data: {
         toIds: students,
         title: "阅读消息提醒",
         content: contain,
         time: time,
         tutorId: realId,
+      },
+      success(res) {
+        if(that.errCheck(res)) {
+          app.onLaunch();
+          return;
+        }
+        that.successCheck(res);
       }
-    })
-    wx.showToast({
-      title: '发送成功！',
-      icon:"success",
-      duration:1500
     });
+    // wx.showToast({
+    //   title: '发送成功！',
+    //   icon:"success",
+    //   duration:1500
+    // });
     this.onClose();
     this.setData({result:[]});
   },
