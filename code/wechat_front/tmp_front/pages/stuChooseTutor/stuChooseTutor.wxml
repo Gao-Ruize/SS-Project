@@ -1,8 +1,8 @@
 <!--pages/stuChooseTutor/stuChooseTutor.wxml-->
-<view>
+<view class = "total">
   <view class="page">
     <text class="text1">绑定导师：</text>
-    <van-button round type="info" bindtap="bindOpenTutor">
+    <van-button round type="info" bindtap="bindOpenTutor" class = "button">
       选择导师
     </van-button>
     <text class="text1">您的导师是：{{tutor}}</text>
@@ -17,20 +17,21 @@
   </view>
   <!--遮罩层：显示tutorpicker-->
   <van-popup
+  class = "popup"
   show="{{ showPop }}"
   position="top"
   custom-style="height: 70%;"
   bind:close="onClose"
- >
-   <view wx:for="{{tutors}}" wx:for-item="tutor">
-   <van-cell 
+  >
+    <view wx:for="{{tutors}}" wx:for-item="tutor">
+    <van-cell 
     bindtap = "chooseTutor" data-tutorid = "{{tutor.tutorid}}"
     data-tutorname = "{{tutor.tutorname}}"
     title="{{tutor.tutorname}}" size="large" label="{{tutor.tutorid}}"
     value = "选择"
     is-link 
-  />
-</view>
+    />
+    </view>
  </van-popup>
 </view>
 
