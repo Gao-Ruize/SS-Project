@@ -10,6 +10,6 @@
     </van-cell-group>
   </view>
   <view class = "buttonContainer">
-    <van-button type = "info" plain bindtap="toStudentPage">查看详情</van-button>
+    <van-button class="showDetail" type = "info" plain bindtap="toStudentPage">查看详情</van-button>
   </view>
 </view>
