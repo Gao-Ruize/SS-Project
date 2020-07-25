@@ -1,5 +1,4 @@
-import threading
-
+# coding = gbk
 from setting import MYSQL_HOST, MYSQL_USER, MYSQL_PWD, MYSQL_DB, ROOT
 import pymysql  # 用于判断学生表/老师表是否为空
 import os
