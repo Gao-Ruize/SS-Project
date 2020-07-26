@@ -1,6 +1,7 @@
 <!--index.wxml-->
 <view>
 <van-search
+  class="searchBar"
   value="{{searchValue}}"
   placeholder="请输入搜索关键词"
   show-action
@@ -26,6 +27,7 @@
 <van-cell-group>
   <view wx:for="{{showMsgs}}" wx:for-item="message">
       <van-cell 
+        class="oneJwcMsg"
         label="{{message.releasetime}}" 
         bindtap = "showDetails" data-id = "{{message.id}}"
         is-link
