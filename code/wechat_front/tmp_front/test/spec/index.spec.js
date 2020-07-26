@@ -91,11 +91,6 @@ describe('index', () => {
     await selectTutorButton.tap();
     expect(await page.data('showPop')).toEqual(true);
 
-    //let tutorPicker = await page.$('.tutorpicker');
-
-    //let tutorOptions = await tutorPicker.$$('view');
-    // console.log(tutorOptions);
-
   })
 
 

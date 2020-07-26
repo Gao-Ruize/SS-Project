@@ -1,5 +1,4 @@
 // pages/messageDetail/messageDetailPage.js
-const app = getApp();
 Page({
   /**
    * 页面的初始数据
@@ -24,6 +23,7 @@ Page({
     msgId: 0,
     userType: wx.getStorageSync('type')
   },
+  app: getApp(),
   onCollChange(event) {
     this.setData({
       activeNames: event.detail,
@@ -66,20 +66,20 @@ Page({
         userType: userType
       },
       success(res) {
-        if(that.errCheck(res)) {
-          app.onLaunch();
-          return;
-        }
         that.onCommit_suc(res);
       }
     });
   },
   onCommit_suc(res){
+    if(this.errCheck(res)) {
+      app.onLaunch();
+      return;
+    }
     if(res.data.code == 200) {
       let userType = this.data.userType;
     let senderType = this.data.senderType;
-    console.log(userType);
-    console.log(senderType);
+    // console.log(userType);
+    // console.log(senderType);
     if(userType == 'S') {
       if(senderType == 'jwc') 
         wx.navigateTo({
@@ -127,14 +127,17 @@ Page({
       },
       success (res) {
         // console.log(res.data);
-        if(that.errCheck(res)) {
-          app.onLaunch();
-          return;
-        }
-        that.setData({
-          infoForm: res.data
-        });
+        onLoad_suc(res)
       }
     })
+  },
+  onLoad_suc(res){
+    if(this.errCheck(res)) {
+      app.onLaunch();
+      return;
+    }
+    this.setData({
+      infoForm: res.data
+    });
   }
 })

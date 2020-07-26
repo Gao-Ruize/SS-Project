@@ -1,5 +1,4 @@
 // pages/sentMsgDetailPage/sentMsgDetailPage.js
-const app = getApp();
 Page({
   /**
    * 页面的初始数据
@@ -18,6 +17,7 @@ Page({
     showPopUp:false,
     result:[],
   },
+  app: getApp(),
   errCheck(res) {
     let errCheck = res.statusCode;
         if(errCheck == 500) {
@@ -52,17 +52,21 @@ Page({
         'token': token,
       },
       success(res) {
-        if(that.errCheck(res)) {
-          app.onLaunch();
-          return;
-        }
-        that.setData({
-          readStudentInfo: res.data,
-          showStudents: res.data
-        })
+        that.onLoad_suc(res)
       }
     });
   },
+  onLoad_suc(res){
+    if(this.errCheck(res)) {
+      app.onLaunch();
+      return;
+    }
+    this.setData({
+      readStudentInfo: res.data,
+      showStduents: res.data
+    })
+  }
+  ,
   onChange(event) {
     // event.detail 的值为当前选中项的索引
     this.setData({ active: event.detail });
@@ -112,6 +116,10 @@ Page({
     this.setData({result:event.detail})
   },
   successCheck(res) {
+    if(this.errCheck(res)) {
+      app.onLaunch();
+      return;
+    }
     if(res.data.code == 200) {
       wx.showToast({
         title: '发送成功！',
@@ -150,10 +158,6 @@ Page({
         tutorId: realId,
       },
       success(res) {
-        if(that.errCheck(res)) {
-          app.onLaunch();
-          return;
-        }
         that.successCheck(res);
       }
     });

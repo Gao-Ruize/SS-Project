@@ -1,6 +1,5 @@
 //index.js
 //获取应用实例
-const app = getApp();
 
 Page({
   data: {
@@ -15,6 +14,7 @@ Page({
     jwcMsgCount: '',
     searchValue: ''
   },
+  app: getApp(),
   errCheck(res) {
     let errCheck = res.statusCode;
         if(errCheck == 500) {
@@ -65,14 +65,17 @@ Page({
         'token': token,
       },
       success (res) {
-        if(that.errCheck(res)) {
-          app.onLaunch();
-          return;
-        }
-        that.setData({
-          jwcMsgCount: res.data
-        })
+        that.setJwcCount_suc(res);
       }
+    })
+  },
+  setJwcCount_suc(res){
+    if(this.errCheck(res)) {
+      app.onLaunch();
+      return;
+    }
+    this.setData({
+      jwcMsgCount: res.data
     })
   },
   onChange (event) {
@@ -142,16 +145,19 @@ Page({
         'token': token,
       },
       success (res) {
-        if(that.errCheck(res)) {
-          app.onLaunch();
-          return;
-        }
-        that.setData({
-          allMsgs: res.data,
-          showMsgs: res.data,
-        });
+        that.onLoad_suc(res);
         // console.log(res.data);
       }
+    });
+  },
+  onLoad_suc(res){
+    if(this.errCheck(res)) {
+      app.onLaunch();
+      return;
+    }
+    this.setData({
+      allMsgs: res.data,
+      showMsgs: res.data,
     });
   }
 })

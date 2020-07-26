@@ -60,7 +60,9 @@ describe('stuChooseTutor', ()=>{
   });
 
   describe('bindConfirm_suc', ()=>{
-    let res = {data: {code: 200}};
+    let res = {data: {code: 200},statusCode: 500};
+    page.bindConfirm_suc(res);
+    res = {data: {code: 200},statusCode: 100};
     page.bindConfirm_suc(res);
     it('bindConfirm_suc()1', () => {
       expect(wx.showToast).toBeCalled();
@@ -73,4 +75,49 @@ describe('stuChooseTutor', ()=>{
     });
   });
 
+  describe('errCheck', ()=>{
+    let res = {statusCode: 500};
+    page.errCheck(res);
+    res = {statusCode: 0};
+    page.errCheck(res);
+    it('应该执行errCheck()', () => {
+      expect(wx.showToast).toBeCalled();
+    });
+  });
+
+  describe('setJwcCount_suc', ()=>{
+    let res = {data: 0, statusCode: 500};
+    jest.spyOn(page, 'setData')
+    page.setJwcCount_suc(res);
+    res = {data: 0, statusCode: 100};
+    jest.spyOn(page, 'setData')
+    page.setJwcCount_suc(res);
+    it('应该执行onload_suc()', () => {
+      expect(page.setData).toBeCalled();
+    });
+  });
+
+  describe('setTutCount_suc', ()=>{
+    let res = {data: 0, statusCode: 500};
+    jest.spyOn(page, 'setData')
+    page.setTutCount_suc(res);
+    res = {data: 0, statusCode: 100};
+    jest.spyOn(page, 'setData')
+    page.setTutCount_suc(res);
+    it('setTutCount_suc()', () => {
+      expect(page.setData).toBeCalled();
+    });
+  });
+
+  describe('onLoad_suc', ()=>{
+    let res = {data: 0, statusCode: 500};
+    jest.spyOn(page, 'setData')
+    page.onLoad_suc(res);
+    res = {data: 0, statusCode: 100};
+    jest.spyOn(page, 'setData')
+    page.onLoad_suc(res);
+    it('onLoad_suc()', () => {
+      expect(page.setData).toBeCalled();
+    });
+  });
 })

@@ -1,5 +1,4 @@
 // pages/stuIndex/stuIndex.js
-const app = getApp();
 Page({
   /**
    * 页面的初始数据
@@ -10,7 +9,7 @@ Page({
     jwcMsgNum: 0,
     insMsgNum: 0,
   },
-
+  app: getApp(),
   /**
    * 生命周期函数--监听页面加载
    */
@@ -83,14 +82,17 @@ Page({
         'token': token,
       },
       success (res) {
-        if(that.errCheck(res)) {
-          app.onLaunch();
-          return;
-        }
-        that.setData({
-          jwcMsgNum: res.data
-        })
+        setJwcNum_suc(res)
       }
+    })
+  },
+  setJwcNum_suc(res){
+    if(this.errCheck(res)) {
+      app.onLaunch();
+      return;
+    }
+    this.setData({
+      jwcMsgNum: res.data
     })
   },
   setInsNum () {
@@ -107,14 +109,17 @@ Page({
         'token': token,
       },
       success (res){
-        if(that.errCheck(res)) {
-          app.onLaunch();
-          return;
-        }
-        that.setData({
-          insMsgNum: res.data,
-        })
+        setInsNum_suc(res)
       }
     })
   },
+  setInsNum_suc(res){
+    if(this.errCheck(res)) {
+      app.onLaunch();
+      return;
+    }
+    this.setData({
+      insMsgNum: res.data,
+    })
+  }
 })

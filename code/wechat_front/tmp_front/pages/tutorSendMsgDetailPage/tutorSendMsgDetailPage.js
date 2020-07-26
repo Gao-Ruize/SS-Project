@@ -1,5 +1,4 @@
 // pages/message/message.js
-const app = getApp();
 Page({
   /**
    * 页面的初始数据
@@ -17,6 +16,7 @@ Page({
     titlemsg: "",
     contentmsg: ""
   },
+  app: getApp(),
   errCheck(res) {
     let errCheck = res.statusCode;
         if(errCheck == 500) {
@@ -77,10 +77,6 @@ Page({
       },
       data: send,
       success: function (res) {
-        if(that.errCheck(res)) {
-          app.onLaunch();
-          return;
-        }
         that.bindQuit_suc(res);
       },
     })
@@ -89,6 +85,10 @@ Page({
     })
   },
   bindQuit_suc(res){
+    if(this.errCheck(res)) {
+      app.onLaunch();
+      return;
+    }
     if(res.data.code == 200)
     {
       wx.showToast({

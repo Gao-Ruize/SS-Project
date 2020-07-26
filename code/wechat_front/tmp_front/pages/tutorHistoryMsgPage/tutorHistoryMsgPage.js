@@ -1,5 +1,4 @@
 // pages/sentMsgPage/sentMsgPage.js
-const app = getApp();
 Page({
 
   /**
@@ -14,6 +13,7 @@ Page({
     showItems:[],
     jwcMsgCount: '',
   },
+  app: getApp(),
   errCheck(res) {
     let errCheck = res.statusCode;
         if(errCheck == 500) {
@@ -42,10 +42,6 @@ Page({
         'token': token,
       },
       success(res) {
-        if(that.errCheck(res)) {
-          app.onLaunch();
-          return;
-        }
         that.onLoad_suc(res);
       }
     });
@@ -63,17 +59,24 @@ Page({
         'token': token,
       },
       success (res) {
-        if(that.errCheck(res)) {
-          app.onLaunch();
-          return;
-        }
-        that.setData({
-          jwcMsgCount: res.data
-        })
+        that.setJwcCount_suc(res)
       }
     })
   },
+  setJwcCount_suc(res){
+    if(this.errCheck(res)) {
+      app.onLaunch();
+      return;
+    }
+    this.setData({
+      jwcMsgCount: res.data
+    })
+  },
   onLoad_suc(res){
+    if(this.errCheck(res)) {
+      app.onLaunch();
+      return;
+    }
     // console.log(res.data);
     this.setData({
       msgItems: res.data
