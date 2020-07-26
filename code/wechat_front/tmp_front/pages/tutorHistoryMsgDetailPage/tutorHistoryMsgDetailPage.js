@@ -13,7 +13,7 @@ Page({
     //未读学生信息，在发送通知时使用
     unreadStudentInfo:[],
     //页面展示学生信息，在搜索时使用
-    showStduents:[],
+    showStudents:[],
     searchValue:"",
     showPopUp:false,
     result:[],
@@ -58,7 +58,7 @@ Page({
         }
         that.setData({
           readStudentInfo: res.data,
-          showStduents: res.data
+          showStudents: res.data
         })
       }
     });
@@ -95,12 +95,12 @@ Page({
         tmpArr.push(item);
       }
     };
-    this.setData({showStduents: tmpArr});
+    this.setData({showStudents: tmpArr});
   },
 
   onCancel() {
     let tmpArr = this.data.readStudentInfo;
-    this.setData({showStduents: tmpArr});
+    this.setData({showStudents: tmpArr});
   },
 
   mulChosChange(event) {

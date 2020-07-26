@@ -5,7 +5,7 @@
      text="阅读后请点击确认按钮"
     />
   </view>
-  <view>
+  <view class='msgDetail'>
     <van-cell title="{{infoForm.title}}" value="{{infoForm.time}}" size="large" label="{{infoForm.senderName}}" />
     <van-collapse value="{{ activeNames }}" bind:change="onCollChange">
       <van-collapse-item title="详情" name="1">

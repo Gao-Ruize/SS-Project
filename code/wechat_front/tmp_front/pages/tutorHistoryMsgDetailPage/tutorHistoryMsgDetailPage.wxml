@@ -30,7 +30,7 @@
     bind:cancel = "onCancel"
     shape = "round"
   />
-  <view wx:for="{{showStduents}}" wx:for-item="eachInfo">
+  <view wx:for="{{showStudents}}" wx:for-item="eachInfo">
     <van-cell icon="user-o"  value = "{{eachInfo.studentid}}">
       <view slot="title">
         <view class="van-cell-text">{{eachInfo.studentname}}</view>
