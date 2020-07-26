@@ -36,4 +36,36 @@ describe('stuIndex', ()=>{
       expect(wx.navigateTo).toBeCalled();
     });
   });
+
+  describe('errCheck', ()=>{
+    let res = {statusCode: 500};
+    page.errCheck(res);
+    res = {statusCode: 0};
+    page.errCheck(res);
+    it('应该执行errCheck()', () => {
+      expect(wx.showToast).toBeCalled();
+    });
+  });
+
+  describe('setJwcNum_suc', ()=>{
+    let res = {data: 0, statusCode: 500};
+    jest.spyOn(page, 'setData')
+    page.setJwcNum_suc(res);
+    res = {data: 0, statusCode: 100};
+    page.setJwcNum_suc(res);
+    it('setJwcNum_suc()', () => {
+      expect(page.setData).toBeCalled();
+    });
+  });
+
+  describe('setInsNum_suc', ()=>{
+    let res = {data: 0, statusCode: 500};
+    jest.spyOn(page, 'setData')
+    page.setInsNum_suc(res);
+    res = {data: 0, statusCode: 100};
+    page.setInsNum_suc(res);
+    it('setInsNum_suc()', () => {
+      expect(page.setData).toBeCalled();
+    });
+  });
 })

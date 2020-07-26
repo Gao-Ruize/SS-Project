@@ -16,6 +16,7 @@ describe('导师发送消息页面', ()=>{
   });
   describe('changetomessage', () => {
     page.data.result=["111111"];
+    page.data.list = [{studentId:"111111", studentname: "1"}];
     page.changetomessage();
     it('应该执行changetomessage()', () => {
       expect(wx.setStorageSync).toBeCalled();
@@ -42,11 +43,45 @@ describe('导师发送消息页面', ()=>{
     });
   });
 
+  describe('errCheck', ()=>{
+    let res = {statusCode: 500};
+    page.errCheck(res);
+    res = {statusCode: 0};
+    page.errCheck(res);
+    it('应该执行errCheck()', () => {
+      expect(wx.showToast).toBeCalled();
+    });
+  });
+
+  describe('setJwcCount_suc', ()=>{
+    page.app.onLaunch = jest.fn();
+    let res = {statusCode: 500};
+    page.setJwcCount_suc(res);
+    res = {statusCode: 0};
+    page.setJwcCount_suc(res);
+    it('setJwcCount_suc()', () => {
+      expect(wx.showToast).toBeCalled();
+    });
+  });
+
   describe('getStudents_suc', ()=>{
-    const res = {data: 0};
-    jest.spyOn(page,'setData');
+    jest.spyOn(page,'setData')
+    let res = {statusCode: 500};
     page.getStudents_suc(res);
-    it('应该执行setData()', () => {
+    res = {statusCode: 0};
+    page.getStudents_suc(res);
+    it('getStudents_suc()', () => {
+      expect(page.setData).toBeCalled();
+    });
+  });
+
+  describe('onLoad_suc', ()=>{
+    jest.spyOn(page,'setData')
+    let res = {statusCode: 500};
+    page.onLoad_suc(res);
+    res = {statusCode: 0};
+    page.onLoad_suc(res);
+    it('onLoad_suc()', () => {
       expect(page.setData).toBeCalled();
     });
   });

@@ -57,10 +57,72 @@ describe('导师接收教务处消息页面', ()=>{
       expect(page.setData).toBeCalled();
     });
   });
+
   describe('onload', ()=>{
     page.onLoad();
     it('formatDate()', () => {
       expect(wx.request).toBeCalled;
+    });
+  });
+
+  describe('errCheck', ()=>{
+    let res = {statusCode: 500};
+    page.errCheck(res);
+    res = {statusCode: 0};
+    page.errCheck(res);
+    it('应该执行errCheck()', () => {
+      expect(wx.showToast).toBeCalled();
+    });
+  });
+
+  describe('searchChange', ()=>{
+    jest.spyOn(page, 'setData')
+    let res = {detail: 500};
+    page.searchChange(res);
+    res = {detail: 0};
+    page.errCheck(res);
+    it('searchChange()', () => {
+      expect(page.setData).toBeCalled();
+    });
+  });
+
+  describe('onSearch', ()=>{
+    page.data.searchValue = "1";
+    page.data.allMsgs = [{title: "1", releasetime: "2"}, {title: "2", releasetime: "1"}];
+    page.onSearch();
+    it('onSearch()', () => {
+      expect(page.setData).toBeCalled();
+    });
+  });
+
+  describe('onCancel', ()=>{
+    page.data.searchValue = "1";
+    page.data.allMsgs = [{title: "1", releasetime: "2"}, {title: "2", releasetime: "1"}];
+    page.onCancel();
+    it('onCancel()', () => {
+      expect(page.setData).toBeCalled();
+    });
+  });
+
+  describe('setJwcCount_suc', ()=>{
+    page.app.onLaunch = jest.fn();
+    let res = {statusCode: 500};
+    page.setJwcCount_suc(res);
+    res = {statusCode: 0};
+    page.setJwcCount_suc(res);
+    it('setJwcCount_suc()', () => {
+      expect(page.setData).toBeCalled();
+    });
+  });
+
+  describe('onLoad_suc', ()=>{
+    page.app.onLaunch = jest.fn();
+    let res = {statusCode: 500};
+    page.onLoad_suc(res);
+    res = {statusCode: 0};
+    page.onLoad_suc(res);
+    it('onLoad_suc()', () => {
+      expect(page.setData).toBeCalled();
     });
   });
 })

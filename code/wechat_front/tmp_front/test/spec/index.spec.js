@@ -83,16 +83,16 @@ describe('index', () => {
       tutors: mockTutors,
     });
 
-    console.log(await page.data());
+    // console.log(await page.data());
     expect(await page.data('showPop')).toEqual(false);
     await selectTutorButton.tap();
     expect(await page.data('showPop')).toEqual(true);
 
     let tutorPicker = await page.$('.tutorpicker');
-console.log(tutorPicker);
+    // console.log(tutorPicker);
     let tutorOptions = await tutorPicker.$$('view');
-    console.log(tutorOptions);
-    //await tutorOptions[1].tap();
+    // console.log(tutorOptions);
+    // await tutorOptions[1].tap();
 
   })
 

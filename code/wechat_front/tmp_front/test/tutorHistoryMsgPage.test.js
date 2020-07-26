@@ -11,9 +11,23 @@ describe('导师历史消息页面', ()=>{
     });
   });
   describe('onload_suc', ()=>{
-    const res = {data: 0};
+    let res = {data: 0, statusCode: 500};
     jest.spyOn(page, 'setData')
     page.onLoad_suc(res);
+    res = {data: 0, statusCode: 100};
+    jest.spyOn(page, 'setData')
+    page.onLoad_suc(res);
+    it('应该执行onload_suc()', () => {
+      expect(page.setData).toBeCalled();
+    });
+  });
+  describe('setJwcCount_suc', ()=>{
+    let res = {data: 0, statusCode: 500};
+    jest.spyOn(page, 'setData')
+    page.setJwcCount_suc(res);
+    res = {data: 0, statusCode: 100};
+    jest.spyOn(page, 'setData')
+    page.setJwcCount_suc(res);
     it('应该执行onload_suc()', () => {
       expect(page.setData).toBeCalled();
     });
@@ -66,6 +80,16 @@ describe('导师历史消息页面', ()=>{
     page.checkDetails(event);
     it('应该执行checkDetails()', () => {
       expect(wx.navigateTo).toBeCalled();
+    });
+  });
+
+  describe('errCheck', ()=>{
+    let res = {statusCode: 500};
+    page.errCheck(res);
+    res = {statusCode: 0};
+    page.errCheck(res);
+    it('应该执行errCheck()', () => {
+      expect(wx.showToast).toBeCalled();
     });
   });
 })

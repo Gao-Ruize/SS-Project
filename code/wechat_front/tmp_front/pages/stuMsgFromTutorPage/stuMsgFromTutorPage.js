@@ -1,5 +1,3 @@
-const app = getApp();
-
 Page({
   data:{
     activate: 'home',
@@ -25,6 +23,7 @@ Page({
     showPigeonhole: [],
     active: 1, // 底边导航栏
   },
+  app: getApp(),
   errCheck(res) {
     let errCheck = res.statusCode;
         if(errCheck == 500) {
@@ -51,10 +50,6 @@ Page({
         'token': token,
       },
       success(res) {
-        if(that.errCheck(res)) {
-          app.onLaunch();
-          return;
-        }
         that.onload_suc(res);
       }
     });
@@ -69,6 +64,10 @@ Page({
   },
 
   onload_suc(res){
+    if(this.errCheck(res)) {
+      app.onLaunch();
+      return;
+    }
     let info = res.data;
     let phase1 = [];
     let phase2 = [];
