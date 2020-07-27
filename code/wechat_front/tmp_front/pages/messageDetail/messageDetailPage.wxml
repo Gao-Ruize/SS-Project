@@ -1,6 +1,6 @@
 <!--pages/messageDetail/messageDetailPage.wxml-->
 <view>
-  <view>
+  <view class = "notice">
     <van-notice-bar
      text="阅读后请点击确认按钮"
     />

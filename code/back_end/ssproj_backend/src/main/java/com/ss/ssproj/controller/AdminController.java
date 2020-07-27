@@ -1,11 +1,9 @@
 package com.ss.ssproj.controller;
 
+import com.ss.ssproj.annotation.AdminLoginToken;
 import com.ss.ssproj.entity.*;
 import com.ss.ssproj.service.*;
-import com.ss.ssproj.utils.JwcMsgCacu;
-import com.ss.ssproj.utils.JwcMsgCacuDetail;
-import com.ss.ssproj.utils.Result;
-import com.ss.ssproj.utils.StuInfo;
+import com.ss.ssproj.utils.*;
 import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +28,13 @@ public class AdminController {
     @Autowired
     ReadJwcMsgService readJwcMsgService;
 
+    @Autowired
+    AdminService adminService;
+
+    @Autowired
+    TokenService tokenService;
+
+    @AdminLoginToken
     @CrossOrigin
     @GetMapping(value = "api/admin/students")
     @ResponseBody
@@ -59,6 +64,7 @@ public class AdminController {
         return ret;
     }
 
+    @AdminLoginToken
     @CrossOrigin
     @GetMapping(value = "api/admin/tutors")
     @ResponseBody
@@ -66,6 +72,7 @@ public class AdminController {
         return this.tutorService.findAll();
     }
 
+    @AdminLoginToken
     @CrossOrigin
     @GetMapping(value = "api/admin/jwcmsgs")
     @ResponseBody
@@ -92,11 +99,12 @@ public class AdminController {
         return ret;
     }
 
+    @AdminLoginToken
     @CrossOrigin
     @PostMapping(value = "api/admin/unbindtutor")
     @ResponseBody
     public Result unbindTutor(@RequestBody String studentId) {
-        Instruct instruct = instructService.findDistinctByStudentid(studentId);
+        Instruct instruct = this.instructService.findDistinctByStudentid(studentId);
         System.out.println(studentId);
         if(instruct == null)
             return new Result(400);
@@ -106,6 +114,7 @@ public class AdminController {
         }
     }
 
+    @AdminLoginToken
     @CrossOrigin
     @GetMapping(value = "api/admin/jwcmsgdetail/{msgid}")
     @ResponseBody
@@ -134,4 +143,35 @@ public class AdminController {
         }
         return new JwcMsgCacuDetail(msgid,title,content,releasetime,studentList,tutorList);
     }
+
+    @CrossOrigin
+    @PostMapping(value = "api/admin/login")
+    @ResponseBody
+    public Result adminLogin(@RequestBody LoginMsg loginMsg) {
+        String userid = loginMsg.getRealId();
+        String password = loginMsg.getOpenId();
+        Admin admin = this.adminService.findDistinctByUserid(userid);
+        if(admin.getPassword().equals(password)) {
+            String token = this.tokenService.getToken(userid, password);
+            return new Result(200, token);
+        }
+        return new Result(400, "");
+    }
+
+    @CrossOrigin
+    @PostMapping(value = "api/admin/register")
+    @ResponseBody
+    public Result adminRegister(@RequestBody Admin admin) {
+        Admin oldAdmin = this.adminService.findDistinctByUserid(admin.getUserid());
+        if(oldAdmin == null) {
+            if(admin.getPassword() == null || admin.getUserid() == null)
+                return new Result(400);
+            this.adminService.save(admin);
+            String token = this.tokenService.getToken(admin.getUserid(), admin.getPassword());
+            return new Result(200, token);
+        }
+        return new Result(400);
+    }
+
+
 }

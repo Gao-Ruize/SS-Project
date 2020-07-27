@@ -4,6 +4,7 @@ public class LoginMsg {
     String realId;
     String type;
     String openId;
+    String token;
 
     public void setRealId(String realId) {
         this.realId = realId;
@@ -27,5 +28,13 @@ public class LoginMsg {
 
     public String getOpenId() {
         return openId;
+    }
+
+    public String getToken() {
+        return this.token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

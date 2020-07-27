@@ -1,41 +1,43 @@
 // pages/qunfaMessage/qunfaMessage.js
+const app = getApp();
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    list:[
-      {
-        id:0,
-        studentname:"学生A",
-        studentId:"111111",
-        uid:"u1"
-      },
-      {
-        id:1,
-        studentname:"学生B",
-        studentId:"222222",
-        uid:"u2"
-      },
-      {
-        id:2,
-        studentname:"学生C",
-        studentId:"333333",
-        uid:"u3"
-      }
-    ],
+    list:[],
     result:[],
     active: 2,
     jwcMsgCount: '',
   },
+  errCheck(res) {
+    let errCheck = res.statusCode;
+        if(errCheck == 500) {
+          wx.showToast({
+            title: '登陆超时，请重新登陆',
+            icon: 'none'
+          });  
+          return 1;  
+        }
+        return 0;
+  },
   setJwcCount() {
     let ID = wx.getStorageSync('realid');
+    let token = wx.getStorageSync('token');
     let baseurl = "http://localhost:8443/api/tut/jwcmsgcount/" + ID;
     let that = this;
     wx.request({
       url: baseurl,
       method: 'GET',
+      header: {
+        'content-type': 'application/json', // 默认值
+        'token': token,
+      },
       success (res) {
+        if(that.errCheck(res)) {
+          app.onLaunch();
+          return;
+        }
         that.setData({
           jwcMsgCount: res.data
         })
@@ -44,13 +46,21 @@ Page({
   },
   getStudents(){
     var t_id = wx.getStorageSync('realid');
+    let token = wx.getStorageSync('token');
     var url = "http://localhost:8443/api/tut/students/"+t_id;
     const _this = this;
     wx.request({
       url: url,
       method: 'GET',
-      data: t_id,
+      header: {
+        'content-type': 'application/json', // 默认值
+        'token': token,
+      },
       success: function(res){
+        if(_this.errCheck(res)) {
+          app.onLaunch();
+          return;
+        }
         _this.getStudents_suc(res);
       },
     })
@@ -105,12 +115,20 @@ Page({
     this.getStudents();
     let that = this;
     var t_id = wx.getStorageSync('realid');
+    let token = wx.getStorageSync('token');
     var url = "http://localhost:8443/api/tut/students/"+t_id;
     wx.request({
       url: url,
       method: 'GET',
-      data: t_id,
+      header: {
+        'content-type': 'application/json', // 默认值
+        'token': token,
+      },
       success: function (res) {
+        if(that.errCheck(res)) {
+          app.onLaunch();
+          return;
+        }
         that.setData({list: res.data})
       }
     })

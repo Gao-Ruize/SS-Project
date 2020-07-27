@@ -4,6 +4,7 @@ import pymysql  # 用于判断学生表/老师表是否为空
 import os
 import re
 from DataManager import DataManager
+from logconfig import MyLogging
 
 
 class UpdateChecker:
@@ -33,7 +34,7 @@ class UpdateChecker:
                 else:
                     return True
         except Exception as e:
-            print(e)
+            MyLogging.error_logger(e)
 
     def InsertOrUpdate(self, phase):
         sql = 'select * from info where Phase=%s'
@@ -46,7 +47,7 @@ class UpdateChecker:
                 else:
                     return True
         except Exception as e:
-            print(e)
+            MyLogging.error_logger(e)
 
     def selectCheck(self):
         path = self.root + '/selectPhase'
@@ -87,8 +88,10 @@ class UpdateChecker:
                 i += 1
             file.close()
         insertFlag = self.firstInsertCheck()
+        MyLogging.write_logger("select Check Finished")
         if insertFlag:
             self.InsertRoleTable()
+            MyLogging.write_logger("insert Finished")
 
     def InsertRoleTable(self):
         for key in self.studentInfo:
@@ -100,6 +103,7 @@ class UpdateChecker:
             data = (key, self.tutorInfo[key])
             sql = 'insert into tutor (TutorId, TutorName) values (%s, %s)'
             self.db.save_data(data, sql)
+        MyLogging.write_logger("Role table insert finished")
 
     def reportCheck(self):
         path = self.root + '/reportPhase'
@@ -132,6 +136,7 @@ class UpdateChecker:
                     tutorId = result2[1]
                 i += 1
             file.close()
+        MyLogging.write_logger("Phase2 check finished")
 
     def middleCheck(self):
         path = self.root + '/reportPhase'
@@ -165,3 +170,4 @@ class UpdateChecker:
                         self.db.save_data(data, sql)
                 i += 1
             file.close()
+        MyLogging.write_logger("Phase3 check finished")

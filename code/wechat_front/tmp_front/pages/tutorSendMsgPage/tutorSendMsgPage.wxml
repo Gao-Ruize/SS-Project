@@ -1,7 +1,9 @@
 <view>
-  <view>
+  <view class = "chooseCon">
     <van-checkbox-group value="{{ result }}" bind:change="onChangeCheck">
-      <van-checkbox name="{{item.studentid}}" wx:for="{{list}}">{{item.studentname}}</van-checkbox>
+      <van-checkbox name="{{item.studentid}}" wx:for="{{list}}" >
+        {{item.studentname}}
+      </van-checkbox>
     </van-checkbox-group>
   </view>
   <view class = "buttonCon">

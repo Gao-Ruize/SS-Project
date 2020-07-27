@@ -1,4 +1,5 @@
 // pages/stuIndex/stuIndex.js
+const app = getApp();
 Page({
   /**
    * 页面的初始数据
@@ -57,14 +58,35 @@ Page({
       url: '/pages/stuMsgFromJwcPage/stuMsgFromJwcPage',
     })
   },
+  errCheck(res) {
+    let errCheck = res.statusCode;
+        if(errCheck == 500) {
+          wx.showToast({
+            title: '登陆超时，请重新登陆',
+            icon: 'none'
+          });  
+          return 1;  
+        }
+        return 0;
+  },
   setJwcNum () {
     let that = this;
     let studentId = wx.getStorageSync('realid');
     //let studentId = "123";
     let baseurl = "http://localhost:8443/api/stu/unreadjwcmsg/" + studentId;
+    let token = wx.getStorageSync('token');
     wx.request({
       url: baseurl,
+      method: 'GET',
+      header: {
+        'content-type': 'application/json', // 默认值
+        'token': token,
+      },
       success (res) {
+        if(that.errCheck(res)) {
+          app.onLaunch();
+          return;
+        }
         that.setData({
           jwcMsgNum: res.data
         })
@@ -75,10 +97,20 @@ Page({
     let that = this;
     let studentId = wx.getStorageSync('realid');
     //let studentId = "123";
+    let token = wx.getStorageSync('token');
     let baseurl = "http://localhost:8443/api/stu/unreadinsmsg/" + studentId;
     wx.request({
       url: baseurl,
-      success (res) {
+      method: 'GET',
+      header: {
+        'content-type': 'application/json', // 默认值
+        'token': token,
+      },
+      success (res){
+        if(that.errCheck(res)) {
+          app.onLaunch();
+          return;
+        }
         that.setData({
           insMsgNum: res.data,
         })
