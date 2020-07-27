@@ -1,7 +1,5 @@
 //index.js
 //获取应用实例
-const app = getApp();
-
 Page({
   data: {
     motto: 'Hello World!',
@@ -16,6 +14,7 @@ Page({
     jwcMsgCount: '',
     tutMsgCount: '',
   }, 
+  app: getApp(),
   errCheck(res) {
     let errCheck = res.statusCode;
         if(errCheck == 500) {
@@ -40,16 +39,20 @@ Page({
         'token': token,
       },
       success(res) {
-        if(that.errCheck(res)) {
-          app.onLaunch();
-          return;
-        }
-        that.setData({
-          jwcMsgCount: res.data,
-        })
+        setJwcCount_suc(res)
       }
     })
   },
+  setJwcCount_suc(res){
+    if(this.errCheck(res)) {
+      app.onLaunch();
+      return;
+    }
+    this.setData({
+      jwcMsgCount: res.data,
+    })
+  }
+  ,
   setTutCount () {
     let that = this;
     let ID = wx.getStorageSync('realid');
@@ -63,16 +66,19 @@ Page({
         'token': token,
       },
       success (res) {
-        if(that.errCheck(res)) {
-          app.onLaunch();
-          return;
-        }
-        that.setData({
-          tutMsgCount: res.data,
-        });
+        setTutCount_suc(res)
         // console.log(res);
       }
     })
+  },
+  setTutCount_suc(res){
+    if(this.errCheck(res)) {
+      app.onLaunch();
+      return;
+    }
+    this.setData({
+      tutMsgCount: res.data,
+    });
   },
   onSearch () {
     //过滤allMsgs得到showMsgs进行展示
@@ -161,16 +167,19 @@ Page({
         'token': token,
       },
       success (res) {
-        if(that.errCheck(res)) {
-          app.onLaunch();
-          return;
-        }
-        that.setData({
-          allMsgs: res.data,
-          showMsgs: res.data,
-        });
+        onLoad_suc(res)
         // console.log(res.data);
       }
     })
+  },
+  onLoad_suc(res){
+    if(this.errCheck(res)) {
+      app.onLaunch();
+      return;
+    }
+    this.setData({
+      allMsgs: res.data,
+      showMsgs: res.data,
+    });
   }
 })

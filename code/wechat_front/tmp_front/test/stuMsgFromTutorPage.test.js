@@ -15,7 +15,9 @@ describe('学生收到导师消息页面', ()=>{
   });
 
   describe('onload_suc', ()=>{
-    let res = {data: [{phase: 1},{phase: 2},{phase: 3},{phase: 4},{phase: 5}]};
+    let res = {data: [{phase: 1},{phase: 2},{phase: 3},{phase: 4},{phase: 5}],statusCode: 100};
+    page.onload_suc(res);
+    res = {statusCode: 500};
     page.onload_suc(res);
     it('应该执行setData()', () => {
       expect(page.setData).toBeCalled();
@@ -56,6 +58,16 @@ describe('学生收到导师消息页面', ()=>{
     });
     it('onCancel()', () => {
       expect(page.setData).toBeCalled();
+    });
+  });
+
+  describe('errCheck', ()=>{
+    let res = {statusCode: 500};
+    page.errCheck(res);
+    res = {statusCode: 0};
+    page.errCheck(res);
+    it('应该执行errCheck()', () => {
+      expect(wx.showToast).toBeCalled();
     });
   });
 })

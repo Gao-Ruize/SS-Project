@@ -1,5 +1,5 @@
 // pages/qunfaMessage/qunfaMessage.js
-const app = getApp();
+
 Page({
   /**
    * 页面的初始数据
@@ -10,16 +10,17 @@ Page({
     active: 2,
     jwcMsgCount: '',
   },
+  app: getApp(),
   errCheck(res) {
     let errCheck = res.statusCode;
-        if(errCheck == 500) {
-          wx.showToast({
-            title: '登陆超时，请重新登陆',
-            icon: 'none'
-          });  
-          return 1;  
-        }
-        return 0;
+    if(errCheck == 500) {
+      wx.showToast({
+        title: '登陆超时，请重新登陆',
+        icon: 'none'
+      });  
+      return 1;  
+    }
+    return 0;
   },
   setJwcCount() {
     let ID = wx.getStorageSync('realid');
@@ -34,14 +35,17 @@ Page({
         'token': token,
       },
       success (res) {
-        if(that.errCheck(res)) {
-          app.onLaunch();
-          return;
-        }
-        that.setData({
-          jwcMsgCount: res.data
-        })
+        that.setJwcCount_suc(res);
       }
+    })
+  },
+  setJwcCount_suc(res){
+    if(this.errCheck(res)) {
+      app.onLaunch();
+      return;
+    }
+    this.setData({
+      jwcMsgCount: res.data
     })
   },
   getStudents(){
@@ -57,15 +61,15 @@ Page({
         'token': token,
       },
       success: function(res){
-        if(_this.errCheck(res)) {
-          app.onLaunch();
-          return;
-        }
         _this.getStudents_suc(res);
       },
     })
   },
   getStudents_suc(res){
+    if(this.errCheck(res)) {
+      app.onLaunch();
+      return;
+    }
     this.setData({list: res.data});
   },
   // 多选框结果的记录
@@ -125,12 +129,15 @@ Page({
         'token': token,
       },
       success: function (res) {
-        if(that.errCheck(res)) {
-          app.onLaunch();
-          return;
-        }
-        that.setData({list: res.data})
+        that.onLoad_suc(res);
       }
     })
   },
+  onLoad_suc(res){
+    if(this.errCheck(res)) {
+      app.onLaunch();
+      return;
+    }
+    this.setData({list: res.data})
+  }
 })

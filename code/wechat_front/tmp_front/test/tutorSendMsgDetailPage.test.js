@@ -68,14 +68,29 @@ describe('导师发送具体消息页面', ()=>{
   });
 
   describe('bindQuit_suc', ()=>{
-    let res = {data: {code: 200}};
+    let res = {data: {code: 200}, statusCode: 500};
     page.bindQuit_suc(res);
     it('应该执行bindQuit_suc1', () => {
       expect(wx.showToast).toBeCalled();
     });
-    res = {data: {code: 400}};
+    res = {data: {code: 200}, statusCode: 100};
     page.bindQuit_suc(res);
     it('应该执行bindQuit_suc1', () => {
+      expect(wx.showToast).toBeCalled();
+    });
+    res = {data: {code: 400}, statusCode: 100};
+    page.bindQuit_suc(res);
+    it('应该执行bindQuit_suc1', () => {
+      expect(wx.showToast).toBeCalled();
+    });
+  });
+
+  describe('errCheck', ()=>{
+    let res = {statusCode: 500};
+    page.errCheck(res);
+    res = {statusCode: 0};
+    page.errCheck(res);
+    it('应该执行errCheck()', () => {
       expect(wx.showToast).toBeCalled();
     });
   });

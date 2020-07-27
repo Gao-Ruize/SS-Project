@@ -102,4 +102,48 @@ describe('学生接收教务处消息页面', ()=>{
       expect(page.setData).toBeCalled;
     });
   });
+
+  describe('errCheck', ()=>{
+    let res = {statusCode: 500};
+    page.errCheck(res);
+    res = {statusCode: 0};
+    page.errCheck(res);
+    it('应该执行errCheck()', () => {
+      expect(wx.showToast).toBeCalled();
+    });
+  });
+
+  describe('setJwcCount_suc', ()=>{
+    let res = {data: 0, statusCode: 500};
+    jest.spyOn(page, 'setData')
+    page.setJwcCount_suc(res);
+    res = {data: 0, statusCode: 100};
+    page.setJwcCount_suc(res);
+    it('setJwcCount_suc()', () => {
+      expect(page.setData).toBeCalled();
+    });
+  });
+
+  describe('setTutCount_suc', ()=>{
+    let res = {data: 0, statusCode: 500};
+    jest.spyOn(page, 'setData')
+    page.setTutCount_suc(res);
+    res = {data: 0, statusCode: 100};
+    page.setTutCount_suc(res);
+    it('setTutCount_suc()', () => {
+      expect(page.setData).toBeCalled();
+    });
+  });
+
+  describe('onload_suc', ()=>{
+    let res = {data: 0, statusCode: 500};
+    jest.spyOn(page, 'setData')
+    page.onLoad_suc(res);
+    res = {data: 0, statusCode: 100};
+    jest.spyOn(page, 'setData')
+    page.onLoad_suc(res);
+    it('应该执行onload_suc()', () => {
+      expect(page.setData).toBeCalled();
+    });
+  });
 })

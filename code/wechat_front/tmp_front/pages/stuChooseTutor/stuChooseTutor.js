@@ -1,4 +1,3 @@
-const app = getApp();
 Page({
   /**
    * 页面的初始数据
@@ -15,6 +14,7 @@ Page({
     jwcMsgCount: '',
     tutMsgCount: 0,
   },
+  app: getApp(),
   errCheck(res) {
     let errCheck = res.statusCode;
         if(errCheck == 500) {
@@ -39,14 +39,17 @@ Page({
         'token': token,
       },
       success(res) {
-        if(that.errCheck(res)) {
-          app.onLaunch();
-          return;
-        }
-        that.setData({
-          jwcMsgCount: res.data,
-        })
+        setJwcCount_suc(res);
       }
+    })
+  },
+  setJwcCount_suc(res){
+    if(this.errCheck(res)) {
+      app.onLaunch();
+      return;
+    }
+    this.setData({
+      jwcMsgCount: res.data,
     })
   },
   setTutCount () {
@@ -62,14 +65,17 @@ Page({
         'token': token,
       },
       success (res) {
-        if(that.errCheck(res)) {
-          app.onLaunch();
-          return;
-        }
-        that.setData({
-          tutMsgCount: res.data,
-        })
+        setTutCount_suc(res)
       }
+    })
+  },
+  setTutCount_suc(res){
+    if(this.errCheck(res)) {
+      app.onLaunch();
+      return;
+    }
+    this.setData({
+      tutMsgCount: res.data,
     })
   },
   chooseTutor(event) {
@@ -127,14 +133,17 @@ Page({
       success (res) {
         // console.log("tutus");
         // console.log(res.data);
-        if(that.errCheck(res)) {
-          app.onLaunch();
-          return;
-        }
-        that.setData({
-          tutors :res.data,
-        })
+        onLoad_suc(res)
       }
+    })
+  },
+  onLoad_suc(res){
+    if(this.errCheck(res)) {
+      app.onLaunch();
+      return;
+    }
+    this.setData({
+      tutors :res.data,
     })
   },
   bindConfirm() {
@@ -166,15 +175,15 @@ Page({
         tutorId: tutorid,
       },
       success(res) {
-        if(that.errCheck(res)) {
-          app.onLaunch();
-          return;
-        }
         that.bindConfirm_suc(res);
       }
     })
   },
   bindConfirm_suc(res){
+    if(this.errCheck(res)) {
+      app.onLaunch();
+      return;
+    }
     if(res.data.code == 200)
     {
       wx.showToast({

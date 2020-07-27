@@ -41,3 +41,6 @@ global.wx = {
   navigateBack: jest.fn(),
   showToast: jest.fn()
 };
+global.app = {
+  onLaunch: jest.fn()
+}
