@@ -1,7 +1,5 @@
 //index.js
 //获取应用实例
-const app = getApp();
-
 Page({
   data: {
     motto: 'Hello World!',
@@ -19,6 +17,7 @@ Page({
     jwcMsgCount: '',
     tutMsgCount: '',
   },
+  app: getApp(),
   // 
   errCheck(res) {
     let errCheck = res.statusCode;
@@ -68,7 +67,7 @@ Page({
       },
       success (res) {
         if(that.errCheck(res)) {
-          app.onLaunch();
+          this.app.onLaunch();
           return;
         }
         that.setData({
@@ -176,7 +175,7 @@ Page({
       },
       success (res) {
         if(that.errCheck(res)) {
-          app.onLaunch();
+          this.app.onLaunch();
           return;
         }
         that.setData({

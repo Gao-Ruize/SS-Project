@@ -127,13 +127,13 @@ Page({
       },
       success (res) {
         // console.log(res.data);
-        onLoad_suc(res)
+        that.onLoad_suc(res)
       }
     })
   },
   onLoad_suc(res){
     if(this.errCheck(res)) {
-      app.onLaunch();
+      this.app.onLaunch();
       return;
     }
     this.setData({
