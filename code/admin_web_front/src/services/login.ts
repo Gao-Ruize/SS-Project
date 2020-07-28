@@ -1,4 +1,5 @@
-import { request } from 'umi';
+// import { request } from 'umi';
+import $ from 'jquery'
 
 export interface LoginParamsType {
   username: string;
@@ -8,7 +9,17 @@ export interface LoginParamsType {
   type: string;
 }
 
-export async function fakeAccountLogin(params: LoginParamsType) {
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export class login_info {
+
+  public static token: string = 'token';
+
+  public static isLoggedIn: boolean = false;
+
+  public static user: string = '未登录';
+}
+
+export async function accountLogin(params: LoginParamsType) {
   // return request<API.LoginStateType>('/api/login/account', {
   //   method: 'POST',
   //   data: params,
@@ -45,10 +56,13 @@ export async function fakeAccountLogin(params: LoginParamsType) {
 
 }
 
-export async function getFakeCaptcha(mobile: string) {
-  return request(`/api/login/captcha?mobile=${mobile}`);
-}
+// export async function getFakeCaptcha(mobile: string) {
+//   return request(`/api/login/captcha?mobile=${mobile}`);
+// }
 
 export async function outLogin() {
-  return request('/api/login/outLogin');
+  // return request('/api/login/outLogin');
+  return new Promise(function(resolve){
+    resolve({ data: {}, success: true });
+  })
 }

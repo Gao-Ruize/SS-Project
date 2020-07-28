@@ -5,6 +5,9 @@ import styles from './index.less';
 import { Input, Popconfirm, notification } from 'antd';
 import { AudioOutlined } from '@ant-design/icons';
 
+import { login_info } from '@/services/login';
+import { history } from 'umi';
+
 import $ from  'jquery';
 import config from '../../../config.js';
 
@@ -24,55 +27,15 @@ const unbind_success = type => {
     description:
     '',
   })
-}
+};
+const notLoggedIn = type => {
+  notification[type]({
+    message: '未登录或登录失效！',
+    description:
+      '请先进行登录',
+  });
+};
 
-const columns = [
-  {
-    title: '姓名',
-    dataIndex: 'studentname',
-    key: 's_name',
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: '学号',
-    dataIndex: 'studentid',
-    key: 's_ID',
-  },
-  {
-    title: '绑定微信号',
-    dataIndex: 'uid',
-    key: 'uid',
-    render: (text, record) => (
-      record.uid==null ? 
-      <span>
-        <Tag color="default">未绑定</Tag>
-      </span> :
-      <span>
-        {record.uid} &nbsp;&nbsp;
-        <Popconfirm title="确认解绑？" onConfirm={() => this.handleUidUnbind(record.studentid)}>
-          <a>解绑</a>
-        </Popconfirm>
-      </span>
-    )
-  },
-  {
-    title: '所选导师',
-    dataIndex: 'tutorname',
-    key:'tut_name',
-    render: (text, record) => (
-      record.tutorname==null ? 
-      <span>
-        <Tag color="default">未选择</Tag>
-      </span> :
-      <span>
-        {record.tutorname} &nbsp;&nbsp;
-        <Popconfirm title="确认解绑？" onConfirm={() => this.handleTutorUnbind(record.studentid)}>
-          <a>解绑</a>
-        </Popconfirm>
-      </span>
-    )
-  }
-];
 
 var _this;
 
@@ -103,7 +66,7 @@ export default class StudentList extends React.Component{
         dataIndex: 'uid',
         key: 'uid',
         render: (text, record) => (
-          record.uid==null ? 
+          record.uid==null ?
           <span>
             <Tag color="default">未绑定</Tag>
           </span> :
@@ -120,7 +83,7 @@ export default class StudentList extends React.Component{
         dataIndex: 'tutorname',
         key:'tut_name',
         render: (text, record) => (
-          record.tutorname==null ? 
+          record.tutorname==null ?
           <span>
             <Tag color="default">未选择</Tag>
           </span> :
@@ -134,6 +97,11 @@ export default class StudentList extends React.Component{
       }
     ];
 
+    if(login_info.isLoggedIn === false){
+      history.push('/user/login');
+      notLoggedIn('error');
+    }
+
     this.acquireStudents();
   }
 
@@ -142,6 +110,9 @@ export default class StudentList extends React.Component{
       type: "get",
       url: global.config.backendUrl+"/api/admin/students",
       contentType: "application/json;charset=utf-8;",
+      beforeSend (XMLHttpRequest) {
+        XMLHttpRequest.setRequestHeader("token", login_info.token);
+      },
       dataType: "text",
       success:function(data) {
           var result = JSON.parse(data);
@@ -182,6 +153,9 @@ export default class StudentList extends React.Component{
       type: "post",
       url: global.config.backendUrl+"/api/admin/unbind",
       contentType: "application/json;charset=utf-8;",
+      beforeSend (XMLHttpRequest) {
+        XMLHttpRequest.setRequestHeader("token", login_info.token);
+      },
       data: info_json,
       dataType: "text",
       success:function(data) {
@@ -211,6 +185,9 @@ export default class StudentList extends React.Component{
       type: "post",
       url: global.config.backendUrl+"/api/admin/unbindtutor",
       contentType: "application/json;charset=utf-8;",
+      beforeSend (XMLHttpRequest) {
+        XMLHttpRequest.setRequestHeader("token", login_info.token);
+      },
       data: studentid,
       dataType: "text",
       success:function(data) {

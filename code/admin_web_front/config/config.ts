@@ -68,10 +68,9 @@ export default defineConfig({
     //   component: './ListTableList',
     // },
     {
-      path: '/user_manage',
       name: '用户管理',
+      path: '/user_manage',
       icon: 'user',
-      access: 'canAdmin',
       routes: [
         {
           path: 'user_manage/students',

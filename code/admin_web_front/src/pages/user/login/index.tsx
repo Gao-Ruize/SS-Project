@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 import { Link, SelectLang, history, useModel } from 'umi';
 import { getPageQuery } from '@/utils/utils';
 import logo from '@/assets/logo.svg';
-import { LoginParamsType, fakeAccountLogin } from '@/services/login';
+import { LoginParamsType, accountLogin } from '@/services/login';
+import { login_info } from '@/services/login';
 import Footer from '@/components/Footer';
 import LoginFrom from './components/Login';
 import styles from './style.less';
@@ -59,9 +60,12 @@ const Login: React.FC<{}> = () => {
     try {
       // 登录
       console.log(values);
-      const msg = await fakeAccountLogin({ ...values, type });
+      const msg = await accountLogin({ ...values, type });
       console.log(msg);
       if (msg.status === 'ok') {
+        login_info.token = msg.token;
+        login_info.isLoggedIn = true;
+        login_info.user = values.username;
         message.success('登录成功！');
         replaceGoto();
         setTimeout(() => {
@@ -70,9 +74,15 @@ const Login: React.FC<{}> = () => {
         return;
       }
       // 如果失败去设置用户错误信息
-      console.log(msg);
+      // console.log(msg);
+      login_info.token = 'token';
+      login_info.isLoggedIn = false;
+      login_info.user = '未登录';
       setUserLoginState(msg);
     } catch (error) {
+      login_info.token = 'token';
+      login_info.isLoggedIn = false;
+      login_info.user = '未登录';
       message.error('登录失败，请重试！');
     }
     setSubmitting(false);
@@ -89,7 +99,7 @@ const Login: React.FC<{}> = () => {
         <div className={styles.top}>
           <div className={styles.header}>
             <Link to="/">
-              <img alt="logo" className={styles.logo} src={logo} />
+              {/*<img alt="logo" className={styles.logo} src={logo} />*/}
               <span className={styles.title}>网页管理端</span>
             </Link>
           </div>
