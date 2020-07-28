@@ -93,7 +93,7 @@ export default class MsgList extends React.Component{
   constructor(props){
     super(props);
     _this = this;
-    
+
     this.state = {
       datalist: [],
       showlist: [],
@@ -172,7 +172,7 @@ export default class MsgList extends React.Component{
           })
       },
       error:function(error) {
-          console.log("acquire students error");
+          console.log("acquire messages error");
       }
     });
   }
@@ -222,7 +222,7 @@ export default class MsgList extends React.Component{
           //   title: this.state.list[i].title,
           //   release_time: this.state.list[i].release_time,
           //   read_cond: '学生：'+String(this.state.list[i].s_read_num)+'/'+String(this.state.list[i].s_tot_num),
-            
+
           // }
           // newList = [...newList, newRow];
           newList = [...newList, this.state.datalist[i]];

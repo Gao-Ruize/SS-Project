@@ -1,4 +1,8 @@
 <!--index.wxml-->
+<van-notice-bar
+  left-icon="volume-o"
+  text="注意：教务处信息每12小时更新一次"
+/>
 <view>
   <view>
   <van-search

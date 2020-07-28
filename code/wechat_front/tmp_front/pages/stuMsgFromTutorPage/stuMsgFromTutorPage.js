@@ -65,7 +65,7 @@ Page({
 
   onload_suc(res){
     if(this.errCheck(res)) {
-      app.onLaunch();
+      this.app.onLaunch();
       return;
     }
     let info = res.data;

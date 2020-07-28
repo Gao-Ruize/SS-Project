@@ -60,6 +60,7 @@ const Login: React.FC<{}> = () => {
       // 登录
       console.log(values);
       const msg = await fakeAccountLogin({ ...values, type });
+      console.log(msg);
       if (msg.status === 'ok') {
         message.success('登录成功！');
         replaceGoto();
@@ -69,6 +70,7 @@ const Login: React.FC<{}> = () => {
         return;
       }
       // 如果失败去设置用户错误信息
+      console.log(msg);
       setUserLoginState(msg);
     } catch (error) {
       message.error('登录失败，请重试！');

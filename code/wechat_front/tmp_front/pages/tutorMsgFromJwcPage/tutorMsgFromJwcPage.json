@@ -1,5 +1,6 @@
 {
   "usingComponents": {
+    "van-notice-bar": "@vant/weapp/notice-bar/index",
     "van-search": "/miniprogram_npm/@vant/weapp/search/index",
     "van-button": "/miniprogram_npm/@vant/weapp/button/index",
     "van-tabbar": "/miniprogram_npm/@vant/weapp/tabbar/index",

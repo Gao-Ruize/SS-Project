@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/register/register",
     "pages/stuIndex/stuIndex",
     "pages/stuMsgFromIns/stuMsgFromInsPage",
     "pages/stuChooseTutor/stuChooseTutor",
@@ -11,7 +12,6 @@
     "pages/tutorHistoryMsgDetailPage/tutorHistoryMsgDetailPage",
     "pages/tutorSendMsgDetailPage/tutorSendMsgDetailPage",
     "pages/messageDetail/messageDetailPage"
-
   ],
   "window": {
     "backgroundTextStyle": "light",

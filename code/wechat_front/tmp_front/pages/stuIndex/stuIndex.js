@@ -82,13 +82,13 @@ Page({
         'token': token,
       },
       success (res) {
-        setJwcNum_suc(res)
+        that.setJwcNum_suc(res)
       }
     })
   },
   setJwcNum_suc(res){
     if(this.errCheck(res)) {
-      app.onLaunch();
+      this.app.onLaunch();
       return;
     }
     this.setData({
@@ -109,13 +109,13 @@ Page({
         'token': token,
       },
       success (res){
-        setInsNum_suc(res)
+        that.setInsNum_suc(res)
       }
     })
   },
-  setInsNum_suc(res){
+  setInsNum_suc(res) {
     if(this.errCheck(res)) {
-      app.onLaunch();
+      this.app.onLaunch();
       return;
     }
     this.setData({

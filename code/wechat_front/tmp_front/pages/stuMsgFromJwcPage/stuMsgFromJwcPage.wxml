@@ -1,4 +1,8 @@
 <!--index.wxml-->
+<van-notice-bar
+  left-icon="volume-o"
+  text="注意：教务处信息每12小时更新一次"
+/>
 <view>
 <van-search
   class="searchBar"
@@ -9,7 +13,6 @@
   bind:search="onSearch"
   bind:cancel="onCancel"
 />
-
 <view>
   <!-- <van-cell title="选择日期区间" value="{{ date }}" bind:click="onDisplay" />
     <van-calendar
