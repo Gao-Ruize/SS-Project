@@ -1,5 +1,6 @@
 from selenium import webdriver
 from setting import LOGIN_USER, LOGIN_PWD, DRIVER_PATH
+from logconfig import MyLogging
 import re
 import time
 
@@ -49,6 +50,7 @@ class Spider:
         file = open(filename, mode='w')
         file.write(TableInfo.text)
         file.close()
+        MyLogging.write_logger("Phase1 finished")
 
     def __grabDataPhase2(self):
         self.driver.get('http://bysj.jwc.sjtu.edu.cn/')
@@ -92,6 +94,7 @@ class Spider:
         file = open(filename, mode='w')
         file.write(TableInfo.text)
         file.close()
+        MyLogging.write_logger("Phase2 finished")
 
     def __grabDataPhase3(self):
         self.driver.get('http://bysj.jwc.sjtu.edu.cn/')
@@ -137,6 +140,7 @@ class Spider:
         file = open(filename, mode='w')
         file.write(TableInfo.text)
         file.close()
+        MyLogging.write_logger("Phase3 finished")
 
     def grabData(self):
         self.__grabDataPhase1()

@@ -1,7 +1,7 @@
 import pymysql
 import threading
 from setting import MYSQL_DB, MYSQL_PWD, MYSQL_HOST, MYSQL_USER
-
+from logconfig import MyLogging
 # 需要自己写sql脚本 自己指定需要连接的数据库
 
 
@@ -30,7 +30,7 @@ class DataManager:
             self.cursor.execute(sql, data)
             self.conn.commit()
         except Exception as e:
-            print('插入数据失败', e)
+            MyLogging.error_logger(e)
             self.conn.rollback()  # 回滚
 
     def __del__(self):
