@@ -48,7 +48,9 @@ public class JwcMsgController {
             for(JwcMessage item : jwcMessages) {
                 int msgId = item.getId();
                 ReadJwcMsg readJwcMsg = this.readJwcMsgService.findDistinctByStudentidAndMsgid(usetId, msgId);
-                item.setIfRead(readJwcMsg.getIfread());
+                if(readJwcMsg != null) {
+                    item.setIfRead(readJwcMsg.getIfread());
+                }
             }
         }
         List<JwcMessage> sortRet = new ArrayList<>();
