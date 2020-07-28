@@ -58,12 +58,12 @@ Page({
   },
   onLoad_suc(res){
     if(this.errCheck(res)) {
-      app.onLaunch();
+      this.app.onLaunch();
       return;
     }
     this.setData({
       readStudentInfo: res.data,
-      showStduents: res.data
+      showStudents: res.data
     })
   }
   ,
@@ -117,7 +117,7 @@ Page({
   },
   successCheck(res) {
     if(this.errCheck(res)) {
-      app.onLaunch();
+      this.app.onLaunch();
       return;
     }
     if(res.data.code == 200) {

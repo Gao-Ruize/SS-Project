@@ -41,7 +41,7 @@ Page({
   },
   setJwcCount_suc(res){
     if(this.errCheck(res)) {
-      app.onLaunch();
+      this.app.onLaunch();
       return;
     }
     this.setData({
@@ -67,7 +67,7 @@ Page({
   },
   getStudents_suc(res){
     if(this.errCheck(res)) {
-      app.onLaunch();
+      this.app.onLaunch();
       return;
     }
     this.setData({list: res.data});
@@ -135,7 +135,7 @@ Page({
   },
   onLoad_suc(res){
     if(this.errCheck(res)) {
-      app.onLaunch();
+      this.app.onLaunch();
       return;
     }
     this.setData({list: res.data})

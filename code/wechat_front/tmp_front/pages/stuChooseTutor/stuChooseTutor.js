@@ -39,13 +39,13 @@ Page({
         'token': token,
       },
       success(res) {
-        setJwcCount_suc(res);
+        that.setJwcCount_suc(res);
       }
     })
   },
   setJwcCount_suc(res){
     if(this.errCheck(res)) {
-      app.onLaunch();
+      this.app.onLaunch();
       return;
     }
     this.setData({
@@ -65,13 +65,13 @@ Page({
         'token': token,
       },
       success (res) {
-        setTutCount_suc(res)
+        that.setTutCount_suc(res)
       }
     })
   },
   setTutCount_suc(res){
     if(this.errCheck(res)) {
-      app.onLaunch();
+      this.app.onLaunch();
       return;
     }
     this.setData({
@@ -133,13 +133,13 @@ Page({
       success (res) {
         // console.log("tutus");
         // console.log(res.data);
-        onLoad_suc(res)
+        that.onLoad_suc(res)
       }
     })
   },
   onLoad_suc(res){
     if(this.errCheck(res)) {
-      app.onLaunch();
+      this.app.onLaunch();
       return;
     }
     this.setData({
@@ -181,7 +181,7 @@ Page({
   },
   bindConfirm_suc(res){
     if(this.errCheck(res)) {
-      app.onLaunch();
+      this.app.onLaunch();
       return;
     }
     if(res.data.code == 200)
