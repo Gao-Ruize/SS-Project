@@ -77,7 +77,7 @@ public class LoginController {
     @GetMapping(value = "api/getToken")
     @ResponseBody
     public String getToken() {
-        return this.tokenService.getToken("1234","xxx");
+        return this.tokenService.getToken("10886","oGHQL41GnIk7aXtTCALuwIkJLeXw");
     }
 
 
