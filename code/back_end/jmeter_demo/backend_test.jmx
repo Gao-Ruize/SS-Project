@@ -35,7 +35,7 @@
           <stringProp name="HTTPSampler.port">8443</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/api/user/msgdetail/1/tutor</stringProp>
+          <stringProp name="HTTPSampler.path">/api/user/msgdetail/87/tutor</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -50,7 +50,7 @@
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">token</stringProp>
-              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MTQyNjA5MDUyIiwiZXhwIjoxNTk1OTM3Mjk1LCJpYXQiOjE1OTU5MTkyOTV9.zJ2UoCP8kR_Fz5HY3EelbB-DvZt3mPz1K8D95J3dOFs</stringProp>
+              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNzEwMDA1MTU4OTgiLCJleHAiOjE1OTYwMjY5MDQsImlhdCI6MTU5NjAwODkwNH0.M60FqA5MQPgxehWJcoN7LnLZTY-o5rf2L8YUN91mShs </stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>
@@ -153,7 +153,7 @@
           <stringProp name="HTTPSampler.port">8443</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/api/user/msgdetail/173/jwc</stringProp>
+          <stringProp name="HTTPSampler.path">/api/user/msgdetail/259/jwc</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -168,7 +168,7 @@
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">token</stringProp>
-              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MTQyNjA5MDUyIiwiZXhwIjoxNTk1OTM3Mjk1LCJpYXQiOjE1OTU5MTkyOTV9.zJ2UoCP8kR_Fz5HY3EelbB-DvZt3mPz1K8D95J3dOFs</stringProp>
+              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNzEwMDA1MTU4OTgiLCJleHAiOjE1OTYwMjY5MDQsImlhdCI6MTU5NjAwODkwNH0.M60FqA5MQPgxehWJcoN7LnLZTY-o5rf2L8YUN91mShs </stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>
@@ -271,7 +271,7 @@
           <stringProp name="HTTPSampler.port">8443</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/api/user/typejwcmsg/S/5142609052</stringProp>
+          <stringProp name="HTTPSampler.path">/api/user/typejwcmsg/S/271000515898</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -286,7 +286,7 @@
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">token</stringProp>
-              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MTQyNjA5MDUyIiwiZXhwIjoxNTk1OTM3Mjk1LCJpYXQiOjE1OTU5MTkyOTV9.zJ2UoCP8kR_Fz5HY3EelbB-DvZt3mPz1K8D95J3dOFs</stringProp>
+              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNzEwMDA1MTU4OTgiLCJleHAiOjE1OTYwMjY5MDQsImlhdCI6MTU5NjAwODkwNH0.M60FqA5MQPgxehWJcoN7LnLZTY-o5rf2L8YUN91mShs </stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>
@@ -388,8 +388,8 @@
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">{&#xd;
-	&quot;userId&quot;:&quot;5142609052&quot;,&#xd;
-	&quot;msgId&quot;:&quot;179&quot;,&#xd;
+	&quot;userId&quot;:&quot;440277024013&quot;,&#xd;
+	&quot;msgId&quot;:&quot;261&quot;,&#xd;
 	&quot;type&quot;:&quot;jwc&quot;,&#xd;
 	&quot;userType&quot;:&quot;S&quot;&#xd;
 }</stringProp>
@@ -416,7 +416,7 @@
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">token</stringProp>
-              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MTQyNjA5MDUyIiwiZXhwIjoxNTk1OTM3Mjk1LCJpYXQiOjE1OTU5MTkyOTV9.zJ2UoCP8kR_Fz5HY3EelbB-DvZt3mPz1K8D95J3dOFs</stringProp>
+              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNzEwMDA1MTU4OTgiLCJleHAiOjE1OTYwMjY5MDQsImlhdCI6MTU5NjAwODkwNH0.M60FqA5MQPgxehWJcoN7LnLZTY-o5rf2L8YUN91mShs </stringProp>
             </elementProp>
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">content-type</stringProp>
@@ -523,7 +523,7 @@
           <stringProp name="HTTPSampler.port">8443</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/api/stu/insmsg/5142609052</stringProp>
+          <stringProp name="HTTPSampler.path">/api/stu/insmsg/271000515898</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -538,7 +538,7 @@
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">token</stringProp>
-              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MTQyNjA5MDUyIiwiZXhwIjoxNTk1OTM3Mjk1LCJpYXQiOjE1OTU5MTkyOTV9.zJ2UoCP8kR_Fz5HY3EelbB-DvZt3mPz1K8D95J3dOFs</stringProp>
+              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNzEwMDA1MTU4OTgiLCJleHAiOjE1OTYwMjY5MDQsImlhdCI6MTU5NjAwODkwNH0.M60FqA5MQPgxehWJcoN7LnLZTY-o5rf2L8YUN91mShs </stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>
@@ -641,7 +641,7 @@
           <stringProp name="HTTPSampler.port">8443</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/api/stu/unreadinsmsg/5142609052</stringProp>
+          <stringProp name="HTTPSampler.path">/api/stu/unreadinsmsg/271000515898</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -656,7 +656,7 @@
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">token</stringProp>
-              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MTQyNjA5MDUyIiwiZXhwIjoxNTk1OTM3Mjk1LCJpYXQiOjE1OTU5MTkyOTV9.zJ2UoCP8kR_Fz5HY3EelbB-DvZt3mPz1K8D95J3dOFs</stringProp>
+              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNzEwMDA1MTU4OTgiLCJleHAiOjE1OTYwMjY5MDQsImlhdCI6MTU5NjAwODkwNH0.M60FqA5MQPgxehWJcoN7LnLZTY-o5rf2L8YUN91mShs </stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>
@@ -759,7 +759,7 @@
           <stringProp name="HTTPSampler.port">8443</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/api/stu/unreadjwcmsg/5142609052</stringProp>
+          <stringProp name="HTTPSampler.path">/api/stu/unreadjwcmsg/271000515898</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -774,7 +774,7 @@
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">token</stringProp>
-              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MTQyNjA5MDUyIiwiZXhwIjoxNTk1OTM3Mjk1LCJpYXQiOjE1OTU5MTkyOTV9.zJ2UoCP8kR_Fz5HY3EelbB-DvZt3mPz1K8D95J3dOFs</stringProp>
+              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNzEwMDA1MTU4OTgiLCJleHAiOjE1OTYwMjY5MDQsImlhdCI6MTU5NjAwODkwNH0.M60FqA5MQPgxehWJcoN7LnLZTY-o5rf2L8YUN91mShs </stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>
@@ -877,7 +877,7 @@
           <stringProp name="HTTPSampler.port">8443</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/api/tut/getmsginfo/1</stringProp>
+          <stringProp name="HTTPSampler.path">/api/tut/getmsginfo/87</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -892,7 +892,7 @@
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">token</stringProp>
-              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMDg4NiIsImV4cCI6MTU5NTk0MzAyNywiaWF0IjoxNTk1OTI1MDI3fQ.9qzRBtySZP2XWPHquyVjVje-aJqsQTxUEu64khffBTQ</stringProp>
+              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMzM3MSIsImV4cCI6MTU5NjAyNzA1MiwiaWF0IjoxNTk2MDA5MDUyfQ.LuZQ3zLYdyl1H_4W1GNzlSCWaY1aDCxXhMCwqsQG2TQ </stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>
@@ -995,7 +995,7 @@
           <stringProp name="HTTPSampler.port">8443</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/api/tut/jwcmsgcount/10886</stringProp>
+          <stringProp name="HTTPSampler.path">/api/tut/jwcmsgcount/03371</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1010,7 +1010,7 @@
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">token</stringProp>
-              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMDg4NiIsImV4cCI6MTU5NTk0MzAyNywiaWF0IjoxNTk1OTI1MDI3fQ.9qzRBtySZP2XWPHquyVjVje-aJqsQTxUEu64khffBTQ</stringProp>
+              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMzM3MSIsImV4cCI6MTU5NjAyNzA1MiwiaWF0IjoxNTk2MDA5MDUyfQ.LuZQ3zLYdyl1H_4W1GNzlSCWaY1aDCxXhMCwqsQG2TQ </stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>
@@ -1090,7 +1090,7 @@
         </ResultCollector>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="insmsgs" enabled="false">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="insmsgs" enabled="true">
         <stringProp name="TestPlan.comments">导师查看自己发送的所有信息</stringProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="循环控制器" enabled="true">
@@ -1113,7 +1113,7 @@
           <stringProp name="HTTPSampler.port">8443</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/api/tut/insmsgs/10886</stringProp>
+          <stringProp name="HTTPSampler.path">/api/tut/insmsgs/03371</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1128,7 +1128,7 @@
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">token</stringProp>
-              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMDg4NiIsImV4cCI6MTU5NTk0MzAyNywiaWF0IjoxNTk1OTI1MDI3fQ.9qzRBtySZP2XWPHquyVjVje-aJqsQTxUEu64khffBTQ</stringProp>
+              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMzM3MSIsImV4cCI6MTU5NjAyNzA1MiwiaWF0IjoxNTk2MDA5MDUyfQ.LuZQ3zLYdyl1H_4W1GNzlSCWaY1aDCxXhMCwqsQG2TQ </stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>

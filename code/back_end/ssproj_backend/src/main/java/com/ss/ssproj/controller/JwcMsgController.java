@@ -38,30 +38,63 @@ public class JwcMsgController {
     public List<JwcMessage> typejwcmsgs(@PathVariable("type") String type,
                                         @PathVariable("userId") String usetId) {
         List<JwcMessage> jwcMessages = this.jwcMessageService.findAll();
+        List<JwcMessage> sortRet = new ArrayList<>();
+//        if(type.equals("T")) {
+//            for(JwcMessage item : jwcMessages) {
+//                int msgId = item.getId();
+//                ReadJwcMsg readJwcMsg = this.readJwcMsgService.findDistinctByTutoridAndMsgid(usetId, msgId);
+//                item.setIfRead(readJwcMsg.getIfread());
+//            }
+//        } else if(type.equals("S")) {
+//            for(JwcMessage item : jwcMessages) {
+//                int msgId = item.getId();
+//                ReadJwcMsg readJwcMsg = this.readJwcMsgService.findDistinctByStudentidAndMsgid(usetId, msgId);
+//                if(readJwcMsg != null) {
+//                    item.setIfRead(readJwcMsg.getIfread());
+//                }
+//            }
+//        }
+//        List<JwcMessage> sortRet = new ArrayList<>();
+//        for(int i = 0; i < jwcMessages.size(); ++ i) {
+//            JwcMessage item = jwcMessages.get(i);
+//            if(item.getIfRead() == 0) {
+//                sortRet.add(item);
+//                jwcMessages.remove(i);
+//                i --;
+//            }
+//        }
+        int size = jwcMessages.size();
         if(type.equals("T")) {
-            for(JwcMessage item : jwcMessages) {
+            for(int i = 0; i < size; ++ i) {
+                JwcMessage item = jwcMessages.get(i);
                 int msgId = item.getId();
                 ReadJwcMsg readJwcMsg = this.readJwcMsgService.findDistinctByTutoridAndMsgid(usetId, msgId);
-                item.setIfRead(readJwcMsg.getIfread());
+                int ifRead = readJwcMsg.getIfread();
+                item.setIfRead(ifRead);
+                if(ifRead == 0) {
+                    sortRet.add(item);
+                    jwcMessages.remove(i);
+                    size --;
+                    i --;
+                }
             }
         } else if(type.equals("S")) {
-            for(JwcMessage item : jwcMessages) {
+            for(int i = 0; i < size; ++ i) {
+                JwcMessage item = jwcMessages.get(i);
                 int msgId = item.getId();
                 ReadJwcMsg readJwcMsg = this.readJwcMsgService.findDistinctByStudentidAndMsgid(usetId, msgId);
-                if(readJwcMsg != null) {
-                    item.setIfRead(readJwcMsg.getIfread());
+                int ifRead = readJwcMsg.getIfread();
+                item.setIfRead(ifRead);
+                if(ifRead == 0) {
+                    sortRet.add(item);
+                    jwcMessages.remove(i);
+                    size --;
+                    i --;
                 }
             }
         }
-        List<JwcMessage> sortRet = new ArrayList<>();
-        for(int i = 0; i < jwcMessages.size(); ++ i) {
-            JwcMessage item = jwcMessages.get(i);
-            if(item.getIfRead() == 0) {
-                sortRet.add(item);
-                jwcMessages.remove(i);
-                i --;
-            }
-        }
+
+
         sortRet.addAll(jwcMessages);
         return sortRet;
     }
