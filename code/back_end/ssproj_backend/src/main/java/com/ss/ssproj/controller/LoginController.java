@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.ss.ssproj.utils.HttpRequest;
 
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -74,10 +75,10 @@ public class LoginController {
 
     //测试用
     @CrossOrigin
-    @GetMapping(value = "api/getToken")
+    @GetMapping(value = "api/getToken/{rid}/{uid}")
     @ResponseBody
-    public String getToken() {
-        return this.tokenService.getToken("10886","oGHQL41GnIk7aXtTCALuwIkJLeXw");
+    public String getToken(@PathVariable("rid") String rid, @PathVariable("uid") String uid) {
+        return this.tokenService.getToken(rid,uid);
     }
 
 

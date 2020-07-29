@@ -4,14 +4,20 @@
 //搜索
 package com.ss.ssproj.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.ss.ssproj.annotation.TutorLoginToken;
 import com.ss.ssproj.annotation.UserToken;
 import com.ss.ssproj.entity.*;
 import com.ss.ssproj.service.*;
+import com.ss.ssproj.utils.HttpRequest;
 import com.ss.ssproj.utils.MsgForm;
 import com.ss.ssproj.utils.Result;
+import com.ss.ssproj.utils.TemplateForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +82,10 @@ public class TutMsgController {
             readInsMsg.setMsgid(newId);
             readInsMsg.setStudentid(item);
             this.readInsMsgService.save(readInsMsg);
+            //给学生发送信息
+//            Student student = this.studentService.findDistinctByStudentId(item);
+//            String uid = student.getUid();
+//            this.sendNotice(uid);
         }
         return new Result(200);
     }
@@ -142,6 +152,47 @@ public class TutMsgController {
     public int getJwcMsgCount(@PathVariable("tutid") String tutid) {
         List<ReadJwcMsg> count = this.readJwcMsgService.findAllByTutoridAndIfread(tutid, 0);
         return count.size();
+    }
+
+    //跨域为测试时使用，实际只需要在发送信息后调用，参数为学生的微信uid
+    @CrossOrigin
+    @GetMapping(value = "api/sendNotice")
+    @ResponseBody
+    public Result sendNotice(String uid) {
+        //实际调用时删除
+        uid = "oGHQL41GnIk7aXtTCALuwIkJLeXw";
+        //参数uid为微信id
+        //根据小程序的appId与appSecret
+        String appId = "wxfc660793593ad691";
+        String appSecret = "2a9fce2e91b62d6b069c5de6ee140b53";
+        String params = "grant_type=client_credential&appid=" + appId + "&secret=" + appSecret;
+        String url = "https://api.weixin.qq.com/cgi-bin/token" + "?" + params;
+        RestTemplate restTemplate = new RestTemplate();
+        //获取access_token
+        ResponseEntity<String> entity = restTemplate.getForEntity(url, String.class);
+        String retData = entity.getBody();
+        JSONObject json1 = JSONObject.parseObject(retData);
+        String access_token;
+        if(json1.containsKey("access_token")) {
+            access_token = json1.getString("access_token");
+        } else return new Result(400);
+        //模版id
+        String templateId = "dOtAsk_vsyMhO43Oo64G-Xd07aWKpr8telFVKlecrZk";
+        //调用发送请求接口
+        JSONObject data = new JSONObject();
+        //根据模版进行参数的组装
+        //后续可以根据需求自主申请模版
+        JSONObject phone_number2 = new JSONObject();
+        JSONObject thing4 = new JSONObject();
+        phone_number2.put("value", 2333);
+        thing4.put("value", "success!");
+        data.put("phone_number2", phone_number2);
+        data.put("thing4", thing4);
+        TemplateForm dataFrom = new TemplateForm(uid, templateId, data);
+        String url2 = "https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=" + access_token;
+        //调用微信提供的接口，发送消息
+        ResponseEntity<String> postEntity = restTemplate.postForEntity(url2, dataFrom, String.class);
+        return new Result(200);
     }
 
 }
