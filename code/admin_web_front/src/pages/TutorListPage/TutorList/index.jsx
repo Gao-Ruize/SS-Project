@@ -8,6 +8,9 @@ import { AudioOutlined } from '@ant-design/icons';
 import $ from  'jquery';
 import config from '../../../config.js';
 
+import { login_info } from '@/services/login';
+import { history } from 'umi';
+
 const { Search } = Input;
 
 const unbind_fail = type => {
@@ -23,49 +26,14 @@ const unbind_success = type => {
     description:
     '',
   })
-}
-
-const data = [
-  {
-    key: '1',
-    tut_name: 'John Brown',
-    tut_ID: '13245',
-    dept_name: '软件学院',
-    openID: 'akgoe',
-  },
-  {
-    key: '2',
-    tut_name: 'Jim Green',
-    tut_ID: '31425',
-    dept_name: '机械与动力学院',
-    openID: 'kgoes',
-  },
-  {
-    key: '3',
-    tut_name: 'Joe Black',
-    tut_ID: '96385',
-    dept_name: '软件学院',
-    openID: 'eijaf',
-  },
-];
-
-// export default () => (
-//   <div className={styles.container}>
-//     <div className="search">
-//       <Search
-//         style={{ width: 512 }}
-//         placeholder="输入要查询的姓名或工号"
-//         onSearch={(value) => console.log(value)}
-//         enterButton
-//       />
-//       <br />
-//       <br />
-//     </div>
-//     <div id="components-table-demo-basic">
-//       <Table columns={columns} dataSource={data} />
-//     </div>
-//   </div>
-// );
+};
+const notLoggedIn = type => {
+  notification[type]({
+    message: '未登录或登录失效！',
+    description:
+      '请先进行登录',
+  });
+};
 
 var _this;
 
@@ -75,7 +43,7 @@ export default class TutorList extends React.Component{
     _this = this;
 
     this.state = {
-      datalist: data,
+      datalist: [],
       showlist: [],
     }
 
@@ -96,7 +64,7 @@ export default class TutorList extends React.Component{
         dataIndex: 'uid',
         key: 'uid',
         render: (text, record) => (
-          record.uid==null ? 
+          record.uid==null ?
           <span>
             <Tag color="default">未绑定</Tag>
           </span> :
@@ -110,6 +78,11 @@ export default class TutorList extends React.Component{
       },
     ];
 
+    if(login_info.isLoggedIn === false){
+      history.push('/user/login');
+      notLoggedIn('error');
+    }
+
     this.acquireTutors();
   }
 
@@ -118,6 +91,9 @@ export default class TutorList extends React.Component{
       type: "get",
       url: global.config.backendUrl+"/api/admin/tutors",
       contentType: "application/json;charset=utf-8;",
+      beforeSend (XMLHttpRequest) {
+        XMLHttpRequest.setRequestHeader("token", login_info.token);
+      },
       dataType: "text",
       success:function(data) {
           var result = JSON.parse(data);
@@ -143,7 +119,7 @@ export default class TutorList extends React.Component{
     });
   }
 
-  
+
   handleUidUnbind=(realId)=>{
     var info = {
       realId: realId,
@@ -156,6 +132,9 @@ export default class TutorList extends React.Component{
       type: "post",
       url: global.config.backendUrl+"/api/admin/unbind",
       contentType: "application/json;charset=utf-8;",
+      beforeSend (XMLHttpRequest) {
+        XMLHttpRequest.setRequestHeader("token", login_info.token);
+      },
       data: info_json,
       dataType: "text",
       success:function(data) {

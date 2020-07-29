@@ -1,91 +1,28 @@
 import React from 'react';
-import { Table, Tag } from 'antd';
+import { Table, Tag, notification } from 'antd';
 import styles from './index.less';
 import { DatePicker } from 'antd';
 import { Input } from 'antd';
 import { AudioOutlined } from '@ant-design/icons';
+import { history } from 'umi';
+
+import { login_info } from '@/services/login';
 
 import $ from  'jquery';
 import config from '../../../config.js';
+// import { history } from '@@/core/history';
 
 const { Search } = Input;
 
-const columns = [
-  {
-    title: '通知',
-    dataIndex: 'key',
-    key: 'title',
-    render: (text) => <a href={'#/msgdetail/1'}>{text}</a>,
-  },
-  {
-    title: '发布时间',
-    dataIndex: 'release_time',
-    key: 'release_time',
-    render: (text) => <p>{new Date(text*1000).toLocaleDateString()}</p>,
-  },
-  {
-    title: '阅读情况',
-    key: 'action',
-    render: (text, record) => (
-      <span>
-        <a
-          href=""
-          style={{
-            marginRight: 16,
-          }}
-        >
-          查看阅读情况
-        </a>
-      </span>
-    ),
-  },
-];
-const data = [
-  {
-    key: '1',
-    msgid: 1,
-    title: '毕设开题提交通知',
-    release_time: 1582992000,
-    phase: 1,
-    t_read_num: 16,
-    t_tot_num: 16,
-    s_read_num: 64,
-    s_tot_num: 64,
-  },
-  {
-    key: '2',
-    msgid: 3,
-    title: '毕设开题提交入口即将关闭',
-    release_time: 1584115200,
-    phase: 1,
-    t_read_num: 16,
-    t_tot_num: 16,
-    s_read_num: 62,
-    s_tot_num: 64,
-  },
-  {
-    key: '3',
-    msgid: 4,
-    title: '中期检查通知',
-    release_time: 1590681600,
-    phase: 2,
-    t_read_num: 15,
-    t_tot_num: 16,
-    s_read_num: 60,
-    s_tot_num: 64,
-  },
-  {
-    key: '4',
-    msgid: 2,
-    title: '阶段4',
-    release_time: 1594742400,
-    phase: 4,
-    t_read_num: 12,
-    t_tot_num: 16,
-    s_read_num: 46,
-    s_tot_num: 64,
-  }
-];
+
+const notLoggedIn = type => {
+  notification[type]({
+    message: '未登录或登录失效！',
+    description:
+      '请先进行登录',
+  });
+};
+
 
 var _this;
 
@@ -139,6 +76,11 @@ export default class MsgList extends React.Component{
       },
     ];
 
+    if(login_info.isLoggedIn === false){
+      notLoggedIn('error');
+      history.push('/user/login');
+    }
+
     this.acquireMsgs();
   }
 
@@ -147,6 +89,9 @@ export default class MsgList extends React.Component{
       type: "get",
       url: global.config.backendUrl+"/api/admin/jwcmsgs",
       contentType: "application/json;charset=utf-8;",
+      beforeSend (XMLHttpRequest) {
+        XMLHttpRequest.setRequestHeader("token", login_info.token);
+      },
       dataType: "text",
       success:function(data) {
           var result = JSON.parse(data);
