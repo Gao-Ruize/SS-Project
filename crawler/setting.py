@@ -1,7 +1,7 @@
 MYSQL_HOST = 'localhost'
 MYSQL_USER = 'root'
 MYSQL_PWD = '12345678'
-MYSQL_DB = 'summer'
+MYSQL_DB = 'test'
 
 LOGIN_USERID = '10367'
 LOGIN_PWD = '10367'
