@@ -4,6 +4,7 @@ import com.ss.ssproj.dao.StudentDao;
 import com.ss.ssproj.entity.Student;
 import com.ss.ssproj.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class StudentServiceImpl implements StudentService {
         return studentDao.findDistinctByUid(uid);
     }
 
+    @Cacheable("students")
     @Override
     public Student findDistinctByStudentId(String studentId) {
         return studentDao.findDistinctByStudentId(studentId);
