@@ -67,7 +67,7 @@ Page({
     }
     let that = this;
     let token = wx.getStorageSync('token');
-    var url = "http://localhost:8443/api/tut/sendmsg";
+    var url = "http://39.106.85.149:8080/api/tut/sendmsg";
     wx.request({
       url: url,
       method: 'POST',

@@ -72,7 +72,7 @@ Page({
     let that = this;
     let studentId = wx.getStorageSync('realid');
     //let studentId = "123";
-    let baseurl = "http://localhost:8443/api/stu/unreadjwcmsg/" + studentId;
+    let baseurl = "http://39.106.85.149:8080/api/stu/unreadjwcmsg/" + studentId;
     let token = wx.getStorageSync('token');
     wx.request({
       url: baseurl,
@@ -100,7 +100,7 @@ Page({
     let studentId = wx.getStorageSync('realid');
     //let studentId = "123";
     let token = wx.getStorageSync('token');
-    let baseurl = "http://localhost:8443/api/stu/unreadinsmsg/" + studentId;
+    let baseurl = "http://39.106.85.149:8080/api/stu/unreadinsmsg/" + studentId;
     wx.request({
       url: baseurl,
       method: 'GET',

@@ -41,7 +41,7 @@ Page({
     let that = this;
     let realid = wx.getStorageSync('realid');
     let token = wx.getStorageSync('token');
-    let baseurl ='http://localhost:8443/api/stu/insmsg/' + realid;
+    let baseurl ='http://39.106.85.149:8080/api/stu/insmsg/' + realid;
     wx.request({
       url: baseurl,
       method: 'GET',
