@@ -83,9 +83,9 @@ public class TutMsgController {
             readInsMsg.setStudentid(item);
             this.readInsMsgService.save(readInsMsg);
             //给学生发送信息
-//            Student student = this.studentService.findDistinctByStudentId(item);
-//            String uid = student.getUid();
-//            this.sendNotice(uid);
+            Student student = this.studentService.findDistinctByStudentId(item);
+            String uid = student.getUid();
+            this.sendNotice(uid);
         }
         return new Result(200);
     }
@@ -115,11 +115,13 @@ public class TutMsgController {
                 ret.remove(i);
                 i --;
             }
-            sortRet.addAll(ret);
         }
+        //730
+        sortRet.addAll(ret);
         return sortRet;
     }
 
+    //导师查看自己指导的所有学生
     @TutorLoginToken
     @CrossOrigin
     @GetMapping(value = "api/tut/students/{tutid}")
@@ -137,6 +139,7 @@ public class TutMsgController {
         return students;
     }
 
+    //导师查看自己发送的所有信息
     @TutorLoginToken
     @CrossOrigin
     @GetMapping(value = "api/tut/insmsgs/{tutid}")
@@ -159,12 +162,13 @@ public class TutMsgController {
     @GetMapping(value = "api/sendNotice")
     @ResponseBody
     public Result sendNotice(String uid) {
-        //实际调用时删除
+        //实际调用时删除，仅测试时使用
         uid = "oGHQL41GnIk7aXtTCALuwIkJLeXw";
         //参数uid为微信id
         //根据小程序的appId与appSecret
         String appId = "wxfc660793593ad691";
         String appSecret = "2a9fce2e91b62d6b069c5de6ee140b53";
+
         String params = "grant_type=client_credential&appid=" + appId + "&secret=" + appSecret;
         String url = "https://api.weixin.qq.com/cgi-bin/token" + "?" + params;
         RestTemplate restTemplate = new RestTemplate();
@@ -176,19 +180,23 @@ public class TutMsgController {
         if(json1.containsKey("access_token")) {
             access_token = json1.getString("access_token");
         } else return new Result(400);
-        //模版id
-        String templateId = "dOtAsk_vsyMhO43Oo64G-Xd07aWKpr8telFVKlecrZk";
+
+        //模版id，根据实际模版id改变
+        String templateId = "9nsC02qakcZ8FzRlXV5lLNOyuOkHSmNKnbDUDEUob0g";
+
         //调用发送请求接口
         JSONObject data = new JSONObject();
+
         //根据模版进行参数的组装
         //后续可以根据需求自主申请模版
-        JSONObject phone_number2 = new JSONObject();
-        JSONObject thing4 = new JSONObject();
-        phone_number2.put("value", 2333);
-        thing4.put("value", "success!");
-        data.put("phone_number2", phone_number2);
-        data.put("thing4", thing4);
+        JSONObject thing2 = new JSONObject();
+        JSONObject name1 = new JSONObject();
+        thing2.put("value", "收到一条新信息，请及时查阅");
+        name1.put("value", "导师");
+        data.put("thing2", thing2);
+        data.put("name1", name1);
         TemplateForm dataFrom = new TemplateForm(uid, templateId, data);
+
         String url2 = "https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=" + access_token;
         //调用微信提供的接口，发送消息
         ResponseEntity<String> postEntity = restTemplate.postForEntity(url2, dataFrom, String.class);

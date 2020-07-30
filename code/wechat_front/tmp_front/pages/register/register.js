@@ -39,7 +39,7 @@ Page({
       }) }
     else
     {
-      let baseurl = 'http://localhost:8443/api/user/bind';
+      let baseurl = 'http://39.106.85.149:8080/api/user/bind';
       let openid = wx.getStorageSync('openid');
       let type = this.data.type;
       if(type == "err") {

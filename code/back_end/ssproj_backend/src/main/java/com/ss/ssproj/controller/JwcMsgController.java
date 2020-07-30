@@ -8,6 +8,7 @@ import com.ss.ssproj.entity.ReadJwcMsg;
 import com.ss.ssproj.service.JwcMessageService;
 import com.ss.ssproj.service.ReadJwcMsgService;
 import com.ss.ssproj.utils.MsgForm;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 

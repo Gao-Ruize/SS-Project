@@ -40,8 +40,8 @@ Page({
     });
     //通过msgId获得对应的学生
     //将已读学生和未读学生存储到一起
-    //获得信息后将将showStudent为全部学生信息
-    let baseurl = 'http://localhost:8443/api/tut/getmsginfo/' + tmpMsgId;
+    //获得信息后将showStudent为全部学生信息
+    let baseurl = 'http://39.106.85.149:8080/api/tut/getmsginfo/' + tmpMsgId;
     let token = wx.getStorageSync('token');
     let that = this;
     wx.request({
@@ -142,7 +142,7 @@ Page({
     contain = "请及时阅读通知：" + contain; 
     // console.log(students);
     let token = wx.getStorageSync('token');
-    let baseurl = "http://localhost:8443/api/tut/sendmsg";
+    let baseurl = "http://39.106.85.149:8080/api/tut/sendmsg";
     wx.request({
       url: baseurl,
       method: 'POST',

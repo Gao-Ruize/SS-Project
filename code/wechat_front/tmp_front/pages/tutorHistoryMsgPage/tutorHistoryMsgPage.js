@@ -32,7 +32,7 @@ Page({
     this.setJwcCount();
     let realId = wx.getStorageSync('realid');
     let token = wx.getStorageSync('token');
-    let baseurl = "http://localhost:8443/api/tut/insmsgs/" + realId;
+    let baseurl = "http://39.106.85.149:8080/api/tut/insmsgs/" + realId;
     let that = this;
     wx.request({
       url: baseurl,
@@ -49,7 +49,7 @@ Page({
   setJwcCount() {
     let ID = wx.getStorageSync('realid');
     let token = wx.getStorageSync('token');
-    let baseurl = "http://localhost:8443/api/tut/jwcmsgcount/" + ID;
+    let baseurl = "http://39.106.85.149:8080/api/tut/jwcmsgcount/" + ID;
     let that = this;
     wx.request({
       url: baseurl,

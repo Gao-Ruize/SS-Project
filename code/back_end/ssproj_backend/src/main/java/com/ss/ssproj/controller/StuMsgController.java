@@ -36,6 +36,7 @@ public class StuMsgController {
     public Result choose(@RequestBody ChooseForm chooseForm) {
         String studentId = chooseForm.getStudentId();
         String tutorId = chooseForm.getTutorId();
+        //初始instruct表为空
         Instruct check = this.instructService.findDistinctByStudentid(studentId);
         if(check != null) {
             return new Result(400);
