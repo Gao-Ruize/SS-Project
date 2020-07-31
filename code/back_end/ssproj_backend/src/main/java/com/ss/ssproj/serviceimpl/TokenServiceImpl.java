@@ -15,7 +15,7 @@ public class TokenServiceImpl implements TokenService {
         // 设置签发与过期时间
         Date generateDate = new Date();
         Calendar nowTime = Calendar.getInstance();
-        nowTime.add(Calendar.MINUTE, 300);
+        nowTime.add(Calendar.MINUTE, 120);
         Date expiresDate = nowTime.getTime();
         String token="";
         token= JWT.create().withAudience(rid) // 将 rid 存入token

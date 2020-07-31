@@ -1,5 +1,14 @@
-from DataManager import DataManager
 from spider import Spider
-from MsgSender import MsgSender
 from UpdateChecker import UpdateChecker
+from MsgChecker import MsgChecker
 
+updateChecker = UpdateChecker()
+spider = Spider()
+msgChecker = MsgChecker()
+spider.grabData()
+msgChecker.checkSelectPhase()
+msgChecker.checkReportPhase()
+msgChecker.checkMiddelePhase()
+updateChecker.selectCheck()
+updateChecker.reportCheck()
+updateChecker.middleCheck()

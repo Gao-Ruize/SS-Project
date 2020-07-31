@@ -159,7 +159,8 @@ public class LoginController {
         String real_id = loginForm.getRealId();
         String code = loginForm.getCode();
         String type = loginForm.getType();
-        //通过code获取u_id
+        //在进入小程序后先调用login，获取登陆状态与uid
+        //此处code是由login获取的uid，不需要再调用接口
         String u_id = code;
         if(type.equals("1")) {
             //为学生
@@ -169,23 +170,27 @@ public class LoginController {
             if(tmpS == null) {
                 return new Result(400);
             }
-            if(tmpS.getUid() == null) {
+            //判断是否注册过
+            if(tmpS.getUid() == null || tmpS.getUid().length() == 0) {
                 //若没有则获取该生姓名
                 tmpS.setUid(u_id);
                 this.studentService.saveOrUpdate(tmpS);
-                return new Result(200);
+                //在bind后返回token避免前端再次登陆获取token
+                //730
+                String token = this.tokenService.getToken(real_id, u_id);
+                return new Result(200, token);
             }
         }
         if(type.equals("2")) {
-            //判断是否被注册过
             Tutor tmpT = this.tutorService.findDistinctByTutorId(real_id);
             if(tmpT == null) {
                 return new Result(400);
             }
-            if(tmpT.getUid() == null) {
+            if(tmpT.getUid() == null || tmpT.getUid().length() == 0) {
                 tmpT.setUid(u_id);
                 this.tutorService.saveOrUpdate(tmpT);
-                return new Result(201);
+                String token = this.tokenService.getToken(real_id, u_id);
+                return new Result(201, token);
             }
         }
         return new Result(300);

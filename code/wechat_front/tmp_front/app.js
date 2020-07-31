@@ -11,7 +11,7 @@ App({
              console.log(res.code); // 先login得到code
              if (res.code) {
                // url为后端地址
-               var url = "http://localhost:8443/api/user/login";
+               var url = "http://39.106.85.149:8080/api/user/login";
                wx.request({
                   url: url,
                   method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT 

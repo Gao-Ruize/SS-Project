@@ -50,7 +50,7 @@ Page({
     // console.log(userType);
     // console.log(senderType); 
     // console.log(msgId);
-    let baseurl = "http://localhost:8443/api/user/readmsg";
+    let baseurl = "http://39.106.85.149:8080/api/user/readmsg";
     let token = wx.getStorageSync('token');
     wx.request({
       url: baseurl,
@@ -115,7 +115,7 @@ Page({
     // console.log("detail page");
     // console.log(msgId);
     // console.log(type);
-    let baseurl = 'http://localhost:8443/api/user/msgdetail/'
+    let baseurl = 'http://39.106.85.149:8080/api/user/msgdetail/'
       + msgId + '/' + type;
     let token = wx.getStorageSync('token');
     wx.request({
