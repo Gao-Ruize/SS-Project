@@ -12,7 +12,7 @@ import java.util.Date;
 public class TokenServiceImpl implements TokenService {
     @Override
     public String getToken(String rid, String uid) {
-        //设置签发与过期时间
+        // 设置签发与过期时间
         Date generateDate = new Date();
         Calendar nowTime = Calendar.getInstance();
         nowTime.add(Calendar.MINUTE, 300);

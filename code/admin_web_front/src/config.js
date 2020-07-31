@@ -1,3 +1,3 @@
 global.config = {
-    backendUrl:'http://localhost:8443',
+    backendUrl:'http://39.106.85.149:8080',
 };

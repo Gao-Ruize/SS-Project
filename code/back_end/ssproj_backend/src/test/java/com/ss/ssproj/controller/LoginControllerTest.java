@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ss.ssproj.entity.Student;
 import com.ss.ssproj.entity.Tutor;
+import com.ss.ssproj.interceptor.AuthenticationInterceptor;
 import com.ss.ssproj.service.StudentService;
 import com.ss.ssproj.service.TutorService;
 import com.ss.ssproj.utils.HttpRequest;
@@ -51,8 +52,11 @@ class LoginControllerTest {
     @MockBean
     private TutorService tutorservice;
 
+    @MockBean
+    private AuthenticationInterceptor intereceptor;
+
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws Exception {
         mockmvc = MockMvcBuilders.webAppContextSetup(webapplicatioincontext).build();
 
 //        Mockito.when(httprequest.sendGet(Mockito.matches("https://api.weixin.qq.com/sns/jscode2session"), Mockito.anyString())).thenAnswer(
@@ -166,6 +170,7 @@ class LoginControllerTest {
                     }
                 }
         );
+        Mockito.when(intereceptor.preHandle(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(true);
 //        Mockito.when(tutorservice.saveOrUpdate(Mockito.any()));
 
     }

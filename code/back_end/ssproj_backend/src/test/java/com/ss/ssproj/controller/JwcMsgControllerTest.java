@@ -5,6 +5,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ss.ssproj.entity.JwcMessage;
 import com.ss.ssproj.entity.ReadJwcMsg;
+import com.ss.ssproj.entity.Student;
+import com.ss.ssproj.interceptor.AuthenticationInterceptor;
 import com.ss.ssproj.service.JwcMessageService;
 import com.ss.ssproj.service.ReadJwcMsgService;
 import org.hibernate.annotations.Check;
@@ -12,6 +14,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -44,6 +48,9 @@ class JwcMsgControllerTest {
     @MockBean
     ReadJwcMsgService readJwcMsgService;
 
+    @MockBean
+    private AuthenticationInterceptor intereceptor;
+
     @Autowired
     JwcMsgController jwcMsgController;
 
@@ -53,7 +60,7 @@ class JwcMsgControllerTest {
     }
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws Exception {
         mockmvc = MockMvcBuilders.webAppContextSetup(webapplicationcontext).build();
         JwcMessage jm1 = new JwcMessage(1,"2020","t1","c1",0);
         JwcMessage jm2 = new JwcMessage(2,"2020","t2","c2",0);
@@ -61,18 +68,29 @@ class JwcMsgControllerTest {
         ReadJwcMsg rjT2 = new ReadJwcMsg(2,null,"t123",0,0,2);
         ReadJwcMsg rjS1 = new ReadJwcMsg(3,"s123",null,0,1,1);
         ReadJwcMsg rjS2 = new ReadJwcMsg(4,"s123",null,0,1,2);
-        List<JwcMessage> jwcMessageList = new ArrayList<>();
-        jwcMessageList.add(jm1);
-        jwcMessageList.add(jm2);
-        Mockito.when(jwcMessageService.findAll()).thenReturn(jwcMessageList);
+//        List<JwcMessage> jwcMessageList = new ArrayList<>();
+//        jwcMessageList.add(jm1);
+//        jwcMessageList.add(jm2);
+        Mockito.when(jwcMessageService.findAll()).thenAnswer(
+                new Answer<List<JwcMessage>>(){
+                    @Override
+                    public List<JwcMessage> answer(InvocationOnMock invocation){
+                        List<JwcMessage> ret = new ArrayList<>();
+                        ret.add(jm1);
+                        ret.add(jm2);
+                        return ret;
+                    }
+                }
+        );
         Mockito.when(readJwcMsgService.findDistinctByStudentidAndMsgid("s123",1)).thenReturn(rjS1);
         Mockito.when(readJwcMsgService.findDistinctByStudentidAndMsgid("s123",2)).thenReturn(rjS2);
         Mockito.when(readJwcMsgService.findDistinctByTutoridAndMsgid("t123",1)).thenReturn(rjT1);
         Mockito.when(readJwcMsgService.findDistinctByTutoridAndMsgid("t123",2)).thenReturn(rjT2);
+        Mockito.when(intereceptor.preHandle(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(true);
     }
 
     @Test
-    void jwcmsgs() throws Exception {
+    void jwcmsgsTest() throws Exception {
         JwcMessage jm1 = new JwcMessage(1,"2020","t1","c1",0);
         jm1.setIfRead(0);
         JwcMessage jm2 = new JwcMessage(2,"2020","t2","c2",0);
@@ -92,7 +110,7 @@ class JwcMsgControllerTest {
 
 
     @Test
-    void typejwcmsgs() throws Exception {
+    void typejwcmsgsTest() throws Exception {
         JwcMessage checks1 = new JwcMessage(1,"2020","t1","c1",0);
         checks1.setIfRead(0);
         JwcMessage checks2 = new JwcMessage(2,"2020","t2","c2",0);

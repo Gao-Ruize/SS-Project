@@ -1,9 +1,12 @@
 package com.ss.ssproj.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ss.ssproj.annotation.AdminLoginToken;
 import com.ss.ssproj.entity.Student;
 import com.ss.ssproj.entity.Tutor;
+import com.ss.ssproj.interceptor.AuthenticationInterceptor;
 import com.ss.ssproj.service.StudentService;
+import com.ss.ssproj.service.TokenService;
 import com.ss.ssproj.service.TutorService;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
@@ -11,6 +14,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -52,12 +56,20 @@ class AccountControllerTest {
     private StudentService studentservice;
 
     @Autowired
+    private TokenService tokenservice;
+
+    @MockBean
+    private AuthenticationInterceptor intereceptor;
+
+    @Autowired
     private AccountController accountcontroller;
 
+
     private ObjectMapper om = new ObjectMapper();
+    private String mockToken = "";
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws Exception {
         mockmvc = MockMvcBuilders.webAppContextSetup(webapplicationcontext).build();
 
         Student stu = new Student(1, "s1", "uid", "name1");
@@ -85,6 +97,10 @@ class AccountControllerTest {
 //                    }
 //                }
 //        );
+
+        Mockito.when(intereceptor.preHandle(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(true);
+        this.mockToken = tokenservice.getToken("admin", "administrat");
+        System.out.println(this.mockToken);
     }
 
     @Test
@@ -93,8 +109,9 @@ class AccountControllerTest {
         map.put("realId", "s1");
         map.put("type", "1");
         String content = JSONObject.toJSONString(map);
+        System.out.println(this.mockToken);
         mockmvc.perform(MockMvcRequestBuilders.post("/api/admin/unbind")
-                .contentType(MediaType.APPLICATION_JSON).content(content))
+                .contentType(MediaType.APPLICATION_JSON).header("token", this.mockToken).content(content))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("code").value(200));
                 //.andReturn().getResponse().getContentAsString();
@@ -149,7 +166,7 @@ class AccountControllerTest {
                 .contentType(MediaType.APPLICATION_JSON).content(content))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("code").value(400))
-                .andExpect(MockMvcResultMatchers.content().string("{\"code\":400}"));
+                .andExpect(MockMvcResultMatchers.content().string("{\"code\":400,\"token\":\"\"}"));
                 //.andReturn().getResponse().getContentAsString();
 //        obj = (JSONObject) new JSONParser(JSONParser.MODE_PERMISSIVE).parse(result);
 //        assertEquals(400, obj.getAsNumber("code"));

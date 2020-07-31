@@ -115,8 +115,8 @@ public class TutMsgController {
                 ret.remove(i);
                 i --;
             }
-            sortRet.addAll(ret);
         }
+        sortRet.addAll(ret);
         return sortRet;
     }
 

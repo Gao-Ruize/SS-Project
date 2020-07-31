@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import { Link, SelectLang, history, useModel } from 'umi';
 import { getPageQuery } from '@/utils/utils';
 import logo from '@/assets/logo.svg';
-import { LoginParamsType, accountLogin } from '@/services/login';
-import { login_info } from '@/services/login';
+import { LoginParamsType, accountLogin , login_info } from '@/services/login';
+
 import Footer from '@/components/Footer';
 import LoginFrom from './components/Login';
 import styles from './style.less';
@@ -14,7 +14,7 @@ const { Tab, Username, Password, Mobile, Captcha, Submit } = LoginFrom;
 
 const LoginMessage: React.FC<{
   content: string;
-}> = ({ content }) => (
+}> = ({ content}) => (
   <Alert
     style={{
       marginBottom: 24,
@@ -50,6 +50,7 @@ const replaceGoto = () => {
 const Login: React.FC<{}> = () => {
   const [userLoginState, setUserLoginState] = useState<API.LoginStateType>({});
   const [submitting, setSubmitting] = useState(false);
+  const [haveTriedLog, setHaveTriedLog] = useState(false);
 
   const { refresh } = useModel('@@initialState');
   const [autoLogin, setAutoLogin] = useState(true);
@@ -57,6 +58,7 @@ const Login: React.FC<{}> = () => {
 
   const handleSubmit = async (values: LoginParamsType) => {
     setSubmitting(true);
+    setHaveTriedLog(false);
     try {
       // 登录
       console.log(values);
@@ -78,12 +80,15 @@ const Login: React.FC<{}> = () => {
       login_info.token = 'token';
       login_info.isLoggedIn = false;
       login_info.user = '未登录';
+      message.error('登录失败，请重试！');
+      setHaveTriedLog(true);
       setUserLoginState(msg);
     } catch (error) {
       login_info.token = 'token';
       login_info.isLoggedIn = false;
       login_info.user = '未登录';
       message.error('登录失败，请重试！');
+      setHaveTriedLog(true);
     }
     setSubmitting(false);
   };
@@ -99,21 +104,21 @@ const Login: React.FC<{}> = () => {
         <div className={styles.top}>
           <div className={styles.header}>
             <Link to="/">
-              {/*<img alt="logo" className={styles.logo} src={logo} />*/}
+              {/* <img alt="logo" className={styles.logo} src={logo} /> */}
               <span className={styles.title}>网页管理端</span>
             </Link>
           </div>
-          <div className={styles.desc}></div>
+          <div className={styles.desc} />
         </div>
 
         <div className={styles.main}>
           <LoginFrom activeKey={type} onTabChange={setType} onSubmit={handleSubmit}>
             <Tab key="account" tab="账户密码登录">
-              {status === 'error' && loginType === 'account' && !submitting && (
-                <LoginMessage content="账户或密码错误（admin/ant.design）" />
+              {!login_info.isLoggedIn && haveTriedLog && (
+                <LoginMessage content="账户或密码错误" />
               )}
 
-              <Username
+             <Username
                 name="username"
                 placeholder="用户名"
                 rules={[
@@ -170,13 +175,13 @@ const Login: React.FC<{}> = () => {
               {/* <Checkbox checked={autoLogin} onChange={(e) => setAutoLogin(e.target.checked)}>
                 自动登录
               </Checkbox> */}
-              <a
-                style={{
-                  float: 'right',
-                }}
-              >
-                忘记密码
-              </a>
+              {/* <a */}
+              {/*  style={{ */}
+              {/*    float: 'right', */}
+              {/*  }} */}
+              {/* > */}
+              {/*  忘记密码 */}
+              {/* </a> */}
             </div>
             <Submit loading={submitting}>登录</Submit>
             {/* <div className={styles.other}>
