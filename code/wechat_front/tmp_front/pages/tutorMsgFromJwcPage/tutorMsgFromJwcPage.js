@@ -137,6 +137,8 @@ Page({
     let token = wx.getStorageSync('token');
     let baseurl = "http://39.106.85.149:8080/api/user/typejwcmsg/" 
       + type + "/" + realid;
+      console.log("here");
+      console.log(token);
     wx.request({
       url: baseurl,
       method: 'GET',

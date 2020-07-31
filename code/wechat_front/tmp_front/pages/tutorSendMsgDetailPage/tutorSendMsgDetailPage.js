@@ -109,6 +109,8 @@ Page({
 
   onLoad: function (options) {
     var studentsname = wx.getStorageSync('SendMessageToStudentname');
+    console.log("xxx");
+    console.log(studentsname);
     var studentsId = wx.getStorageSync('SendMessageToStudentId');
     this.setData({studentsname: studentsname, studentsId: studentsId});
   },
