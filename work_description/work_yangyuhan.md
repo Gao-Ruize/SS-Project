@@ -143,3 +143,11 @@
 - 已经将后端挂载到服务器上了,拟用jmeter对服务器进行压力测试
 - 尝试提高后端程序在测试时的吞吐
 
+# 2020/7/31
+
+- 利用xshell和xftp远程连接服务器,测试了一下python版本以及几个基本测试脚本的运行
+- 发现python部分库尚未引入,利用pip install安装了requests,pymysql,selenium等
+- 研究了如何使用crontab进行定时任务的进行,并跑了一个定期往"my.log"里输出当前时间以及"Hello world"的脚本,效果良好
+- 为服务器安装了chrome,并且向脚本文件夹中导入了相应的chromedriver,测试了一个简单的脚本,结果良好
+- 实际脚本运行时,由于挂载python版本为2.x,出现了一定的兼容性问题,为服务器安装了python3
+
