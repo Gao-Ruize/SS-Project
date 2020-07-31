@@ -50,7 +50,7 @@
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">token</stringProp>
-              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNzEwMDA1MTU4OTgiLCJleHAiOjE1OTYyNjc1NTEsImlhdCI6MTU5NjA4NzU1MX0.gXSZMY3vRmsy2XXn79Ik8GFfGm_Rzk-kcUHZZKwmipw</stringProp>
+              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNzEwMDA1MTU4OTgiLCJleHAiOjE1OTYxODc3MTksImlhdCI6MTU5NjE4MDUxOX0.W9geHW5u2Fd6u65EGiJbWinV6P90qBvizkQ-kT_5sn0</stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>
@@ -137,7 +137,7 @@
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <stringProp name="LoopController.loops">1</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.num_threads">100</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
@@ -168,7 +168,7 @@
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">token</stringProp>
-              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNzEwMDA1MTU4OTgiLCJleHAiOjE1OTYyNjc1NTEsImlhdCI6MTU5NjA4NzU1MX0.gXSZMY3vRmsy2XXn79Ik8GFfGm_Rzk-kcUHZZKwmipw</stringProp>
+              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNzEwMDA1MTU4OTgiLCJleHAiOjE1OTYxODc3MTksImlhdCI6MTU5NjE4MDUxOX0.W9geHW5u2Fd6u65EGiJbWinV6P90qBvizkQ-kT_5sn0</stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>
@@ -286,7 +286,7 @@
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">token</stringProp>
-              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNzEwMDA1MTU4OTgiLCJleHAiOjE1OTYyNjc1NTEsImlhdCI6MTU5NjA4NzU1MX0.gXSZMY3vRmsy2XXn79Ik8GFfGm_Rzk-kcUHZZKwmipw</stringProp>
+              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNzEwMDA1MTU4OTgiLCJleHAiOjE1OTYxODc3MTksImlhdCI6MTU5NjE4MDUxOX0.W9geHW5u2Fd6u65EGiJbWinV6P90qBvizkQ-kT_5sn0</stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>
@@ -328,7 +328,7 @@
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="汇总报告" enabled="true">
+        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="汇总报告" enabled="false">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
@@ -416,7 +416,7 @@
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">token</stringProp>
-              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNzEwMDA1MTU4OTgiLCJleHAiOjE1OTYyNjc1NTEsImlhdCI6MTU5NjA4NzU1MX0.gXSZMY3vRmsy2XXn79Ik8GFfGm_Rzk-kcUHZZKwmipw</stringProp>
+              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNzEwMDA1MTU4OTgiLCJleHAiOjE1OTYxODc3MTksImlhdCI6MTU5NjE4MDUxOX0.W9geHW5u2Fd6u65EGiJbWinV6P90qBvizkQ-kT_5sn0</stringProp>
             </elementProp>
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">content-type</stringProp>
@@ -519,8 +519,8 @@
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="Variables pré-définies" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
-          <stringProp name="HTTPSampler.port">8443</stringProp>
+          <stringProp name="HTTPSampler.domain">39.106.85.149</stringProp>
+          <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/api/stu/insmsg/271000515898</stringProp>
@@ -538,7 +538,7 @@
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">token</stringProp>
-              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNzEwMDA1MTU4OTgiLCJleHAiOjE1OTYyNjc1NTEsImlhdCI6MTU5NjA4NzU1MX0.gXSZMY3vRmsy2XXn79Ik8GFfGm_Rzk-kcUHZZKwmipw</stringProp>
+              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNzEwMDA1MTU4OTgiLCJleHAiOjE1OTYxODc3MTksImlhdCI6MTU5NjE4MDUxOX0.W9geHW5u2Fd6u65EGiJbWinV6P90qBvizkQ-kT_5sn0</stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>
@@ -656,7 +656,7 @@
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">token</stringProp>
-              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNzEwMDA1MTU4OTgiLCJleHAiOjE1OTYyNjc1NTEsImlhdCI6MTU5NjA4NzU1MX0.gXSZMY3vRmsy2XXn79Ik8GFfGm_Rzk-kcUHZZKwmipw</stringProp>
+              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNzEwMDA1MTU4OTgiLCJleHAiOjE1OTYxODc3MTksImlhdCI6MTU5NjE4MDUxOX0.W9geHW5u2Fd6u65EGiJbWinV6P90qBvizkQ-kT_5sn0</stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>
@@ -774,7 +774,7 @@
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">token</stringProp>
-              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNzEwMDA1MTU4OTgiLCJleHAiOjE1OTYyNjc1NTEsImlhdCI6MTU5NjA4NzU1MX0.gXSZMY3vRmsy2XXn79Ik8GFfGm_Rzk-kcUHZZKwmipw</stringProp>
+              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNzEwMDA1MTU4OTgiLCJleHAiOjE1OTYxODc3MTksImlhdCI6MTU5NjE4MDUxOX0.W9geHW5u2Fd6u65EGiJbWinV6P90qBvizkQ-kT_5sn0</stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>
@@ -854,7 +854,7 @@
         </ResultCollector>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="getmsginfo" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="getmsginfo" enabled="false">
         <stringProp name="TestPlan.comments">导师查看某条信息学生的阅读情况</stringProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="循环控制器" enabled="true">
@@ -873,8 +873,8 @@
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="Variables pré-définies" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
-          <stringProp name="HTTPSampler.port">8443</stringProp>
+          <stringProp name="HTTPSampler.domain">39.106.85.149</stringProp>
+          <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/api/tut/getmsginfo/87</stringProp>
@@ -892,7 +892,7 @@
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">token</stringProp>
-              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzODU4NCIsImV4cCI6MTU5NjI3ODc4NSwiaWF0IjoxNTk2MDk4Nzg1fQ.TroFoFw6fRuARa98tGqEy2BoZq_ycm43hvRaj3KndtU</stringProp>
+              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMzM3MSIsImV4cCI6MTU5NjE4Nzc1NiwiaWF0IjoxNTk2MTgwNTU2fQ.BG8-GDH3GJPQERKoMucmjkEMJ2U1qSkcBR4qxikI8as</stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>
@@ -1010,7 +1010,7 @@
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">token</stringProp>
-              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMzM3MSIsImV4cCI6MTU5NjI2Nzk4MiwiaWF0IjoxNTk2MDg3OTgyfQ.afpt5wBmzYlP5MQ0YaF4FfE3KECDwxUJ8Z7XDT4CkVU</stringProp>
+              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMzM3MSIsImV4cCI6MTU5NjE4Nzc1NiwiaWF0IjoxNTk2MTgwNTU2fQ.BG8-GDH3GJPQERKoMucmjkEMJ2U1qSkcBR4qxikI8as</stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>
@@ -1090,7 +1090,7 @@
         </ResultCollector>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="insmsgs" enabled="false">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="insmsgs" enabled="true">
         <stringProp name="TestPlan.comments">导师查看自己发送的所有信息</stringProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="循环控制器" enabled="true">
@@ -1128,7 +1128,7 @@
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">token</stringProp>
-              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMzM3MSIsImV4cCI6MTU5NjI2Nzk4MiwiaWF0IjoxNTk2MDg3OTgyfQ.afpt5wBmzYlP5MQ0YaF4FfE3KECDwxUJ8Z7XDT4CkVU</stringProp>
+              <stringProp name="Header.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMzM3MSIsImV4cCI6MTU5NjE4Nzc1NiwiaWF0IjoxNTk2MTgwNTU2fQ.BG8-GDH3GJPQERKoMucmjkEMJ2U1qSkcBR4qxikI8as</stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>
