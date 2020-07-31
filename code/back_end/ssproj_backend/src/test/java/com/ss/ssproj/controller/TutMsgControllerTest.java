@@ -3,6 +3,7 @@ package com.ss.ssproj.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.ss.ssproj.entity.*;
+import com.ss.ssproj.interceptor.AuthenticationInterceptor;
 import com.ss.ssproj.service.*;
 import net.minidev.json.JSONObject;
 import org.json.JSONString;
@@ -57,8 +58,11 @@ class TutMsgControllerTest {
     @MockBean
     private InstructService instructservice;
 
+    @MockBean
+    private AuthenticationInterceptor intereceptor;
+
     @BeforeEach
-    public void setUp(){
+    public void setUp() throws Exception {
         mockmvc = MockMvcBuilders.webAppContextSetup(webapplicatioincontext).build();
 
         Mockito.when(tutorservice.findAll()).thenAnswer(
@@ -136,6 +140,7 @@ class TutMsgControllerTest {
                     }
                 }
         );
+        Mockito.when(intereceptor.preHandle(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(true);
     }
 
     @Test
@@ -190,8 +195,8 @@ class TutMsgControllerTest {
         Student stu2 = new Student(1, sid2, "uid", "name");
         stu2.setIfRead(0);
         JSONArray arr = new JSONArray();
-        arr.add(stu1);
         arr.add(stu2);
+        arr.add(stu1);
         JSONArray exp = JSONArray.parseArray(arr.toJSONString());
 
         assertEquals(exp, res);

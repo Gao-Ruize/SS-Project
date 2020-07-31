@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ss.ssproj.entity.InsMessage;
 import com.ss.ssproj.entity.JwcMessage;
 import com.ss.ssproj.entity.Tutor;
+import com.ss.ssproj.interceptor.AuthenticationInterceptor;
 import com.ss.ssproj.service.InsMessageService;
 import com.ss.ssproj.service.JwcMessageService;
 import com.ss.ssproj.service.TutorService;
@@ -50,6 +51,9 @@ class AllMsgControllerTest {
     @MockBean
     TutorService tutorService;
 
+    @MockBean
+    private AuthenticationInterceptor intereceptor;
+
     @Autowired
     AllMsgController allMsgController;
 
@@ -61,7 +65,7 @@ class AllMsgControllerTest {
     }
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws Exception {
         mockmvc = MockMvcBuilders.webAppContextSetup(webapplicationcontext).build();
         JwcMessage jwcMessage1 = new JwcMessage(1,"2020j","tj","cj",0);
         InsMessage insMessage1 = new InsMessage(2,"tutor123","ti","ci","2020i");
@@ -71,7 +75,7 @@ class AllMsgControllerTest {
         Mockito.when(jwcMessageService.findById(3)).thenReturn(null);
         Mockito.when(insMessageService.findDistinctById(3)).thenReturn(null);
         Mockito.when(tutorService.findDistinctByTutorId("tutor123")).thenReturn(tutor1);
-
+        Mockito.when(intereceptor.preHandle(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(true);
     }
 
     @Test

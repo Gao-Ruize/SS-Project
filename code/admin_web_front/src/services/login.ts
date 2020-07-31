@@ -34,7 +34,8 @@ export async function accountLogin(params: LoginParamsType) {
   let returnMsg = { status: "error", token: '', type: '', currentAuthority: '' };
   await $.ajax({
     type: 'post',
-    url: 'http://localhost:8443/api/admin/login',
+    // url: 'http://localhost:8443/api/admin/login',
+    url: 'http://39.106.85.149:8080/api/admin/login',
     contentType: "application/json;charset=utf-8;",
     data: jsonstr,
     dataType: "text",

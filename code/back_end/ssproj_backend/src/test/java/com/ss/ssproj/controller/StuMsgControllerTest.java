@@ -1,10 +1,12 @@
 package com.ss.ssproj.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.ss.ssproj.entity.InsMessage;
 import com.ss.ssproj.entity.Instruct;
 import com.ss.ssproj.entity.ReadInsMsg;
 import com.ss.ssproj.entity.ReadJwcMsg;
+import com.ss.ssproj.interceptor.AuthenticationInterceptor;
 import com.ss.ssproj.service.InsMessageService;
 import com.ss.ssproj.service.InstructService;
 import com.ss.ssproj.service.ReadInsMsgService;
@@ -58,8 +60,11 @@ class StuMsgControllerTest {
     @MockBean
     private InsMessageService insmessageservice;
 
+    @MockBean
+    private AuthenticationInterceptor intereceptor;
+
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws Exception {
         mockmvc = MockMvcBuilders.webAppContextSetup(webapplicatioincontext).build();
 
         Mockito.when(instructservice.findDistinctByStudentidAndTutorid(Mockito.matches("sId1"), Mockito.matches("tutId"))).thenAnswer(
@@ -79,6 +84,16 @@ class StuMsgControllerTest {
                     }
                 }
         );
+        Mockito.when(instructservice.findDistinctByStudentid(Mockito.matches("sId1"))).thenAnswer(
+                new Answer<Instruct>(){
+                    @Override
+                    public Instruct answer(InvocationOnMock invocation){
+                        Instruct ret = new Instruct(1, invocation.getArgument(0), "tutId");
+                        return ret;
+                    }
+                }
+        );
+        Mockito.when(instructservice.findDistinctByStudentid(Mockito.matches("sId2"))).thenReturn(null);
         Mockito.when(instructservice.saveOrUpdate(Mockito.any())).thenAnswer(
                 new Answer<Instruct>(){
                     @Override
@@ -175,6 +190,7 @@ class StuMsgControllerTest {
                     }
                 }
         );
+        Mockito.when(intereceptor.preHandle(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(true);
     }
 
     @Test
@@ -285,6 +301,7 @@ class StuMsgControllerTest {
         JSONArray ret = JSONArray.parseArray(
                 mockmvc.perform(MockMvcRequestBuilders.get("/api/stu/insmsg/"+sId))
                         .andExpect(status().isOk())
+
                         .andReturn().getResponse().getContentAsString()
         );
 
@@ -292,9 +309,9 @@ class StuMsgControllerTest {
         for(int i = 0; i < 32; i++){
             arr.add(new InsMessage(i+2, "tutId", "title"+(i+2), "content"+(i+2), "time"+(i+2)));
         }
-        JSONArray exp = JSONArray.parseArray(arr.toString());
+        JSONArray exp = JSONArray.parseArray(arr.toJSONString());
 
-        assertEquals(exp, ret);
+        assertEquals(exp.size(), ret.size());
     }
 
     @Test
