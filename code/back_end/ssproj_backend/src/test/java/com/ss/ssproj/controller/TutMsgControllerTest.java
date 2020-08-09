@@ -1,10 +1,13 @@
 package com.ss.ssproj.controller;
 
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.TypeReference;
 import com.ss.ssproj.entity.*;
 import com.ss.ssproj.interceptor.AuthenticationInterceptor;
 import com.ss.ssproj.service.*;
+import com.ss.ssproj.utils.JwcMsgCacu;
 import net.minidev.json.JSONObject;
 import org.json.JSONString;
 import org.junit.jupiter.api.BeforeEach;
@@ -57,6 +60,8 @@ class TutMsgControllerTest {
     private StudentService studentservice;
     @MockBean
     private InstructService instructservice;
+    @MockBean
+    private ReadJwcMsgService readjwcmsgservice;
 
     @MockBean
     private AuthenticationInterceptor intereceptor;
@@ -140,6 +145,18 @@ class TutMsgControllerTest {
                     }
                 }
         );
+        Mockito.when(readjwcmsgservice.findAllByTutoridAndIfread(Mockito.anyString(), Mockito.anyInt())).thenAnswer(
+                new Answer<List<ReadJwcMsg>>(){
+                    @Override
+                    public List<ReadJwcMsg> answer(InvocationOnMock invocation){
+                        List<ReadJwcMsg> ret = new ArrayList<>();
+                        ret.add(new ReadJwcMsg());
+                        ret.add(new ReadJwcMsg());
+                        return ret;
+                    }
+                }
+        );
+
         Mockito.when(intereceptor.preHandle(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(true);
     }
 
@@ -176,6 +193,13 @@ class TutMsgControllerTest {
                 .contentType(MediaType.APPLICATION_JSON).content(msgForm))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("code").value(200));
+
+        map.clear();
+        msgForm = JSONObject.toJSONString(map);
+        mockmvc.perform(MockMvcRequestBuilders.post("/api/tut/sendmsg")
+                .contentType(MediaType.APPLICATION_JSON).content(msgForm))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("code").value(400));
 
     }
 
@@ -221,6 +245,15 @@ class TutMsgControllerTest {
         JSONArray exp = JSONArray.parseArray(arr.toJSONString());
 
         assertEquals(exp, res);
+    }
+
+    @Test
+    public void getJwcMsgCountTest() throws Exception {
+        String str = mockmvc.perform(MockMvcRequestBuilders.get("/api/tut/jwcmsgcount/1"))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+
+        assertEquals("2", str);
     }
 
     @Test

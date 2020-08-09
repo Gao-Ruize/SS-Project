@@ -71,6 +71,11 @@ public class Student {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(id, studentid, uid, studentname, ifRead);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null) return false ;

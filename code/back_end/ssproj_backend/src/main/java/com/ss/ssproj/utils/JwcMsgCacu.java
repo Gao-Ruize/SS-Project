@@ -1,5 +1,7 @@
 package com.ss.ssproj.utils;
 
+import java.util.Objects;
+
 public class JwcMsgCacu {
     int id;
     String title;
@@ -85,5 +87,25 @@ public class JwcMsgCacu {
         this.ttotnum = ttotnum;
         this.sreadnum = sreadnum;
         this.stotnum = stotnum;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        JwcMsgCacu that = (JwcMsgCacu) o;
+        return id == that.id &&
+                phase == that.phase &&
+                treadnum == that.treadnum &&
+                ttotnum == that.ttotnum &&
+                sreadnum == that.sreadnum &&
+                stotnum == that.stotnum &&
+                Objects.equals(title, that.title) &&
+                Objects.equals(releasetime, that.releasetime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, releasetime, phase, treadnum, ttotnum, sreadnum, stotnum);
     }
 }

@@ -4,6 +4,7 @@ import com.ss.ssproj.entity.Student;
 import com.ss.ssproj.entity.Tutor;
 
 import java.util.List;
+import java.util.Objects;
 
 public class JwcMsgCacuDetail {
     int msgid;
@@ -70,5 +71,23 @@ public class JwcMsgCacuDetail {
         this.releasetime = releasetime;
         this.unreadStudents = unreadStudents;
         this.unreadTutors = unreadTutors;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        JwcMsgCacuDetail that = (JwcMsgCacuDetail) o;
+        return msgid == that.msgid &&
+                Objects.equals(title, that.title) &&
+                Objects.equals(content, that.content) &&
+                Objects.equals(releasetime, that.releasetime) &&
+                Objects.equals(unreadStudents, that.unreadStudents) &&
+                Objects.equals(unreadTutors, that.unreadTutors);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(msgid, title, content, releasetime, unreadStudents, unreadTutors);
     }
 }
