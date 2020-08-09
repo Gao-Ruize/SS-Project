@@ -45,6 +45,7 @@ public class AdminController {
             String studentid = item.getStudentid();
             Instruct instruct = this.instructService.findDistinctByStudentid(studentid);
             if(instruct == null) {
+                System.out.println("instruct: null");
                 int id = item.getId();
                 String studentname = item.getStudentname();
                 String uid = item.getUid();
@@ -151,27 +152,27 @@ public class AdminController {
         String userid = loginMsg.getRealId();
         String password = loginMsg.getOpenId();
         Admin admin = this.adminService.findDistinctByUserid(userid);
-        if(admin.getPassword().equals(password)) {
+        if(admin != null && admin.getPassword().equals(password)) {
             String token = this.tokenService.getToken(userid, password);
             return new Result(200, token);
         }
         return new Result(400, "");
     }
 
-    @CrossOrigin
-    @PostMapping(value = "api/admin/register")
-    @ResponseBody
-    public Result adminRegister(@RequestBody Admin admin) {
-        Admin oldAdmin = this.adminService.findDistinctByUserid(admin.getUserid());
-        if(oldAdmin == null) {
-            if(admin.getPassword() == null || admin.getUserid() == null)
-                return new Result(400);
-            this.adminService.save(admin);
-            String token = this.tokenService.getToken(admin.getUserid(), admin.getPassword());
-            return new Result(200, token);
-        }
-        return new Result(400);
-    }
+//    @CrossOrigin
+//    @PostMapping(value = "api/admin/register")
+//    @ResponseBody
+//    public Result adminRegister(@RequestBody Admin admin) {
+//        Admin oldAdmin = this.adminService.findDistinctByUserid(admin.getUserid());
+//        if(oldAdmin == null) {
+//            if(admin.getPassword() == null || admin.getUserid() == null)
+//                return new Result(400);
+//            this.adminService.save(admin);
+//            String token = this.tokenService.getToken(admin.getUserid(), admin.getPassword());
+//            return new Result(200, token);
+//        }
+//        return new Result(400);
+//    }
 
 
 }
