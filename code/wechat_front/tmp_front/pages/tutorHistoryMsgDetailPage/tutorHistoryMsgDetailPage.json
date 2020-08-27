@@ -15,6 +15,7 @@
     "van-checkbox": "/miniprogram_npm/@vant/weapp/checkbox/index",
     "van-checkbox-group": "/miniprogram_npm/@vant/weapp/checkbox-group/index",
     "van-toast": "/miniprogram_npm/@vant/weapp/toast/index",
-    "van-nav-bar": "/miniprogram_npm/@vant/weapp/nav-bar/index"
+    "van-nav-bar": "/miniprogram_npm/@vant/weapp/nav-bar/index",
+    "van-field": "@vant/weapp/field/index"
   }
 }

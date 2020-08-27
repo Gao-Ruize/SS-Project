@@ -16,6 +16,15 @@ Page({
     showMsgs:[],
     jwcMsgCount: '',
     tutMsgCount: '',
+    value1: 0,
+    option1: [
+      { text: '全部通知', value: 0 },
+      { text: '导师选择通知', value: 1 },
+      { text: '开题报告通知', value: 2 },
+      { text: '中期检查通知', value: 3 },
+      { text: '答辩通知', value: 4 },
+      { text: '归档通知', value: 5 },
+    ],
   },
   app: getApp(),
   // 
@@ -34,7 +43,8 @@ Page({
     let that = this;
     let ID = wx.getStorageSync('realid');
     let token = wx.getStorageSync('token');
-    let baseUrl = "http://39.106.85.149:8080/api/stu/unreadjwcmsg/" + ID;
+    // let baseUrl = "http://39.106.85.149:8080/api/stu/unreadjwcmsg/" + ID;
+    let baseUrl = this.app.baseUrl + "/api/stu/unreadjwcmsg/" + ID;
     wx.request({
       url: baseUrl,
       method: 'GET',
@@ -57,7 +67,8 @@ Page({
     let that = this;
     let ID = wx.getStorageSync('realid');
     let token = wx.getStorageSync('token');
-    let baseUrl = "http://39.106.85.149:8080/api/stu/unreadinsmsg/" + ID;
+    // let baseUrl = "http://39.106.85.149:8080/api/stu/unreadinsmsg/" + ID;
+    let baseUrl = this.app.baseUrl + "/api/stu/unreadinsmsg/" + ID;
     wx.request({
       url: baseUrl,
       method: 'GET',
@@ -164,7 +175,9 @@ Page({
     console.log(type);
     console.log(realid);
     let token = wx.getStorageSync('token');
-    let baseurl = "http://39.106.85.149:8080/api/stu/insmsg/" 
+    // let baseurl = "http://39.106.85.149:8080/api/stu/insmsg/" 
+    //   + "/" + realid;
+    let baseurl = this.app.baseUrl + "/api/stu/insmsg/" 
       + "/" + realid;
     wx.request({
       url: baseurl,
@@ -175,7 +188,7 @@ Page({
       },
       success (res) {
         if(that.errCheck(res)) {
-          this.app.onLaunch();
+          that.app.onLaunch();
           return;
         }
         that.setData({
@@ -185,15 +198,15 @@ Page({
         console.log(res.data);
       }
     })
-    if (app.globalData.userInfo) {
+    if (that.app.globalData.userInfo) {
       this.setData({
-        userInfo: app.globalData.userInfo,
+        userInfo: that.app.globalData.userInfo,
         hasUserInfo: true
       })
     } else if (this.data.canIUse){
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
+      that.app.userInfoReadyCallback = res => {
         this.setData({
           userInfo: res.userInfo,
           hasUserInfo: true
@@ -203,7 +216,7 @@ Page({
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
-          app.globalData.userInfo = res.userInfo
+          that.app.globalData.userInfo = res.userInfo
           this.setData({
             userInfo: res.userInfo,
             hasUserInfo: true
@@ -214,10 +227,34 @@ Page({
   },
   getUserInfo: function(e) {
     console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
+    this.app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  changeDropItem(e) {
+    let check = e.detail;
+    this.filter(check);
+  },
+
+  filter(value) {
+    if(value == 0) {
+      this.setData({
+        showMsgs: this.data.allMsgs
+      });
+      return;
+    }
+    let phase = value - 1;
+    let arrRec = [];
+      for(var i = 0; i < this.data.allMsgs.length; ++i) {
+        let item = this.data.allMsgs[i];
+        if(item.phase == phase)
+          arrRec.push(item);
+      }
+      this.setData({
+        showMsgs: arrRec
+      });
+      return;
   }
 })

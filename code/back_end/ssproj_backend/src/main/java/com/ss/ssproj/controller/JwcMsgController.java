@@ -94,8 +94,6 @@ public class JwcMsgController {
                 }
             }
         }
-
-
         sortRet.addAll(jwcMessages);
         return sortRet;
     }

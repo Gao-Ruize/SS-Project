@@ -103,6 +103,7 @@ public class TutMsgController {
             Student student = this.studentService.findDistinctByStudentId(studentId);
             if(student != null) {
                 student.setIfRead(item.getIfread());
+                student.setReply(item.getReply());
                 ret.add(student);
             }
         }

@@ -12,6 +12,15 @@ Page({
     //页面展示信息，即搜索过滤后的信息
     showItems:[],
     jwcMsgCount: '',
+    value1: 0,
+    option1: [
+      { text: '全部通知', value: 0 },
+      { text: '导师选择通知', value: 1 },
+      { text: '开题报告通知', value: 2 },
+      { text: '中期检查通知', value: 3 },
+      { text: '答辩通知', value: 4 },
+      { text: '归档通知', value: 5 },
+    ],
   },
   app: getApp(),
   errCheck(res) {
@@ -32,7 +41,8 @@ Page({
     this.setJwcCount();
     let realId = wx.getStorageSync('realid');
     let token = wx.getStorageSync('token');
-    let baseurl = "http://39.106.85.149:8080/api/tut/insmsgs/" + realId;
+    //let baseurl = "http://39.106.85.149:8080/api/tut/insmsgs/" + realId;
+    let baseurl = this.app.baseUrl + "/api/tut/insmsgs/" + realId;
     let that = this;
     wx.request({
       url: baseurl,
@@ -49,7 +59,8 @@ Page({
   setJwcCount() {
     let ID = wx.getStorageSync('realid');
     let token = wx.getStorageSync('token');
-    let baseurl = "http://39.106.85.149:8080/api/tut/jwcmsgcount/" + ID;
+    // let baseurl = "http://39.106.85.149:8080/api/tut/jwcmsgcount/" + ID;
+    let baseurl = this.app.baseUrl + "/api/tut/jwcmsgcount/" + ID;
     let that = this;
     wx.request({
       url: baseurl,
@@ -132,4 +143,28 @@ Page({
       url: '../tutorHistoryMsgDetailPage/tutorHistoryMsgDetailPage?msgId=' + msgId
     })
   },
+  changeDropItem(e) {
+    let check = e.detail;
+    this.filter(check);
+  },
+
+  filter(value) {
+    if(value == 0) {
+      this.setData({
+        showItems: this.data.msgItems
+      });
+      return;
+    }
+    let phase = value - 1;
+    let arrRec = [];
+      for(var i = 0; i < this.data.msgItems.length; ++i) {
+        let item = this.data.msgItems[i];
+        if(item.phase == phase)
+          arrRec.push(item);
+      }
+      this.setData({
+        showItems: arrRec
+      });
+      return;
+  }
 })

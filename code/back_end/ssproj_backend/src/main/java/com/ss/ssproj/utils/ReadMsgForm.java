@@ -5,6 +5,7 @@ public class ReadMsgForm {
     int msgId;
     String type;
     String userType;
+    String reply;
 
     public String getType() {
         return type;
@@ -36,5 +37,13 @@ public class ReadMsgForm {
 
     public String getUserType() {
         return userType;
+    }
+
+    public void setReply(String reply) {
+        this.reply = reply;
+    }
+
+    public String getReply() {
+        return this.reply;
     }
 }

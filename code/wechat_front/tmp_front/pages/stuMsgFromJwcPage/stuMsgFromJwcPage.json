@@ -10,6 +10,8 @@
     "van-calendar": "/miniprogram_npm/@vant/weapp/calendar/index",
     "van-divider": "/miniprogram_npm/@vant/weapp/divider/index",
     "van-tag": "/miniprogram_npm/@vant/weapp/tag/index",
-    "van-notice-bar": "@vant/weapp/notice-bar/index"
+    "van-notice-bar": "@vant/weapp/notice-bar/index",
+    "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index"
   }
 }
