@@ -21,6 +21,7 @@ Page({
     receiver_type:"",
     infoForm:[],
     msgId: 0,
+    reply: "",
     userType: wx.getStorageSync('type')
   },
   app: getApp(),
@@ -40,17 +41,24 @@ Page({
         }
         return 0;
   },
+  changeReply(event) {
+    this.setData({
+      reply: event.detail
+    });
+  },
   onCommit() {
     let realid = wx.getStorageSync('realid');
     let userType = wx.getStorageSync('type');
     let senderType = this.data.senderType;
     let msgId = this.data.msgId;
     let that = this;
+    let reply = this.data.reply;
     // console.log(realid);
     // console.log(userType);
     // console.log(senderType); 
     // console.log(msgId);
-    let baseurl = "http://39.106.85.149:8080/api/user/readmsg";
+    //let baseurl = "http://39.106.85.149:8080/api/user/readmsg";
+    let baseurl = this.app.baseUrl + "/api/user/readmsg";
     let token = wx.getStorageSync('token');
     wx.request({
       url: baseurl,
@@ -63,7 +71,8 @@ Page({
         userId: realid,
         msgId: msgId,
         type: senderType,
-        userType: userType
+        userType: userType,
+        reply: reply
       },
       success(res) {
         that.onCommit_suc(res);
@@ -77,7 +86,7 @@ Page({
     }
     if(res.data.code == 200) {
       let userType = this.data.userType;
-    let senderType = this.data.senderType;
+      let senderType = this.data.senderType;
     // console.log(userType);
     // console.log(senderType);
     if(userType == 'S') {
@@ -100,6 +109,13 @@ Page({
         duration: 1500
       });
     }
+    if(res.data.code == 300) {
+      wx.showToast({
+        title: '请勿重复确认',
+        icon:'none',
+        duration: 1500
+      });
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -115,8 +131,10 @@ Page({
     // console.log("detail page");
     // console.log(msgId);
     // console.log(type);
-    let baseurl = 'http://39.106.85.149:8080/api/user/msgdetail/'
-      + msgId + '/' + type;
+    // let baseurl = 'http://39.106.85.149:8080/api/user/msgdetail/'
+    //   + msgId + '/' + type;
+    let baseurl = this.app.baseUrl + "/api/user/msgdetail/" 
+      + msgId + "/" + type;
     let token = wx.getStorageSync('token');
     wx.request({
       url: baseurl,

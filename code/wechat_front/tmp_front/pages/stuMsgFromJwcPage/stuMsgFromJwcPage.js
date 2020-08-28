@@ -13,6 +13,15 @@ Page({
     searchValue:'',
     jwcMsgCount: '',
     tutMsgCount: '',
+    value1: 0,
+    option1: [
+      { text: '全部通知', value: 0 },
+      { text: '导师选择通知', value: 1 },
+      { text: '开题报告通知', value: 2 },
+      { text: '中期检查通知', value: 3 },
+      { text: '答辩通知', value: 4 },
+      { text: '归档通知', value: 5 },
+    ],
   }, 
   app: getApp(),
   errCheck(res) {
@@ -30,7 +39,8 @@ Page({
     let that = this;
     let ID = wx.getStorageSync('realid');
     let token = wx.getStorageSync('token');
-    let baseUrl = "http://39.106.85.149:8080/api/stu/unreadjwcmsg/" + ID;
+    // let baseUrl = "http://39.106.85.149:8080/api/stu/unreadjwcmsg/" + ID;
+    let baseUrl = this.app.baseUrl + "/api/stu/unreadjwcmsg/" + ID;
     wx.request({
       url: baseUrl,
       method: 'GET',
@@ -57,7 +67,8 @@ Page({
     let that = this;
     let ID = wx.getStorageSync('realid');
     let token = wx.getStorageSync('token');
-    let baseUrl = "http://39.106.85.149:8080/api/stu/unreadinsmsg/" + ID;
+    // let baseUrl = "http://39.106.85.149:8080/api/stu/unreadinsmsg/" + ID;
+    let baseUrl = this.app.baseUrl + "/api/stu/unreadinsmsg/" + ID;
     wx.request({
       url: baseUrl,
       method: 'GET',
@@ -157,7 +168,9 @@ Page({
     // console.log(type);
     // console.log(realid);
     let token = wx.getStorageSync('token');
-    let baseurl = "http://39.106.85.149:8080/api/user/typejwcmsg/" 
+    // let baseurl = "http://39.106.85.149:8080/api/user/typejwcmsg/" 
+    //   + type + "/" + realid;
+    let baseurl = this.app.baseUrl + "/api/user/typejwcmsg/" 
       + type + "/" + realid;
     wx.request({
       url: baseurl,
@@ -181,5 +194,29 @@ Page({
       allMsgs: res.data,
       showMsgs: res.data,
     });
+  },
+  changeDropItem(e) {
+    let check = e.detail;
+    this.filter(check);
+  },
+
+  filter(value) {
+    if(value == 0) {
+      this.setData({
+        showMsgs: this.data.allMsgs
+      });
+      return;
+    }
+    let phase = value - 1;
+    let arrRec = [];
+      for(var i = 0; i < this.data.allMsgs.length; ++i) {
+        let item = this.data.allMsgs[i];
+        if(item.phase == phase)
+          arrRec.push(item);
+      }
+      this.setData({
+        showMsgs: arrRec
+      });
+      return;
   }
 })

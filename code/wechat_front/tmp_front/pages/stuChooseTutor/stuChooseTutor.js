@@ -29,7 +29,8 @@ Page({
   setJwcCount () {
     let that = this;
     let ID = wx.getStorageSync('realid');
-    let baseUrl = "http://39.106.85.149:8080/api/stu/unreadjwcmsg/" + ID;
+    let baseUrl = this.app.baseUrl + "/api/stu/unreadjwcmsg/" + ID;
+    //let baseUrl = "http://39.106.85.149:8080/api/stu/unreadjwcmsg/" + ID;
     let token = wx.getStorageSync('token');
     wx.request({
       url: baseUrl,
@@ -56,7 +57,8 @@ Page({
     let that = this;
     let ID = wx.getStorageSync('realid');
     let token = wx.getStorageSync('token');
-    let baseUrl = "http://39.106.85.149:8080/api/stu/unreadinsmsg/" + ID;
+    let baseUrl = this.app.baseUrl + "/api/stu/unreadinsmsg/" + ID;
+    //let baseUrl = "http://39.106.85.149:8080/api/stu/unreadinsmsg/" + ID;
     wx.request({
       url: baseUrl,
       method: 'GET',
@@ -121,7 +123,8 @@ Page({
     this.setJwcCount();
     this.setTutCount();
     let that = this;
-    let baseurl = "http://39.106.85.149:8080/api/user/tutors";
+    let baseurl = this.app.baseUrl + "/api/user/tutors";
+    //let baseurl = "http://39.106.85.149:8080/api/user/tutors";
     let token = wx.getStorageSync('token');
     wx.request({
       url: baseurl,
@@ -160,7 +163,8 @@ Page({
       return;
     }
     // console.log(tutorid);
-    let baseurl = "http://39.106.85.149:8080/api/stu/choosetutor";
+    let baseurl = this.app.baseUrl + "/api/stu/choosetutor";
+    //let baseurl = "http://39.106.85.149:8080/api/stu/choosetutor";
     let token = wx.getStorageSync('token');
     let that = this;
     wx.request({

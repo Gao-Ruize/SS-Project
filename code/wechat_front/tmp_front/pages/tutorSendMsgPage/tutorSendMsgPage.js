@@ -25,7 +25,8 @@ Page({
   setJwcCount() {
     let ID = wx.getStorageSync('realid');
     let token = wx.getStorageSync('token');
-    let baseurl = "http://39.106.85.149:8080/api/tut/jwcmsgcount/" + ID;
+    // let baseurl = "http://39.106.85.149:8080/api/tut/jwcmsgcount/" + ID;
+    let baseurl = this.app.baseUrl + "/api/tut/jwcmsgcount/" + ID;
     let that = this;
     wx.request({
       url: baseurl,
@@ -51,7 +52,8 @@ Page({
   getStudents(){
     var t_id = wx.getStorageSync('realid');
     let token = wx.getStorageSync('token');
-    var url = "http://39.106.85.149:8080/api/tut/students/"+t_id;
+    // var url = "http://39.106.85.149:8080/api/tut/students/"+t_id;
+    var url = this.app.baseUrl + "/api/tut/students/"+t_id;
     const _this = this;
     wx.request({
       url: url,
@@ -120,7 +122,8 @@ Page({
     let that = this;
     var t_id = wx.getStorageSync('realid');
     let token = wx.getStorageSync('token');
-    var url = "http://39.106.85.149:8080/api/tut/students/"+t_id;
+    // var url = "http://39.106.85.149:8080/api/tut/students/"+t_id;
+    var url = this.app.baseUrl + "/api/tut/students/"+t_id;
     wx.request({
       url: url,
       method: 'GET',

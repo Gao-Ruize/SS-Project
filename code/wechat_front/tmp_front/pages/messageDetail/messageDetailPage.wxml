@@ -12,6 +12,15 @@
         {{infoForm.content}}
       </van-collapse-item>
     </van-collapse>
+    <van-field
+      value = "{{reply}}"
+      rows="1"
+      autosize
+      label="回复"
+      type="textarea"
+      placeholder="若必要请输入回复"
+      bind:change = "changeReply"
+     />
     <view slot="footer" class = "buttons">
         <van-button size="normal" type="danger" bindtap="onCommit">确认收到</van-button>
     </view>

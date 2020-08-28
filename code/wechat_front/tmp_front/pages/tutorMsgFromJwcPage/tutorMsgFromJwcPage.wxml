@@ -13,7 +13,13 @@
   bind:search="onSearch"
   bind:cancel="onCancel"
   />
-  </view>
+</view>
+
+<view>
+<van-dropdown-menu>
+  <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}" bind:change = "changeDropItem"/>
+</van-dropdown-menu>
+</view>
 
 <view>
   <!-- <van-cell title="选择日期区间" value="{{ date }}" bind:click="onDisplay" />

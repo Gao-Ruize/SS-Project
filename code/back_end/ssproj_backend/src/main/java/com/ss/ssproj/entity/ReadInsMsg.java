@@ -13,6 +13,7 @@ public class ReadInsMsg {
     String studentid;
     int ifread;
     int msgid;
+    String reply;
 
     public void setMsgid(int msgid) {
         this.msgid = msgid;
@@ -44,6 +45,14 @@ public class ReadInsMsg {
 
     public int getIfread() {
         return ifread;
+    }
+
+    public void setReply(String reply) {
+        this.reply = reply;
+    }
+
+    public String getReply() {
+        return this.reply;
     }
 
     public ReadInsMsg() {}

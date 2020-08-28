@@ -15,7 +15,9 @@ Page({
     showStudents:[],
     searchValue:"",
     showPopUp:false,
+    showReply:false,
     result:[],
+    tmpReply:"",
   },
   app: getApp(),
   errCheck(res) {
@@ -41,7 +43,8 @@ Page({
     //通过msgId获得对应的学生
     //将已读学生和未读学生存储到一起
     //获得信息后将showStudent为全部学生信息
-    let baseurl = 'http://39.106.85.149:8080/api/tut/getmsginfo/' + tmpMsgId;
+    // let baseurl = 'http://39.106.85.149:8080/api/tut/getmsginfo/' + tmpMsgId;
+    let baseurl = this.app.baseUrl +'/api/tut/getmsginfo/' + tmpMsgId;
     let token = wx.getStorageSync('token');
     let that = this;
     wx.request({
@@ -86,7 +89,6 @@ Page({
     this.setData({showPopUp: false});
     this.setData({unreadStudentInfo:[]});
   },
-
   onSearch(){
     // 将内容过滤后存入showStudents
     // console.log("search!");
@@ -142,7 +144,8 @@ Page({
     contain = "请及时阅读通知：" + contain; 
     // console.log(students);
     let token = wx.getStorageSync('token');
-    let baseurl = "http://39.106.85.149:8080/api/tut/sendmsg";
+    //let baseurl = "http://39.106.85.149:8080/api/tut/sendmsg";
+    let baseurl = this.app.baseUrl + "/api/tut/sendmsg";
     wx.request({
       url: baseurl,
       method: 'POST',
@@ -179,5 +182,15 @@ Page({
       }
     };
     this.setData({unreadStudentInfo:tmpArr});
+  },
+  showReply(e) {
+    let tmpReply = e.currentTarget.dataset.type;
+    //通过popup展示学生回复
+    this.setData({tmpReply: tmpReply});
+    this.setData({showReply: true});
+  },
+  onCloseReply() {
+    this.setData({showReply: false});
+    this.setData({tmpReply:""});
   },
 })

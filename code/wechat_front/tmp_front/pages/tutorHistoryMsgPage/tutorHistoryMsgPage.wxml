@@ -8,6 +8,13 @@
   bind:cancel="onCancel"
   shape = "round"
 />
+
+<view>
+<van-dropdown-menu>
+  <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}" bind:change = "changeDropItem"/>
+</van-dropdown-menu>
+</view>
+
 <view wx:for="{{showItems}}" wx:for-item="showItem">
   <van-cell 
     bindtap = "checkDetails" data-id = "{{showItem.id}}" data-title = "{{showItem.title}}"

@@ -21,6 +21,28 @@
     </van-goods-action>
   </van-popup>
 
+  <van-popup
+    round
+    show="{{ showReply }}"
+    position="bottom"
+    custom-style="height: 80%;"
+    bind:close="onCloseReply"
+    closeable
+  >
+    <text>\n</text>
+    <text>\n</text>
+    <text>\n</text>
+
+    <van-field 
+      label="学生回复" value="{{tmpReply}}" disabled 
+      type="textarea"
+      autosize
+      rows = "1"
+    />
+
+
+  </van-popup>
+
   <van-search
     value="{{ searchValue }}"
     show-action
@@ -31,7 +53,13 @@
     shape = "round"
   />
   <view wx:for="{{showStudents}}" wx:for-item="eachInfo">
-    <van-cell icon="user-o"  value = "{{eachInfo.studentid}}">
+    <van-cell 
+      bindtap = "showReply"
+      data-type = "{{eachInfo.reply}}"
+      icon="user-o"  
+      value = "{{eachInfo.studentid}}"
+      is-link 
+    >
       <view slot="title">
         <view class="van-cell-text">{{eachInfo.studentname}}</view>
         <van-tag type="{{eachInfo.ifRead?'success':'danger'}}">{{eachInfo.ifRead?"已读":"未读"}}</van-tag>

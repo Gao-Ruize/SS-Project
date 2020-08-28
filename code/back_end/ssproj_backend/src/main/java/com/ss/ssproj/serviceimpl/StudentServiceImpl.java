@@ -24,7 +24,7 @@ public class StudentServiceImpl implements StudentService {
         return studentDao.findDistinctByUid(uid);
     }
 
-    @Cacheable("students")
+    //@Cacheable("students")
     @Override
     public Student findDistinctByStudentId(String studentId) {
         return studentDao.findDistinctByStudentId(studentId);

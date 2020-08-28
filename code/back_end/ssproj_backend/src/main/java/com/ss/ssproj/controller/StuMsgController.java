@@ -57,6 +57,7 @@ public class StuMsgController {
         String userId = readMsgForm.getUserId();
         String type = readMsgForm.getType();
         String userType = readMsgForm.getUserType();
+        String reply = readMsgForm.getReply();
         int msgId = readMsgForm.getMsgId();
         if(type.equals("tutor")) {
             //userType必定为S
@@ -64,7 +65,12 @@ public class StuMsgController {
             if(readInsMsg == null) {
                 return new Result(400);
             }
+            //重复阅读 不做修改 返回特殊的提示码
+            if(readInsMsg.getIfread() == 1) {
+                return new Result(300);
+            }
             readInsMsg.setIfread(1);
+            readInsMsg.setReply(reply);
             this.readInsMsgService.save(readInsMsg);
             return new Result(200);
         } else if(type.equals("jwc")) {
@@ -73,12 +79,18 @@ public class StuMsgController {
                 if(readJwcMsg == null) {
                     return new Result(400);
                 }
+                if(readJwcMsg.getIfread() == 1) {
+                    return new Result(300);
+                }
                 readJwcMsg.setIfread(1);
                 this.readJwcMsgService.saveOrUpdate(readJwcMsg);
             } else if(userType.equals("T")) {
                 ReadJwcMsg readJwcMsg = this.readJwcMsgService.findDistinctByTutoridAndMsgid(userId, msgId);
                 if(readJwcMsg == null) {
                     return new Result(400);
+                }
+                if(readJwcMsg.getIfread() == 1) {
+                    return new Result(300);
                 }
                 readJwcMsg.setIfread(1);
                 this.readJwcMsgService.saveOrUpdate(readJwcMsg);

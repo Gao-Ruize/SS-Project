@@ -39,7 +39,8 @@ Page({
       }) }
     else
     {
-      let baseurl = 'http://39.106.85.149:8080/api/user/bind';
+      let baseurl = app.baseUrl + "/api/user/bind";
+      //let baseurl = 'http://39.106.85.149:8080/api/user/bind';
       let openid = wx.getStorageSync('openid');
       let type = this.data.type;
       if(type == "err") {
@@ -75,16 +76,21 @@ Page({
     //将token存储到本地
     wx.setStorageSync('token', token);
     if(result == 200) {
+      app.onLaunch();
+      this.requestSubscribe();
       wx.setStorageSync('type', "S");
-      wx.navigateTo({
-        url: '../stuMsgFromJwcPage/stuMsgFromJwcPage',
-      });
+      // wx.navigateTo({
+      //   url: '../stuMsgFromJwcPage/stuMsgFromJwcPage',
+      // });
     } else
     if(result == 201) {
+      app.onLaunch();
+      this.requestSubscribe();
+      //可以注释掉
       wx.setStorageSync('realid', "T");
-      wx.navigateTo({
-        url: '../tutorMsgFromJwcPage/tutorMsgFromJwcPage',
-      });
+      // wx.navigateTo({
+      //   url: '../tutorMsgFromJwcPage/tutorMsgFromJwcPage',
+      // });
     } else 
     if(result == 400) {
       wx.showToast({
@@ -113,5 +119,15 @@ Page({
     this.setData({
       radio: name,
     });
+  },
+
+  requestSubscribe() {
+    // 获取发送通知的权限
+    wx.requestSubscribeMessage({
+      tmplIds: ['9nsC02qakcZ8FzRlXV5lLNOyuOkHSmNKnbDUDEUob0g'],
+      success (res) {
+        console.log("success");
+      }
+    })
   },
 })

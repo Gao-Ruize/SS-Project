@@ -24,6 +24,11 @@
     /> -->
 </view>
 
+<view>
+<van-dropdown-menu>
+  <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}" bind:change = "changeDropItem"/>
+</van-dropdown-menu>
+</view>
 
 <van-cell-group>
   <view wx:for="{{showMsgs}}" wx:for-item="message">

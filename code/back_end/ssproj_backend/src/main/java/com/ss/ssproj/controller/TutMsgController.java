@@ -103,6 +103,7 @@ public class TutMsgController {
             Student student = this.studentService.findDistinctByStudentId(studentId);
             if(student != null) {
                 student.setIfRead(item.getIfread());
+                student.setReply(item.getReply());
                 ret.add(student);
             }
         }
@@ -162,7 +163,7 @@ public class TutMsgController {
     @ResponseBody
     public Result sendNotice(String uid) {
         //实际调用时删除，仅测试时使用
-        uid = "oGHQL41GnIk7aXtTCALuwIkJLeXw";
+        //uid = "oGHQL41GnIk7aXtTCALuwIkJLeXw";
         //参数uid为微信id
         //根据小程序的appId与appSecret
         String appId = "wxfc660793593ad691";

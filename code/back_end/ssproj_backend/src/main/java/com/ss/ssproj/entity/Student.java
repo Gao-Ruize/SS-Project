@@ -58,7 +58,18 @@ public class Student {
     }
 
     public int getIfRead() {
-        return ifRead;
+        return this.ifRead;
+    }
+
+    @Transient
+    String reply;
+
+    public void setReply(String reply) {
+        this.reply = reply;
+    }
+
+    public String getReply() {
+        return this.reply;
     }
 
     public Student() {}

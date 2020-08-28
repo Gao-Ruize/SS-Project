@@ -107,6 +107,7 @@ CREATE TABLE `read_ins_msg` (
   `StudentId` varchar(100) DEFAULT NULL,
   `ifRead` int(11) DEFAULT 0,
   `MsgId` int(11) DEFAULT 0,
+	`Reply` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=300 DEFAULT CHARSET=utf8;
 
