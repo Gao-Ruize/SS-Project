@@ -78,20 +78,19 @@ Page({
     if(result == 200) {
       app.onLaunch();
       this.requestSubscribe();
-      //可以注释掉
       wx.setStorageSync('type', "S");
-      wx.navigateTo({
-        url: '../stuMsgFromJwcPage/stuMsgFromJwcPage',
-      });
+      // wx.navigateTo({
+      //   url: '../stuMsgFromJwcPage/stuMsgFromJwcPage',
+      // });
     } else
     if(result == 201) {
       app.onLaunch();
       this.requestSubscribe();
       //可以注释掉
       wx.setStorageSync('realid', "T");
-      wx.navigateTo({
-        url: '../tutorMsgFromJwcPage/tutorMsgFromJwcPage',
-      });
+      // wx.navigateTo({
+      //   url: '../tutorMsgFromJwcPage/tutorMsgFromJwcPage',
+      // });
     } else 
     if(result == 400) {
       wx.showToast({
