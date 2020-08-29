@@ -1,0 +1,176 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: JwcMsgCacuDetail</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.ss.ssproj.utils</a> ]
+</div>
+
+<h1>Coverage Summary for Class: JwcMsgCacuDetail (com.ss.ssproj.utils)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JwcMsgCacuDetail</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.8%
+  </span>
+  <span class="absValue">
+    (15/ 16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    97.3%
+  </span>
+  <span class="absValue">
+    (36/ 37)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.ss.ssproj.utils;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.ss.ssproj.entity.Student;
+<i>4</i>&nbsp;import com.ss.ssproj.entity.Tutor;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import java.util.List;
+<i>7</i>&nbsp;import java.util.Objects;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;public class JwcMsgCacuDetail {
+<i>10</i>&nbsp;    int msgid;
+<i>11</i>&nbsp;    String title;
+<i>12</i>&nbsp;    String content;
+<i>13</i>&nbsp;    String releasetime;
+<i>14</i>&nbsp;    List&lt;Student&gt; unreadStudents;
+<i>15</i>&nbsp;    List&lt;Tutor&gt; unreadTutors;
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    public void setReleasetime(String releasetime) {
+<b class="fc"><i>18</i>&nbsp;        this.releasetime = releasetime;</b>
+<b class="fc"><i>19</i>&nbsp;    }</b>
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    public String getReleasetime() {
+<b class="fc"><i>22</i>&nbsp;        return this.releasetime;</b>
+<i>23</i>&nbsp;    }
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    public void setTitle(String title) {
+<b class="fc"><i>26</i>&nbsp;        this.title = title;</b>
+<b class="fc"><i>27</i>&nbsp;    }</b>
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    public String getTitle() {
+<b class="fc"><i>30</i>&nbsp;        return this.title;</b>
+<i>31</i>&nbsp;    }
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    public void setMsgid(int msgid) {
+<b class="fc"><i>34</i>&nbsp;        this.msgid = msgid;</b>
+<b class="fc"><i>35</i>&nbsp;    }</b>
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    public int getMsgid() {
+<b class="fc"><i>38</i>&nbsp;        return this.msgid;</b>
+<i>39</i>&nbsp;    }
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    public void setContent(String content) {
+<b class="fc"><i>42</i>&nbsp;        this.content = content;</b>
+<b class="fc"><i>43</i>&nbsp;    }</b>
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;    public String getContent() {
+<b class="fc"><i>46</i>&nbsp;        return this.content;</b>
+<i>47</i>&nbsp;    }
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    public void setUnreadStudents(List&lt;Student&gt; unreadStudents) {
+<b class="fc"><i>50</i>&nbsp;        this.unreadStudents = unreadStudents;</b>
+<b class="fc"><i>51</i>&nbsp;    }</b>
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    public List&lt;Student&gt; getUnreadStudents() {
+<b class="fc"><i>54</i>&nbsp;        return this.unreadStudents;</b>
+<i>55</i>&nbsp;    }
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;    public void setUnreadTutors(List&lt;Tutor&gt; unreadTutors) {
+<b class="fc"><i>58</i>&nbsp;        this.unreadTutors = unreadTutors;</b>
+<b class="fc"><i>59</i>&nbsp;    }</b>
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;    public List&lt;Tutor&gt; getUnreadTutors() {
+<b class="fc"><i>62</i>&nbsp;        return this.unreadTutors;</b>
+<i>63</i>&nbsp;    }
+<i>64</i>&nbsp;
+<b class="fc"><i>65</i>&nbsp;    public JwcMsgCacuDetail () {}</b>
+<i>66</i>&nbsp;
+<b class="fc"><i>67</i>&nbsp;    public JwcMsgCacuDetail(int msgid, String title, String content, String releasetime, List&lt;Student&gt; unreadStudents, List&lt;Tutor&gt; unreadTutors) {</b>
+<b class="fc"><i>68</i>&nbsp;        this.msgid = msgid;</b>
+<b class="fc"><i>69</i>&nbsp;        this.title = title;</b>
+<b class="fc"><i>70</i>&nbsp;        this.content = content;</b>
+<b class="fc"><i>71</i>&nbsp;        this.releasetime = releasetime;</b>
+<b class="fc"><i>72</i>&nbsp;        this.unreadStudents = unreadStudents;</b>
+<b class="fc"><i>73</i>&nbsp;        this.unreadTutors = unreadTutors;</b>
+<b class="fc"><i>74</i>&nbsp;    }</b>
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;    @Override
+<i>77</i>&nbsp;    public boolean equals(Object o) {
+<b class="fc"><i>78</i>&nbsp;        if (this == o) return true;</b>
+<b class="fc"><i>79</i>&nbsp;        if (o == null || getClass() != o.getClass()) return false;</b>
+<b class="fc"><i>80</i>&nbsp;        JwcMsgCacuDetail that = (JwcMsgCacuDetail) o;</b>
+<b class="fc"><i>81</i>&nbsp;        return msgid == that.msgid &amp;&amp;</b>
+<b class="fc"><i>82</i>&nbsp;                Objects.equals(title, that.title) &amp;&amp;</b>
+<b class="fc"><i>83</i>&nbsp;                Objects.equals(content, that.content) &amp;&amp;</b>
+<b class="fc"><i>84</i>&nbsp;                Objects.equals(releasetime, that.releasetime) &amp;&amp;</b>
+<b class="fc"><i>85</i>&nbsp;                Objects.equals(unreadStudents, that.unreadStudents) &amp;&amp;</b>
+<b class="fc"><i>86</i>&nbsp;                Objects.equals(unreadTutors, that.unreadTutors);</b>
+<i>87</i>&nbsp;    }
+<i>88</i>&nbsp;
+<i>89</i>&nbsp;    @Override
+<i>90</i>&nbsp;    public int hashCode() {
+<b class="nc"><i>91</i>&nbsp;        return Objects.hash(msgid, title, content, releasetime, unreadStudents, unreadTutors);</b>
+<i>92</i>&nbsp;    }
+<i>93</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-08-29 00:16</div>
+</div>
+</body>
+</html>

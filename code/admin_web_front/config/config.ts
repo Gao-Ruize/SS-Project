@@ -39,8 +39,7 @@ export default defineConfig({
           component: './user/login',
         },
       ],
-    },
-    // {
+    }, // {
     //   path: '/welcome',
     //   name: 'welcome',
     //   icon: 'smile',

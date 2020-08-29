@@ -1,0 +1,63 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ReadJwcMsgRepository</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.ss.ssproj.repository</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ReadJwcMsgRepository (com.ss.ssproj.repository)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">ReadJwcMsgRepository</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.ss.ssproj.repository;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.ss.ssproj.entity.JwcMessage;
+<i>4</i>&nbsp;import com.ss.ssproj.entity.ReadJwcMsg;
+<i>5</i>&nbsp;import org.springframework.data.jpa.repository.JpaRepository;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import java.util.List;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;public interface ReadJwcMsgRepository extends JpaRepository&lt;ReadJwcMsg, Integer&gt; {
+<i>10</i>&nbsp;    ReadJwcMsg findDistinctByStudentidAndMsgid(String studentid, int msgid);
+<i>11</i>&nbsp;    ReadJwcMsg findDistinctByTutoridAndMsgid(String tutorid, int msgid);
+<i>12</i>&nbsp;    ReadJwcMsg save(ReadJwcMsg readJwcMsg);
+<i>13</i>&nbsp;    List&lt;ReadJwcMsg&gt; findAllByStudentidAndIfread(String studentid, int ifread);
+<i>14</i>&nbsp;    List&lt;ReadJwcMsg&gt; findAllByTutoridAndIfread(String tutorid, int ifread);
+<i>15</i>&nbsp;    List&lt;ReadJwcMsg&gt; findAllByIfstudentAndIfreadAndMsgid(int ifstudent, int ifread, int msgid);
+<i>16</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-08-29 00:16</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,197 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Instruct</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.ss.ssproj.entity</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Instruct (com.ss.ssproj.entity)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Instruct</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.9%
+  </span>
+  <span class="absValue">
+    (8/ 9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.9%
+  </span>
+  <span class="absValue">
+    (20/ 22)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Instruct$HibernateProxy$CBsuuaWf</td>
+  </tr>
+  <tr>
+    <td class="name">Instruct$HibernateProxy$Cr2bNoff</td>
+  </tr>
+  <tr>
+    <td class="name">Instruct$HibernateProxy$DXfRu7Rt</td>
+  </tr>
+  <tr>
+    <td class="name">Instruct$HibernateProxy$fTywNH2C</td>
+  </tr>
+  <tr>
+    <td class="name">Instruct$HibernateProxy$KyyBkfKD</td>
+  </tr>
+  <tr>
+    <td class="name">Instruct$HibernateProxy$O9DQKsT3</td>
+  </tr>
+  <tr>
+    <td class="name">Instruct$HibernateProxy$P24FT50A</td>
+  </tr>
+  <tr>
+    <td class="name">Instruct$HibernateProxy$PDVpGuWW</td>
+  </tr>
+  <tr>
+    <td class="name">Instruct$HibernateProxy$sQf8G91D</td>
+  </tr>
+  <tr>
+    <td class="name">Instruct$HibernateProxy$swAfqE76</td>
+  </tr>
+  <tr>
+    <td class="name">Instruct$HibernateProxy$VJyW6BwR</td>
+  </tr>
+  <tr>
+    <td class="name">Instruct$HibernateProxy$vMl97pyr</td>
+  </tr>
+  <tr>
+    <td class="name">Instruct$HibernateProxy$wehNMAvx</td>
+  </tr>
+  <tr>
+    <td class="name">Instruct$HibernateProxy$x3ro2o2y</td>
+  </tr>
+  <tr>
+    <td class="name">Instruct$HibernateProxy$ZxU3FyeT</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    88.9%
+  </span>
+  <span class="absValue">
+    (8/ 9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.9%
+  </span>
+  <span class="absValue">
+    (20/ 22)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.ss.ssproj.entity;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import javax.persistence.*;
+<i>6</i>&nbsp;import java.util.Objects;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;@Entity
+<i>9</i>&nbsp;@Table(name = &quot;instruct&quot;)
+<i>10</i>&nbsp;@JsonIgnoreProperties(value = {&quot;handler&quot;,&quot;hibernateLazyInitializer&quot;,&quot;fieldHandler&quot;})
+<i>11</i>&nbsp;public class Instruct {
+<i>12</i>&nbsp;    @Id
+<i>13</i>&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+<i>14</i>&nbsp;    @Column(name = &quot;Id&quot;)
+<i>15</i>&nbsp;    int id;
+<i>16</i>&nbsp;    String studentid;
+<i>17</i>&nbsp;    String tutorid;
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    public void setTutorid(String tutorid) {
+<b class="fc"><i>20</i>&nbsp;        this.tutorid = tutorid;</b>
+<b class="fc"><i>21</i>&nbsp;    }</b>
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    public String getTutorid() {
+<b class="fc"><i>24</i>&nbsp;        return tutorid;</b>
+<i>25</i>&nbsp;    }
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    public void setStudentid(String studentid) {
+<b class="fc"><i>28</i>&nbsp;        this.studentid = studentid;</b>
+<b class="fc"><i>29</i>&nbsp;    }</b>
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    public String getStudentid() {
+<b class="fc"><i>32</i>&nbsp;        return studentid;</b>
+<i>33</i>&nbsp;    }
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    public void setId(int id) {
+<b class="nc"><i>36</i>&nbsp;        this.id = id;</b>
+<b class="nc"><i>37</i>&nbsp;    }</b>
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;    public int getId() {
+<b class="fc"><i>40</i>&nbsp;        return id;</b>
+<i>41</i>&nbsp;    }
+<i>42</i>&nbsp;
+<b class="fc"><i>43</i>&nbsp;    public Instruct() {}</b>
+<i>44</i>&nbsp;
+<b class="fc"><i>45</i>&nbsp;    public Instruct(int id, String studentid, String tutorid){</b>
+<b class="fc"><i>46</i>&nbsp;        this.id = id;</b>
+<b class="fc"><i>47</i>&nbsp;        this.studentid = studentid;</b>
+<b class="fc"><i>48</i>&nbsp;        this.tutorid = tutorid;</b>
+<b class="fc"><i>49</i>&nbsp;    }</b>
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;    @Override
+<i>52</i>&nbsp;    public boolean equals(Object o) {
+<b class="fc"><i>53</i>&nbsp;        if (this == o) return true;</b>
+<b class="fc"><i>54</i>&nbsp;        if (o == null) return false ;</b>
+<i>55</i>&nbsp;
+<b class="fc"><i>56</i>&nbsp;        if (!(o instanceof Instruct)) return false;</b>
+<b class="fc"><i>57</i>&nbsp;        Instruct other = (Instruct) o;</b>
+<b class="fc"><i>58</i>&nbsp;        return this.id == other.id &amp;&amp;</b>
+<b class="fc"><i>59</i>&nbsp;                Objects.equals(this.studentid, other.studentid) &amp;&amp;</b>
+<b class="fc"><i>60</i>&nbsp;                Objects.equals(this.tutorid, other.tutorid);</b>
+<i>61</i>&nbsp;    }
+<i>62</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-08-29 00:16</div>
+</div>
+</body>
+</html>

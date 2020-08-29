@@ -50,7 +50,7 @@ class TutorServiceImplTest {
 
     @Test
     public void saveOrUpdateTest(){
-
+        tutorserviceimpl.saveOrUpdate(null);
     }
 
     @Test

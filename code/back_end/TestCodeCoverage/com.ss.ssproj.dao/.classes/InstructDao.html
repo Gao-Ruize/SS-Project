@@ -1,0 +1,73 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: InstructDao</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.ss.ssproj.dao</a> ]
+</div>
+
+<h1>Coverage Summary for Class: InstructDao (com.ss.ssproj.dao)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">InstructDao$MockitoMock$909840996</td>
+  </tr>
+  <tr>
+    <td class="name">InstructDao$MockitoMock$909840996$auxiliary$qzMG1qzO</td>
+  </tr>
+  <tr>
+    <td class="name">InstructDao$MockitoMock$909840996$auxiliary$tuaZPdFm</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.ss.ssproj.dao;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.ss.ssproj.entity.Instruct;
+<i>4</i>&nbsp;import com.ss.ssproj.repository.InstructRepository;
+<i>5</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import java.util.List;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;public interface InstructDao {
+<i>10</i>&nbsp;    List&lt;Instruct&gt; findAll();
+<i>11</i>&nbsp;    Instruct save(Instruct instruct);
+<i>12</i>&nbsp;    List&lt;Instruct&gt; findAllByTutorid(String tutorid);
+<i>13</i>&nbsp;    Instruct findDistinctByStudentidAndTutorid(String studentid, String tutorid);
+<i>14</i>&nbsp;    Instruct findDistinctByStudentid(String studentid);
+<i>15</i>&nbsp;    void deleteById(int id);
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-08-29 00:16</div>
+</div>
+</body>
+</html>
