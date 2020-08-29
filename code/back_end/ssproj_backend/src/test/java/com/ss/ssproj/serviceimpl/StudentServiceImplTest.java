@@ -14,6 +14,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
@@ -40,6 +43,17 @@ class StudentServiceImplTest {
                     }
                 }
         );
+        Mockito.when(studentdao.findAll()).thenAnswer(
+                new Answer<List<Student>>(){
+                    @Override
+                    public List<Student> answer(InvocationOnMock invocation){
+                        List<Student> ret = new ArrayList<Student>();
+                        ret.add(new Student(1, "studentid1", "uid1", "studentname1"));
+                        ret.add(new Student(2, "studentid2", "uid2", "studentname2"));
+                        return ret;
+                    }
+                }
+        );
     }
 
     @Test
@@ -60,5 +74,16 @@ class StudentServiceImplTest {
 //        Student exp = new Student(168,"516030910005","abcde","陈星伊");
 
         assertEquals(exp, studentserviceimpl.findDistinctByStudentId("s2"));
+    }
+
+    @Test
+    public void findAllTest(){
+        List<Student> exp = new ArrayList<Student>();
+        exp.add(new Student(1, "studentid1", "uid1", "studentname1"));
+        exp.add(new Student(2, "studentid2", "uid2", "studentname2"));
+
+        List<Student> get = studentserviceimpl.findAll();
+
+        assertEquals(exp, get);
     }
 }

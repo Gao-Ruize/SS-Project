@@ -1,0 +1,71 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ReadJwcMsgDao</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.ss.ssproj.dao</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ReadJwcMsgDao (com.ss.ssproj.dao)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">ReadJwcMsgDao$MockitoMock$1935868368</td>
+  </tr>
+  <tr>
+    <td class="name">ReadJwcMsgDao$MockitoMock$1935868368$auxiliary$BCk6KjEh</td>
+  </tr>
+  <tr>
+    <td class="name">ReadJwcMsgDao$MockitoMock$1935868368$auxiliary$Z5BoPMNN</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.ss.ssproj.dao;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.ss.ssproj.entity.ReadJwcMsg;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import java.util.List;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;public interface ReadJwcMsgDao {
+<i>8</i>&nbsp;    ReadJwcMsg findDistinctByStudentidAndMsgid(String studentid, int msgid);
+<i>9</i>&nbsp;    ReadJwcMsg findDistinctByTutoridAndMsgid(String tutorid, int msgid);
+<i>10</i>&nbsp;    ReadJwcMsg save(ReadJwcMsg readJwcMsg);
+<i>11</i>&nbsp;    List&lt;ReadJwcMsg&gt; findAllByStudentidAndIfread(String studentid, int ifread);
+<i>12</i>&nbsp;    List&lt;ReadJwcMsg&gt; findAllByTutoridAndIfread(String tutorid, int ifread);
+<i>13</i>&nbsp;    List&lt;ReadJwcMsg&gt; findAllByIfstudentAndIfreadAndMsgid(int ifstudent, int ifread, int msgid);
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-08-29 00:16</div>
+</div>
+</body>
+</html>

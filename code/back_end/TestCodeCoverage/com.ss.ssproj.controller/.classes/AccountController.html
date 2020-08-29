@@ -1,0 +1,142 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: AccountController</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.ss.ssproj.controller</a> ]
+</div>
+
+<h1>Coverage Summary for Class: AccountController (com.ss.ssproj.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AccountController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (21/ 21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;//教师查看发送给学生的信息
+<i>2</i>&nbsp;//教师查看信息阅读情况
+<i>3</i>&nbsp;//教师给学生发送信息
+<i>4</i>&nbsp;//搜索
+<i>5</i>&nbsp;package com.ss.ssproj.controller;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import com.ss.ssproj.annotation.AdminLoginToken;
+<i>8</i>&nbsp;import com.ss.ssproj.entity.Student;
+<i>9</i>&nbsp;import com.ss.ssproj.entity.Tutor;
+<i>10</i>&nbsp;import com.ss.ssproj.service.StudentService;
+<i>11</i>&nbsp;import com.ss.ssproj.service.TutorService;
+<i>12</i>&nbsp;import com.ss.ssproj.utils.LoginMsg;
+<i>13</i>&nbsp;import com.ss.ssproj.utils.Result;
+<i>14</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>15</i>&nbsp;import org.springframework.web.bind.annotation.*;
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;@RestController
+<b class="fc"><i>18</i>&nbsp;public class AccountController {</b>
+<i>19</i>&nbsp;    @Autowired
+<i>20</i>&nbsp;    TutorService tutorService;
+<i>21</i>&nbsp;    @Autowired
+<i>22</i>&nbsp;    StudentService studentService;
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    //解除绑定
+<i>25</i>&nbsp;    @AdminLoginToken
+<i>26</i>&nbsp;    @CrossOrigin
+<i>27</i>&nbsp;    @PostMapping(value = &quot;api/admin/unbind&quot;)
+<i>28</i>&nbsp;    @ResponseBody
+<i>29</i>&nbsp;    public Result unbind(@RequestBody LoginMsg unbindMsg) {
+<b class="fc"><i>30</i>&nbsp;        String realId = unbindMsg.getRealId();</b>
+<b class="fc"><i>31</i>&nbsp;        String type = unbindMsg.getType();</b>
+<b class="fc"><i>32</i>&nbsp;        if(type.equals(&quot;1&quot;)) {</b>
+<i>33</i>&nbsp;            //学生
+<b class="fc"><i>34</i>&nbsp;            Student tmpS = this.studentService.findDistinctByStudentId(realId);</b>
+<b class="fc"><i>35</i>&nbsp;            System.out.println(&quot;tmpS.getUid(): &quot;+tmpS.getUid());</b>
+<b class="fc"><i>36</i>&nbsp;            if(tmpS.getUid() == null) {</b>
+<b class="fc"><i>37</i>&nbsp;                System.out.println(&quot;return temS.getUid() == null&quot;);</b>
+<b class="fc"><i>38</i>&nbsp;                return new Result(400);</b>
+<i>39</i>&nbsp;            } else {
+<b class="fc"><i>40</i>&nbsp;                tmpS.setUid(null);</b>
+<b class="fc"><i>41</i>&nbsp;                this.studentService.saveOrUpdate(tmpS);</b>
+<b class="fc"><i>42</i>&nbsp;                System.out.println(&quot;return: tmpS.setUid(null)&quot;);</b>
+<b class="fc"><i>43</i>&nbsp;                return new Result(200);</b>
+<i>44</i>&nbsp;            }
+<i>45</i>&nbsp;        } else
+<b class="fc"><i>46</i>&nbsp;        if(type.equals(&quot;2&quot;)) {</b>
+<i>47</i>&nbsp;            //导师
+<b class="fc"><i>48</i>&nbsp;            Tutor tmpT = this.tutorService.findDistinctByTutorId(realId);</b>
+<b class="fc"><i>49</i>&nbsp;            if(tmpT.getUid() == null) {</b>
+<b class="fc"><i>50</i>&nbsp;                return new Result(400);</b>
+<i>51</i>&nbsp;            } else {
+<b class="fc"><i>52</i>&nbsp;                tmpT.setUid(null);</b>
+<b class="fc"><i>53</i>&nbsp;                this.tutorService.saveOrUpdate(tmpT);</b>
+<b class="fc"><i>54</i>&nbsp;                return new Result(200);</b>
+<i>55</i>&nbsp;            }
+<i>56</i>&nbsp;        }
+<b class="fc"><i>57</i>&nbsp;        return new Result(400);</b>
+<i>58</i>&nbsp;    }
+<i>59</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-08-29 00:16</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,244 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: InsMessage</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.ss.ssproj.entity</a> ]
+</div>
+
+<h1>Coverage Summary for Class: InsMessage (com.ss.ssproj.entity)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">InsMessage</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.2%
+  </span>
+  <span class="absValue">
+    (15/ 17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    89.5%
+  </span>
+  <span class="absValue">
+    (34/ 38)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">InsMessage$HibernateProxy$8zQXtZmX</td>
+  </tr>
+  <tr>
+    <td class="name">InsMessage$HibernateProxy$Ae2w5VCO</td>
+  </tr>
+  <tr>
+    <td class="name">InsMessage$HibernateProxy$BgmgreS5</td>
+  </tr>
+  <tr>
+    <td class="name">InsMessage$HibernateProxy$CzaKTnXn</td>
+  </tr>
+  <tr>
+    <td class="name">InsMessage$HibernateProxy$GZ7ER26C</td>
+  </tr>
+  <tr>
+    <td class="name">InsMessage$HibernateProxy$he0ekRSi</td>
+  </tr>
+  <tr>
+    <td class="name">InsMessage$HibernateProxy$LiokeByJ</td>
+  </tr>
+  <tr>
+    <td class="name">InsMessage$HibernateProxy$m4wnAhlx</td>
+  </tr>
+  <tr>
+    <td class="name">InsMessage$HibernateProxy$MI6sOcri</td>
+  </tr>
+  <tr>
+    <td class="name">InsMessage$HibernateProxy$nuJeheNR</td>
+  </tr>
+  <tr>
+    <td class="name">InsMessage$HibernateProxy$qftGQGUF</td>
+  </tr>
+  <tr>
+    <td class="name">InsMessage$HibernateProxy$QtPpIqcn</td>
+  </tr>
+  <tr>
+    <td class="name">InsMessage$HibernateProxy$Uj1Zx849</td>
+  </tr>
+  <tr>
+    <td class="name">InsMessage$HibernateProxy$vr1zwNxy</td>
+  </tr>
+  <tr>
+    <td class="name">InsMessage$HibernateProxy$vwfw88cM</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    88.2%
+  </span>
+  <span class="absValue">
+    (15/ 17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    89.5%
+  </span>
+  <span class="absValue">
+    (34/ 38)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.ss.ssproj.entity;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;
+<i>4</i>&nbsp;import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import javax.persistence.*;
+<i>7</i>&nbsp;import java.util.Objects;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;@Entity
+<i>10</i>&nbsp;@Table(name = &quot;ins_message&quot;)
+<i>11</i>&nbsp;@JsonIgnoreProperties(value = {&quot;handler&quot;,&quot;hibernateLazyInitializer&quot;,&quot;fieldHandler&quot;})
+<i>12</i>&nbsp;public class InsMessage {
+<i>13</i>&nbsp;    @Id
+<i>14</i>&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+<i>15</i>&nbsp;    @Column(name = &quot;Id&quot;)
+<i>16</i>&nbsp;    int id;
+<i>17</i>&nbsp;    String tutorid;
+<i>18</i>&nbsp;    String title;
+<i>19</i>&nbsp;    String content;
+<i>20</i>&nbsp;    String releasetime;
+<i>21</i>&nbsp;    int phase;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    public void setPhase(int phase) {
+<b class="nc"><i>24</i>&nbsp;        this.phase = phase;</b>
+<b class="nc"><i>25</i>&nbsp;    }</b>
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    public int getPhase() {
+<b class="fc"><i>28</i>&nbsp;        return phase;</b>
+<i>29</i>&nbsp;    }
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    public void setTitle(String title) {
+<b class="fc"><i>32</i>&nbsp;        this.title = title;</b>
+<b class="fc"><i>33</i>&nbsp;    }</b>
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    public String getTitle() {
+<b class="fc"><i>36</i>&nbsp;        return title;</b>
+<i>37</i>&nbsp;    }
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;    public void setContent(String content) {
+<b class="fc"><i>40</i>&nbsp;        this.content = content;</b>
+<b class="fc"><i>41</i>&nbsp;    }</b>
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;    public String getContent() {
+<b class="fc"><i>44</i>&nbsp;        return content;</b>
+<i>45</i>&nbsp;    }
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;    public void setId(int id) {
+<b class="nc"><i>49</i>&nbsp;        this.id = id;</b>
+<b class="nc"><i>50</i>&nbsp;    }</b>
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    public int getId() {
+<b class="fc"><i>53</i>&nbsp;        return id;</b>
+<i>54</i>&nbsp;    }
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;    public void setReleasetime(String releasetime) {
+<b class="fc"><i>57</i>&nbsp;        this.releasetime = releasetime;</b>
+<b class="fc"><i>58</i>&nbsp;    }</b>
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;    public String getReleasetime() {
+<b class="fc"><i>61</i>&nbsp;        return releasetime;</b>
+<i>62</i>&nbsp;    }
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;    public void setTutorid(String tutorid) {
+<b class="fc"><i>66</i>&nbsp;        this.tutorid = tutorid;</b>
+<b class="fc"><i>67</i>&nbsp;    }</b>
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;    public String getTutorid() {
+<b class="fc"><i>70</i>&nbsp;        return tutorid;</b>
+<i>71</i>&nbsp;    }
+<i>72</i>&nbsp;
+<b class="fc"><i>73</i>&nbsp;    public InsMessage() {}</b>
+<i>74</i>&nbsp;
+<b class="fc"><i>75</i>&nbsp;    public InsMessage(int id, String tutorid, String title, String content, String releasetime){</b>
+<b class="fc"><i>76</i>&nbsp;        this.id = id;</b>
+<b class="fc"><i>77</i>&nbsp;        this.tutorid = tutorid;</b>
+<b class="fc"><i>78</i>&nbsp;        this.title = title;</b>
+<b class="fc"><i>79</i>&nbsp;        this.content = content;</b>
+<b class="fc"><i>80</i>&nbsp;        this.releasetime = releasetime;</b>
+<b class="fc"><i>81</i>&nbsp;    }</b>
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;    @Transient
+<i>84</i>&nbsp;    int ifRead;
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    public void setIfRead(int ifRead) {
+<b class="fc"><i>87</i>&nbsp;        this.ifRead = ifRead;</b>
+<b class="fc"><i>88</i>&nbsp;    }</b>
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;    public int getIfRead() {
+<b class="fc"><i>91</i>&nbsp;        return this.ifRead;</b>
+<i>92</i>&nbsp;    }
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;    @Override
+<i>95</i>&nbsp;    public boolean equals(Object o) {
+<b class="fc"><i>96</i>&nbsp;        if (this == o) return true;</b>
+<b class="fc"><i>97</i>&nbsp;        if (o == null) return false ;</b>
+<i>98</i>&nbsp;
+<b class="fc"><i>99</i>&nbsp;        if (!(o instanceof InsMessage)) return false;</b>
+<b class="fc"><i>100</i>&nbsp;        InsMessage other = (InsMessage) o;</b>
+<b class="fc"><i>101</i>&nbsp;        return this.id == other.id &amp;&amp;</b>
+<b class="fc"><i>102</i>&nbsp;                Objects.equals(this.tutorid, other.tutorid) &amp;&amp;</b>
+<b class="fc"><i>103</i>&nbsp;                Objects.equals(this.title, other.title) &amp;&amp;</b>
+<b class="fc"><i>104</i>&nbsp;                Objects.equals(this.content, other.content) &amp;&amp;</b>
+<b class="fc"><i>105</i>&nbsp;                Objects.equals(this.releasetime, other.releasetime);</b>
+<i>106</i>&nbsp;    }
+<i>107</i>&nbsp;}
+<i>108</i>&nbsp;
+<i>109</i>&nbsp;
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-08-29 00:16</div>
+</div>
+</body>
+</html>

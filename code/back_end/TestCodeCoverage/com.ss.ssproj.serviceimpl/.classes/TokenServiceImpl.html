@@ -1,0 +1,110 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TokenServiceImpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.ss.ssproj.serviceimpl</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TokenServiceImpl (com.ss.ssproj.serviceimpl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TokenServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/ 11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.ss.ssproj.serviceimpl;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.auth0.jwt.JWT;
+<i>4</i>&nbsp;import com.auth0.jwt.algorithms.Algorithm;
+<i>5</i>&nbsp;import com.ss.ssproj.service.TokenService;
+<i>6</i>&nbsp;import org.springframework.stereotype.Service;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import java.util.Calendar;
+<i>9</i>&nbsp;import java.util.Date;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;@Service
+<b class="fc"><i>12</i>&nbsp;public class TokenServiceImpl implements TokenService {</b>
+<i>13</i>&nbsp;    @Override
+<i>14</i>&nbsp;    public String getToken(String rid, String uid) {
+<i>15</i>&nbsp;        // 设置签发与过期时间
+<b class="fc"><i>16</i>&nbsp;        Date generateDate = new Date();</b>
+<b class="fc"><i>17</i>&nbsp;        Calendar nowTime = Calendar.getInstance();</b>
+<b class="fc"><i>18</i>&nbsp;        nowTime.add(Calendar.MINUTE, 120);</b>
+<b class="fc"><i>19</i>&nbsp;        Date expiresDate = nowTime.getTime();</b>
+<b class="fc"><i>20</i>&nbsp;        String token=&quot;&quot;;</b>
+<b class="fc"><i>21</i>&nbsp;        token= JWT.create().withAudience(rid) // 将 rid 存入token</b>
+<b class="fc"><i>22</i>&nbsp;                .withExpiresAt(expiresDate)</b>
+<b class="fc"><i>23</i>&nbsp;                .withIssuedAt(generateDate)</b>
+<b class="fc"><i>24</i>&nbsp;                .sign(Algorithm.HMAC256(uid));// 以 uid 作为 token 的密钥</b>
+<b class="fc"><i>25</i>&nbsp;        return token;</b>
+<i>26</i>&nbsp;    }
+<i>27</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-08-29 00:16</div>
+</div>
+</body>
+</html>

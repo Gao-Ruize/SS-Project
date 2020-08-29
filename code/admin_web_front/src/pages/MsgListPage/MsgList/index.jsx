@@ -82,7 +82,45 @@ export default class MsgList extends React.Component{
     }
 
     this.acquireMsgs();
+    // this.get_mem_usage();
   }
+
+//   get_mem_usage(){
+//     $.ajax({
+//       type: "get",
+//       url:"http://localhost:8443/actuator/health", //global.config.backendUrl+"/actautor/metrics/jvm.memory.used",
+//       contentType: "application/json;charset=utf-8;",
+//       dataType:'jsonp',
+//       beforeSend (XMLHttpRequest) {
+//         XMLHttpRequest.setRequestHeader("token", login_info.token);
+//       },
+//       success:function(data){
+//         console.log(data);
+//       },
+//       error:function(xhr){
+//         console.log("get health error");
+//         console.log(xhr);
+// //         alert("进入error---");
+// // 　　　　alert("状态码："+xhr.status);
+// 　　　　　　　　//alert("状态:"+xhr.readyState);//当前状态,0-未初始化，1-正在载入，2-已经载入，3-数据进行交互，4-完成。
+// // 　　　　　　　　alert("错误信息:"+xhr.statusText );
+// 　　　　　　　　console.log("返回响应信息："+xhr.responseText );//这里是详细的信息
+// // 　　　　　　　　alert("请求状态："+textStatus); 　　　　　　　　
+// // 　　　　　　　　alert(errorThrown); 　　　　　　　　
+// // 　　　　　　　　alert("请求失败"); 
+//       }
+//     });
+//     // $.jsonp({
+//     //   "url": "http://localhost:8443/actuator/metrics/jvm.memory.used",
+//     //   "success": function(data){
+//     //     console.log(data);
+//     //   },
+//     //   "error": function(error){
+//     //     console.log("get memory usage error");
+//     //     console.log(error);
+//     //   }
+//     // });
+//   }
 
   acquireMsgs(){
     $.ajax({

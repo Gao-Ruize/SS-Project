@@ -1,0 +1,62 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: InstructRepository</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.ss.ssproj.repository</a> ]
+</div>
+
+<h1>Coverage Summary for Class: InstructRepository (com.ss.ssproj.repository)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">InstructRepository</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.ss.ssproj.repository;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.ss.ssproj.entity.Instruct;
+<i>4</i>&nbsp;import org.springframework.data.jpa.repository.JpaRepository;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import java.util.List;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;public interface InstructRepository extends JpaRepository&lt;Instruct, Integer&gt; {
+<i>9</i>&nbsp;    List&lt;Instruct&gt; findAll();
+<i>10</i>&nbsp;    Instruct save(Instruct instruct);
+<i>11</i>&nbsp;    List&lt;Instruct&gt; findAllByTutorid(String tutorid);
+<i>12</i>&nbsp;    Instruct findDistinctByStudentidAndTutorid(String studentid, String tutorid);
+<i>13</i>&nbsp;    Instruct findDistinctByStudentid(String studentid);
+<i>14</i>&nbsp;    void deleteById(int id);
+<i>15</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-08-29 00:16</div>
+</div>
+</body>
+</html>

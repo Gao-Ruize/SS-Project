@@ -1,0 +1,225 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: HttpRequest</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.ss.ssproj.utils</a> ]
+</div>
+
+<h1>Coverage Summary for Class: HttpRequest (com.ss.ssproj.utils)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HttpRequest</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 59)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.ss.ssproj.utils;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;
+<i>4</i>&nbsp;import java.io.BufferedReader;
+<i>5</i>&nbsp;import java.io.IOException;
+<i>6</i>&nbsp;import java.io.InputStreamReader;
+<i>7</i>&nbsp;import java.io.PrintWriter;
+<i>8</i>&nbsp;import java.net.URL;
+<i>9</i>&nbsp;import java.net.URLConnection;
+<i>10</i>&nbsp;import java.util.List;
+<i>11</i>&nbsp;import java.util.Map;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;/**
+<i>14</i>&nbsp; * @Author: S1mpleSonny
+<i>15</i>&nbsp; * @Date: Created in 10:00 2020/7/15
+<i>16</i>&nbsp; * @ClassName: HttpRequest
+<i>17</i>&nbsp; * @Description: 发起HTTP请求第三方路径（页面、接口等）
+<i>18</i>&nbsp; */
+<b class="nc"><i>19</i>&nbsp;public class HttpRequest {</b>
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    /**
+<i>22</i>&nbsp;     * 向指定URL发送GET方法的请求
+<i>23</i>&nbsp;     * @param url：发送请求的URL
+<i>24</i>&nbsp;     * @param param：请求参数，请求参数应该是 name1=value1&amp;name2=value2&amp;name3=value3 的形式。
+<i>25</i>&nbsp;     * @return String[result]：所代表远程资源的响应结果
+<i>26</i>&nbsp;     */
+<i>27</i>&nbsp;    public static String sendGet(String url, String param) {
+<b class="nc"><i>28</i>&nbsp;        String result = &quot;&quot;;</b>
+<b class="nc"><i>29</i>&nbsp;        BufferedReader in = null;</b>
+<i>30</i>&nbsp;        try {
+<b class="nc"><i>31</i>&nbsp;            String urlNameString = url + &quot;?&quot; + param;</b>
+<b class="nc"><i>32</i>&nbsp;            URL realUrl = new URL(urlNameString);</b>
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;            // 打开和URL之间的连接
+<b class="nc"><i>35</i>&nbsp;            URLConnection connection = realUrl.openConnection();</b>
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;            // 设置通用的请求属性
+<b class="nc"><i>38</i>&nbsp;            connection.setRequestProperty(&quot;accept&quot;, &quot;*/*&quot;);</b>
+<b class="nc"><i>39</i>&nbsp;            connection.setRequestProperty(&quot;connection&quot;, &quot;Keep-Alive&quot;);</b>
+<b class="nc"><i>40</i>&nbsp;            connection.setRequestProperty(&quot;user-agent&quot;, &quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)&quot;);</b>
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;            // 建立实际的连接
+<b class="nc"><i>43</i>&nbsp;            connection.connect();</b>
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;            // 获取所有响应头字段
+<b class="nc"><i>46</i>&nbsp;            Map&lt;String, List&lt;String&gt;&gt; map = connection.getHeaderFields();</b>
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;            // 遍历所有的响应头字段
+<b class="nc"><i>49</i>&nbsp;            for (String key : map.keySet()) {</b>
+<b class="nc"><i>50</i>&nbsp;                System.out.println(key + &quot;---&gt;&quot; + map.get(key));</b>
+<b class="nc"><i>51</i>&nbsp;            }</b>
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;            // 定义 BufferedReader输入流来读取URL的响应
+<b class="nc"><i>54</i>&nbsp;            in = new BufferedReader(new InputStreamReader(</b>
+<b class="nc"><i>55</i>&nbsp;                    connection.getInputStream()));</b>
+<i>56</i>&nbsp;            String line;
+<b class="nc"><i>57</i>&nbsp;            while ((line = in.readLine()) != null) {</b>
+<b class="nc"><i>58</i>&nbsp;                result += line;</b>
+<i>59</i>&nbsp;            }
+<b class="nc"><i>60</i>&nbsp;        } catch (Exception e) {</b>
+<b class="nc"><i>61</i>&nbsp;            System.out.println(&quot;发送GET请求出现异常！&quot; + e);</b>
+<b class="nc"><i>62</i>&nbsp;            e.printStackTrace();</b>
+<i>63</i>&nbsp;        }
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;        // 使用finally块来关闭输入流
+<i>66</i>&nbsp;        finally {
+<b class="nc"><i>67</i>&nbsp;            try {</b>
+<b class="nc"><i>68</i>&nbsp;                if (in != null) {</b>
+<b class="nc"><i>69</i>&nbsp;                    in.close();</b>
+<i>70</i>&nbsp;                }
+<b class="nc"><i>71</i>&nbsp;            } catch (Exception e2) {</b>
+<b class="nc"><i>72</i>&nbsp;                e2.printStackTrace();</b>
+<b class="nc"><i>73</i>&nbsp;            }</b>
+<b class="nc"><i>74</i>&nbsp;        }</b>
+<b class="nc"><i>75</i>&nbsp;        return result;</b>
+<i>76</i>&nbsp;    }
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;    /**
+<i>79</i>&nbsp;     * 向指定 URL 发送POST方法的请求
+<i>80</i>&nbsp;     *
+<i>81</i>&nbsp;     * @param url：发送请求的 URL
+<i>82</i>&nbsp;     * @param param：请求参数，请求参数应该是 name1=value1&amp;name2=value2 的形式。
+<i>83</i>&nbsp;     * @return String[result]：所代表远程资源的响应结果
+<i>84</i>&nbsp;     */
+<i>85</i>&nbsp;    public static String sendPost(String url, String param) {
+<b class="nc"><i>86</i>&nbsp;        PrintWriter out = null;</b>
+<b class="nc"><i>87</i>&nbsp;        BufferedReader in = null;</b>
+<b class="nc"><i>88</i>&nbsp;        String result = &quot;&quot;;</b>
+<i>89</i>&nbsp;        try {
+<b class="nc"><i>90</i>&nbsp;            URL realUrl = new URL(url);</b>
+<i>91</i>&nbsp;
+<i>92</i>&nbsp;            // 打开和URL之间的连接
+<b class="nc"><i>93</i>&nbsp;            URLConnection conn = realUrl.openConnection();</b>
+<i>94</i>&nbsp;
+<i>95</i>&nbsp;            // 设置通用的请求属性
+<b class="nc"><i>96</i>&nbsp;            conn.setRequestProperty(&quot;accept&quot;, &quot;*/*&quot;);</b>
+<b class="nc"><i>97</i>&nbsp;            conn.setRequestProperty(&quot;connection&quot;, &quot;Keep-Alive&quot;);</b>
+<b class="nc"><i>98</i>&nbsp;            conn.setRequestProperty(&quot;user-agent&quot;, &quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)&quot;);</b>
+<i>99</i>&nbsp;
+<i>100</i>&nbsp;            // 发送POST请求必须设置如下两行
+<b class="nc"><i>101</i>&nbsp;            conn.setDoOutput(true);</b>
+<b class="nc"><i>102</i>&nbsp;            conn.setDoInput(true);</b>
+<i>103</i>&nbsp;
+<i>104</i>&nbsp;            // 获取URLConnection对象对应的输出流
+<b class="nc"><i>105</i>&nbsp;            out = new PrintWriter(conn.getOutputStream());</b>
+<i>106</i>&nbsp;
+<i>107</i>&nbsp;            // 发送请求参数
+<b class="nc"><i>108</i>&nbsp;            out.print(param);</b>
+<i>109</i>&nbsp;
+<i>110</i>&nbsp;            // flush输出流的缓冲
+<b class="nc"><i>111</i>&nbsp;            out.flush();</b>
+<i>112</i>&nbsp;
+<i>113</i>&nbsp;            // 定义BufferedReader输入流来读取URL的响应
+<b class="nc"><i>114</i>&nbsp;            in = new BufferedReader(</b>
+<b class="nc"><i>115</i>&nbsp;                    new InputStreamReader(conn.getInputStream()));</b>
+<i>116</i>&nbsp;            String line;
+<b class="nc"><i>117</i>&nbsp;            while ((line = in.readLine()) != null) {</b>
+<b class="nc"><i>118</i>&nbsp;                result += line;</b>
+<i>119</i>&nbsp;            }
+<b class="nc"><i>120</i>&nbsp;        } catch (Exception e) {</b>
+<b class="nc"><i>121</i>&nbsp;            System.out.println(&quot;发送 POST 请求出现异常！&quot;+e);</b>
+<b class="nc"><i>122</i>&nbsp;            e.printStackTrace();</b>
+<i>123</i>&nbsp;        }
+<i>124</i>&nbsp;
+<i>125</i>&nbsp;        //使用finally块来关闭输出流、输入流
+<i>126</i>&nbsp;        finally{
+<b class="nc"><i>127</i>&nbsp;            try{</b>
+<b class="nc"><i>128</i>&nbsp;                if(out!=null){</b>
+<b class="nc"><i>129</i>&nbsp;                    out.close();</b>
+<i>130</i>&nbsp;                }
+<b class="nc"><i>131</i>&nbsp;                if(in!=null){</b>
+<b class="nc"><i>132</i>&nbsp;                    in.close();</b>
+<i>133</i>&nbsp;                }
+<i>134</i>&nbsp;            }
+<b class="nc"><i>135</i>&nbsp;            catch(IOException ex){</b>
+<b class="nc"><i>136</i>&nbsp;                ex.printStackTrace();</b>
+<b class="nc"><i>137</i>&nbsp;            }</b>
+<b class="nc"><i>138</i>&nbsp;        }</b>
+<b class="nc"><i>139</i>&nbsp;        return result;</b>
+<i>140</i>&nbsp;    }
+<i>141</i>&nbsp;}
+<i>142</i>&nbsp;
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-08-29 00:16</div>
+</div>
+</body>
+</html>

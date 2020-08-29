@@ -55,6 +55,27 @@ class ReadJwcMsgServiceImplTest {
                     }
                 }
         );
+        Mockito.when(readjwcmsgdao.findAllByTutoridAndIfread(Mockito.anyString(), Mockito.anyInt())).thenAnswer(
+                new Answer<List<ReadJwcMsg>>(){
+                    @Override
+                    public List<ReadJwcMsg> answer(InvocationOnMock invocation){
+                        List<ReadJwcMsg> ret = new ArrayList<>();
+                        ret.add(new ReadJwcMsg(1, "sId", "tutId", invocation.getArgument(1), 0, 1));
+                        ret.add(new ReadJwcMsg(2, "sId", "tutId", invocation.getArgument(1), 0, 2));
+                        return ret;
+                    }
+                }
+        );
+        Mockito.when(readjwcmsgdao.findAllByIfstudentAndIfreadAndMsgid(Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt())).thenAnswer(
+                new Answer<List<ReadJwcMsg>>(){
+                    @Override
+                    public List<ReadJwcMsg> answer(InvocationOnMock invocation){
+                        List<ReadJwcMsg> ret = new ArrayList<>();
+                        ret.add(new ReadJwcMsg(1, "sId", "tutId", invocation.getArgument(1), invocation.getArgument(0), invocation.getArgument(2)));
+                        return ret;
+                    }
+                }
+        );
     }
 
     @Test
@@ -81,6 +102,21 @@ class ReadJwcMsgServiceImplTest {
         exp.add(new ReadJwcMsg(1, "sId", "tutId", 0, 1, 1));
         exp.add(new ReadJwcMsg(2, "sId", "tutId", 0, 1, 2));
         assertEquals(exp, readjwcmsgserviceimpl.findAllByStudentidAndIfread("sId", 0));
+    }
+
+    @Test
+    public void findAllByTutoridAndIfreadTest(){
+        List<ReadJwcMsg> exp = new ArrayList<>();
+        exp.add(new ReadJwcMsg(1, "sId", "tutId", 0, 0, 1));
+        exp.add(new ReadJwcMsg(2, "sId", "tutId", 0, 0, 2));
+        assertEquals(exp, readjwcmsgserviceimpl.findAllByTutoridAndIfread("tutId", 0));
+    }
+
+    @Test
+    public void findAllByIfstudentAndIfreadAndMsgid(){
+        List<ReadJwcMsg> exp = new ArrayList<>();
+        exp.add(new ReadJwcMsg(1, "sId", "tutId", 0, 1, 1));
+        assertEquals(exp, readjwcmsgserviceimpl.findAllByIfstudentAndIfreadAndMsgid(1, 0, 1));
     }
 
 }
