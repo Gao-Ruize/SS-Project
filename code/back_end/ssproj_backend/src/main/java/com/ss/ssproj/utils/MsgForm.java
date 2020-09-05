@@ -17,6 +17,10 @@ public class MsgForm {
     int msgId;
     List<String> toIds;
 
+    //新加入了phase
+    //在导师发送信息的时候需要选择phase
+    int phase;
+
     public void setTime(String time) {
         this.time = time;
     }
@@ -79,6 +83,14 @@ public class MsgForm {
 
     public List<String> getToIds() {
         return toIds;
+    }
+
+    public void setPhase(int phase) {
+        this.phase = phase;
+    }
+
+    public int getPhase() {
+        return this.phase;
     }
 
     @Override

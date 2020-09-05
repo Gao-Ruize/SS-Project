@@ -65,13 +65,14 @@ public class TutMsgController {
         String content = msgForm.getContent();
         String time = msgForm.getTime();
         String tutorId = msgForm.getTutorId();
-
+        int phase = msgForm.getPhase();
         //将信息存入InsMessage
         InsMessage insMessage = new InsMessage();
         insMessage.setTitle(title);
         insMessage.setContent(content);
         insMessage.setTutorid(tutorId);
         insMessage.setReleasetime(time);
+        insMessage.setPhase(phase);
         InsMessage rec = this.insMessageService.saveOrUpdate(insMessage);
         int newId = rec.getId();
         //给每个学生发信息

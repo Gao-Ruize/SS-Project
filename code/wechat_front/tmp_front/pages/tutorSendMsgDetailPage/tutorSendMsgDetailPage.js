@@ -14,7 +14,17 @@ Page({
     currentDate: new Date().getTime(),
     timeSpanStr: new Date().getFullYear()+ "-" + (new Date().getMonth()+1) + "-" + new Date().getDate() + " " + new Date().getHours() +":" + new Date().getMinutes(),
     titlemsg: "",
-    contentmsg: ""
+    contentmsg: "",
+    phase: 0,
+    value1: 0,
+    option1: [
+      { text: '请选择信息发送阶段', value: 0 },
+      { text: '导师选择通知', value: 1 },
+      { text: '开题报告通知', value: 2 },
+      { text: '中期检查通知', value: 3 },
+      { text: '答辩通知', value: 4 },
+      { text: '归档通知', value: 5 },
+    ],
   },
   app: getApp(),
   errCheck(res) {
@@ -58,12 +68,23 @@ Page({
   // 发消息的确认，传给后端
   bindQuit(){
     // 此处补充传向后端的代码数据
+    let tmpPhase = this.data.phase;
+    if(tmpPhase == 0) {
+      wx.showToast({
+        title: '请选择阶段!',
+        icon:'none',
+        duration: 1500
+      });
+      return;
+    }
+    tmpPhase = tmpPhase - 1;
     var send = {
       title: this.data.titlemsg,
       content: this.data.contentmsg,
       time: this.data.timeSpanStr,
       tutorId: wx.getStorageSync('realid'),
       toIds: wx.getStorageSync('SendMessageToStudentId'),
+      phase: tmpPhase
     }
     let that = this;
     let token = wx.getStorageSync('token');
@@ -113,4 +134,12 @@ Page({
     var studentsId = wx.getStorageSync('SendMessageToStudentId');
     this.setData({studentsname: studentsname, studentsId: studentsId});
   },
+
+  changeDropItem (e) {
+    let tmp = e.detail;
+    this.setData({
+      phase: tmp
+    });
+    console.log(this.data.phase);
+  }
 })
