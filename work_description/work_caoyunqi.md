@@ -144,10 +144,10 @@
 * 考虑到只需要简单的回执，将回复功内容直接加入了数据库中，在readInsMsg表中加入了reply（varchar 255）
 
 - 后端：
-* 在stuMsgController的readMsg中添加了回复功能（在数据库中更新reply字段）
-* 在辅助类readMsgForm中添加了reply
-* 在辅助类MsgForm中添加了phase
-* 在sendMsg函数中添加了构造phase的功能（在数据库中更新phase字段）
-* 对部分接口的cacheable进行了调整，在测试过程中发现如果不通过后端直接修改数据库，cacheable的使用会导致出现缓存数据与实际数据不一样的错误，在部分接口使用cacheable是不合适的
+  * 在stuMsgController的readMsg中添加了回复功能（在数据库中更新reply字段）
+  * 在辅助类readMsgForm中添加了reply
+  * 在辅助类MsgForm中添加了phase
+  * 在sendMsg函数中添加了构造phase的功能（在数据库中更新phase字段）
+  * 对部分接口的cacheable进行了调整，在测试过程中发现如果不通过后端直接修改数据库，cacheable的使用会导致出现缓存数据与实际数据不一样的错误，在部分接口使用cacheable是不合适的
 
 
