@@ -124,7 +124,7 @@
 - 后端与数据库部署到服务器后修改前端的url  
 - 进行远端压力测试，发现未加cache的后端typejwcmsg端口与getmsginfo端口性能不达标，应该在添加cache后就能解决  
 
-# day20 731
+# day20 7.31
 - 在远端服务器部后端更新后进行性能测试，均符合要求  
 - 完善小程序的功能，学习了获取发送通知权限的方法并在小程序前端中添加  
 - 在对微信小程序前端的测试中发现了一些问题，包括一些功能上的小问题与部分页面布局不合理  
@@ -133,15 +133,15 @@
 
 # 后五周
 - 微信小程序：
-* 将baseUrl放进了app.js里，作为全局的参数便于修改与调试
-* 在messageDetail添加了消息回复功能，在需要的时候在输入框内输入回复
-* 修改了register.js，在注册后调用app.onLaunch直接登陆
-* 根据助教的意见，信息全部展示显得有些混乱，故在stuMsgFromIns, stuMsgFromJwcPage, tutMsgFromJwcPage, tutHistoryMsgPage添加了按时间段筛选功能
-* 在tutHistoryMsgDetail页面加入遮罩层展示学生对对应消息的回复
-* 在tutorSendMsgdetailPage上加入了阶段选择，导师在发送通知时直接选择对应阶段，否则无法发送
+  * 将baseUrl放进了app.js里，作为全局的参数便于修改与调试
+  * 在messageDetail添加了消息回复功能，在需要的时候在输入框内输入回复
+  * 修改了register.js，在注册后调用app.onLaunch直接登陆
+  * 根据助教的意见，信息全部展示显得有些混乱，故在stuMsgFromIns, stuMsgFromJwcPage, tutMsgFromJwcPage, tutHistoryMsgPage添加了按时间段筛选功能
+  * 在tutHistoryMsgDetail页面加入遮罩层展示学生对对应消息的回复
+  * 在tutorSendMsgdetailPage上加入了阶段选择，导师在发送通知时直接选择对应阶段，否则无法发送
 
 - 数据库：
-* 考虑到只需要简单的回执，将回复功内容直接加入了数据库中，在readInsMsg表中加入了reply（varchar 255）
+  * 考虑到只需要简单的回执，将回复功内容直接加入了数据库中，在readInsMsg表中加入了reply（varchar 255）
 
 - 后端：
   * 在stuMsgController的readMsg中添加了回复功能（在数据库中更新reply字段）
@@ -149,5 +149,6 @@
   * 在辅助类MsgForm中添加了phase
   * 在sendMsg函数中添加了构造phase的功能（在数据库中更新phase字段）
   * 对部分接口的cacheable进行了调整，在测试过程中发现如果不通过后端直接修改数据库，cacheable的使用会导致出现缓存数据与实际数据不一样的错误，在部分接口使用cacheable是不合适的
+  * 修改了showdoc上的接口文档
 
 
