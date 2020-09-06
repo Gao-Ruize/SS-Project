@@ -70,6 +70,12 @@ public class JwcMsgController {
                 JwcMessage item = jwcMessages.get(i);
                 int msgId = item.getId();
                 ReadJwcMsg readJwcMsg = this.readJwcMsgService.findDistinctByTutoridAndMsgid(usetId, msgId);
+                if(readJwcMsg == null) {
+                    jwcMessages.remove(i);
+                    size --;
+                    i --;
+                    continue;
+                }
                 int ifRead = readJwcMsg.getIfread();
                 item.setIfRead(ifRead);
                 if(ifRead == 0) {
@@ -77,6 +83,7 @@ public class JwcMsgController {
                     jwcMessages.remove(i);
                     size --;
                     i --;
+                    continue;
                 }
             }
         } else if(type.equals("S")) {
@@ -84,6 +91,11 @@ public class JwcMsgController {
                 JwcMessage item = jwcMessages.get(i);
                 int msgId = item.getId();
                 ReadJwcMsg readJwcMsg = this.readJwcMsgService.findDistinctByStudentidAndMsgid(usetId, msgId);
+                if(readJwcMsg == null) {
+                    jwcMessages.remove(i);
+                    size --;
+                    i --;
+                }
                 int ifRead = readJwcMsg.getIfread();
                 item.setIfRead(ifRead);
                 if(ifRead == 0) {
