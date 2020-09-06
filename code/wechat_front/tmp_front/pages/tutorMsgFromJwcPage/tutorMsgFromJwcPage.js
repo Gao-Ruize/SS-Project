@@ -81,7 +81,7 @@ Page({
   },
   setJwcCount_suc(res){
     if(this.errCheck(res)) {
-      app.onLaunch();
+      this.app.onLaunch();
       return;
     }
     this.setData({
