@@ -186,10 +186,10 @@ Page({
     })
   },
   onLoad_suc(res){
-    if(this.errCheck(res)) {
-      this.app.onLaunch();
-      return;
-    }
+    // if(this.errCheck(res)) {
+    //   this.app.onLaunch();
+    //   return;
+    // }
     this.setData({
       allMsgs: res.data,
       showMsgs: res.data,
