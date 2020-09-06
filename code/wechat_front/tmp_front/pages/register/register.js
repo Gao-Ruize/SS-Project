@@ -74,7 +74,7 @@ Page({
     let result = res.data.code;
     let token = res.data.token;
     //将token存储到本地
-    wx.setStorageSync('token', token);
+    //wx.setStorageSync('token', token);
     if(result == 200) {
       app.onLaunch();
       this.requestSubscribe();
