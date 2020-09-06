@@ -2,11 +2,19 @@
 <view>
   <view class="page">
     <text class="TargetText">即将发送给以下几位同学：{{studentsId}}</text>
+
     <view>
     <van-button round type="info" bindtap="bindOpenTime" plain>
       选择时间
     </van-button>
     </view>
+
+    <view>
+    <van-dropdown-menu>
+    <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}" bind:change = "changeDropItem"/>
+    </van-dropdown-menu>
+    </view>
+
     <text class="TimeText">选择发送的时间为:{{timeSpanStr}}</text>
     <van-field
       label = "标题"
